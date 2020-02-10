@@ -14,7 +14,7 @@
   </entry>
   <entry>
     <title>Hello World</title>
-    <url>/2020/ck6f28f4r0002z4nj0mkv0lmd/</url>
+    <url>/2020/ck6g91r9b0005xonjhmthbla7/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
@@ -32,7 +32,7 @@
   </entry>
   <entry>
     <title>Markdown测试</title>
-    <url>/2019/ck6f28f4x0005z4nj5q6o30c8/</url>
+    <url>/2019/ck6g91r8v0000xonjf4s8ar7h/</url>
     <content><![CDATA[<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><hr>
 <h3 id="1-斜体和粗体"><a href="#1-斜体和粗体" class="headerlink" title="1. 斜体和粗体"></a>1. 斜体和粗体</h3><p>使用 * 和 ** 表示斜体和粗体。</p>
 <p>示例：</p>
@@ -211,6 +211,96 @@
       </categories>
       <tags>
         <tag>测试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SYN flood攻击及SYN cookie原理分析</title>
+    <url>/2019/honor/</url>
+    <content><![CDATA[<h2 id="1-实验简介"><a href="#1-实验简介" class="headerlink" title="1.实验简介"></a>1.实验简介</h2><p>　　最近在学习《计算机网络》，课程布置了一个网络攻击的作业 SYN Flooding Attack ，本篇博客就本次实验做一个完整的实验报告及总结。<br>##所用平台seed简介</p>
+<ol>
+<li>SEED：计算机安全教育的教学实验平台</li>
+<li><a href="http://www.cis.syr.edu/~wedu/seed/" target="_blank" rel="noopener">http://www.cis.syr.edu/~wedu/seed/</a></li>
+<li>纽约雪城大学 杜文亮 (Du, Wenliang)教授设计和实现，从2002年开始得到NSF 1.2M$的资助</li>
+</ol>
+<p>##一.实验环境（详细说明实验运行的操作系统，网络平台，机器的配置）<br>操作系统：Windows10<br>虚拟机操作系统：SEEDUbuntu 12.04<br>虚拟机工具：VirtualBox 5.2.16<br>网络虚拟软件：GNS3 2.0.3</p>
+<p>##二.实验目的</p>
+<ol>
+<li>掌握基础ip网络配置；</li>
+<li>掌握GNS3和使用WireShark对流量进行抓包分析；</li>
+<li>实现SYN flood攻击，理解其表现形式和产生的影响；</li>
+<li>深入观察理解linux内核tcp SYN cookie机制，理解其在SYN flood攻击中的作用。</li>
+</ol>
+<p>##三.实验步骤</p>
+<ol>
+<li><p>导入SEED虚拟机镜像文件，命名为SEED ubuntu，复制一个，命名为SEED ubuntu target（注意勾选重新初始化网卡的MAC地址）。<br><img src="https://i.loli.net/2020/02/10/o9mBiqw6ElF3b81.png" alt="01.png"></p>
+<div align="center">![02.png](https://i.loli.net/2020/02/10/RK6YpAUMm5XtTbn.png)
+![03.png](https://i.loli.net/2020/02/10/DPbZmHJYWUvT9fn.png)
+![04.png](https://i.loli.net/2020/02/10/cVIMzFqChb9SkoZ.png)
+</div>
+</li>
+<li><p>利用GNS3配置如图所示网络<br><img src="https://i.loli.net/2020/02/10/F51tw4KbjaiXe8P.png" alt="01.png"></p>
+</li>
+<li><p>配置两台主机的ip地址和路由，一个为192.168.1.1，另一个为192.168.1.2.默认的路由为192.168.1.0<br><img src="https://i.loli.net/2020/02/10/K45RJ9dq3bizWCk.png" alt="02.png"><br><img src="https://i.loli.net/2020/02/10/EJKW9D8gPFOQdHZ.png" alt="03.png"></p>
+</li>
+<li><p>测试连通性<br><img src="https://i.loli.net/2020/02/10/3ifuPty94hvkweM.png" alt="04.png"><br><img src="https://i.loli.net/2020/02/10/MxYHlJRseKuWLVm.png" alt="05.png"></p>
+</li>
+<li><p>在SEED Ubuntu target上启动telnet服务<br><img src="https://i.loli.net/2020/02/10/Bl7wKHhRAsLgEcz.png" alt="06.png"></p>
+</li>
+<li><p>在SEED Ubuntu主机上输入攻击命令<br><img src="https://i.loli.net/2020/02/10/9R5nGNSlUiQd6Tu.png" alt="07.png"></p>
+</li>
+<li><p>在seed Ubuntu target上用wireshark观察攻击报文<br><img src="https://i.loli.net/2020/02/10/chOIQatpP7qYSg3.png" alt="08.png"></p>
+</li>
+<li><p>用netstat –n –tcp命令观察建立的连接，显示的状态为established<br><img src="https://i.loli.net/2020/02/10/qfnNbBGc1kPp7TZ.png" alt="09.png"></p>
+</li>
+<li><p>此时seed ubuntu可以通过telnet登录seed Ubuntu target<br><img src="https://i.loli.net/2020/02/10/cLSAQYJipUw8szO.png" alt="10.png"></p>
+</li>
+<li><p>进一步观察linux内核tcp syn cookie机制<br>通过echo 0 &gt; /proc/sys/net/ipv4/tcp_syncookies命令关闭syn cookies<br>通过sysctl -w net.ipv4.tcp_max_syn_backlog = 5指定所能接受SYN同步包的最大客户端数量为5<br><img src="https://i.loli.net/2020/02/10/R3IEKrmyftcobM9.png" alt="11.png"></p>
+</li>
+<li><p>再次从SEED Ubuntu 上用netwox的syn flood攻击SEED Ubuntu target<br><img src="https://i.loli.net/2020/02/10/embRT7JGZnAvrSO.png" alt="12.png"></p>
+</li>
+<li><p>此时发现不能用telnet登录seed ubuntu target<br><img src="https://i.loli.net/2020/02/10/6JCzFa8oDY5OgGZ.png" alt="13.png"></p>
+</li>
+<li><p>再次打开SEED Ubuntu target内核tcp syn cookie参数(将tcp_syncookies设置为1)，同时从SEED Ubuntu 上用telnet连接主机 SEED Ubuntu target<br><img src="https://i.loli.net/2020/02/10/1EuwVbAZGXHiYSj.png" alt="14.png"></p>
+</li>
+</ol>
+<p>发现可以通过telnet建立连接<br><img src="https://i.loli.net/2020/02/10/ZmfCsdTySpWU298.png" alt="15.png"></p>
+<ol start="14">
+<li>用netstat –n –tcp查看tcp网络的连接情况。<br><img src="https://i.loli.net/2020/02/10/VNpCqYZdyztFT7o.png" alt="16.png"></li>
+</ol>
+<p>在seed ubuntu target查看连接情况<br><img src="https://graph.baidu.com/resource/122b7a2d41a5f2f2af87d01581326366.jpg" alt="17.png"><br>##四.实验结果分析</p>
+<h3 id="1-SYN-Flood攻击原理"><a href="#1-SYN-Flood攻击原理" class="headerlink" title="1. SYN Flood攻击原理"></a>1. SYN Flood攻击原理</h3><p>　　SYN Flood 攻击是一种典型的拒绝服务型(Denial of Service,DoS)攻击。所谓拒绝服务型攻击就是通过对网络带宽进行消耗性攻击，使受害主机或网络不能够良好的提供服务，从而间接达到攻击的目的。SYN Flood攻击就是利用了“三次握手”的漏洞。假设一个用户向服务器发送了SYN报文后突然死机或掉线，那么服务器在发出 SYN+ACK 应答报文后是无法收到客户端的 ACK 报文的(第三次握手无法完成)，一般把服务器收到 SYN 包而还未收到 ACK 包时的连接状态成为半开连接。这时服务器端一般会重试(再次发送 SYN+ACK 给客户端)并等待一段时间后丢弃这个未完成的连接，这段时间的长度我们称为 SYN Timeout，一般来说这个时间是分钟的数量级(大约为30秒-2分钟)。如果有一个恶意的攻击者大量模拟这种情况，服务器端将为了维护一个非常大的半连接列表而消耗非常多的资源—-数以万计的半连接，即使是简单的保存并遍历也会消耗非常多的 CPU 时间和内存，何况还要不断对这个列表中的 IP 进行 SYN+ACK 的重试。服务器端将忙于处理攻击者伪造的 TCP 连接请求而无暇理睬客户的正常请求，此时从正常客户的角度看来，服务器失去响应，这种情况就称作服务器端受到了SYN Flood攻击(SYN 洪范攻击)。</p>
+<h3 id="2-SYN-Cookies原理"><a href="#2-SYN-Cookies原理" class="headerlink" title="2. SYN Cookies原理"></a>2. SYN Cookies原理</h3><p>　　SYN cookie就是用一个cookie来响应 TCP SYN请求的TCP实现，根据上面的描述，在正常的TCP实现中，当服务器接收到一个SYN数据包，它返回一个SYN+ACK包来应答，然后进入TCP_SYN_RECV(半开放连接)状态来等待最后返回的ACK包。服务器用一个数据空间来描述所有未决的连接，然而这个数据空间的大小是有限的，所以攻击者将塞满这个空间。SYN Cookie是对TCP服务器端的三次握手协议作一些修改，专门用来防范SYN Flood 攻击的一种手段。它的原理是，在TCP服务器收到 TCP SYN包并返回 TCP SYN+ACK 包时，不分配一个专门的数据区，而是根据这个SYN包计算出一个cookie值,并将这个cookie作为将要返回的 SYN+ACK 包的初始序列号。在收到 TCP ACK包时，TCP服务器再根据报头信息获取cookie值，并通过这个cookie值检查这个TCP ACK包的合法性。如果合法，再分配专门的数据区进行处理未来的TCP连接。 由此可见，cookie的实现要求cookie 必须与每次TCP连接紧密对应，攻击者无法伪造cookie，同时cookie中包含连接的状态信息。</p>
+<h3 id="3-实验结果"><a href="#3-实验结果" class="headerlink" title="3. 实验结果"></a>3. 实验结果</h3><p>　　当打开SEED Ubuntu target内核的tcp syn cookie参数时，在target机器遭受syn flood 攻击后，源主机(SEED Ubuntu)可以用telnet登录target主机，即可以建立正常的TCP连接。<br>当内核关闭tcp syn cookie参数时，target主机在遭受flood攻击后，源主机(SEED Ubuntu)telnet不能正常登录target主机，无法建立正常的TCP连接。</p>
+]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>实验</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>暑期社会实践</title>
+    <url>/2017/vietnam/</url>
+    <content><![CDATA[<h2 id="调研武汉市BRT运行现状，我们在行动"><a href="#调研武汉市BRT运行现状，我们在行动" class="headerlink" title="调研武汉市BRT运行现状，我们在行动"></a>调研武汉市BRT运行现状，我们在行动</h2><blockquote>
+<p>6月30日至7月4日，为响应国家大学生暑期三下乡活动的号召，“推动改进快速公交建设，切实提高公交服务质量”，我校计信学院社会实践团队赴武汉市调研城市BRT项目运行现状。</p>
+</blockquote>
+<a id="more"></a>
+<p><img src="https://i.loli.net/2020/02/10/fITbnjko8atEyX6.jpg" alt="001.jpg"><br>作为武汉市首条快速公交-雄楚大道BRT，其在正式开通运行后遇到了许多问题。沿线配套设施的建设还需要时间，道路施工还在继续。</p>
+<p>6月30日，实践团队来到了光谷公交集团，对公司负责人袁主任进行了采访，采访期间，袁主任十分亲切，从BRT的预期效果到未来规划，对我们的问题一一解答，同时还给我们普及了很多BRT的相关知识，亲自带我们参观了公交调度指挥室，向我们展示了公交实时调度的显示屏，让我们更加细致地了解到公交背后的运营、调度、指挥模式，团队每个人都收获满满。袁主任表示：“你们可能对BRT有点偏见，BRT它是一个道路的快速公交系统，它不是一条线。武汉市的BRT现在是24+1模式,24条辅线+一条主线，主线是全线贯通的，辅线就是说只在BRT廊道内运行一段，有的运行比较长，有的运行比较短，运行一两站路就出去了。把其他路段的乘客在BRT廊道内进行一个换乘。就是一个集中再分散的过程。”</p>
+<p><img src="https://i.loli.net/2020/02/10/HsSmztxUNbP7LDj.jpg" alt="002.jpg"></p>
+<p>7月1日至3日，实践团队分别于武昌火车站，领秀城站、楚平路站、关山大道站、光谷大道站等BRT1路沿线站点发放调查问卷。虽然一路被拒绝过很多次，但是也有很多叔叔阿姨，哥哥姐姐填写的非常认真，一些年纪比较大的爷爷奶奶，即便不太看得清字，也非常愿意配合我们的调查，让我们都很感动。被采访的乘客普遍表示，武汉市快速公交系统的建成，改善了城市交通拥挤现象，节省了出行时间。</p>
+<p>通过三天实地发放调查问卷，有效问卷回收共计306份。7月4日上午，实践团队成员对前几天的调查问卷及成果进行了统计与整理，初步调查结果显示，有28.2%的人对于武汉目前的交通状况很不满意，有76.7%的人认为BRT通行后，城市交通拥挤现象有一定改善，68.5%的人认为乘坐BRT能节省时间。同时归纳了群众反映的优势、缺陷、建议，并根据结果拟出了几个问题。下午，团队一行抵达BRT快速公交的捷运公司，根据上午拟出的问题，对王部长进行了采访，了解到选择雄楚大道作为BRT首条开通路线的原因，与预期相比开通BRT公交路线后的实际作用，还有建设过程中，市民的建议和反馈的渠道，具体的反映如何，以及后期采取的措施等等。部长的耐心讲解使我们受益良多。</p>
+<p><img src="https://i.loli.net/2020/02/10/7qJarSeDlNx2b8O.jpg" alt="003.jpg"></p>
+<p>经过五天的社会实践调研，实践团队对武汉市快速公交系统运行现状有了更深层次的了解。接下来的时间，我们会综合所有调查结果，详细整理数据，希望通过后期的分析，为“推动改进快速公交建设，切实提高公交服务质量”提出有价值的建议。</p>
+<p><img src="https://i.loli.net/2019/12/04/CaJ8bZnojg4GQEf.png" alt="手机端效果"> </p>
+]]></content>
+      <categories>
+        <category>武汉</category>
+      </categories>
+      <tags>
+        <tag>BRT</tag>
+        <tag>实践</tag>
       </tags>
   </entry>
 </search>

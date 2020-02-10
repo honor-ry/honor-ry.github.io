@@ -46,8 +46,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="https://honor-ry.github.io/2020/ck6f28f4r0002z4nj0mkv0lmd/"/>
-    <id>https://honor-ry.github.io/2020/ck6f28f4r0002z4nj0mkv0lmd/</id>
+    <link href="https://honor-ry.github.io/2020/ck6g91r9b0005xonjhmthbla7/"/>
+    <id>https://honor-ry.github.io/2020/ck6g91r9b0005xonjhmthbla7/</id>
     <published>2020-02-09T11:19:33.102Z</published>
     <updated>2020-02-09T11:19:33.104Z</updated>
     
@@ -69,8 +69,8 @@
   
   <entry>
     <title>Markdown测试</title>
-    <link href="https://honor-ry.github.io/2019/ck6f28f4x0005z4nj5q6o30c8/"/>
-    <id>https://honor-ry.github.io/2019/ck6f28f4x0005z4nj5q6o30c8/</id>
+    <link href="https://honor-ry.github.io/2019/ck6g91r8v0000xonjf4s8ar7h/"/>
+    <id>https://honor-ry.github.io/2019/ck6g91r8v0000xonjf4s8ar7h/</id>
     <published>2019-12-01T09:07:11.000Z</published>
     <updated>2020-02-09T09:27:05.000Z</updated>
     
@@ -88,6 +88,58 @@
     
     
       <category term="测试" scheme="https://honor-ry.github.io/tags/%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SYN flood攻击及SYN cookie原理分析</title>
+    <link href="https://honor-ry.github.io/2019/honor/"/>
+    <id>https://honor-ry.github.io/2019/honor/</id>
+    <published>2019-11-30T07:25:55.000Z</published>
+    <updated>2020-02-10T09:22:56.700Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;1-实验简介&quot;&gt;&lt;a href=&quot;#1-实验简介&quot; class=&quot;headerlink&quot; title=&quot;1.实验简介&quot;&gt;&lt;/a&gt;1.实验简介&lt;/h2&gt;&lt;p&gt;　　最近在学习《计算机网络》，课程布置了一个网络攻击的作业 SYN Flooding Attack
+        
+      
+    
+    </summary>
+    
+    
+      <category term="计算机网络" scheme="https://honor-ry.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    
+      <category term="实验" scheme="https://honor-ry.github.io/tags/%E5%AE%9E%E9%AA%8C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>暑期社会实践</title>
+    <link href="https://honor-ry.github.io/2017/vietnam/"/>
+    <id>https://honor-ry.github.io/2017/vietnam/</id>
+    <published>2017-09-16T12:25:55.000Z</published>
+    <updated>2020-02-10T07:01:39.344Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;调研武汉市BRT运行现状，我们在行动&quot;&gt;&lt;a href=&quot;#调研武汉市BRT运行现状，我们在行动&quot; class=&quot;headerlink&quot; title=&quot;调研武汉市BRT运行现状，我们在行动&quot;&gt;&lt;/a&gt;调研武汉市BRT运行现状，我们在行动&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;6月30日至7月4日，为响应国家大学生暑期三下乡活动的号召，“推动改进快速公交建设，切实提高公交服务质量”，我校计信学院社会实践团队赴武汉市调研城市BRT项目运行现状。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="武汉" scheme="https://honor-ry.github.io/categories/%E6%AD%A6%E6%B1%89/"/>
+    
+    
+      <category term="BRT" scheme="https://honor-ry.github.io/tags/BRT/"/>
+    
+      <category term="实践" scheme="https://honor-ry.github.io/tags/%E5%AE%9E%E8%B7%B5/"/>
     
   </entry>
   
