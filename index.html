@@ -145,7 +145,7 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/ck6g91r9b0005xonjhmthbla7/"
+  <a class="article-title" href="/2020/ck6g9cp2p0004qonjezhee9oz/"
     >Hello World</a
   >
 </h2>
@@ -156,7 +156,7 @@
 
     
     <div class="article-meta">
-      <a href="/2020/ck6g91r9b0005xonjhmthbla7/" class="article-date">
+      <a href="/2020/ck6g9cp2p0004qonjezhee9oz/" class="article-date">
   <time datetime="2020-02-09T11:19:33.102Z" itemprop="datePublished">2020-02-09</time>
 </a>
       
@@ -221,7 +221,7 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2019/ck6g91r8v0000xonjf4s8ar7h/"
+  <a class="article-title" href="/2019/ck6g9cp2a0000qonj6e2x9n65/"
     >Markdown测试</a
   >
 </h2>
@@ -232,7 +232,7 @@
 
     
     <div class="article-meta">
-      <a href="/2019/ck6g91r8v0000xonjf4s8ar7h/" class="article-date">
+      <a href="/2019/ck6g9cp2a0000qonj6e2x9n65/" class="article-date">
   <time datetime="2019-12-01T09:07:11.000Z" itemprop="datePublished">2019-12-01</time>
 </a>
       
@@ -260,7 +260,7 @@
 <p>示例：</p>
 <p>这是 <em>斜体</em>，这是 <strong>粗体</strong>。</p>
       
-      <a class="article-more-link" href="/2019/ck6g91r8v0000xonjf4s8ar7h/">阅读更多...</a>
+      <a class="article-more-link" href="/2019/ck6g9cp2a0000qonj6e2x9n65/">阅读更多...</a>
       
       
       <!-- reward -->
@@ -336,16 +336,14 @@
 <li><a href="http://www.cis.syr.edu/~wedu/seed/" target="_blank" rel="noopener">http://www.cis.syr.edu/~wedu/seed/</a></li>
 <li>纽约雪城大学 杜文亮 (Du, Wenliang)教授设计和实现，从2002年开始得到NSF 1.2M$的资助</li>
 </ol>
-<p>##一.实验环境（详细说明实验运行的操作系统，网络平台，机器的配置）<br>操作系统：Windows10<br>虚拟机操作系统：SEEDUbuntu 12.04<br>虚拟机工具：VirtualBox 5.2.16<br>网络虚拟软件：GNS3 2.0.3</p>
-<p>##二.实验目的</p>
-<ol>
+<h2 id="一-实验环境（详细说明实验运行的操作系统，网络平台，机器的配置）"><a href="#一-实验环境（详细说明实验运行的操作系统，网络平台，机器的配置）" class="headerlink" title="一.实验环境（详细说明实验运行的操作系统，网络平台，机器的配置）"></a>一.实验环境（详细说明实验运行的操作系统，网络平台，机器的配置）</h2><p>操作系统：Windows10<br>虚拟机操作系统：SEEDUbuntu 12.04<br>虚拟机工具：VirtualBox 5.2.16<br>网络虚拟软件：GNS3 2.0.3</p>
+<h2 id="二-实验目的"><a href="#二-实验目的" class="headerlink" title="二.实验目的"></a>二.实验目的</h2><ol>
 <li>掌握基础ip网络配置；</li>
 <li>掌握GNS3和使用WireShark对流量进行抓包分析；</li>
 <li>实现SYN flood攻击，理解其表现形式和产生的影响；</li>
 <li>深入观察理解linux内核tcp SYN cookie机制，理解其在SYN flood攻击中的作用。</li>
 </ol>
-<p>##三.实验步骤</p>
-<ol>
+<h2 id="三-实验步骤"><a href="#三-实验步骤" class="headerlink" title="三.实验步骤"></a>三.实验步骤</h2><ol>
 <li><p>导入SEED虚拟机镜像文件，命名为SEED ubuntu，复制一个，命名为SEED ubuntu target（注意勾选重新初始化网卡的MAC地址）。<br><img src="https://i.loli.net/2020/02/10/o9mBiqw6ElF3b81.png" alt="01.png"></p>
 <div align="center">![02.png](https://i.loli.net/2020/02/10/RK6YpAUMm5XtTbn.png)
 ![03.png](https://i.loli.net/2020/02/10/DPbZmHJYWUvT9fn.png)
@@ -381,8 +379,8 @@
 <ol start="14">
 <li>用netstat –n –tcp查看tcp网络的连接情况。<br><img src="https://i.loli.net/2020/02/10/VNpCqYZdyztFT7o.png" alt="16.png"></li>
 </ol>
-<p>在seed ubuntu target查看连接情况<br><img src="https://graph.baidu.com/resource/122b7a2d41a5f2f2af87d01581326366.jpg" alt="17.png"><br>##四.实验结果分析</p>
-<h3 id="1-SYN-Flood攻击原理"><a href="#1-SYN-Flood攻击原理" class="headerlink" title="1. SYN Flood攻击原理"></a>1. SYN Flood攻击原理</h3><p>　　SYN Flood 攻击是一种典型的拒绝服务型(Denial of Service,DoS)攻击。所谓拒绝服务型攻击就是通过对网络带宽进行消耗性攻击，使受害主机或网络不能够良好的提供服务，从而间接达到攻击的目的。SYN Flood攻击就是利用了“三次握手”的漏洞。假设一个用户向服务器发送了SYN报文后突然死机或掉线，那么服务器在发出 SYN+ACK 应答报文后是无法收到客户端的 ACK 报文的(第三次握手无法完成)，一般把服务器收到 SYN 包而还未收到 ACK 包时的连接状态成为半开连接。这时服务器端一般会重试(再次发送 SYN+ACK 给客户端)并等待一段时间后丢弃这个未完成的连接，这段时间的长度我们称为 SYN Timeout，一般来说这个时间是分钟的数量级(大约为30秒-2分钟)。如果有一个恶意的攻击者大量模拟这种情况，服务器端将为了维护一个非常大的半连接列表而消耗非常多的资源—-数以万计的半连接，即使是简单的保存并遍历也会消耗非常多的 CPU 时间和内存，何况还要不断对这个列表中的 IP 进行 SYN+ACK 的重试。服务器端将忙于处理攻击者伪造的 TCP 连接请求而无暇理睬客户的正常请求，此时从正常客户的角度看来，服务器失去响应，这种情况就称作服务器端受到了SYN Flood攻击(SYN 洪范攻击)。</p>
+<p>在seed ubuntu target查看连接情况<br><img src="https://graph.baidu.com/resource/122b7a2d41a5f2f2af87d01581326366.jpg" alt="17.png"></p>
+<h2 id="四-实验结果分析"><a href="#四-实验结果分析" class="headerlink" title="四.实验结果分析"></a>四.实验结果分析</h2><h3 id="1-SYN-Flood攻击原理"><a href="#1-SYN-Flood攻击原理" class="headerlink" title="1. SYN Flood攻击原理"></a>1. SYN Flood攻击原理</h3><p>　　SYN Flood 攻击是一种典型的拒绝服务型(Denial of Service,DoS)攻击。所谓拒绝服务型攻击就是通过对网络带宽进行消耗性攻击，使受害主机或网络不能够良好的提供服务，从而间接达到攻击的目的。SYN Flood攻击就是利用了“三次握手”的漏洞。假设一个用户向服务器发送了SYN报文后突然死机或掉线，那么服务器在发出 SYN+ACK 应答报文后是无法收到客户端的 ACK 报文的(第三次握手无法完成)，一般把服务器收到 SYN 包而还未收到 ACK 包时的连接状态成为半开连接。这时服务器端一般会重试(再次发送 SYN+ACK 给客户端)并等待一段时间后丢弃这个未完成的连接，这段时间的长度我们称为 SYN Timeout，一般来说这个时间是分钟的数量级(大约为30秒-2分钟)。如果有一个恶意的攻击者大量模拟这种情况，服务器端将为了维护一个非常大的半连接列表而消耗非常多的资源—-数以万计的半连接，即使是简单的保存并遍历也会消耗非常多的 CPU 时间和内存，何况还要不断对这个列表中的 IP 进行 SYN+ACK 的重试。服务器端将忙于处理攻击者伪造的 TCP 连接请求而无暇理睬客户的正常请求，此时从正常客户的角度看来，服务器失去响应，这种情况就称作服务器端受到了SYN Flood攻击(SYN 洪范攻击)。</p>
 <h3 id="2-SYN-Cookies原理"><a href="#2-SYN-Cookies原理" class="headerlink" title="2. SYN Cookies原理"></a>2. SYN Cookies原理</h3><p>　　SYN cookie就是用一个cookie来响应 TCP SYN请求的TCP实现，根据上面的描述，在正常的TCP实现中，当服务器接收到一个SYN数据包，它返回一个SYN+ACK包来应答，然后进入TCP_SYN_RECV(半开放连接)状态来等待最后返回的ACK包。服务器用一个数据空间来描述所有未决的连接，然而这个数据空间的大小是有限的，所以攻击者将塞满这个空间。SYN Cookie是对TCP服务器端的三次握手协议作一些修改，专门用来防范SYN Flood 攻击的一种手段。它的原理是，在TCP服务器收到 TCP SYN包并返回 TCP SYN+ACK 包时，不分配一个专门的数据区，而是根据这个SYN包计算出一个cookie值,并将这个cookie作为将要返回的 SYN+ACK 包的初始序列号。在收到 TCP ACK包时，TCP服务器再根据报头信息获取cookie值，并通过这个cookie值检查这个TCP ACK包的合法性。如果合法，再分配专门的数据区进行处理未来的TCP连接。 由此可见，cookie的实现要求cookie 必须与每次TCP连接紧密对应，攻击者无法伪造cookie，同时cookie中包含连接的状态信息。</p>
 <h3 id="3-实验结果"><a href="#3-实验结果" class="headerlink" title="3. 实验结果"></a>3. 实验结果</h3><p>　　当打开SEED Ubuntu target内核的tcp syn cookie参数时，在target机器遭受syn flood 攻击后，源主机(SEED Ubuntu)可以用telnet登录target主机，即可以建立正常的TCP连接。<br>当内核关闭tcp syn cookie参数时，target主机在遭受flood攻击后，源主机(SEED Ubuntu)telnet不能正常登录target主机，无法建立正常的TCP连接。</p>
 
