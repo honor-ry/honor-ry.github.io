@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>王荣耀的博客</title>
+  <title>努力做一个可爱的人。</title>
   <icon>https://www.gravatar.com/avatar/8c43a382c70e58f623d741de658d1a97</icon>
   <subtitle>面朝大海，春暖花开</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://honor-ry.github.io/"/>
-  <updated>2020-02-09T13:02:04.972Z</updated>
+  <updated>2020-02-10T12:20:28.449Z</updated>
   <id>https://honor-ry.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://honor-ry.github.io/2020/about/"/>
     <id>https://honor-ry.github.io/2020/about/</id>
     <published>2020-02-09T13:37:04.000Z</published>
-    <updated>2020-02-09T13:02:04.972Z</updated>
+    <updated>2020-02-10T12:20:28.449Z</updated>
     
     <summary type="html">
     
@@ -32,7 +32,7 @@
           &lt;blockquote&gt;
 &lt;p&gt;A Coder, live in xiangyang, China.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;姓名：王荣耀&lt;br&gt;家乡：湖北襄阳&lt;br&gt;现居：武汉&lt;br&gt;GitHub: &lt;a
+&lt;p&gt;姓名：王荣耀&lt;br&gt;年龄：22&lt;br&gt;家乡：湖北襄阳&lt;br&gt;Tel: 15071239458&lt;br&gt;GitHub: &lt;a
         
       
     
@@ -45,32 +45,9 @@
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="https://honor-ry.github.io/2020/ck6g9cp2p0004qonjezhee9oz/"/>
-    <id>https://honor-ry.github.io/2020/ck6g9cp2p0004qonjezhee9oz/</id>
-    <published>2020-02-09T11:19:33.102Z</published>
-    <updated>2020-02-09T11:19:33.104Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
-        
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>Markdown测试</title>
-    <link href="https://honor-ry.github.io/2019/ck6g9cp2a0000qonj6e2x9n65/"/>
-    <id>https://honor-ry.github.io/2019/ck6g9cp2a0000qonj6e2x9n65/</id>
+    <link href="https://honor-ry.github.io/2019/ck6gfy52x0000jknj9ch1cjn2/"/>
+    <id>https://honor-ry.github.io/2019/ck6gfy52x0000jknj9ch1cjn2/</id>
     <published>2019-12-01T09:07:11.000Z</published>
     <updated>2020-02-09T09:27:05.000Z</updated>
     
@@ -96,17 +73,16 @@
     <link href="https://honor-ry.github.io/2019/honor/"/>
     <id>https://honor-ry.github.io/2019/honor/</id>
     <published>2019-11-30T07:25:55.000Z</published>
-    <updated>2020-02-10T09:30:48.512Z</updated>
+    <updated>2020-02-10T12:36:45.557Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;1-实验简介&quot;&gt;&lt;a href=&quot;#1-实验简介&quot; class=&quot;headerlink&quot; title=&quot;1.实验简介&quot;&gt;&lt;/a&gt;1.实验简介&lt;/h2&gt;&lt;p&gt;　　最近在学习《计算机网络》，课程布置了一个网络攻击的作业 SYN Flooding Attack
-        
-      
+      &lt;h2 id=&quot;1-实验简介&quot;&gt;&lt;a href=&quot;#1-实验简介&quot; class=&quot;headerlink&quot; title=&quot;1.实验简介&quot;&gt;&lt;/a&gt;1.实验简介&lt;/h2&gt;&lt;p&gt;　　最近在学习《计算机网络》，课程布置了一个网络攻击的作业 SYN Flooding Attack ，本篇博客就本次实验做一个完整的实验报告及总结。&lt;/p&gt;
+&lt;h2 id=&quot;所用平台seed简介&quot;&gt;&lt;a href=&quot;#所用平台seed简介&quot; class=&quot;headerlink&quot; title=&quot;所用平台seed简介&quot;&gt;&lt;/a&gt;所用平台seed简介&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;SEED：计算机安全教育的教学实验平台&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cis.syr.edu/~wedu/seed/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.cis.syr.edu/~wedu/seed/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;纽约雪城大学 杜文亮 (Du, Wenliang)教授设计和实现，从2002年开始得到NSF 1.2M$的资助&lt;/li&gt;
+&lt;/ol&gt;
     
     </summary>
     
@@ -119,27 +95,19 @@
   </entry>
   
   <entry>
-    <title>暑期社会实践</title>
-    <link href="https://honor-ry.github.io/2017/vietnam/"/>
-    <id>https://honor-ry.github.io/2017/vietnam/</id>
-    <published>2017-09-16T12:25:55.000Z</published>
-    <updated>2020-02-10T07:01:39.344Z</updated>
+    <title>Hello World</title>
+    <link href="https://honor-ry.github.io/2017/ck6gfy53l0006jknj0s56g3of/"/>
+    <id>https://honor-ry.github.io/2017/ck6gfy53l0006jknj0s56g3of/</id>
+    <published>2017-07-01T04:07:11.000Z</published>
+    <updated>2020-02-10T12:27:50.758Z</updated>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;调研武汉市BRT运行现状，我们在行动&quot;&gt;&lt;a href=&quot;#调研武汉市BRT运行现状，我们在行动&quot; class=&quot;headerlink&quot; title=&quot;调研武汉市BRT运行现状，我们在行动&quot;&gt;&lt;/a&gt;调研武汉市BRT运行现状，我们在行动&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;6月30日至7月4日，为响应国家大学生暑期三下乡活动的号召，“推动改进快速公交建设，切实提高公交服务质量”，我校计信学院社会实践团队赴武汉市调研城市BRT项目运行现状。&lt;/p&gt;
-&lt;/blockquote&gt;
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
     
     </summary>
     
     
-      <category term="武汉" scheme="https://honor-ry.github.io/categories/%E6%AD%A6%E6%B1%89/"/>
-    
-    
-      <category term="BRT" scheme="https://honor-ry.github.io/tags/BRT/"/>
-    
-      <category term="实践" scheme="https://honor-ry.github.io/tags/%E5%AE%9E%E8%B7%B5/"/>
     
   </entry>
   
