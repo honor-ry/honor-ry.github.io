@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>honor</title>
+  <icon>https://www.gravatar.com/avatar/8c43a382c70e58f623d741de658d1a97</icon>
+  <subtitle>爱笑的小土豆~</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://www.rongyao-blog.top/"/>
+  <updated>2020-08-26T12:07:47.951Z</updated>
+  <id>https://www.rongyao-blog.top/</id>
+  
+  <author>
+    <name>honor</name>
+    <email>995688198@qq.com</email>
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++-example</title>
+    <link href="https://www.rongyao-blog.top/posts/9071.html"/>
+    <id>https://www.rongyao-blog.top/posts/9071.html</id>
+    <published>2020-08-26T12:07:47.000Z</published>
+    <updated>2020-08-26T12:07:47.951Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script&gt;
+        document.querySelectorAll(&#39;.github-emoji&#39;)
+          .forEach(el =&gt; {
+            if (!el.dataset.src) { return; }
+       
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>C++-study</title>
+    <link href="https://www.rongyao-blog.top/posts/241f.html"/>
+    <id>https://www.rongyao-blog.top/posts/241f.html</id>
+    <published>2020-08-26T07:33:23.000Z</published>
+    <updated>2020-08-26T07:33:45.823Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script&gt;
+        document.querySelectorAll(&#39;.github-emoji&#39;)
+          .forEach(el =&gt; {
+            if (!el.dataset.src) { return; }
+       
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Anaconda3安装教程(详细)</title>
+    <link href="https://www.rongyao-blog.top/posts/bf8d.html"/>
+    <id>https://www.rongyao-blog.top/posts/bf8d.html</id>
+    <published>2020-03-19T12:29:38.000Z</published>
+    <updated>2020-03-28T07:00:49.613Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;h2 id=&quot;Anaconda3下载&quot;&gt;&lt;a href=&quot;#Anaconda3下载&quot; class=&quot;headerlink&quot; title=&quot;Anaconda3下载&quot;&gt;&lt;/a&gt;Anaconda3下载&lt;/h2&gt;&lt;p&gt;下载地址：&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://www.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="anaconda python" scheme="https://www.rongyao-blog.top/tags/anaconda-python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>机器学习-李宏毅| 回归演示 | python</title>
+    <link href="https://www.rongyao-blog.top/posts/c315.html"/>
+    <id>https://www.rongyao-blog.top/posts/c315.html</id>
+    <published>2020-03-12T07:52:26.000Z</published>
+    <updated>2020-03-28T07:02:29.448Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+
+&lt;h2 id=&quot;回归的定义&quot;&gt;&lt;a href=&quot;#回归的定义&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://www.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="logistic regression python 机器学习" scheme="https://www.rongyao-blog.top/tags/logistic-regression-python-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSDN-markdown编辑器语法——字体、字号与颜色设置</title>
+    <link href="https://www.rongyao-blog.top/posts/36fc.html"/>
+    <id>https://www.rongyao-blog.top/posts/36fc.html</id>
+    <published>2020-03-12T03:05:08.000Z</published>
+    <updated>2020-03-28T06:54:35.995Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+
+        
+      
+    
+    </summary>
+    
+    
+      <category term="markdown" scheme="https://www.rongyao-blog.top/categories/markdown/"/>
+    
+    
+      <category term="csdn markdown" scheme="https://www.rongyao-blog.top/tags/csdn-markdown/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基于FOLPD模型的PID控制器参数的整定</title>
+    <link href="https://www.rongyao-blog.top/posts/e76e.html"/>
+    <id>https://www.rongyao-blog.top/posts/e76e.html</id>
+    <published>2020-03-11T07:55:39.000Z</published>
+    <updated>2020-03-28T07:02:13.098Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;在PID控制器的诸多经典参数整算法中，绝大多数的算法都是在带有时间延迟的一阶模型（FOPDT）的基础上提出的，模型的一般形式为：&lt;img
+        
+      
+    
+    </summary>
+    
+    
+      <category term="控制" scheme="https://www.rongyao-blog.top/categories/%E6%8E%A7%E5%88%B6/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>PID控制的理解与参数整定</title>
+    <link href="https://www.rongyao-blog.top/posts/20ab.html"/>
+    <id>https://www.rongyao-blog.top/posts/20ab.html</id>
+    <published>2020-03-11T04:09:26.000Z</published>
+    <updated>2020-03-28T07:02:31.197Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;h3 id=&quot;PID控制器的一般结构&quot;&gt;&lt;a href=&quot;#PID控制器的一般结构&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="控制" scheme="https://www.rongyao-blog.top/categories/%E6%8E%A7%E5%88%B6/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>基本的bash shell命令（一）</title>
+    <link href="https://www.rongyao-blog.top/posts/87b0.html"/>
+    <id>https://www.rongyao-blog.top/posts/87b0.html</id>
+    <published>2020-02-26T02:00:02.000Z</published>
+    <updated>2020-03-28T07:02:02.865Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;h2 id=&quot;linux文件系统&quot;&gt;&lt;a href=&quot;#linux文件系统&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://www.rongyao-blog.top/categories/linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>stm32mp1开发板入门pangu</title>
+    <link href="https://www.rongyao-blog.top/posts/29d1.html"/>
+    <id>https://www.rongyao-blog.top/posts/29d1.html</id>
+    <published>2020-02-22T03:59:29.000Z</published>
+    <updated>2020-03-28T07:02:30.455Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;h2 id=&quot;pangu开发板介绍&quot;&gt;&lt;a href=&quot;#pangu开发板介绍&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="嵌入式" scheme="https://www.rongyao-blog.top/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TCP Congestion性能测试分析</title>
+    <link href="https://www.rongyao-blog.top/posts/ab61.html"/>
+    <id>https://www.rongyao-blog.top/posts/ab61.html</id>
+    <published>2019-12-22T07:25:55.000Z</published>
+    <updated>2020-02-15T03:15:05.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-实验简介&quot;&gt;&lt;a href=&quot;#1-实验简介&quot; class=&quot;headerlink&quot; title=&quot;1.实验简介&quot;&gt;&lt;/a&gt;1.实验简介&lt;/h2&gt;&lt;p&gt;  最近在学习《现代计算机网络》，课程布置了一个对tcp拥塞控制性能进行测试的实验，本篇博客就本次实验做一个完整的实验报告及总结。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="计算机网络" scheme="https://www.rongyao-blog.top/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    
+      <category term="实验" scheme="https://www.rongyao-blog.top/tags/%E5%AE%9E%E9%AA%8C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Markdown测试</title>
+    <link href="https://www.rongyao-blog.top/posts/ff42.html"/>
+    <id>https://www.rongyao-blog.top/posts/ff42.html</id>
+    <published>2019-12-01T09:07:11.000Z</published>
+    <updated>2020-02-15T03:15:04.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一级标题&quot;&gt;&lt;a href=&quot;#一级标题&quot; class=&quot;headerlink&quot; title=&quot;一级标题&quot;&gt;&lt;/a&gt;一级标题&lt;/h1&gt;&lt;hr&gt;
+&lt;h3 id=&quot;1-斜体和粗体&quot;&gt;&lt;a href=&quot;#1-斜体和粗体&quot; class=&quot;headerlink&quot; title=&quot;1. 斜体和粗体&quot;&gt;&lt;/a&gt;1. 斜体和粗体&lt;/h3&gt;&lt;p&gt;使用 * 和 ** 表示斜体和粗体。&lt;/p&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;p&gt;这是 &lt;em&gt;斜体&lt;/em&gt;，这是 &lt;strong&gt;粗体&lt;/strong&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="测试" scheme="https://www.rongyao-blog.top/categories/%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="测试" scheme="https://www.rongyao-blog.top/tags/%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SYN flood攻击及SYN cookie原理分析</title>
+    <link href="https://www.rongyao-blog.top/posts/77c3.html"/>
+    <id>https://www.rongyao-blog.top/posts/77c3.html</id>
+    <published>2019-11-30T07:25:55.000Z</published>
+    <updated>2020-02-15T03:15:04.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-实验简介&quot;&gt;&lt;a href=&quot;#1-实验简介&quot; class=&quot;headerlink&quot; title=&quot;1.实验简介&quot;&gt;&lt;/a&gt;1.实验简介&lt;/h2&gt;&lt;p&gt;　　最近在学习《计算机网络》，课程布置了一个网络攻击的作业 SYN Flooding Attack ，本篇博客就本次实验做一个完整的实验报告及总结。&lt;/p&gt;
+&lt;h2 id=&quot;所用平台seed简介&quot;&gt;&lt;a href=&quot;#所用平台seed简介&quot; class=&quot;headerlink&quot; title=&quot;所用平台seed简介&quot;&gt;&lt;/a&gt;所用平台seed简介&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;SEED：计算机安全教育的教学实验平台&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cis.syr.edu/~wedu/seed/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.cis.syr.edu/~wedu/seed/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;纽约雪城大学 杜文亮 (Du, Wenliang)教授设计和实现，从2002年开始得到NSF 1.2M$的资助&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+      <category term="计算机网络" scheme="https://www.rongyao-blog.top/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    
+      <category term="实验" scheme="https://www.rongyao-blog.top/tags/%E5%AE%9E%E9%AA%8C/"/>
+    
+  </entry>
+  
+</feed>
