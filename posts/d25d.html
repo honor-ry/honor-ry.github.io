@@ -1,0 +1,1672 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Kaggle-泰坦尼克号生存者预测比赛|初级入门, 生活、学习、旅行、代码、博客">
+    <meta name="description" content="
+
+问题描述
+泰坦尼克号的沉没是历史上最臭名昭著的沉船事件之一。1912年4月15日，泰坦尼克号在处女航中撞上冰山沉没，2224名乘客和船员中1502人遇难。这一耸人听闻的悲剧震惊了国际社会，并导致了更好的船舶安全条例。
+
+沉船造成如此巨大">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Kaggle-泰坦尼克号生存者预测比赛|初级入门 | honor</title>
+    <link rel="icon" type="image/png" href="/favicon01.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="honor" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo1.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">honor</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>主页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于我</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://wangrongyao.lofter.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>摄影</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/box" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-secret" style="zoom: 0.6;"></i>
+      
+      <span>网址导航</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo1.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">honor</div>
+        <div class="logo-desc">
+            
+            记录学习、科研、生活的点滴
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			主页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于我
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://wangrongyao.lofter.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			摄影
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/box" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-secret"></i>
+			
+			网址导航
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Kaggle-泰坦尼克号生存者预测比赛|初级入门</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/python-kaggle-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">python kaggle 机器学习</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                机器学习
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-06-27
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    11 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <a id="more"></a>
+
+<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><ul>
+<li><p>泰坦尼克号的沉没是历史上最臭名昭著的沉船事件之一。1912年4月15日，泰坦尼克号在处女航中撞上冰山沉没，2224名乘客和船员中1502人遇难。这一耸人听闻的悲剧震惊了国际社会，并导致了更好的船舶安全条例。</p>
+</li>
+<li><p>沉船造成如此巨大人员伤亡的原因之一是没有足够的救生艇来容纳乘客和船员。虽然在沉船事件中幸存下来也有一些运气的因素，但有些人比其他人更有可能幸存下来，比如妇女、儿童和上层阶级。</p>
+</li>
+<li><p>在这个挑战中，我们要求你完成对可能存活下来的人的分析。我们特别要求你们运用机器学习工具来预测哪些乘客在灾难中幸存下来。<br>数据来源：<a href="https://www.kaggle.com/c/titanic/data" target="_blank" rel="noopener">https://www.kaggle.com/c/titanic/data</a></p>
+<h3 id="初探数据"><a href="#初探数据" class="headerlink" title="初探数据"></a>初探数据</h3><p>首先看看数据，长什么样</p>
+</li>
+</ul>
+<p>pandas是常用的python数据处理包，把csv文件读入称dataframe格式，数据分为两部分：训练集和测试集，训练集891行12列，测试集419行11列（无survived列）。<br><img src="https://img-blog.csdnimg.cn/20200626190549962.png" alt="在这里插入图片描述"><br>各列的含义如下：<br>|PassengerId   |乘客ID编号  |<br>|–|–|<br>| Pclass | 乘客等级|<br>|Name   | 姓名 |<br>|Sex   | 性别 |<br>| Age  | 年龄 |<br>| SibSp  |堂兄弟/妹个数  |<br>| Parch  |父母与小孩个数  |<br>| Ticket   |船票信息  |<br>| Fare   |票价  |<br>|Cabin    |客舱  |<br>| Embarked   |登船港口C,Q,S  |</p>
+<h4 id="1-数据初步认识"><a href="#1-数据初步认识" class="headerlink" title="1.数据初步认识"></a>1.数据初步认识</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>df_train<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<p><img src="https://img-blog.csdnimg.cn/20200627073604715.png" alt="在这里插入图片描述"><br>上面的数据告诉我们训练集共有891名乘客，但是他们有些属性不全，比如：</p>
+<ul>
+<li>Age属性只有714名乘客有记录</li>
+<li>Cabin则只有204名乘客有记录<br>可以采用pandans中的describe()方法，对数据中的每一列数进行统计分析。得到数值型数据的一些分布（而有些属性比如姓名是文本型，登船港口是类目性，这些用describe()方法是看不到的）<br>df_train.describe()<br><img src="https://img-blog.csdnimg.cn/20200627074330643.png" alt="在这里插入图片描述"><br>上面可以得出，大概有38.3%的人获救了，乘客的平均年龄是29.7岁。<h4 id="2-数据初步分析"><a href="#2-数据初步分析" class="headerlink" title="2.数据初步分析"></a>2.数据初步分析</h4>每个乘客都有这么多属性，如何知道哪些属性更有用，又该如何使用呢。所以我们要知道，对数据的认识非常重要！看看单一/多个属性和最后的survived之间有什么样的关系。<br>下面使用统计学与绘图，了解数据之间的相关性，主要在以下方面：</li>
+<li>1.性别与幸存率的关系</li>
+<li>2.乘客社会等级与幸存率的关系</li>
+<li>3.配偶及兄弟姐妹数与幸存率的关系</li>
+<li>4.父母及子女数与幸存率的关系</li>
+<li>5.年龄与幸存率的关系</li>
+<li>6.Embarked登港港口与幸存率的关系</li>
+<li>7.称呼与幸存率的关系</li>
+<li>8.家庭人数与幸存率的关系</li>
+<li>9.不同船舱的乘客与幸存率的关系<h5 id="2-1性别与幸存率的关系"><a href="#2-1性别与幸存率的关系" class="headerlink" title="2.1性别与幸存率的关系"></a>2.1性别与幸存率的关系</h5><img src="https://img-blog.csdnimg.cn/20200627082626924.png" alt="在这里插入图片描述"><h5 id="2-乘客社会等级与幸存率的关系"><a href="#2-乘客社会等级与幸存率的关系" class="headerlink" title="2.乘客社会等级与幸存率的关系"></a>2.乘客社会等级与幸存率的关系</h5></li>
+</ul>
+<pre class=" language-python"><code class="language-python">sns<span class="token punctuation">.</span>barplot<span class="token punctuation">(</span>x<span class="token operator">=</span><span class="token string">'Pclass'</span><span class="token punctuation">,</span> y<span class="token operator">=</span><span class="token string">'Survived'</span><span class="token punctuation">,</span> data<span class="token operator">=</span>train<span class="token punctuation">)</span></code></pre>
+<p><img src="https://img-blog.csdnimg.cn/20200627082753277.png" alt="在这里插入图片描述"><br>由图看出，乘客社会等级越高，幸存率越高。</p>
+<h5 id="3-配偶及兄弟姐妹数与幸存率的关系"><a href="#3-配偶及兄弟姐妹数与幸存率的关系" class="headerlink" title="3.配偶及兄弟姐妹数与幸存率的关系"></a>3.配偶及兄弟姐妹数与幸存率的关系</h5><pre class=" language-python"><code class="language-python">sns<span class="token punctuation">.</span>barplot<span class="token punctuation">(</span>x<span class="token operator">=</span><span class="token string">'SibSp'</span><span class="token punctuation">,</span> y<span class="token operator">=</span><span class="token string">'Survived'</span><span class="token punctuation">,</span> data<span class="token operator">=</span>train<span class="token punctuation">)</span></code></pre>
+<p><img src="https://img-blog.csdnimg.cn/20200627082847917.png" alt="在这里插入图片描述"><br>4.父母及子女数与幸存率的关系</p>
+<pre class=" language-python"><code class="language-python">sns<span class="token punctuation">.</span>barplot<span class="token punctuation">(</span>x<span class="token operator">=</span><span class="token string">'Parch'</span><span class="token punctuation">,</span> y<span class="token operator">=</span><span class="token string">'Survived'</span><span class="token punctuation">,</span> data<span class="token operator">=</span>train<span class="token punctuation">)</span></code></pre>
+<p><img src="https://img-blog.csdnimg.cn/2020062708292029.png" alt="在这里插入图片描述"><br>父母与子女数适中的乘客幸存率较高</p>
+<h5 id="5-年龄与幸存率的关系"><a href="#5-年龄与幸存率的关系" class="headerlink" title="5.年龄与幸存率的关系"></a>5.年龄与幸存率的关系</h5><pre class=" language-python"><code class="language-python">facet <span class="token operator">=</span> sns<span class="token punctuation">.</span>FacetGrid<span class="token punctuation">(</span>train<span class="token punctuation">,</span> hue<span class="token operator">=</span><span class="token string">"Survived"</span><span class="token punctuation">,</span>aspect<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+facet<span class="token punctuation">.</span>map<span class="token punctuation">(</span>sns<span class="token punctuation">.</span>kdeplot<span class="token punctuation">,</span><span class="token string">'Age'</span><span class="token punctuation">,</span>shade<span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span>
+facet<span class="token punctuation">.</span>set<span class="token punctuation">(</span>xlim<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> train<span class="token punctuation">[</span><span class="token string">'Age'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>max<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+facet<span class="token punctuation">.</span>add_legend<span class="token punctuation">(</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'Age'</span><span class="token punctuation">)</span> 
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'density'</span><span class="token punctuation">)</span> </code></pre>
+<p><img src="https://img-blog.csdnimg.cn/20200627084408414.png" alt="在这里插入图片描述"><br>从不同生还情况的密度图可以看出，在年龄15岁的左侧，生还率有明显差别，密度图非交叉区域面积非常大，但在其他年龄段，则差别不是很明显，认为是随机所致，因此可以考虑将年龄偏小的区域分离出来。</p>
+<h5 id="6-Embarked登港港口与幸存率的关系"><a href="#6-Embarked登港港口与幸存率的关系" class="headerlink" title="6.Embarked登港港口与幸存率的关系"></a>6.Embarked登港港口与幸存率的关系</h5><p>登船港口（Embarked）：</p>
+<ul>
+<li>出发地点：S = 英国南安普顿Southampton</li>
+<li>途径地点1：C = 法国 瑟堡市Cherbourg</li>
+<li>途径地点2：Q = 爱尔兰 昆士敦Queenstown<br><img src="https://img-blog.csdnimg.cn/20200627084910905.png" alt="在这里插入图片描述"><br>由图发现C地的生存率更高。</li>
+</ul>
+<p>7.称呼与幸存率的关系<br>定义以下几种头衔类型，</p>
+<ul>
+<li>Officer政府官员</li>
+<li>Royalty王室（皇室）</li>
+<li>Mr已婚男士</li>
+<li>Mrs已婚妇女</li>
+<li>Miss年轻未婚女子</li>
+<li>Master有技能的人/教师<pre class=" language-python"><code class="language-python">all_data <span class="token operator">=</span> pd<span class="token punctuation">.</span>concat<span class="token punctuation">(</span><span class="token punctuation">[</span>train<span class="token punctuation">,</span> test<span class="token punctuation">]</span><span class="token punctuation">,</span> ignore_index<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+all_data<span class="token punctuation">[</span><span class="token string">'Title'</span><span class="token punctuation">]</span> <span class="token operator">=</span> all_data<span class="token punctuation">[</span><span class="token string">'Name'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>apply<span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span>x<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">','</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+Title_Dict <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+Title_Dict<span class="token punctuation">.</span>update<span class="token punctuation">(</span>dict<span class="token punctuation">.</span>fromkeys<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'Capt'</span><span class="token punctuation">,</span> <span class="token string">'Col'</span><span class="token punctuation">,</span> <span class="token string">'Major'</span><span class="token punctuation">,</span> <span class="token string">'Dr'</span><span class="token punctuation">,</span> <span class="token string">'Rev'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'Officer'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+Title_Dict<span class="token punctuation">.</span>update<span class="token punctuation">(</span>dict<span class="token punctuation">.</span>fromkeys<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'Don'</span><span class="token punctuation">,</span> <span class="token string">'Sir'</span><span class="token punctuation">,</span> <span class="token string">'the Countess'</span><span class="token punctuation">,</span> <span class="token string">'Dona'</span><span class="token punctuation">,</span> <span class="token string">'Lady'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'Royalty'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+Title_Dict<span class="token punctuation">.</span>update<span class="token punctuation">(</span>dict<span class="token punctuation">.</span>fromkeys<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'Mme'</span><span class="token punctuation">,</span> <span class="token string">'Ms'</span><span class="token punctuation">,</span> <span class="token string">'Mrs'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'Mrs'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+Title_Dict<span class="token punctuation">.</span>update<span class="token punctuation">(</span>dict<span class="token punctuation">.</span>fromkeys<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'Mlle'</span><span class="token punctuation">,</span> <span class="token string">'Miss'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'Miss'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+Title_Dict<span class="token punctuation">.</span>update<span class="token punctuation">(</span>dict<span class="token punctuation">.</span>fromkeys<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'Mr'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'Mr'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+Title_Dict<span class="token punctuation">.</span>update<span class="token punctuation">(</span>dict<span class="token punctuation">.</span>fromkeys<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'Master'</span><span class="token punctuation">,</span><span class="token string">'Jonkheer'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'Master'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+</li>
+</ul>
+<p>all_data[‘Title’] = all_data[‘Title’].map(Title_Dict)<br>sns.barplot(x=”Title”, y=”Survived”, data=all_data)<br>plt.show()</p>
+<pre><code>
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200627085132971.png)
+
+8.家庭人数与幸存率的关系
+这里新增FamilyLabel特征，这个特征等于父母儿童+配偶兄弟姐妹+1，在文中就是 FamilyLabel=Parch+SibSp+1，然后将FamilySize分为三类：
+
+```python
+all_data['FamilySize']=all_data['SibSp']+all_data['Parch']+1
+sns.barplot(x="FamilySize", y="Survived", data=all_data)</code></pre><p><img src="https://img-blog.csdnimg.cn/20200627094509738.png" alt="在这里插入图片描述"></p>
+<h5 id="数据探索"><a href="#数据探索" class="headerlink" title="数据探索"></a>数据探索</h5><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> warnings
+warnings<span class="token punctuation">.</span>filterwarnings<span class="token punctuation">(</span>action<span class="token operator">=</span><span class="token string">"ignore"</span><span class="token punctuation">)</span>
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+<span class="token keyword">import</span> seaborn <span class="token keyword">as</span> sns
+plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
+sns<span class="token punctuation">.</span>barplot<span class="token punctuation">(</span><span class="token string">'Pclass'</span><span class="token punctuation">,</span> <span class="token string">'Survived'</span><span class="token punctuation">,</span> data<span class="token operator">=</span>train<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+sns<span class="token punctuation">.</span>barplot<span class="token punctuation">(</span><span class="token string">'SibSp'</span><span class="token punctuation">,</span> <span class="token string">'Survived'</span><span class="token punctuation">,</span> data<span class="token operator">=</span>train<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
+sns<span class="token punctuation">.</span>barplot<span class="token punctuation">(</span><span class="token string">'Parch'</span><span class="token punctuation">,</span> <span class="token string">'Survived'</span><span class="token punctuation">,</span> data<span class="token operator">=</span>train<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span>
+sns<span class="token punctuation">.</span>barplot<span class="token punctuation">(</span><span class="token string">'Sex'</span><span class="token punctuation">,</span> <span class="token string">'Survived'</span><span class="token punctuation">,</span> data<span class="token operator">=</span>train<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span>
+sns<span class="token punctuation">.</span>barplot<span class="token punctuation">(</span><span class="token string">'Ticket'</span><span class="token punctuation">,</span> <span class="token string">'Survived'</span><span class="token punctuation">,</span> data<span class="token operator">=</span>train<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">)</span>
+sns<span class="token punctuation">.</span>barplot<span class="token punctuation">(</span><span class="token string">'Cabin'</span><span class="token punctuation">,</span> <span class="token string">'Survived'</span><span class="token punctuation">,</span> data<span class="token operator">=</span>train<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">)</span>
+sns<span class="token punctuation">.</span>barplot<span class="token punctuation">(</span><span class="token string">'Embarked'</span><span class="token punctuation">,</span> <span class="token string">'Survived'</span><span class="token punctuation">,</span> data<span class="token operator">=</span>train<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">)</span>
+sns<span class="token punctuation">.</span>distplot<span class="token punctuation">(</span>train<span class="token punctuation">[</span>train<span class="token punctuation">.</span>Survived<span class="token operator">==</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>Age<span class="token punctuation">,</span> color<span class="token operator">=</span><span class="token string">'green'</span><span class="token punctuation">,</span> kde<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+sns<span class="token punctuation">.</span>distplot<span class="token punctuation">(</span>train<span class="token punctuation">[</span>train<span class="token punctuation">.</span>Survived<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>Age<span class="token punctuation">,</span> color<span class="token operator">=</span><span class="token string">'orange'</span><span class="token punctuation">,</span> kde<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">)</span>
+sns<span class="token punctuation">.</span>distplot<span class="token punctuation">(</span>train<span class="token punctuation">[</span>train<span class="token punctuation">.</span>Survived<span class="token operator">==</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>Fare<span class="token punctuation">,</span> color<span class="token operator">=</span><span class="token string">'green'</span><span class="token punctuation">,</span> kde<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+sns<span class="token punctuation">.</span>distplot<span class="token punctuation">(</span>train<span class="token punctuation">[</span>train<span class="token punctuation">.</span>Survived<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>Fare<span class="token punctuation">,</span> color<span class="token operator">=</span><span class="token string">'orange'</span><span class="token punctuation">,</span> kde<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span></code></pre>
+<h4 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h4><pre class=" language-python"><code class="language-python">train<span class="token punctuation">.</span>drop<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'PassengerId'</span><span class="token punctuation">,</span><span class="token string">'Name'</span><span class="token punctuation">,</span><span class="token string">'Ticket'</span><span class="token punctuation">,</span><span class="token string">'SibSp'</span><span class="token punctuation">,</span><span class="token string">'Parch'</span><span class="token punctuation">,</span><span class="token string">'Ticket'</span><span class="token punctuation">,</span><span class="token string">'Cabin'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>inplace<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+test<span class="token punctuation">.</span>drop<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'PassengerId'</span><span class="token punctuation">,</span><span class="token string">'Name'</span><span class="token punctuation">,</span><span class="token string">'Ticket'</span><span class="token punctuation">,</span><span class="token string">'SibSp'</span><span class="token punctuation">,</span><span class="token string">'Parch'</span><span class="token punctuation">,</span><span class="token string">'Ticket'</span><span class="token punctuation">,</span><span class="token string">'Cabin'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>inplace<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+titanic<span class="token operator">=</span>pd<span class="token punctuation">.</span>concat<span class="token punctuation">(</span><span class="token punctuation">[</span>train<span class="token punctuation">,</span> test<span class="token punctuation">]</span><span class="token punctuation">,</span> sort<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+titanic<span class="token operator">=</span>pd<span class="token punctuation">.</span>get_dummies<span class="token punctuation">(</span>titanic<span class="token punctuation">)</span><span class="token comment" spellcheck="true">#get_dummies one-hot encoding将离散特征的取值扩展到欧式空间，比如性别本事是一个特征，经过one-hot编码后，就变成了男或女两个特征</span>
+train<span class="token operator">=</span>titanic<span class="token punctuation">[</span><span class="token punctuation">:</span>len_train<span class="token punctuation">]</span><span class="token comment" spellcheck="true">#前len_train行为训练集</span>
+test<span class="token operator">=</span>titanic<span class="token punctuation">[</span>len_train<span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token comment" spellcheck="true">#后面的为测试集</span>
+<span class="token comment" spellcheck="true"># Lets change type of target</span>
+train<span class="token punctuation">.</span>Survived<span class="token operator">=</span>train<span class="token punctuation">.</span>Survived<span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token string">'int'</span><span class="token punctuation">)</span>
+train<span class="token punctuation">.</span>Survived<span class="token punctuation">.</span>dtype
+xtrain<span class="token operator">=</span>train<span class="token punctuation">.</span>drop<span class="token punctuation">(</span><span class="token string">"Survived"</span><span class="token punctuation">,</span>axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+ytrain<span class="token operator">=</span>train<span class="token punctuation">[</span><span class="token string">'Survived'</span><span class="token punctuation">]</span>
+xtest<span class="token operator">=</span>test<span class="token punctuation">.</span>drop<span class="token punctuation">(</span><span class="token string">"Survived"</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span></code></pre>
+<h4 id="模型的构建及训练"><a href="#模型的构建及训练" class="headerlink" title="模型的构建及训练"></a>模型的构建及训练</h4><p>随机森林</p>
+<pre class=" language-python"><code class="language-python">RF<span class="token operator">=</span>RandomForestClassifier<span class="token punctuation">(</span>random_state<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+PRF<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token string">'n_estimators'</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">'max_depth'</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">'criterion'</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'gini'</span><span class="token punctuation">,</span><span class="token string">'entropy'</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">]</span>
+GSRF<span class="token operator">=</span>GridSearchCV<span class="token punctuation">(</span>estimator<span class="token operator">=</span>RF<span class="token punctuation">,</span> param_grid<span class="token operator">=</span>PRF<span class="token punctuation">,</span> scoring<span class="token operator">=</span><span class="token string">'accuracy'</span><span class="token punctuation">,</span>cv<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+scores_rf<span class="token operator">=</span>cross_val_score<span class="token punctuation">(</span>GSRF<span class="token punctuation">,</span>xtrain<span class="token punctuation">,</span>ytrain<span class="token punctuation">,</span>scoring<span class="token operator">=</span><span class="token string">'accuracy'</span><span class="token punctuation">,</span>cv<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span>
+np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>scores_rf<span class="token punctuation">)</span></code></pre>
+<p>SVC</p>
+<pre class=" language-python"><code class="language-python">svc<span class="token operator">=</span>make_pipeline<span class="token punctuation">(</span>StandardScaler<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>SVC<span class="token punctuation">(</span>random_state<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+r<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">0.0001</span><span class="token punctuation">,</span><span class="token number">0.001</span><span class="token punctuation">,</span><span class="token number">0.1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">50</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">]</span>
+PSVM<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token string">'svc__C'</span><span class="token punctuation">:</span>r<span class="token punctuation">,</span> <span class="token string">'svc__kernel'</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'linear'</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span><span class="token string">'svc__C'</span><span class="token punctuation">:</span>r<span class="token punctuation">,</span> <span class="token string">'svc__gamma'</span><span class="token punctuation">:</span>r<span class="token punctuation">,</span> <span class="token string">'svc__kernel'</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'rbf'</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">]</span>
+GSSVM<span class="token operator">=</span>GridSearchCV<span class="token punctuation">(</span>estimator<span class="token operator">=</span>svc<span class="token punctuation">,</span> param_grid<span class="token operator">=</span>PSVM<span class="token punctuation">,</span> scoring<span class="token operator">=</span><span class="token string">'accuracy'</span><span class="token punctuation">,</span> cv<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+scores_svm<span class="token operator">=</span>cross_val_score<span class="token punctuation">(</span>GSSVM<span class="token punctuation">,</span> xtrain<span class="token punctuation">.</span>astype<span class="token punctuation">(</span>float<span class="token punctuation">)</span><span class="token punctuation">,</span> ytrain<span class="token punctuation">,</span>scoring<span class="token operator">=</span><span class="token string">'accuracy'</span><span class="token punctuation">,</span> cv<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span>
+np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>scores_svm<span class="token punctuation">)</span></code></pre>
+<h4 id="完整实现代码"><a href="#完整实现代码" class="headerlink" title="完整实现代码"></a>完整实现代码</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+<span class="token keyword">import</span> seaborn <span class="token keyword">as</span> sns
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>model_selection <span class="token keyword">import</span> cross_val_score
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>ensemble <span class="token keyword">import</span> RandomForestClassifier
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>svm <span class="token keyword">import</span> SVC
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>preprocessing <span class="token keyword">import</span> StandardScaler
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>pipeline <span class="token keyword">import</span> make_pipeline
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>model_selection <span class="token keyword">import</span> GridSearchCV
+<span class="token keyword">import</span> warnings
+warnings<span class="token punctuation">.</span>filterwarnings<span class="token punctuation">(</span>action<span class="token operator">=</span><span class="token string">"ignore"</span><span class="token punctuation">)</span>
+
+train<span class="token operator">=</span>pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">"input/train.csv"</span><span class="token punctuation">)</span>
+test<span class="token operator">=</span>pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">"input/test.csv"</span><span class="token punctuation">)</span>
+test2<span class="token operator">=</span>pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">"input/test.csv"</span><span class="token punctuation">)</span>
+titanic<span class="token operator">=</span>pd<span class="token punctuation">.</span>concat<span class="token punctuation">(</span><span class="token punctuation">[</span>train<span class="token punctuation">,</span> test<span class="token punctuation">]</span><span class="token punctuation">,</span> sort<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+len_train<span class="token operator">=</span>train<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token comment" spellcheck="true">#train数据的行数</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>titanic<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>titanic<span class="token punctuation">.</span>dtypes<span class="token punctuation">.</span>sort_values<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#对数据进行排序</span>
+titanic<span class="token punctuation">.</span>select_dtypes<span class="token punctuation">(</span>include<span class="token operator">=</span><span class="token string">'int'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>tail<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+titanic<span class="token punctuation">.</span>select_dtypes<span class="token punctuation">(</span>include<span class="token operator">=</span><span class="token string">'object'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>head<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">#查看特定类型的数据行</span>
+
+titanic<span class="token punctuation">.</span>select_dtypes<span class="token punctuation">(</span>include<span class="token operator">=</span> <span class="token string">'float'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>head<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>titanic<span class="token punctuation">.</span>isnull<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>sum<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span>titanic<span class="token punctuation">.</span>isnull<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>sum<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">></span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#只显示存在缺失值的属性，如果没有titanic.isnull().sum()>0则不确实的特征属性会显示为0</span>
+
+
+train<span class="token punctuation">.</span>Fare<span class="token operator">=</span>train<span class="token punctuation">.</span>Fare<span class="token punctuation">.</span>fillna<span class="token punctuation">(</span>train<span class="token punctuation">.</span>Fare<span class="token punctuation">.</span>mean<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#Fare票价的缺失值用平均值填充</span>
+test<span class="token punctuation">.</span>Fare<span class="token operator">=</span>test<span class="token punctuation">.</span>Fare<span class="token punctuation">.</span>fillna<span class="token punctuation">(</span>train<span class="token punctuation">.</span>Fare<span class="token punctuation">.</span>mean<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+train<span class="token punctuation">.</span>Cabin<span class="token operator">=</span>train<span class="token punctuation">.</span>Cabin<span class="token punctuation">.</span>fillna<span class="token punctuation">(</span><span class="token string">"unknow"</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#船舱座位号空的用unknow填充</span>
+test<span class="token punctuation">.</span>Cabin<span class="token operator">=</span>test<span class="token punctuation">.</span>Cabin<span class="token punctuation">.</span>fillna<span class="token punctuation">(</span><span class="token string">"unknow"</span><span class="token punctuation">)</span>
+
+train<span class="token punctuation">.</span>Embarked<span class="token operator">=</span>train<span class="token punctuation">.</span>Embarked<span class="token punctuation">.</span>fillna<span class="token punctuation">(</span>train<span class="token punctuation">.</span>Embarked<span class="token punctuation">.</span>mode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#mode为求众数(频数最高的值)</span>
+test<span class="token punctuation">.</span>Embarked<span class="token operator">=</span>test<span class="token punctuation">.</span>Embarked<span class="token punctuation">.</span>fillna<span class="token punctuation">(</span>train<span class="token punctuation">.</span>Embarked<span class="token punctuation">.</span>mode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+train<span class="token punctuation">[</span><span class="token string">'title'</span><span class="token punctuation">]</span><span class="token operator">=</span>train<span class="token punctuation">.</span>Name<span class="token punctuation">.</span>apply<span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span> x<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">','</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+test<span class="token punctuation">[</span><span class="token string">'title'</span><span class="token punctuation">]</span><span class="token operator">=</span>test<span class="token punctuation">.</span>Name<span class="token punctuation">.</span>apply<span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span> x<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">','</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#对年龄缺失值的补全，先提取姓名中的称谓，判断大致身份，然后根据各不同称谓的平均年龄，对同类</span>
+<span class="token comment" spellcheck="true">#缺失值进行补齐。</span>
+newtitles<span class="token operator">=</span><span class="token punctuation">{</span>
+    <span class="token string">"Capt"</span><span class="token punctuation">:</span>       <span class="token string">"Officer"</span><span class="token punctuation">,</span>
+    <span class="token string">"Col"</span><span class="token punctuation">:</span>        <span class="token string">"Officer"</span><span class="token punctuation">,</span>
+    <span class="token string">"Major"</span><span class="token punctuation">:</span>      <span class="token string">"Officer"</span><span class="token punctuation">,</span>
+    <span class="token string">"Jonkheer"</span><span class="token punctuation">:</span>   <span class="token string">"Royalty"</span><span class="token punctuation">,</span>
+    <span class="token string">"Don"</span><span class="token punctuation">:</span>        <span class="token string">"Royalty"</span><span class="token punctuation">,</span>
+    <span class="token string">"Sir"</span> <span class="token punctuation">:</span>       <span class="token string">"Royalty"</span><span class="token punctuation">,</span>
+    <span class="token string">"Dr"</span><span class="token punctuation">:</span>         <span class="token string">"Officer"</span><span class="token punctuation">,</span>
+    <span class="token string">"Rev"</span><span class="token punctuation">:</span>        <span class="token string">"Officer"</span><span class="token punctuation">,</span>
+    <span class="token string">"the Countess"</span><span class="token punctuation">:</span><span class="token string">"Royalty"</span><span class="token punctuation">,</span>
+    <span class="token string">"Dona"</span><span class="token punctuation">:</span>       <span class="token string">"Royalty"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mme"</span><span class="token punctuation">:</span>        <span class="token string">"Mrs"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mlle"</span><span class="token punctuation">:</span>       <span class="token string">"Miss"</span><span class="token punctuation">,</span>
+    <span class="token string">"Ms"</span><span class="token punctuation">:</span>         <span class="token string">"Mrs"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mr"</span> <span class="token punctuation">:</span>        <span class="token string">"Mr"</span><span class="token punctuation">,</span>
+    <span class="token string">"Mrs"</span> <span class="token punctuation">:</span>       <span class="token string">"Mrs"</span><span class="token punctuation">,</span>
+    <span class="token string">"Miss"</span> <span class="token punctuation">:</span>      <span class="token string">"Miss"</span><span class="token punctuation">,</span>
+    <span class="token string">"Master"</span> <span class="token punctuation">:</span>    <span class="token string">"Master"</span><span class="token punctuation">,</span>
+    <span class="token string">"Lady"</span> <span class="token punctuation">:</span>      <span class="token string">"Royalty"</span><span class="token punctuation">}</span>
+
+train<span class="token punctuation">[</span><span class="token string">'title'</span><span class="token punctuation">]</span><span class="token operator">=</span>train<span class="token punctuation">.</span>title<span class="token punctuation">.</span>map<span class="token punctuation">(</span>newtitles<span class="token punctuation">)</span>
+test<span class="token punctuation">[</span><span class="token string">'title'</span><span class="token punctuation">]</span><span class="token operator">=</span>test<span class="token punctuation">.</span>title<span class="token punctuation">.</span>map<span class="token punctuation">(</span>newtitles<span class="token punctuation">)</span>
+
+train<span class="token punctuation">.</span>groupby<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'title'</span><span class="token punctuation">,</span><span class="token string">'Sex'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Age<span class="token punctuation">.</span>mean<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> newage <span class="token punctuation">(</span>cols<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    title<span class="token operator">=</span>cols<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    Sex<span class="token operator">=</span>cols<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+    Age<span class="token operator">=</span>cols<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
+    <span class="token keyword">if</span> pd<span class="token punctuation">.</span>isnull<span class="token punctuation">(</span>Age<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> title<span class="token operator">==</span><span class="token string">'Master'</span> <span class="token operator">and</span> Sex<span class="token operator">==</span><span class="token string">"male"</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token number">4.57</span>
+        <span class="token keyword">elif</span> title<span class="token operator">==</span><span class="token string">'Miss'</span> <span class="token operator">and</span> Sex<span class="token operator">==</span><span class="token string">'female'</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token number">21.8</span>
+        <span class="token keyword">elif</span> title<span class="token operator">==</span><span class="token string">'Mr'</span> <span class="token operator">and</span> Sex<span class="token operator">==</span><span class="token string">'male'</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token number">32.37</span>
+        <span class="token keyword">elif</span> title<span class="token operator">==</span><span class="token string">'Mrs'</span> <span class="token operator">and</span> Sex<span class="token operator">==</span><span class="token string">'female'</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token number">35.72</span>
+        <span class="token keyword">elif</span> title<span class="token operator">==</span><span class="token string">'Officer'</span> <span class="token operator">and</span> Sex<span class="token operator">==</span><span class="token string">'female'</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token number">49</span>
+        <span class="token keyword">elif</span> title<span class="token operator">==</span><span class="token string">'Officer'</span> <span class="token operator">and</span> Sex<span class="token operator">==</span><span class="token string">'male'</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token number">46.56</span>
+        <span class="token keyword">elif</span> title<span class="token operator">==</span><span class="token string">'Royalty'</span> <span class="token operator">and</span> Sex<span class="token operator">==</span><span class="token string">'female'</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token number">40.50</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token number">42.33</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> Age
+train<span class="token punctuation">.</span>Age <span class="token operator">=</span> train<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">'title'</span><span class="token punctuation">,</span> <span class="token string">'Sex'</span><span class="token punctuation">,</span> <span class="token string">'Age'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span>apply<span class="token punctuation">(</span>newage<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+test<span class="token punctuation">.</span>Age <span class="token operator">=</span> test<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">'title'</span><span class="token punctuation">,</span> <span class="token string">'Sex'</span><span class="token punctuation">,</span> <span class="token string">'Age'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span>apply<span class="token punctuation">(</span>newage<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">#droping features I won't use in model</span>
+<span class="token comment" spellcheck="true">#train.drop(['PassengerId','Name','Ticket','SibSp','Parch','Ticket','Cabin']</span>
+
+<span class="token comment" spellcheck="true">## 数据准备</span>
+train<span class="token punctuation">.</span>drop<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'PassengerId'</span><span class="token punctuation">,</span><span class="token string">'Name'</span><span class="token punctuation">,</span><span class="token string">'Ticket'</span><span class="token punctuation">,</span><span class="token string">'SibSp'</span><span class="token punctuation">,</span><span class="token string">'Parch'</span><span class="token punctuation">,</span><span class="token string">'Ticket'</span><span class="token punctuation">,</span><span class="token string">'Cabin'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>inplace<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+test<span class="token punctuation">.</span>drop<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'PassengerId'</span><span class="token punctuation">,</span><span class="token string">'Name'</span><span class="token punctuation">,</span><span class="token string">'Ticket'</span><span class="token punctuation">,</span><span class="token string">'SibSp'</span><span class="token punctuation">,</span><span class="token string">'Parch'</span><span class="token punctuation">,</span><span class="token string">'Ticket'</span><span class="token punctuation">,</span><span class="token string">'Cabin'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>inplace<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+titanic<span class="token operator">=</span>pd<span class="token punctuation">.</span>concat<span class="token punctuation">(</span><span class="token punctuation">[</span>train<span class="token punctuation">,</span> test<span class="token punctuation">]</span><span class="token punctuation">,</span> sort<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+titanic<span class="token operator">=</span>pd<span class="token punctuation">.</span>get_dummies<span class="token punctuation">(</span>titanic<span class="token punctuation">)</span><span class="token comment" spellcheck="true">#get_dummies one-hot encoding将离散特征的取值扩展到欧式空间，比如性别本事是一个特征，经过one-hot编码后，就变成了男或女两个特征</span>
+train<span class="token operator">=</span>titanic<span class="token punctuation">[</span><span class="token punctuation">:</span>len_train<span class="token punctuation">]</span><span class="token comment" spellcheck="true">#前len_train行为训练集</span>
+test<span class="token operator">=</span>titanic<span class="token punctuation">[</span>len_train<span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token comment" spellcheck="true">#后面的为测试集</span>
+<span class="token comment" spellcheck="true"># Lets change type of target</span>
+train<span class="token punctuation">.</span>Survived<span class="token operator">=</span>train<span class="token punctuation">.</span>Survived<span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token string">'int'</span><span class="token punctuation">)</span>
+train<span class="token punctuation">.</span>Survived<span class="token punctuation">.</span>dtype
+xtrain<span class="token operator">=</span>train<span class="token punctuation">.</span>drop<span class="token punctuation">(</span><span class="token string">"Survived"</span><span class="token punctuation">,</span>axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+ytrain<span class="token operator">=</span>train<span class="token punctuation">[</span><span class="token string">'Survived'</span><span class="token punctuation">]</span>
+xtest<span class="token operator">=</span>test<span class="token punctuation">.</span>drop<span class="token punctuation">(</span><span class="token string">"Survived"</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+RF<span class="token operator">=</span>RandomForestClassifier<span class="token punctuation">(</span>random_state<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+PRF<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token string">'n_estimators'</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">'max_depth'</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">'criterion'</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'gini'</span><span class="token punctuation">,</span><span class="token string">'entropy'</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">]</span>
+GSRF<span class="token operator">=</span>GridSearchCV<span class="token punctuation">(</span>estimator<span class="token operator">=</span>RF<span class="token punctuation">,</span> param_grid<span class="token operator">=</span>PRF<span class="token punctuation">,</span> scoring<span class="token operator">=</span><span class="token string">'accuracy'</span><span class="token punctuation">,</span>cv<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+scores_rf<span class="token operator">=</span>cross_val_score<span class="token punctuation">(</span>GSRF<span class="token punctuation">,</span>xtrain<span class="token punctuation">,</span>ytrain<span class="token punctuation">,</span>scoring<span class="token operator">=</span><span class="token string">'accuracy'</span><span class="token punctuation">,</span>cv<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span>
+np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>scores_rf<span class="token punctuation">)</span>
+
+svc<span class="token operator">=</span>make_pipeline<span class="token punctuation">(</span>StandardScaler<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>SVC<span class="token punctuation">(</span>random_state<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+r<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">0.0001</span><span class="token punctuation">,</span><span class="token number">0.001</span><span class="token punctuation">,</span><span class="token number">0.1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">50</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">]</span>
+PSVM<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token string">'svc__C'</span><span class="token punctuation">:</span>r<span class="token punctuation">,</span> <span class="token string">'svc__kernel'</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'linear'</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span><span class="token string">'svc__C'</span><span class="token punctuation">:</span>r<span class="token punctuation">,</span> <span class="token string">'svc__gamma'</span><span class="token punctuation">:</span>r<span class="token punctuation">,</span> <span class="token string">'svc__kernel'</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'rbf'</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">]</span>
+GSSVM<span class="token operator">=</span>GridSearchCV<span class="token punctuation">(</span>estimator<span class="token operator">=</span>svc<span class="token punctuation">,</span> param_grid<span class="token operator">=</span>PSVM<span class="token punctuation">,</span> scoring<span class="token operator">=</span><span class="token string">'accuracy'</span><span class="token punctuation">,</span> cv<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+scores_svm<span class="token operator">=</span>cross_val_score<span class="token punctuation">(</span>GSSVM<span class="token punctuation">,</span> xtrain<span class="token punctuation">.</span>astype<span class="token punctuation">(</span>float<span class="token punctuation">)</span><span class="token punctuation">,</span> ytrain<span class="token punctuation">,</span>scoring<span class="token operator">=</span><span class="token string">'accuracy'</span><span class="token punctuation">,</span> cv<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span>
+np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>scores_svm<span class="token punctuation">)</span>
+
+model<span class="token operator">=</span>GSSVM<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>xtrain<span class="token punctuation">,</span> ytrain<span class="token punctuation">)</span>
+pred<span class="token operator">=</span>model<span class="token punctuation">.</span>predict<span class="token punctuation">(</span>xtest<span class="token punctuation">)</span>
+output<span class="token operator">=</span>pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">'PassengerId'</span><span class="token punctuation">:</span>test2<span class="token punctuation">[</span><span class="token string">'PassengerId'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">'Survived'</span><span class="token punctuation">:</span>pred<span class="token punctuation">}</span><span class="token punctuation">)</span>
+output<span class="token punctuation">.</span>to_csv<span class="token punctuation">(</span><span class="token string">'submission.csv'</span><span class="token punctuation">,</span> index<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span></code></pre>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.rongyao-blog.top" rel="external nofollow noreferrer">honor</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.rongyao-blog.top/posts/d25d.html">https://www.rongyao-blog.top/posts/d25d.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://www.rongyao-blog.top" target="_blank">honor</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/python-kaggle-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">python kaggle 机器学习</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">请我喝杯奶茶吧~</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'Uv47nTzvk6C8tvV0aXpJmQkQ-gzGzoHsz',
+        appKey: 'bTwjEJQCSWFvbc23Xwe1Uk0N',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '给我的文章加点评论吧~'
+    });
+</script>
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/8a27.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="生成对抗样本的方法|攻击方法">
+                        
+                        <span class="card-title">生成对抗样本的方法|攻击方法</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+
+对抗样本1.Biggio′s attackBiggio[22]等人首先针对传统机器学习分类器（如SVM和三层全连接神经网络）的MNIST手写数字识别数据集生成对抗样本。它通过优化判别函数来误导分类器。
+2. Szegedy′s limi
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-03
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    机器学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/63ec.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="python+opencv实现人脸识别|采用现成训练好的模型">
+                        
+                        <span class="card-title">python+opencv实现人脸识别|采用现成训练好的模型</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+
+一、图片人脸检测（opencv）1、安装opencv环境介绍windows中opencv在python3上的实现，我的系统环境win10+python3.6+opcv3.4.1
+首先去网站下载OpenCV对应的.whl版本压缩包，网址：
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-23
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    机器学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/opencv-%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB-python/">
+                        <span class="chip bg-color">opencv 人脸识别 python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://www.rongyao-blog.top" target="_blank">honor</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">60.9k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+			<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+			<script type="text/javascript"> 
+			document.write('您的IP地址：'+returnCitySN["cip"]+','+'欢迎来自'+returnCitySN["cname"]+'的朋友') 
+			</script>
+			<br>
+            
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
+                <a href="http://www.beian.miit.gov.cn/" target="_blank">鄂ICP备20002551号</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/honor-ry/" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:995688198@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=995688198" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 995688198" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+
+
+
+
+    <a href="https://blog.csdn.net/baidu_36415362" class="tooltipped" target="_blank" data-tooltip="关注我的CSDN: https://blog.csdn.net/baidu_36415362" data-position="top" data-delay="50">
+        <i class="fab fa-csdn">C</i>
+    </a>
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+	
+	<script src="/js/click_show_text.js"></script>
+	
+	<!-- tianqi -->
+	<script type="text/javascript">
+	WIDGET = {FID: 'hITis4M6BI'}
+	</script>
+	<script type="text/javascript" src="https://apip.weatherdt.com/float/static/js/r.js?v=1111"></script>
+	
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: "7932b868"
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

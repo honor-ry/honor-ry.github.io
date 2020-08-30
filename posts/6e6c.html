@@ -1,0 +1,2146 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="完美解决Tensorflow不支持AVX2指令集问题|指令集加速, 生活、学习、旅行、代码、博客">
+    <meta name="description" content="
+
+ 在pycharm中安装tensorflow后    运行如下测试代码：
+import tensorflow as tf
+x = tf.Variable(3, name=&#34;x&#34;)
+y = tf.Variable(4, name=&#34;y&#34;)">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>完美解决Tensorflow不支持AVX2指令集问题|指令集加速 | honor</title>
+    <link rel="icon" type="image/png" href="/favicon01.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="honor" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo1.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">honor</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>主页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于我</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://wangrongyao.lofter.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>摄影</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/box" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-secret" style="zoom: 0.6;"></i>
+      
+      <span>网址导航</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo1.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">honor</div>
+        <div class="logo-desc">
+            
+            记录学习、科研、生活的点滴
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			主页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于我
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://wangrongyao.lofter.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			摄影
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/box" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-secret"></i>
+			
+			网址导航
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">完美解决Tensorflow不支持AVX2指令集问题|指令集加速</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/tensorflow-AVX2-pycharm-%E6%8C%87%E4%BB%A4%E9%9B%86%E5%8A%A0%E9%80%9F/">
+                                <span class="chip bg-color">tensorflow AVX2 pycharm 指令集加速</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-07-12
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.6k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    15 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <a id="more"></a>
+
+<p> 在pycharm中安装tensorflow后<br>    <img src="https://img-blog.csdnimg.cn/20200712190018795.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>运行如下测试代码：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> tensorflow <span class="token keyword">as</span> tf
+x <span class="token operator">=</span> tf<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"x"</span><span class="token punctuation">)</span>
+y <span class="token operator">=</span> tf<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"y"</span><span class="token punctuation">)</span>
+f <span class="token operator">=</span> x<span class="token operator">*</span>x<span class="token operator">*</span>y <span class="token operator">+</span> y <span class="token operator">+</span> <span class="token number">2</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span></code></pre>
+<p>发现会报一行错误<img src="https://img-blog.csdnimg.cn/20200712190733701.png" alt="在这里插入图片描述"><br><code>Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2</code>大概意思是安装的tensorflow版本不支持cpu的AVX2编译<br>可能是因为安装时使用的pip install tensorflow ，这样默认会下载X86_64的SIMD版本。<br>查找解决办法后，有以下两种办法：</p>
+<h4 id="1-忽略屏蔽这个警告"><a href="#1-忽略屏蔽这个警告" class="headerlink" title="1.忽略屏蔽这个警告"></a>1.忽略屏蔽这个警告</h4><p>在代码最前面添加如下两行代码</p>
+<pre><code>import os
+os.environ["TF_CPP_MIN_LOG_LEVEL"]='2' # 只显示 warning 和 Error</code></pre><h4 id="2-彻底解决，换成支持cpu用AVX2编译的TensorFlow版本。"><a href="#2-彻底解决，换成支持cpu用AVX2编译的TensorFlow版本。" class="headerlink" title="2.彻底解决，换成支持cpu用AVX2编译的TensorFlow版本。"></a>2.彻底解决，换成支持cpu用AVX2编译的TensorFlow版本。</h4><p>首先卸载原来安装的tensorflow版本<br><code>pip uninstall tensorflow</code><br>在这里下载对应版本的tensorflow：<a href="https://github.com/fo40225/tensorflow-windows-wheel" target="_blank" rel="noopener">https://github.com/fo40225/tensorflow-windows-wheel</a>，比如我需要的是CPU+AVX2+Python3.6，那么我就在下面的列表中选择这个：<br><img src="https://img-blog.csdnimg.cn/20200712220316853.png" alt="在这里插入图片描述"></p>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Compiler</th>
+<th>CUDA/cuDNN</th>
+<th>SIMD</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2.2.0\py37\CPU+GPU\cuda102cudnn76sse2</td>
+<td>VS2019 16.5</td>
+<td>10.2.89_441.22/7.6.5.32</td>
+<td>x86_64</td>
+<td>Python 3.7/Compute 3.0</td>
+</tr>
+<tr>
+<td>2.2.0\py37\CPU+GPU\cuda102cudnn76avx2</td>
+<td>VS2019 16.5</td>
+<td>10.2.89_441.22/7.6.5.32</td>
+<td>AVX2</td>
+<td>Python 3.7/Compute 3.0,3.5,5.0,5.2,6.1,7.0,7.5</td>
+</tr>
+<tr>
+<td>2.1.0\py37\CPU+GPU\cuda102cudnn76sse2</td>
+<td>VS2019 16.4</td>
+<td>10.2.89_441.22/7.6.5.32</td>
+<td>x86_64</td>
+<td>Python 3.7/Compute 3.0</td>
+</tr>
+<tr>
+<td>2.1.0\py37\CPU+GPU\cuda102cudnn76avx2</td>
+<td>VS2019 16.4</td>
+<td>10.2.89_441.22/7.6.5.32</td>
+<td>AVX2</td>
+<td>Python 3.7/Compute 3.0,3.5,5.0,5.2,6.1,7.0,7.5</td>
+</tr>
+<tr>
+<td>2.0.0\py37\CPU\sse2</td>
+<td>VS2019 16.3</td>
+<td>No</td>
+<td>x86_64</td>
+<td>Python 3.7</td>
+</tr>
+<tr>
+<td>2.0.0\py37\CPU\avx2</td>
+<td>VS2019 16.3</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 3.7</td>
+</tr>
+<tr>
+<td>2.0.0\py37\GPU\cuda101cudnn76sse2</td>
+<td>VS2019 16.3</td>
+<td>10.1.243_426.00/7.6.4.38</td>
+<td>x86_64</td>
+<td>Python 3.7/Compute 3.0</td>
+</tr>
+<tr>
+<td>2.0.0\py37\GPU\cuda101cudnn76avx2</td>
+<td>VS2019 16.3</td>
+<td>10.1.243_426.00/7.6.4.38</td>
+<td>AVX2</td>
+<td>Python 3.7/Compute 3.0,3.5,5.0,5.2,6.1,7.0,7.5</td>
+</tr>
+<tr>
+<td>1.15.0\py37\CPU+GPU\cuda101cudnn76sse2</td>
+<td>VS2019 16.3</td>
+<td>10.1.243_426.00/7.6.4.38</td>
+<td>x86_64</td>
+<td>Python 3.7/Compute 3.0</td>
+</tr>
+<tr>
+<td>1.15.0\py37\CPU+GPU\cuda101cudnn76avx2</td>
+<td>VS2019 16.3</td>
+<td>10.1.243_426.00/7.6.4.38</td>
+<td>AVX2</td>
+<td>Python 3.7/Compute 3.0,3.5,5.0,5.2,6.1,7.0,7.5</td>
+</tr>
+<tr>
+<td>1.14.0\py37\CPU\sse2</td>
+<td>VS2019 16.1</td>
+<td>No</td>
+<td>x86_64</td>
+<td>Python 3.7</td>
+</tr>
+<tr>
+<td>1.14.0\py37\CPU\avx2</td>
+<td>VS2019 16.1</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 3.7</td>
+</tr>
+<tr>
+<td>1.14.0\py37\GPU\cuda101cudnn76sse2</td>
+<td>VS2019 16.1</td>
+<td>10.1.168_425.25/7.6.0.64</td>
+<td>x86_64</td>
+<td>Python 3.7/Compute 3.0</td>
+</tr>
+<tr>
+<td>1.14.0\py37\GPU\cuda101cudnn76avx2</td>
+<td>VS2019 16.1</td>
+<td>10.1.168_425.25/7.6.0.64</td>
+<td>AVX2</td>
+<td>Python 3.7/Compute 3.0,3.5,5.0,5.2,6.1,7.0,7.5</td>
+</tr>
+<tr>
+<td>1.13.1\py37\CPU\sse2</td>
+<td>VS2017 15.9</td>
+<td>No</td>
+<td>x86_64</td>
+<td>Python 3.7</td>
+</tr>
+<tr>
+<td>1.13.1\py37\CPU\avx2</td>
+<td>VS2017 15.9</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 3.7</td>
+</tr>
+<tr>
+<td>1.13.1\py37\GPU\cuda101cudnn75sse2</td>
+<td>VS2017 15.9</td>
+<td>10.1.105_418.96/7.5.0.56</td>
+<td>x86_64</td>
+<td>Python 3.7/Compute 3.0</td>
+</tr>
+<tr>
+<td>1.13.1\py37\GPU\cuda101cudnn75avx2</td>
+<td>VS2017 15.9</td>
+<td>10.1.105_418.96/7.5.0.56</td>
+<td>AVX2</td>
+<td>Python 3.7/Compute 3.0,3.5,5.0,5.2,6.1,7.0,7.5</td>
+</tr>
+<tr>
+<td>1.12.0\py36\CPU\sse2</td>
+<td>VS2017 15.8</td>
+<td>No</td>
+<td>x86_64</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.12.0\py36\CPU\avx2</td>
+<td>VS2017 15.8</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.12.0\py36\GPU\cuda100cudnn73sse2</td>
+<td>VS2017 15.8</td>
+<td>10.0.130_411.31/7.3.1.20</td>
+<td>x86_64</td>
+<td>Python 3.6/Compute 3.0</td>
+</tr>
+<tr>
+<td>1.12.0\py36\GPU\cuda100cudnn73avx2</td>
+<td>VS2017 15.8</td>
+<td>10.0.130_411.31/7.3.1.20</td>
+<td>AVX2</td>
+<td>Python 3.6/Compute 3.0,3.5,5.0,5.2,6.1,7.0,7.5</td>
+</tr>
+<tr>
+<td>1.12.0\py37\CPU\sse2</td>
+<td>VS2017 15.8</td>
+<td>No</td>
+<td>x86_64</td>
+<td>Python 3.7</td>
+</tr>
+<tr>
+<td>1.12.0\py37\CPU\avx2</td>
+<td>VS2017 15.8</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 3.7</td>
+</tr>
+<tr>
+<td>1.12.0\py37\GPU\cuda100cudnn73sse2</td>
+<td>VS2017 15.8</td>
+<td>10.0.130_411.31/7.3.1.20</td>
+<td>x86_64</td>
+<td>Python 3.7/Compute 3.0</td>
+</tr>
+<tr>
+<td>1.12.0\py37\GPU\cuda100cudnn73avx2</td>
+<td>VS2017 15.8</td>
+<td>10.0.130_411.31/7.3.1.20</td>
+<td>AVX2</td>
+<td>Python 3.7/Compute 3.0,3.5,5.0,5.2,6.1,7.0,7.5</td>
+</tr>
+<tr>
+<td>1.11.0\py36\CPU\sse2</td>
+<td>VS2017 15.8</td>
+<td>No</td>
+<td>x86_64</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.11.0\py36\CPU\avx2</td>
+<td>VS2017 15.8</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.11.0\py36\GPU\cuda100cudnn73sse2</td>
+<td>VS2017 15.8</td>
+<td>10.0.130_411.31/7.3.0.29</td>
+<td>x86_64</td>
+<td>Python 3.6/Compute 3.0</td>
+</tr>
+<tr>
+<td>1.11.0\py36\GPU\cuda100cudnn73avx2</td>
+<td>VS2017 15.8</td>
+<td>10.0.130_411.31/7.3.0.29</td>
+<td>AVX2</td>
+<td>Python 3.6/Compute 3.0,3.5,5.0,5.2,6.1,7.0,7.5</td>
+</tr>
+<tr>
+<td>1.11.0\py37\CPU\sse2</td>
+<td>VS2017 15.8</td>
+<td>No</td>
+<td>x86_64</td>
+<td>Python 3.7</td>
+</tr>
+<tr>
+<td>1.11.0\py37\CPU\avx2</td>
+<td>VS2017 15.8</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 3.7</td>
+</tr>
+<tr>
+<td>1.11.0\py37\GPU\cuda100cudnn73sse2</td>
+<td>VS2017 15.8</td>
+<td>10.0.130_411.31/7.3.0.29</td>
+<td>x86_64</td>
+<td>Python 3.7/Compute 3.0</td>
+</tr>
+<tr>
+<td>1.11.0\py37\GPU\cuda100cudnn73avx2</td>
+<td>VS2017 15.8</td>
+<td>10.0.130_411.31/7.3.0.29</td>
+<td>AVX2</td>
+<td>Python 3.7/Compute 3.0,3.5,5.0,5.2,6.1,7.0,7.5</td>
+</tr>
+<tr>
+<td>1.10.0\py36\CPU\sse2</td>
+<td>VS2017 15.8</td>
+<td>No</td>
+<td>x86_64</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.10.0\py36\CPU\avx2</td>
+<td>VS2017 15.8</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.10.0\py36\GPU\cuda92cudnn72sse2</td>
+<td>VS2017 15.8</td>
+<td>9.2.148.1/7.2.1.38</td>
+<td>x86_64</td>
+<td>Python 3.6/Compute 3.0</td>
+</tr>
+<tr>
+<td>1.10.0\py36\GPU\cuda92cudnn72avx2</td>
+<td>VS2017 15.8</td>
+<td>9.2.148.1/7.2.1.38</td>
+<td>AVX2</td>
+<td>Python 3.6/Compute 3.0,3.5,5.0,5.2,6.1,7.0</td>
+</tr>
+<tr>
+<td>1.10.0\py27\CPU\sse2</td>
+<td>VS2017 15.8</td>
+<td>No</td>
+<td>x86_64</td>
+<td>Python 2.7</td>
+</tr>
+<tr>
+<td>1.10.0\py27\CPU\avx2</td>
+<td>VS2017 15.8</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 2.7</td>
+</tr>
+<tr>
+<td>1.10.0\py27\GPU\cuda92cudnn72sse2</td>
+<td>VS2017 15.8</td>
+<td>9.2.148.1/7.2.1.38</td>
+<td>x86_64</td>
+<td>Python 2.7/Compute 3.0</td>
+</tr>
+<tr>
+<td>1.10.0\py27\GPU\cuda92cudnn72avx2</td>
+<td>VS2017 15.8</td>
+<td>9.2.148.1/7.2.1.38</td>
+<td>AVX2</td>
+<td>Python 2.7/Compute 3.0,3.5,5.0,5.2,6.1,7.0</td>
+</tr>
+<tr>
+<td>1.9.0\py36\CPU\sse2</td>
+<td>VS2017 15.7</td>
+<td>No</td>
+<td>x86_64</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.9.0\py36\CPU\avx2</td>
+<td>VS2017 15.7</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.9.0\py36\GPU\cuda92cudnn71sse2</td>
+<td>VS2017 15.7</td>
+<td>9.2.148/7.1.4</td>
+<td>x86_64</td>
+<td>Python 3.6/Compute 3.0</td>
+</tr>
+<tr>
+<td>1.9.0\py36\GPU\cuda92cudnn71avx2</td>
+<td>VS2017 15.7</td>
+<td>9.2.148/7.1.4</td>
+<td>AVX2</td>
+<td>Python 3.6/Compute 3.0,3.5,5.0,5.2,6.1,7.0</td>
+</tr>
+<tr>
+<td>1.9.0\py27\CPU\sse2</td>
+<td>VS2017 15.7</td>
+<td>No</td>
+<td>x86_64</td>
+<td>Python 2.7</td>
+</tr>
+<tr>
+<td>1.9.0\py27\CPU\avx2</td>
+<td>VS2017 15.7</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 2.7</td>
+</tr>
+<tr>
+<td>1.9.0\py27\GPU\cuda92cudnn71sse2</td>
+<td>VS2017 15.7</td>
+<td>9.2.148/7.1.4</td>
+<td>x86_64</td>
+<td>Python 2.7/Compute 3.0</td>
+</tr>
+<tr>
+<td>1.9.0\py27\GPU\cuda92cudnn71avx2</td>
+<td>VS2017 15.7</td>
+<td>9.2.148/7.1.4</td>
+<td>AVX2</td>
+<td>Python 2.7/Compute 3.0,3.5,5.0,5.2,6.1,7.0</td>
+</tr>
+<tr>
+<td>1.8.0\py36\CPU\sse2</td>
+<td>VS2017 15.4</td>
+<td>No</td>
+<td>x86_64</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.8.0\py36\CPU\avx2</td>
+<td>VS2017 15.4</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.8.0\py36\GPU\cuda91cudnn71sse2</td>
+<td>VS2017 15.4</td>
+<td>9.1.85.3/7.1.3</td>
+<td>x86_64</td>
+<td>Python 3.6/Compute 3.0</td>
+</tr>
+<tr>
+<td>1.8.0\py36\GPU\cuda91cudnn71avx2</td>
+<td>VS2017 15.4</td>
+<td>9.1.85.3/7.1.3</td>
+<td>AVX2</td>
+<td>Python 3.6/Compute 3.0,3.5,5.0,5.2,6.1,7.0</td>
+</tr>
+<tr>
+<td>1.8.0\py27\CPU\sse2</td>
+<td>VS2017 15.4</td>
+<td>No</td>
+<td>x86_64</td>
+<td>Python 2.7</td>
+</tr>
+<tr>
+<td>1.8.0\py27\CPU\avx2</td>
+<td>VS2017 15.4</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 2.7</td>
+</tr>
+<tr>
+<td>1.8.0\py27\GPU\cuda91cudnn71sse2</td>
+<td>VS2017 15.4</td>
+<td>9.1.85.3/7.1.3</td>
+<td>x86_64</td>
+<td>Python 2.7/Compute 3.0</td>
+</tr>
+<tr>
+<td>1.8.0\py27\GPU\cuda91cudnn71avx2</td>
+<td>VS2017 15.4</td>
+<td>9.1.85.3/7.1.3</td>
+<td>AVX2</td>
+<td>Python 2.7/Compute 3.0,3.5,5.0,5.2,6.1,7.0</td>
+</tr>
+<tr>
+<td>1.7.0\py36\CPU\sse2</td>
+<td>VS2017 15.4</td>
+<td>No</td>
+<td>x86_64</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.7.0\py36\CPU\avx2</td>
+<td>VS2017 15.4</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.7.0\py36\GPU\cuda91cudnn71sse2</td>
+<td>VS2017 15.4</td>
+<td>9.1.85.3/7.1.2</td>
+<td>x86_64</td>
+<td>Python 3.6/Compute 3.0</td>
+</tr>
+<tr>
+<td>1.7.0\py36\GPU\cuda91cudnn71avx2</td>
+<td>VS2017 15.4</td>
+<td>9.1.85.3/7.1.2</td>
+<td>AVX2</td>
+<td>Python 3.6/Compute 3.0,3.5,5.0,5.2,6.1,7.0</td>
+</tr>
+<tr>
+<td>1.7.0\py27\CPU\sse2</td>
+<td>VS2017 15.4</td>
+<td>No</td>
+<td>x86_64</td>
+<td>Python 2.7</td>
+</tr>
+<tr>
+<td>1.7.0\py27\CPU\avx2</td>
+<td>VS2017 15.4</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 2.7</td>
+</tr>
+<tr>
+<td>1.7.0\py27\GPU\cuda91cudnn71sse2</td>
+<td>VS2017 15.4</td>
+<td>9.1.85.3/7.1.2</td>
+<td>x86_64</td>
+<td>Python 2.7/Compute 3.0</td>
+</tr>
+<tr>
+<td>1.7.0\py27\GPU\cuda91cudnn71avx2</td>
+<td>VS2017 15.4</td>
+<td>9.1.85.3/7.1.2</td>
+<td>AVX2</td>
+<td>Python 2.7/Compute 3.0,3.5,5.0,5.2,6.1,7.0</td>
+</tr>
+<tr>
+<td>1.6.0\py36\CPU\sse2</td>
+<td>VS2017 15.4</td>
+<td>No</td>
+<td>x86_64</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.6.0\py36\CPU\avx2</td>
+<td>VS2017 15.4</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.6.0\py36\GPU\cuda91cudnn71sse2</td>
+<td>VS2017 15.4</td>
+<td>9.1.85.3/7.1.1</td>
+<td>x86_64</td>
+<td>Python 3.6/Compute 3.0</td>
+</tr>
+<tr>
+<td>1.6.0\py36\GPU\cuda91cudnn71avx2</td>
+<td>VS2017 15.4</td>
+<td>9.1.85.3/7.1.1</td>
+<td>AVX2</td>
+<td>Python 3.6/Compute 3.0,3.5,5.0,5.2,6.1,7.0</td>
+</tr>
+<tr>
+<td>1.6.0\py27\CPU\sse2</td>
+<td>VS2017 15.4</td>
+<td>No</td>
+<td>x86_64</td>
+<td>Python 2.7</td>
+</tr>
+<tr>
+<td>1.6.0\py27\CPU\avx2</td>
+<td>VS2017 15.4</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 2.7</td>
+</tr>
+<tr>
+<td>1.6.0\py27\GPU\cuda91cudnn71sse2</td>
+<td>VS2017 15.4</td>
+<td>9.1.85.2/7.1.1</td>
+<td>x86_64</td>
+<td>Python 2.7/Compute 3.0</td>
+</tr>
+<tr>
+<td>1.6.0\py27\GPU\cuda91cudnn71avx2</td>
+<td>VS2017 15.4</td>
+<td>9.1.85.2/7.1.1</td>
+<td>AVX2</td>
+<td>Python 2.7/Compute 3.0,3.5,5.0,5.2,6.1,7.0</td>
+</tr>
+<tr>
+<td>1.5.0\py36\CPU\avx</td>
+<td>VS2017 15.4</td>
+<td>No</td>
+<td>AVX</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.5.0\py36\CPU\avx2</td>
+<td>VS2017 15.4</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.5.0\py36\GPU\cuda91cudnn7avx2</td>
+<td>VS2017 15.4</td>
+<td>9.1.85/7.0.5</td>
+<td>AVX2</td>
+<td>Python 3.6/Compute 3.0,3.5,5.0,5.2,6.1,7.0</td>
+</tr>
+<tr>
+<td>1.5.0\py27\CPU\sse2</td>
+<td>VS2017 15.4</td>
+<td>No</td>
+<td>x86_64</td>
+<td>Python 2.7</td>
+</tr>
+<tr>
+<td>1.5.0\py27\CPU\avx</td>
+<td>VS2017 15.4</td>
+<td>No</td>
+<td>AVX</td>
+<td>Python 2.7</td>
+</tr>
+<tr>
+<td>1.5.0\py27\CPU\avx2</td>
+<td>VS2017 15.4</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 2.7</td>
+</tr>
+<tr>
+<td>1.5.0\py27\GPU\cuda91cudnn7sse2</td>
+<td>VS2017 15.4</td>
+<td>9.1.85/7.0.5</td>
+<td>x86_64</td>
+<td>Python 2.7/Compute 3.0</td>
+</tr>
+<tr>
+<td>1.5.0\py27\GPU\cuda91cudnn7avx2</td>
+<td>VS2017 15.4</td>
+<td>9.1.85/7.0.5</td>
+<td>AVX2</td>
+<td>Python 2.7/Compute 3.0,3.5,5.0,5.2,6.1,7.0</td>
+</tr>
+<tr>
+<td>1.4.0\py36\CPU\avx</td>
+<td>VS2017 15.4</td>
+<td>No</td>
+<td>AVX</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.4.0\py36\CPU\avx2</td>
+<td>VS2017 15.4</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.4.0\py36\GPU\cuda91cudnn7avx2</td>
+<td>VS2017 15.4</td>
+<td>9.1.85/7.0.5</td>
+<td>AVX2</td>
+<td>Python 3.6/Compute 3.0,3.5,5.0,5.2,6.1,7.0</td>
+</tr>
+<tr>
+<td>1.3.0\py36\CPU\avx</td>
+<td>VS2015 Update 3</td>
+<td>No</td>
+<td>AVX</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.3.0\py36\CPU\avx2</td>
+<td>VS2015 Update 3</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.3.0\py36\GPU\cuda8cudnn6avx2</td>
+<td>VS2015 Update 3</td>
+<td>8.0.61.2/6.0.21</td>
+<td>AVX2</td>
+<td>Python 3.6/Compute 3.0,3.5,5.0,5.2,6.1</td>
+</tr>
+<tr>
+<td>1.2.1\py36\CPU\avx</td>
+<td>VS2015 Update 3</td>
+<td>No</td>
+<td>AVX</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.2.1\py36\CPU\avx2</td>
+<td>VS2015 Update 3</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.2.1\py36\GPU\cuda8cudnn6avx2</td>
+<td>VS2015 Update 3</td>
+<td>8.0.61.2/6.0.21</td>
+<td>AVX2</td>
+<td>Python 3.6/Compute 3.0,3.5,5.0,5.2,6.1</td>
+</tr>
+<tr>
+<td>1.1.0\py36\CPU\avx</td>
+<td>VS2015 Update 3</td>
+<td>No</td>
+<td>AVX</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.1.0\py36\CPU\avx2</td>
+<td>VS2015 Update 3</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.1.0\py36\GPU\cuda8cudnn6avx2</td>
+<td>VS2015 Update 3</td>
+<td>8.0.61.2/6.0.21</td>
+<td>AVX2</td>
+<td>Python 3.6/Compute 3.0,3.5,5.0,5.2,6.1</td>
+</tr>
+<tr>
+<td>1.0.0\py36\CPU\sse2</td>
+<td>VS2015 Update 3</td>
+<td>No</td>
+<td>x86_64</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.0.0\py36\CPU\avx</td>
+<td>VS2015 Update 3</td>
+<td>No</td>
+<td>AVX</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.0.0\py36\CPU\avx2</td>
+<td>VS2015 Update 3</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 3.6</td>
+</tr>
+<tr>
+<td>1.0.0\py36\GPU\cuda8cudnn51sse2</td>
+<td>VS2015 Update 3</td>
+<td>8.0.61.2/5.1.10</td>
+<td>x86_64</td>
+<td>Python 3.6/Compute 3.0</td>
+</tr>
+<tr>
+<td>1.0.0\py36\GPU\cuda8cudnn51avx2</td>
+<td>VS2015 Update 3</td>
+<td>8.0.61.2/5.1.10</td>
+<td>AVX2</td>
+<td>Python 3.6/Compute 3.0,3.5,5.0,5.2,6.1</td>
+</tr>
+<tr>
+<td>0.12.0\py35\CPU\avx</td>
+<td>VS2015 Update 3</td>
+<td>No</td>
+<td>AVX</td>
+<td>Python 3.5</td>
+</tr>
+<tr>
+<td>0.12.0\py35\CPU\avx2</td>
+<td>VS2015 Update 3</td>
+<td>No</td>
+<td>AVX2</td>
+<td>Python 3.5</td>
+</tr>
+<tr>
+<td>0.12.0\py35\GPU\cuda8cudnn51avx2</td>
+<td>VS2015 Update 3</td>
+<td>8.0.61.2/5.1.10</td>
+<td>AVX2</td>
+<td>Python 3.5/Compute 3.0,3.5,5.0,5.2,6.1</td>
+</tr>
+</tbody></table>
+<p>找到对应的.whl文件<br><img src="https://img-blog.csdnimg.cn/20200712220439134.png" alt="在这里插入图片描述"><br>下载该文件，我用google浏览器下载一直显示无法访问<br><img src="https://img-blog.csdnimg.cn/20200712220536927.png" alt="在这里插入图片描述"><br>后来选用Edge浏览器打开就好啦，直接就下载成功了。<br>此处放上<strong>tensorflow-1.12.0-cp36-cp36m-win_amd64.whl</strong>的下载链接：<br>链接：<a href="https://pan.baidu.com/s/1CvKUtmM1zHyJyJk87eFEUA" target="_blank" rel="noopener">https://pan.baidu.com/s/1CvKUtmM1zHyJyJk87eFEUA</a><br>提取码：o85f<br>然后用activate 进入自己创建的虚拟环境<br><img src="https://img-blog.csdnimg.cn/20200712220832684.png" alt="在这里插入图片描述"><br>运行<code>pip install tensorflow-1.12.0-cp36-cp36m-win_amd64.whl</code>命令安装<br><img src="https://img-blog.csdnimg.cn/20200712221831560.png" alt="在这里插入图片描述"><br>最后用<code>conda list</code>命令看安装了那些包<br><img src="https://img-blog.csdnimg.cn/20200712221924711.png" alt="在这里插入图片描述"><br>然后再次运行代码，就不会报AVX2的错误啦<br><img src="https://img-blog.csdnimg.cn/20200712230627530.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>参考链接：<a href="https://blog.csdn.net/beyond9305/article/details/95896135" target="_blank" rel="noopener">https://blog.csdn.net/beyond9305/article/details/95896135</a></li>
+<li><a href="https://www.jb51.net/article/179405.htm" target="_blank" rel="noopener">https://www.jb51.net/article/179405.htm</a></li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.rongyao-blog.top" rel="external nofollow noreferrer">honor</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.rongyao-blog.top/posts/6e6c.html">https://www.rongyao-blog.top/posts/6e6c.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://www.rongyao-blog.top" target="_blank">honor</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/tensorflow-AVX2-pycharm-%E6%8C%87%E4%BB%A4%E9%9B%86%E5%8A%A0%E9%80%9F/">
+                                    <span class="chip bg-color">tensorflow AVX2 pycharm 指令集加速</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">请我喝杯奶茶吧~</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'Uv47nTzvk6C8tvV0aXpJmQkQ-gzGzoHsz',
+        appKey: 'bTwjEJQCSWFvbc23Xwe1Uk0N',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '给我的文章加点评论吧~'
+    });
+</script>
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/241f.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="C++-study">
+                        
+                        <span class="card-title">C++-study</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-08-26
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            honor
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/f8eb.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Classification分类器|机器学习实战-基于Scikit-Learn和TensorFlow">
+                        
+                        <span class="card-title">Classification分类器|机器学习实战-基于Scikit-Learn和TensorFlow</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+
+Classification
+监督学习任务（分类）# To support both python 2 and python 3
+from __future__ import division, print_function, unic
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    机器学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://www.rongyao-blog.top" target="_blank">honor</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">60.9k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+			<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+			<script type="text/javascript"> 
+			document.write('您的IP地址：'+returnCitySN["cip"]+','+'欢迎来自'+returnCitySN["cname"]+'的朋友') 
+			</script>
+			<br>
+            
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
+                <a href="http://www.beian.miit.gov.cn/" target="_blank">鄂ICP备20002551号</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/honor-ry/" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:995688198@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=995688198" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 995688198" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+
+
+
+
+    <a href="https://blog.csdn.net/baidu_36415362" class="tooltipped" target="_blank" data-tooltip="关注我的CSDN: https://blog.csdn.net/baidu_36415362" data-position="top" data-delay="50">
+        <i class="fab fa-csdn">C</i>
+    </a>
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+	
+	<script src="/js/click_show_text.js"></script>
+	
+	<!-- tianqi -->
+	<script type="text/javascript">
+	WIDGET = {FID: 'hITis4M6BI'}
+	</script>
+	<script type="text/javascript" src="https://apip.weatherdt.com/float/static/js/r.js?v=1111"></script>
+	
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: "7932b868"
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

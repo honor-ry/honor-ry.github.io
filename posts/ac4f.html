@@ -1,0 +1,1823 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="NLP入门-文本分类|paddle, 生活、学习、旅行、代码、博客">
+    <meta name="description" content="
+
+文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。
+
+数据来源：从网站上爬取56821条数据中文新闻摘要
+数据内容：包含10种类别，国际、文化、娱乐、体育、财经、汽车、教育、科技、房">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>NLP入门-文本分类|paddle | honor</title>
+    <link rel="icon" type="image/png" href="/favicon01.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="honor" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo1.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">honor</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>主页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于我</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://wangrongyao.lofter.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>摄影</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/box" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-secret" style="zoom: 0.6;"></i>
+      
+      <span>网址导航</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo1.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">honor</div>
+        <div class="logo-desc">
+            
+            记录学习、科研、生活的点滴
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			主页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于我
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://wangrongyao.lofter.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			摄影
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/box" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-secret"></i>
+			
+			网址导航
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">NLP入门-文本分类|paddle</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/python-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">python 机器学习</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/NLP-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                NLP 机器学习
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-07-04
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    16 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <a id="more"></a>
+
+<h4 id="文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。"><a href="#文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。" class="headerlink" title="文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。"></a>文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。</h4><blockquote>
+<ul>
+<li>数据来源：从网站上爬取56821条数据中文新闻摘要<ul>
+<li>数据内容：包含10种类别，国际、文化、娱乐、体育、财经、汽车、教育、科技、房产、证券</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9haS1zdHVkaW8tc3RhdGljLW9ubGluZS5jZG4uYmNlYm9zLmNvbS8xNzg5ZWQ1OTM5ZDI0MTM0YjljZTRkNDVjYTE1ZTBmZGYyMWYyNWFhNDAwYzRmNjg5OGNjNGUwMmFlYTVjNzRl?x-oss-process=image/format,png" alt=""><br>严格意义上来说这个新闻的数据集不是太好，每个类目的新闻数目不是一致的，一个好的数据集对于各个类别分布是比较均匀的。</p>
+<h1 id="1、准备数据"><a href="#1、准备数据" class="headerlink" title="1、准备数据:"></a><strong>1、准备数据:</strong></h1><pre><code>数据进行预处理
+
+创建数据集和数据字典
+
+创建数据读取器train_reader 和test_reader</code></pre><h1 id="2、配置网络"><a href="#2、配置网络" class="headerlink" title="2、配置网络"></a><strong>2、配置网络</strong></h1><p>定义网络</p>
+<p>定义损失函数：交叉熵损失函数</p>
+<p>定义优化算法：选择优化器，adam，SGD等等</p>
+<h1 id="3、训练网络"><a href="#3、训练网络" class="headerlink" title="3、训练网络"></a><strong>3、训练网络</strong></h1><p>需要对网络进行训练，丢入训练集，去训练我们的模型</p>
+<h1 id="4、模型评估"><a href="#4、模型评估" class="headerlink" title="4、模型评估"></a><strong>4、模型评估</strong></h1><h1 id="5、模型预测"><a href="#5、模型预测" class="headerlink" title="5、模型预测"></a><strong>5、模型预测</strong></h1><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 查看当前挂载的数据集目录</span>
+!ls <span class="token operator">/</span>home<span class="token operator">/</span>aistudio<span class="token operator">/</span>data<span class="token operator">/</span>
+<span class="token comment" spellcheck="true">#将数据移动到 /home/aistudio/data/ 目录下</span>
+!cp data<span class="token operator">/</span>data6825<span class="token operator">/</span>news_classify_data<span class="token punctuation">.</span>txt data<span class="token operator">/</span></code></pre>
+<pre><code>data6825</code></pre><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9haS1zdHVkaW8tc3RhdGljLW9ubGluZS5jZG4uYmNlYm9zLmNvbS81NGE4MzIxZWNkMDg0YWU1YjY1OWQ3M2IwYjFlNThiYzFlNDU4MzVkMDdiMjQyZTFhMmZjNWI0NmJiYWU3N2Yx?x-oss-process=image/format,png" alt=""></p>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 导入必要的包</span>
+<span class="token keyword">import</span> os  <span class="token comment" spellcheck="true">#系统操作包</span>
+<span class="token keyword">from</span> multiprocessing <span class="token keyword">import</span> cpu_count
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np <span class="token comment" spellcheck="true">#计算包</span>
+<span class="token keyword">import</span> shutil
+<span class="token keyword">import</span> paddle <span class="token comment" spellcheck="true">#paddle的工具包</span>
+<span class="token keyword">import</span> paddle<span class="token punctuation">.</span>fluid <span class="token keyword">as</span> fluid</code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 创建数据集和数据字典</span>
+
+data_root_path<span class="token operator">=</span><span class="token string">'/home/aistudio/data/'</span> <span class="token comment" spellcheck="true">#选择数据路径</span>
+<span class="token comment" spellcheck="true">#对我们读取出来的路径创建数据词典</span>
+<span class="token keyword">def</span> <span class="token function">create_data_list</span><span class="token punctuation">(</span>data_root_path<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>data_root_path <span class="token operator">+</span> <span class="token string">'test_list.txt'</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        <span class="token keyword">pass</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>data_root_path <span class="token operator">+</span> <span class="token string">'train_list.txt'</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        <span class="token keyword">pass</span>
+
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>data_root_path<span class="token punctuation">,</span> <span class="token string">'dict_txt.txt'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f_data<span class="token punctuation">:</span>
+        dict_txt <span class="token operator">=</span> eval<span class="token punctuation">(</span>f_data<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>data_root_path<span class="token punctuation">,</span> <span class="token string">'news_classify_data.txt'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f_data<span class="token punctuation">:</span>
+        lines <span class="token operator">=</span> f_data<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    i <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">for</span> line <span class="token keyword">in</span> lines<span class="token punctuation">:</span>
+        title <span class="token operator">=</span> line<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'_!_'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span>
+        l <span class="token operator">=</span> line<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'_!_'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+        labs <span class="token operator">=</span> <span class="token string">""</span>
+        <span class="token keyword">if</span> i <span class="token operator">%</span> <span class="token number">10</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            <span class="token keyword">with</span> open<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>data_root_path<span class="token punctuation">,</span> <span class="token string">'test_list.txt'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'a'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f_test<span class="token punctuation">:</span>
+                <span class="token keyword">for</span> s <span class="token keyword">in</span> title<span class="token punctuation">:</span>
+                    lab <span class="token operator">=</span> str<span class="token punctuation">(</span>dict_txt<span class="token punctuation">[</span>s<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                    labs <span class="token operator">=</span> labs <span class="token operator">+</span> lab <span class="token operator">+</span> <span class="token string">','</span>
+                labs <span class="token operator">=</span> labs<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
+                labs <span class="token operator">=</span> labs <span class="token operator">+</span> <span class="token string">'\t'</span> <span class="token operator">+</span> l <span class="token operator">+</span> <span class="token string">'\n'</span>
+                f_test<span class="token punctuation">.</span>write<span class="token punctuation">(</span>labs<span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">with</span> open<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>data_root_path<span class="token punctuation">,</span> <span class="token string">'train_list.txt'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'a'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f_train<span class="token punctuation">:</span>
+                <span class="token keyword">for</span> s <span class="token keyword">in</span> title<span class="token punctuation">:</span>
+                    lab <span class="token operator">=</span> str<span class="token punctuation">(</span>dict_txt<span class="token punctuation">[</span>s<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                    labs <span class="token operator">=</span> labs <span class="token operator">+</span> lab <span class="token operator">+</span> <span class="token string">','</span>
+                labs <span class="token operator">=</span> labs<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
+                labs <span class="token operator">=</span> labs <span class="token operator">+</span> <span class="token string">'\t'</span> <span class="token operator">+</span> l <span class="token operator">+</span> <span class="token string">'\n'</span>
+                f_train<span class="token punctuation">.</span>write<span class="token punctuation">(</span>labs<span class="token punctuation">)</span>
+        i <span class="token operator">+=</span> <span class="token number">1</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"数据列表生成完成！"</span><span class="token punctuation">)</span>
+
+
+<span class="token comment" spellcheck="true"># 把下载得数据生成一个字典</span>
+<span class="token comment" spellcheck="true">#将每一个文本每一个子映射到词典得到一个数字ID，因为输入到模型里面的不是汉字，是一个数字ID</span>
+<span class="token keyword">def</span> <span class="token function">create_dict</span><span class="token punctuation">(</span>data_path<span class="token punctuation">,</span> dict_path<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    dict_set <span class="token operator">=</span> set<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 读取已经下载得数据</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>data_path<span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        lines <span class="token operator">=</span> f<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 把数据生成一个元组</span>
+    <span class="token keyword">for</span> line <span class="token keyword">in</span> lines<span class="token punctuation">:</span>
+        title <span class="token operator">=</span> line<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'_!_'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> s <span class="token keyword">in</span> title<span class="token punctuation">:</span>
+            dict_set<span class="token punctuation">.</span>add<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 把元组转换成字典，一个字对应一个数字</span>
+    dict_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    i <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">for</span> s <span class="token keyword">in</span> dict_set<span class="token punctuation">:</span>
+        dict_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">[</span>s<span class="token punctuation">,</span> i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        i <span class="token operator">+=</span> <span class="token number">1</span>
+    <span class="token comment" spellcheck="true"># 添加未知字符</span>
+    dict_txt <span class="token operator">=</span> dict<span class="token punctuation">(</span>dict_list<span class="token punctuation">)</span>
+    end_dict <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"&lt;unk>"</span><span class="token punctuation">:</span> i<span class="token punctuation">}</span>
+    dict_txt<span class="token punctuation">.</span>update<span class="token punctuation">(</span>end_dict<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 把这些字典保存到本地中</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>dict_path<span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>str<span class="token punctuation">(</span>dict_txt<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"数据字典生成完成！"</span><span class="token punctuation">)</span>
+
+
+<span class="token comment" spellcheck="true"># 获取字典的长度</span>
+<span class="token keyword">def</span> <span class="token function">get_dict_len</span><span class="token punctuation">(</span>dict_path<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>dict_path<span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        line <span class="token operator">=</span> eval<span class="token punctuation">(</span>f<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> len<span class="token punctuation">(</span>line<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 把生产的数据列表都放在自己的总类别文件夹中</span>
+    data_root_path <span class="token operator">=</span> <span class="token string">"/home/aistudio/data/"</span>
+    data_path <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>data_root_path<span class="token punctuation">,</span> <span class="token string">'news_classify_data.txt'</span><span class="token punctuation">)</span>
+    dict_path <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>data_root_path<span class="token punctuation">,</span> <span class="token string">"dict_txt.txt"</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 创建数据字典</span>
+    create_dict<span class="token punctuation">(</span>data_path<span class="token punctuation">,</span> dict_path<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 创建数据列表</span>
+    create_data_list<span class="token punctuation">(</span>data_root_path<span class="token punctuation">)</span></code></pre>
+<pre><code>数据字典生成完成！
+数据列表生成完成！</code></pre><p>创建好的字典：每一个字会对应一个数字ID<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9haS1zdHVkaW8tc3RhdGljLW9ubGluZS5jZG4uYmNlYm9zLmNvbS9lY2FkN2I3MTYzMzM0NjQ4YjE3NDkyOWEwM2M5NjI0Yjg2MGI5MjI0YjhhODRlMDg4MTZjMWU5MTQ2YjA2ZDkz?x-oss-process=image/format,png" alt=""></p>
+<p>创建好的数据列表：文本转化为序列化的表示</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9haS1zdHVkaW8tc3RhdGljLW9ubGluZS5jZG4uYmNlYm9zLmNvbS84NDNkNTE3MjhlMDY0N2E3OWZhODNmYzdjZWRiY2NiZjliOGU1YjlhZGFhYjQyZGI5MGE0MTRkMDAzYTM1ZGQ4?x-oss-process=image/format,png" alt=""><br>每一行代表一句新闻，就是一个样本。</p>
+<p>paddle.reader.xmap_readers():通过多线程方式，通过用户自定义的映射器mapper来映射reader返回的样本（到输出队列)。</p>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 创建数据读取器train_reader 和test_reader</span>
+<span class="token comment" spellcheck="true"># 训练/测试数据的预处理</span>
+<span class="token keyword">def</span> <span class="token function">data_mapper</span><span class="token punctuation">(</span>sample<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    data<span class="token punctuation">,</span> label <span class="token operator">=</span> sample
+    data <span class="token operator">=</span> <span class="token punctuation">[</span>int<span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token keyword">for</span> data <span class="token keyword">in</span> data<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">','</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token keyword">return</span> data<span class="token punctuation">,</span> int<span class="token punctuation">(</span>label<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 创建数据读取器train_reader</span>
+<span class="token keyword">def</span> <span class="token function">train_reader</span><span class="token punctuation">(</span>train_list_path<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">reader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">with</span> open<span class="token punctuation">(</span>train_list_path<span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+            lines <span class="token operator">=</span> f<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token comment" spellcheck="true"># 打乱数据</span>
+            np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>shuffle<span class="token punctuation">(</span>lines<span class="token punctuation">)</span>
+            <span class="token comment" spellcheck="true"># 开始获取每张图像和标签</span>
+            <span class="token keyword">for</span> line <span class="token keyword">in</span> lines<span class="token punctuation">:</span>
+                data<span class="token punctuation">,</span> label <span class="token operator">=</span> line<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'\t'</span><span class="token punctuation">)</span>
+                <span class="token keyword">yield</span> data<span class="token punctuation">,</span> label
+    <span class="token keyword">return</span> paddle<span class="token punctuation">.</span>reader<span class="token punctuation">.</span>xmap_readers<span class="token punctuation">(</span>data_mapper<span class="token punctuation">,</span> reader<span class="token punctuation">,</span> cpu_count<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1024</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#  创建数据读取器test_reader</span>
+<span class="token keyword">def</span> <span class="token function">test_reader</span><span class="token punctuation">(</span>test_list_path<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">reader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">with</span> open<span class="token punctuation">(</span>test_list_path<span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+            lines <span class="token operator">=</span> f<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">for</span> line <span class="token keyword">in</span> lines<span class="token punctuation">:</span>
+                data<span class="token punctuation">,</span> label <span class="token operator">=</span> line<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'\t'</span><span class="token punctuation">)</span>
+                <span class="token keyword">yield</span> data<span class="token punctuation">,</span> label
+
+    <span class="token keyword">return</span> paddle<span class="token punctuation">.</span>reader<span class="token punctuation">.</span>xmap_readers<span class="token punctuation">(</span>data_mapper<span class="token punctuation">,</span> reader<span class="token punctuation">,</span> cpu_count<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1024</span><span class="token punctuation">)</span></code></pre>
+<p>至此，数据准备工作已经完成了。 </p>
+<h1 id="卷积神经网络（Convolutional-Neural-Networks-CNN）"><a href="#卷积神经网络（Convolutional-Neural-Networks-CNN）" class="headerlink" title="卷积神经网络（Convolutional Neural Networks, CNN）"></a>卷积神经网络（Convolutional Neural Networks, CNN）</h1><p>输入词向量序列，产生一个特征图（feature map），对特征图采用时间维度上的最大池化（max pooling over time）操作得到此卷积核对应的整句话的特征，最后，将所有卷积核得到的特征拼接起来即为文本的定长向量表示，对于文本分类问题，将其连接至softmax即构建出完整的模型。</p>
+<p>在实际应用中，我们会使用多个卷积核来处理句子，窗口大小相同的卷积核堆叠起来形成一个矩阵，这样可以更高效的完成运算。</p>
+<p>另外，我们也可使用窗口大小不同的卷积核来处理句子.</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9haS1zdHVkaW8tc3RhdGljLW9ubGluZS5jZG4uYmNlYm9zLmNvbS8zNzY2MjYxZjI0YjU0NTE0YjZjYmMwZDMwMjcwYzZhM2YzOGMxZDBhYWY4ZjQ1MGM5N2U4MzAzZWNhNTFmMjA0?x-oss-process=image/format,png" alt=""></p>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 创建CNN网络</span>
+
+<span class="token keyword">def</span> <span class="token function">CNN_net</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span>dict_dim<span class="token punctuation">,</span> class_dim<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span> emb_dim<span class="token operator">=</span><span class="token number">128</span><span class="token punctuation">,</span> hid_dim<span class="token operator">=</span><span class="token number">128</span><span class="token punctuation">,</span>hid_dim2<span class="token operator">=</span><span class="token number">98</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        emb <span class="token operator">=</span> fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>embedding<span class="token punctuation">(</span>input<span class="token operator">=</span>data<span class="token punctuation">,</span><span class="token comment" spellcheck="true">#进模型之前需要得到一个emb词嵌入，得到一个矩阵的编码</span>
+                                 size<span class="token operator">=</span><span class="token punctuation">[</span>dict_dim<span class="token punctuation">,</span> emb_dim<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        conv_3 <span class="token operator">=</span> fluid<span class="token punctuation">.</span>nets<span class="token punctuation">.</span>sequence_conv_pool<span class="token punctuation">(</span>
+                                                 input<span class="token operator">=</span>emb<span class="token punctuation">,</span>
+                                                 num_filters<span class="token operator">=</span>hid_dim<span class="token punctuation">,</span>
+                                                 filter_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">#卷积核</span>
+                                                 act<span class="token operator">=</span><span class="token string">"tanh"</span><span class="token punctuation">,</span>
+                                                 pool_type<span class="token operator">=</span><span class="token string">"sqrt"</span><span class="token punctuation">)</span>
+        conv_4 <span class="token operator">=</span> fluid<span class="token punctuation">.</span>nets<span class="token punctuation">.</span>sequence_conv_pool<span class="token punctuation">(</span>
+                                                 input<span class="token operator">=</span>emb<span class="token punctuation">,</span>
+                                                 num_filters<span class="token operator">=</span>hid_dim2<span class="token punctuation">,</span>
+                                                 filter_size<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span>
+                                                 act<span class="token operator">=</span><span class="token string">"tanh"</span><span class="token punctuation">,</span>
+                                                 pool_type<span class="token operator">=</span><span class="token string">"sqrt"</span><span class="token punctuation">)</span>
+
+        output <span class="token operator">=</span> fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>fc<span class="token punctuation">(</span>
+            input<span class="token operator">=</span><span class="token punctuation">[</span>conv_3<span class="token punctuation">,</span> conv_4<span class="token punctuation">]</span><span class="token punctuation">,</span> size<span class="token operator">=</span>class_dim<span class="token punctuation">,</span> act<span class="token operator">=</span><span class="token string">'softmax'</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#经过全连接层，将两个cnn的结果拼接起来</span>
+        <span class="token keyword">return</span> output<span class="token comment" spellcheck="true">#1x10的概率分布的矩阵，10个数，概率最大的数就是当前模型的预测结果</span>
+</code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 定义输入数据， lod_level不为0指定输入数据为序列数据</span>
+words <span class="token operator">=</span> fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>data<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">'words'</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span><span class="token string">'int64'</span><span class="token punctuation">,</span> lod_level<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#lod_level 处理变长序列，paddle官网的文档中LoDtensor lodlayer的索引 定长的数据不需要考虑这个问题</span>
+label <span class="token operator">=</span> fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>data<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">'label'</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span><span class="token string">'int64'</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 获取数据字典长度</span>
+dict_dim <span class="token operator">=</span> get_dict_len<span class="token punctuation">(</span><span class="token string">'/home/aistudio/data/dict_txt.txt'</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 获取卷积神经网络</span>
+<span class="token comment" spellcheck="true"># model = CNN_net(words, dict_dim, 15)</span>
+<span class="token comment" spellcheck="true"># 获取分类器</span>
+model <span class="token operator">=</span> CNN_net<span class="token punctuation">(</span>words<span class="token punctuation">,</span> dict_dim<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 获取损失函数和准确率</span>
+cost <span class="token operator">=</span> fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>cross_entropy<span class="token punctuation">(</span>input<span class="token operator">=</span>model<span class="token punctuation">,</span> label<span class="token operator">=</span>label<span class="token punctuation">)</span><span class="token comment" spellcheck="true">#损失函数</span>
+avg_cost <span class="token operator">=</span> fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>cost<span class="token punctuation">)</span><span class="token comment" spellcheck="true">#每次训练都是一个batch，求一个平均</span>
+acc <span class="token operator">=</span> fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>accuracy<span class="token punctuation">(</span>input<span class="token operator">=</span>model<span class="token punctuation">,</span> label<span class="token operator">=</span>label<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 获取预测程序</span>
+test_program <span class="token operator">=</span> fluid<span class="token punctuation">.</span>default_main_program<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>clone<span class="token punctuation">(</span>for_test<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#clone克隆函数</span>
+
+<span class="token comment" spellcheck="true"># 定义优化方法</span>
+optimizer <span class="token operator">=</span> fluid<span class="token punctuation">.</span>optimizer<span class="token punctuation">.</span>AdagradOptimizer<span class="token punctuation">(</span>learning_rate<span class="token operator">=</span><span class="token number">0.002</span><span class="token punctuation">)</span>
+opt <span class="token operator">=</span> optimizer<span class="token punctuation">.</span>minimize<span class="token punctuation">(</span>avg_cost<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 创建一个执行器，CPU训练速度比较慢</span>
+<span class="token comment" spellcheck="true">#place = fluid.CPUPlace()</span>
+place <span class="token operator">=</span> fluid<span class="token punctuation">.</span>CUDAPlace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#GPU执行</span>
+exe <span class="token operator">=</span> fluid<span class="token punctuation">.</span>Executor<span class="token punctuation">(</span>place<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 进行参数初始化</span>
+exe<span class="token punctuation">.</span>run<span class="token punctuation">(</span>fluid<span class="token punctuation">.</span>default_startup_program<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<pre><code>[]</code></pre><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 获取训练数据读取器和测试数据读取器</span>
+train_reader <span class="token operator">=</span> paddle<span class="token punctuation">.</span>batch<span class="token punctuation">(</span>reader<span class="token operator">=</span>train_reader<span class="token punctuation">(</span><span class="token string">'/home/aistudio/data/train_list.txt'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">128</span><span class="token punctuation">)</span>
+test_reader <span class="token operator">=</span> paddle<span class="token punctuation">.</span>batch<span class="token punctuation">(</span>reader<span class="token operator">=</span>test_reader<span class="token punctuation">(</span><span class="token string">'/home/aistudio/data/test_list.txt'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">128</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 定义数据映射器</span>
+feeder <span class="token operator">=</span> fluid<span class="token punctuation">.</span>DataFeeder<span class="token punctuation">(</span>place<span class="token operator">=</span>place<span class="token punctuation">,</span> feed_list<span class="token operator">=</span><span class="token punctuation">[</span>words<span class="token punctuation">,</span> label<span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">EPOCH_NUM<span class="token operator">=</span><span class="token number">20</span><span class="token comment" spellcheck="true">#迭代次数</span>
+model_save_dir <span class="token operator">=</span> <span class="token string">'/home/aistudio/work/infer_model/'</span>
+<span class="token comment" spellcheck="true"># 开始训练</span>
+
+<span class="token keyword">for</span> pass_id <span class="token keyword">in</span> range<span class="token punctuation">(</span>EPOCH_NUM<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 进行训练</span>
+    <span class="token keyword">for</span> batch_id<span class="token punctuation">,</span> data <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>train_reader<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        train_cost<span class="token punctuation">,</span> train_acc <span class="token operator">=</span> exe<span class="token punctuation">.</span>run<span class="token punctuation">(</span>program<span class="token operator">=</span>fluid<span class="token punctuation">.</span>default_main_program<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                             feed<span class="token operator">=</span>feeder<span class="token punctuation">.</span>feed<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                             fetch_list<span class="token operator">=</span><span class="token punctuation">[</span>avg_cost<span class="token punctuation">,</span> acc<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> batch_id <span class="token operator">%</span> <span class="token number">100</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span><span class="token comment" spellcheck="true">#每执行100次，打印一次</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Pass:%d, Batch:%d, Cost:%0.5f, Acc:%0.5f'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>pass_id<span class="token punctuation">,</span> batch_id<span class="token punctuation">,</span> train_cost<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> train_acc<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 进行测试，读入一批陌生的数据，模型没有见过的数据，</span>
+    test_costs <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    test_accs <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> batch_id<span class="token punctuation">,</span> data <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>test_reader<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        test_cost<span class="token punctuation">,</span> test_acc <span class="token operator">=</span> exe<span class="token punctuation">.</span>run<span class="token punctuation">(</span>program<span class="token operator">=</span>test_program<span class="token punctuation">,</span>
+                                              feed<span class="token operator">=</span>feeder<span class="token punctuation">.</span>feed<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                                              fetch_list<span class="token operator">=</span><span class="token punctuation">[</span>avg_cost<span class="token punctuation">,</span> acc<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        test_costs<span class="token punctuation">.</span>append<span class="token punctuation">(</span>test_cost<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        test_accs<span class="token punctuation">.</span>append<span class="token punctuation">(</span>test_acc<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 计算平均预测损失在和准确率</span>
+    test_cost <span class="token operator">=</span> <span class="token punctuation">(</span>sum<span class="token punctuation">(</span>test_costs<span class="token punctuation">)</span> <span class="token operator">/</span> len<span class="token punctuation">(</span>test_costs<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    test_acc <span class="token operator">=</span> <span class="token punctuation">(</span>sum<span class="token punctuation">(</span>test_accs<span class="token punctuation">)</span> <span class="token operator">/</span> len<span class="token punctuation">(</span>test_accs<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Test:%d, Cost:%0.5f, ACC:%0.5f'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>pass_id<span class="token punctuation">,</span> test_cost<span class="token punctuation">,</span> test_acc<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 保存预测模型，可以考虑将这段保存模型的代码放到for循环里面，将每一轮的模型都保存起来</span>
+<span class="token keyword">if</span> <span class="token operator">not</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>exists<span class="token punctuation">(</span>model_save_dir<span class="token punctuation">)</span><span class="token punctuation">:</span> 
+    os<span class="token punctuation">.</span>makedirs<span class="token punctuation">(</span>model_save_dir<span class="token punctuation">)</span> 
+fluid<span class="token punctuation">.</span>io<span class="token punctuation">.</span>save_inference_model<span class="token punctuation">(</span>model_save_dir<span class="token punctuation">,</span> 
+                            feeded_var_names<span class="token operator">=</span><span class="token punctuation">[</span>words<span class="token punctuation">.</span>name<span class="token punctuation">]</span><span class="token punctuation">,</span> 
+                            target_vars<span class="token operator">=</span><span class="token punctuation">[</span>model<span class="token punctuation">]</span><span class="token punctuation">,</span> 
+                            executor<span class="token operator">=</span>exe<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'训练模型保存完成！'</span><span class="token punctuation">)</span> </code></pre>
+<pre><code>Pass:0, Batch:0, Cost:2.30681, Acc:0.09375
+Pass:0, Batch:100, Cost:0.99743, Acc:0.68750
+Pass:0, Batch:200, Cost:0.89360, Acc:0.76562
+Pass:0, Batch:300, Cost:0.92248, Acc:0.70312
+Test:0, Cost:0.81883, ACC:0.73921
+Pass:1, Batch:0, Cost:0.90457, Acc:0.67969
+Pass:1, Batch:100, Cost:0.67305, Acc:0.83594
+Pass:1, Batch:200, Cost:0.63098, Acc:0.80469
+Pass:1, Batch:300, Cost:0.76019, Acc:0.77344
+Test:1, Cost:0.75819, ACC:0.75909
+Pass:2, Batch:0, Cost:0.73232, Acc:0.76562
+Pass:2, Batch:100, Cost:0.70476, Acc:0.77344
+Pass:2, Batch:200, Cost:0.71542, Acc:0.75781
+Pass:2, Batch:300, Cost:0.63258, Acc:0.78125
+Test:2, Cost:0.73717, ACC:0.76160
+Pass:3, Batch:0, Cost:0.56025, Acc:0.82812
+Pass:3, Batch:100, Cost:0.48580, Acc:0.86719
+Pass:3, Batch:200, Cost:0.54991, Acc:0.84375
+Pass:3, Batch:300, Cost:0.67272, Acc:0.78906
+Test:3, Cost:0.72726, ACC:0.76317
+Pass:4, Batch:0, Cost:0.53660, Acc:0.82812
+Pass:4, Batch:100, Cost:0.73550, Acc:0.78906
+Pass:4, Batch:200, Cost:0.53774, Acc:0.80469
+Pass:4, Batch:300, Cost:0.46155, Acc:0.85156
+Test:4, Cost:0.72185, ACC:0.76169
+Pass:5, Batch:0, Cost:0.65421, Acc:0.78906
+Pass:5, Batch:100, Cost:0.59889, Acc:0.80469
+Pass:5, Batch:200, Cost:0.71301, Acc:0.79688
+Pass:5, Batch:300, Cost:0.69682, Acc:0.81250
+Test:5, Cost:0.71626, ACC:0.76525
+Pass:6, Batch:0, Cost:0.72434, Acc:0.75000
+Pass:6, Batch:100, Cost:0.59109, Acc:0.77344
+Pass:6, Batch:200, Cost:0.48783, Acc:0.81250
+Pass:6, Batch:300, Cost:0.57463, Acc:0.81250
+Test:6, Cost:0.71520, ACC:0.76447
+Pass:7, Batch:0, Cost:0.50502, Acc:0.84375
+Pass:7, Batch:100, Cost:0.62133, Acc:0.79688
+Pass:7, Batch:200, Cost:0.68593, Acc:0.76562
+Pass:7, Batch:300, Cost:0.55528, Acc:0.80469
+Test:7, Cost:0.71300, ACC:0.76769
+Pass:8, Batch:0, Cost:0.60046, Acc:0.76562
+Pass:8, Batch:100, Cost:0.47617, Acc:0.82812
+Pass:8, Batch:200, Cost:0.59591, Acc:0.79688
+Pass:8, Batch:300, Cost:0.66050, Acc:0.76562
+Test:8, Cost:0.71475, ACC:0.76594
+Pass:9, Batch:0, Cost:0.40968, Acc:0.84375
+Pass:9, Batch:100, Cost:0.50980, Acc:0.81250
+Pass:9, Batch:200, Cost:0.55923, Acc:0.85156
+Pass:9, Batch:300, Cost:0.42255, Acc:0.87500
+Test:9, Cost:0.71282, ACC:0.76717
+Pass:10, Batch:0, Cost:0.44147, Acc:0.88281
+Pass:10, Batch:100, Cost:0.55140, Acc:0.85938
+Pass:10, Batch:200, Cost:0.50935, Acc:0.84375
+Pass:10, Batch:300, Cost:0.56366, Acc:0.83594
+Test:10, Cost:0.71520, ACC:0.76586
+Pass:11, Batch:0, Cost:0.55133, Acc:0.79688
+Pass:11, Batch:100, Cost:0.45308, Acc:0.80469
+Pass:11, Batch:200, Cost:0.63471, Acc:0.78125
+Pass:11, Batch:300, Cost:0.52810, Acc:0.80469
+Test:11, Cost:0.71511, ACC:0.76673
+Pass:12, Batch:0, Cost:0.51947, Acc:0.83594
+Pass:12, Batch:100, Cost:0.63086, Acc:0.80469
+Pass:12, Batch:200, Cost:0.57166, Acc:0.82812
+Pass:12, Batch:300, Cost:0.59658, Acc:0.75781
+Test:12, Cost:0.71533, ACC:0.76673
+Pass:13, Batch:0, Cost:0.34512, Acc:0.89062
+Pass:13, Batch:100, Cost:0.47249, Acc:0.82812
+Pass:13, Batch:200, Cost:0.51224, Acc:0.85156
+Pass:13, Batch:300, Cost:0.45350, Acc:0.84375
+Test:13, Cost:0.71736, ACC:0.76647
+Pass:14, Batch:0, Cost:0.45494, Acc:0.85156
+Pass:14, Batch:100, Cost:0.68085, Acc:0.78125
+Pass:14, Batch:200, Cost:0.48124, Acc:0.83594
+Pass:14, Batch:300, Cost:0.47296, Acc:0.85938
+Test:14, Cost:0.71745, ACC:0.76760
+Pass:15, Batch:0, Cost:0.73750, Acc:0.77344
+Pass:15, Batch:100, Cost:0.55038, Acc:0.83594
+Pass:15, Batch:200, Cost:0.59775, Acc:0.74219
+Pass:15, Batch:300, Cost:0.47932, Acc:0.82812
+Test:15, Cost:0.72163, ACC:0.76673
+Pass:16, Batch:0, Cost:0.31890, Acc:0.90625
+Pass:16, Batch:100, Cost:0.38017, Acc:0.85156
+Pass:16, Batch:200, Cost:0.57517, Acc:0.79688
+Pass:16, Batch:300, Cost:0.44878, Acc:0.87500
+Test:16, Cost:0.72158, ACC:0.76786
+Pass:17, Batch:0, Cost:0.43048, Acc:0.88281
+Pass:17, Batch:100, Cost:0.47145, Acc:0.82031
+Pass:17, Batch:200, Cost:0.47934, Acc:0.82812
+Pass:17, Batch:300, Cost:0.36709, Acc:0.89062
+Test:17, Cost:0.72381, ACC:0.76647
+Pass:18, Batch:0, Cost:0.35568, Acc:0.88281
+Pass:18, Batch:100, Cost:0.61057, Acc:0.82031
+Pass:18, Batch:200, Cost:0.40052, Acc:0.88281
+Pass:18, Batch:300, Cost:0.45469, Acc:0.83594
+Test:18, Cost:0.72549, ACC:0.76743
+Pass:19, Batch:0, Cost:0.41658, Acc:0.86719
+Pass:19, Batch:100, Cost:0.48703, Acc:0.86719
+Pass:19, Batch:200, Cost:0.47010, Acc:0.83594
+Pass:19, Batch:300, Cost:0.35333, Acc:0.84375
+Test:19, Cost:0.72887, ACC:0.76690
+训练模型保存完成！</code></pre><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 用训练好的模型进行预测并输出预测结果</span>
+<span class="token comment" spellcheck="true"># 创建执行器</span>
+<span class="token comment" spellcheck="true">#place = fluid.CPUPlace()</span>
+place <span class="token operator">=</span> fluid<span class="token punctuation">.</span>CUDAPlace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+exe <span class="token operator">=</span> fluid<span class="token punctuation">.</span>Executor<span class="token punctuation">(</span>place<span class="token punctuation">)</span>
+exe<span class="token punctuation">.</span>run<span class="token punctuation">(</span>fluid<span class="token punctuation">.</span>default_startup_program<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+save_path <span class="token operator">=</span> <span class="token string">'/home/aistudio/work/infer_model/'</span>
+
+<span class="token comment" spellcheck="true"># 从模型中获取预测程序、输入数据名称列表、分类器</span>
+<span class="token punctuation">[</span>infer_program<span class="token punctuation">,</span> feeded_var_names<span class="token punctuation">,</span> target_var<span class="token punctuation">]</span> <span class="token operator">=</span> fluid<span class="token punctuation">.</span>io<span class="token punctuation">.</span>load_inference_model<span class="token punctuation">(</span>dirname<span class="token operator">=</span>save_path<span class="token punctuation">,</span> executor<span class="token operator">=</span>exe<span class="token punctuation">)</span>
+
+
+<span class="token comment" spellcheck="true"># 获取数据</span>
+<span class="token keyword">def</span> <span class="token function">get_data</span><span class="token punctuation">(</span>sentence<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 读取数据字典</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">'/home/aistudio/data/dict_txt.txt'</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f_data<span class="token punctuation">:</span>
+        dict_txt <span class="token operator">=</span> eval<span class="token punctuation">(</span>f_data<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    dict_txt <span class="token operator">=</span> dict<span class="token punctuation">(</span>dict_txt<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 把字符串数据转换成列表数据</span>
+    keys <span class="token operator">=</span> dict_txt<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> s <span class="token keyword">in</span> sentence<span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 判断是否存在未知字符</span>
+        <span class="token keyword">if</span> <span class="token operator">not</span> s <span class="token keyword">in</span> keys<span class="token punctuation">:</span>
+            s <span class="token operator">=</span> <span class="token string">'&lt;unk>'</span>
+        data<span class="token punctuation">.</span>append<span class="token punctuation">(</span>int<span class="token punctuation">(</span>dict_txt<span class="token punctuation">[</span>s<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> data
+
+
+data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token comment" spellcheck="true"># 获取图片数据</span>
+data1 <span class="token operator">=</span> get_data<span class="token punctuation">(</span><span class="token string">'在获得诺贝尔文学奖7年之后，莫言15日晚间在山西汾阳贾家庄如是说'</span><span class="token punctuation">)</span>
+data2 <span class="token operator">=</span> get_data<span class="token punctuation">(</span><span class="token string">'综合“今日美国”、《世界日报》等当地媒体报道，芝加哥河滨警察局表示，'</span><span class="token punctuation">)</span>
+data<span class="token punctuation">.</span>append<span class="token punctuation">(</span>data1<span class="token punctuation">)</span>
+data<span class="token punctuation">.</span>append<span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 获取每句话的单词数量</span>
+base_shape <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>len<span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token keyword">for</span> c <span class="token keyword">in</span> data<span class="token punctuation">]</span><span class="token punctuation">]</span>
+
+<span class="token comment" spellcheck="true"># 生成预测数据</span>
+tensor_words <span class="token operator">=</span> fluid<span class="token punctuation">.</span>create_lod_tensor<span class="token punctuation">(</span>data<span class="token punctuation">,</span> base_shape<span class="token punctuation">,</span> place<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 执行预测</span>
+result <span class="token operator">=</span> exe<span class="token punctuation">.</span>run<span class="token punctuation">(</span>program<span class="token operator">=</span>infer_program<span class="token punctuation">,</span>
+                 feed<span class="token operator">=</span><span class="token punctuation">{</span>feeded_var_names<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">:</span> tensor_words<span class="token punctuation">}</span><span class="token punctuation">,</span>
+                 fetch_list<span class="token operator">=</span>target_var<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 分类名称</span>
+names <span class="token operator">=</span> <span class="token punctuation">[</span> <span class="token string">'文化'</span><span class="token punctuation">,</span> <span class="token string">'娱乐'</span><span class="token punctuation">,</span> <span class="token string">'体育'</span><span class="token punctuation">,</span> <span class="token string">'财经'</span><span class="token punctuation">,</span><span class="token string">'房产'</span><span class="token punctuation">,</span> <span class="token string">'汽车'</span><span class="token punctuation">,</span> <span class="token string">'教育'</span><span class="token punctuation">,</span> <span class="token string">'科技'</span><span class="token punctuation">,</span> <span class="token string">'国际'</span><span class="token punctuation">,</span> <span class="token string">'证券'</span><span class="token punctuation">]</span>
+
+<span class="token comment" spellcheck="true"># 获取结果概率最大的label</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>len<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    lab <span class="token operator">=</span> np<span class="token punctuation">.</span>argsort<span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token comment" spellcheck="true">#10个概率值，对其进行排序，选择最大的那个概率，(-1)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'预测结果标签为：%d， 名称为：%s， 概率为：%f'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>lab<span class="token punctuation">,</span> names<span class="token punctuation">[</span>lab<span class="token punctuation">]</span><span class="token punctuation">,</span> result<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>lab<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<pre><code>预测结果标签为：0， 名称为：文化， 概率为：0.949490
+预测结果标签为：8， 名称为：国际， 概率为：0.472569</code></pre><pre class=" language-python"><code class="language-python"></code></pre>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.rongyao-blog.top" rel="external nofollow noreferrer">honor</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.rongyao-blog.top/posts/ac4f.html">https://www.rongyao-blog.top/posts/ac4f.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://www.rongyao-blog.top" target="_blank">honor</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/python-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">python 机器学习</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">请我喝杯奶茶吧~</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'Uv47nTzvk6C8tvV0aXpJmQkQ-gzGzoHsz',
+        appKey: 'bTwjEJQCSWFvbc23Xwe1Uk0N',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '给我的文章加点评论吧~'
+    });
+</script>
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/a21b.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="NLP入门-情感分析|paddle">
+                        
+                        <span class="card-title">NLP入门-情感分析|paddle</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+
+### 任务介绍：
+
+在自然语言处理中，情感分析一般指判断一段文本所表达的情绪状态，属于文本分类问题。
+
+情绪：正面/负面数据集介绍：IMDB数据集包含来自互联网的50000条严重两极分化的评论，该数据被分为用于训练的25000条评论和
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-04
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/NLP-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    NLP 机器学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/python-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-paddle/">
+                        <span class="chip bg-color">python 机器学习 paddle</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/8a27.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="生成对抗样本的方法|攻击方法">
+                        
+                        <span class="card-title">生成对抗样本的方法|攻击方法</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+
+对抗样本1.Biggio′s attackBiggio[22]等人首先针对传统机器学习分类器（如SVM和三层全连接神经网络）的MNIST手写数字识别数据集生成对抗样本。它通过优化判别函数来误导分类器。
+2. Szegedy′s limi
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-03
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    机器学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://www.rongyao-blog.top" target="_blank">honor</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">60.9k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+			<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+			<script type="text/javascript"> 
+			document.write('您的IP地址：'+returnCitySN["cip"]+','+'欢迎来自'+returnCitySN["cname"]+'的朋友') 
+			</script>
+			<br>
+            
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
+                <a href="http://www.beian.miit.gov.cn/" target="_blank">鄂ICP备20002551号</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/honor-ry/" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:995688198@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=995688198" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 995688198" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+
+
+
+
+    <a href="https://blog.csdn.net/baidu_36415362" class="tooltipped" target="_blank" data-tooltip="关注我的CSDN: https://blog.csdn.net/baidu_36415362" data-position="top" data-delay="50">
+        <i class="fab fa-csdn">C</i>
+    </a>
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+	
+	<script src="/js/click_show_text.js"></script>
+	
+	<!-- tianqi -->
+	<script type="text/javascript">
+	WIDGET = {FID: 'hITis4M6BI'}
+	</script>
+	<script type="text/javascript" src="https://apip.weatherdt.com/float/static/js/r.js?v=1111"></script>
+	
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: "7932b868"
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

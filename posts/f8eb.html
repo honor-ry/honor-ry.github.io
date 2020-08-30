@@ -1,0 +1,1805 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Classification分类器|机器学习实战-基于Scikit-Learn和TensorFlow, 生活、学习、旅行、代码、博客">
+    <meta name="description" content="
+
+Classification
+监督学习任务（分类）# To support both python 2 and python 3
+from __future__ import division, print_function, unic">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Classification分类器|机器学习实战-基于Scikit-Learn和TensorFlow | honor</title>
+    <link rel="icon" type="image/png" href="/favicon01.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="honor" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo1.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">honor</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>主页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于我</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="https://wangrongyao.lofter.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>摄影</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/box" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-secret" style="zoom: 0.6;"></i>
+      
+      <span>网址导航</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo1.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">honor</div>
+        <div class="logo-desc">
+            
+            记录学习、科研、生活的点滴
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			主页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于我
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="https://wangrongyao.lofter.com/" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			摄影
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/box" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-secret"></i>
+			
+			网址导航
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Classification分类器|机器学习实战-基于Scikit-Learn和TensorFlow</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/python/">
+                                <span class="chip bg-color">python</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                机器学习
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-07-12
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    5.2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    22 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <a id="more"></a>
+
+<p><strong>Classification</strong></p>
+<h2 id="监督学习任务（分类）"><a href="#监督学习任务（分类）" class="headerlink" title="监督学习任务（分类）"></a>监督学习任务（分类）</h2><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># To support both python 2 and python 3</span>
+<span class="token keyword">from</span> __future__ <span class="token keyword">import</span> division<span class="token punctuation">,</span> print_function<span class="token punctuation">,</span> unicode_literals
+
+<span class="token comment" spellcheck="true"># Common imports</span>
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> os
+
+<span class="token comment" spellcheck="true"># to make this notebook's output stable across runs</span>
+np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>seed<span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># To plot pretty figures</span>
+<span class="token operator">%</span>matplotlib inline
+<span class="token keyword">import</span> matplotlib
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+plt<span class="token punctuation">.</span>rcParams<span class="token punctuation">[</span><span class="token string">'axes.labelsize'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">14</span>
+plt<span class="token punctuation">.</span>rcParams<span class="token punctuation">[</span><span class="token string">'xtick.labelsize'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">12</span>
+plt<span class="token punctuation">.</span>rcParams<span class="token punctuation">[</span><span class="token string">'ytick.labelsize'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">12</span>
+
+<span class="token comment" spellcheck="true"># Where to save the figures</span>
+PROJECT_ROOT_DIR <span class="token operator">=</span> <span class="token string">"."</span>
+CHAPTER_ID <span class="token operator">=</span> <span class="token string">"classification"</span>
+
+<span class="token keyword">def</span> <span class="token function">save_fig</span><span class="token punctuation">(</span>fig_id<span class="token punctuation">,</span> tight_layout<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    path <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>PROJECT_ROOT_DIR<span class="token punctuation">,</span> <span class="token string">"images"</span><span class="token punctuation">,</span> CHAPTER_ID<span class="token punctuation">,</span> fig_id <span class="token operator">+</span> <span class="token string">".png"</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Saving figure"</span><span class="token punctuation">,</span> fig_id<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> tight_layout<span class="token punctuation">:</span>
+        plt<span class="token punctuation">.</span>tight_layout<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>savefig<span class="token punctuation">(</span>path<span class="token punctuation">,</span> format<span class="token operator">=</span><span class="token string">'png'</span><span class="token punctuation">,</span> dpi<span class="token operator">=</span><span class="token number">300</span><span class="token punctuation">)</span></code></pre>
+<h1 id="MNIST"><a href="#MNIST" class="headerlink" title="MNIST"></a>MNIST</h1><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>datasets <span class="token keyword">import</span> fetch_openml
+mnist <span class="token operator">=</span> fetch_openml<span class="token punctuation">(</span><span class="token string">'mnist_784'</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#获得mnist数据集</span>
+mnist</code></pre>
+<pre><code>{'data': array([[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]),
+ 'target': array(['5', '0', '4', ..., '4', '5', '6'], dtype=object),
+ 'frame': None,
+ 'categories': {},</code></pre><pre class=" language-python"><code class="language-python">X<span class="token punctuation">,</span> y <span class="token operator">=</span> mnist<span class="token punctuation">[</span><span class="token string">"data"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> mnist<span class="token punctuation">[</span><span class="token string">"target"</span><span class="token punctuation">]</span><span class="token comment" spellcheck="true">#共70000张图片，每张图片有784个特征，28x28像素，每个特征代表一个像素点的强度</span>
+X<span class="token punctuation">.</span>shape<span class="token comment" spellcheck="true">#查看各个维度的维数</span></code></pre>
+<pre><code>(70000, 784)</code></pre><pre class=" language-python"><code class="language-python">y<span class="token punctuation">.</span>shape</code></pre>
+<pre><code>(70000,)</code></pre><pre class=" language-python"><code class="language-python"><span class="token number">28</span><span class="token operator">*</span><span class="token number">28</span></code></pre>
+<pre><code>784</code></pre><pre class=" language-python"><code class="language-python"><span class="token operator">%</span>matplotlib inline
+<span class="token keyword">import</span> matplotlib
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+<span class="token comment" spellcheck="true">#先来看看数据集中的一个数字， 你只需要随手抓取一个实例的特征向量，将其重新形成一个28×28数组，然后使用Matplotlib的</span>
+<span class="token comment" spellcheck="true">#imshow（）函数将其显示出来：</span>
+some_digit <span class="token operator">=</span> X<span class="token punctuation">[</span><span class="token number">36000</span><span class="token punctuation">]</span>
+some_digit_image <span class="token operator">=</span> some_digit<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token number">28</span><span class="token punctuation">,</span> <span class="token number">28</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>some_digit_image<span class="token punctuation">,</span> cmap <span class="token operator">=</span> matplotlib<span class="token punctuation">.</span>cm<span class="token punctuation">.</span>binary<span class="token punctuation">,</span>
+           interpolation<span class="token operator">=</span><span class="token string">"nearest"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">"off"</span><span class="token punctuation">)</span>
+
+save_fig<span class="token punctuation">(</span><span class="token string">"some_digit_plot"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre><code>Saving figure some_digit_plot</code></pre><p><img src="https://img-blog.csdnimg.cn/2020071208521182.png" alt="在这里插入图片描述"></p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">plot_digit</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    image <span class="token operator">=</span> data<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token number">28</span><span class="token punctuation">,</span> <span class="token number">28</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>image<span class="token punctuation">,</span> cmap <span class="token operator">=</span> matplotlib<span class="token punctuation">.</span>cm<span class="token punctuation">.</span>binary<span class="token punctuation">,</span>
+               interpolation<span class="token operator">=</span><span class="token string">"nearest"</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">"off"</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># EXTRA</span>
+<span class="token keyword">def</span> <span class="token function">plot_digits</span><span class="token punctuation">(</span>instances<span class="token punctuation">,</span> images_per_row<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token operator">**</span>options<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    size <span class="token operator">=</span> <span class="token number">28</span>
+    images_per_row <span class="token operator">=</span> min<span class="token punctuation">(</span>len<span class="token punctuation">(</span>instances<span class="token punctuation">)</span><span class="token punctuation">,</span> images_per_row<span class="token punctuation">)</span>
+    images <span class="token operator">=</span> <span class="token punctuation">[</span>instance<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>size<span class="token punctuation">,</span>size<span class="token punctuation">)</span> <span class="token keyword">for</span> instance <span class="token keyword">in</span> instances<span class="token punctuation">]</span>
+    n_rows <span class="token operator">=</span> <span class="token punctuation">(</span>len<span class="token punctuation">(</span>instances<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">//</span> images_per_row <span class="token operator">+</span> <span class="token number">1</span>
+    row_images <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    n_empty <span class="token operator">=</span> n_rows <span class="token operator">*</span> images_per_row <span class="token operator">-</span> len<span class="token punctuation">(</span>instances<span class="token punctuation">)</span>
+    images<span class="token punctuation">.</span>append<span class="token punctuation">(</span>np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span>size<span class="token punctuation">,</span> size <span class="token operator">*</span> n_empty<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> row <span class="token keyword">in</span> range<span class="token punctuation">(</span>n_rows<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        rimages <span class="token operator">=</span> images<span class="token punctuation">[</span>row <span class="token operator">*</span> images_per_row <span class="token punctuation">:</span> <span class="token punctuation">(</span>row <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> images_per_row<span class="token punctuation">]</span>
+        row_images<span class="token punctuation">.</span>append<span class="token punctuation">(</span>np<span class="token punctuation">.</span>concatenate<span class="token punctuation">(</span>rimages<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    image <span class="token operator">=</span> np<span class="token punctuation">.</span>concatenate<span class="token punctuation">(</span>row_images<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>image<span class="token punctuation">,</span> cmap <span class="token operator">=</span> matplotlib<span class="token punctuation">.</span>cm<span class="token punctuation">.</span>binary<span class="token punctuation">,</span> <span class="token operator">**</span>options<span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">"off"</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+example_images <span class="token operator">=</span> np<span class="token punctuation">.</span>r_<span class="token punctuation">[</span>X<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">12000</span><span class="token punctuation">:</span><span class="token number">600</span><span class="token punctuation">]</span><span class="token punctuation">,</span> X<span class="token punctuation">[</span><span class="token number">13000</span><span class="token punctuation">:</span><span class="token number">30600</span><span class="token punctuation">:</span><span class="token number">600</span><span class="token punctuation">]</span><span class="token punctuation">,</span> X<span class="token punctuation">[</span><span class="token number">30600</span><span class="token punctuation">:</span><span class="token number">60000</span><span class="token punctuation">:</span><span class="token number">590</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+plot_digits<span class="token punctuation">(</span>example_images<span class="token punctuation">,</span> images_per_row<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span>
+save_fig<span class="token punctuation">(</span><span class="token string">"more_digits_plot"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre><code>Saving figure more_digits_plot</code></pre><p><img src="https://img-blog.csdnimg.cn/20200712090509325.png" alt="在这里插入图片描述"></p>
+<pre class=" language-python"><code class="language-python">y<span class="token punctuation">[</span><span class="token number">36000</span><span class="token punctuation">]</span></code></pre>
+<pre><code>'9'</code></pre><pre class=" language-python"><code class="language-python">X_train<span class="token punctuation">,</span> X_test<span class="token punctuation">,</span> y_train<span class="token punctuation">,</span> y_test <span class="token operator">=</span> X<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">60000</span><span class="token punctuation">]</span><span class="token punctuation">,</span> X<span class="token punctuation">[</span><span class="token number">60000</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">,</span> y<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">60000</span><span class="token punctuation">]</span><span class="token punctuation">,</span> y<span class="token punctuation">[</span><span class="token number">60000</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token comment" spellcheck="true">#创建一个测试集，分成训练集</span>
+<span class="token comment" spellcheck="true">#（前6万张图像）和测试集（最后1万张图像）</span></code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+shuffle_index <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>permutation<span class="token punctuation">(</span><span class="token number">60000</span><span class="token punctuation">)</span>
+X_train<span class="token punctuation">,</span> y_train <span class="token operator">=</span> X_train<span class="token punctuation">[</span>shuffle_index<span class="token punctuation">]</span><span class="token punctuation">,</span> y_train<span class="token punctuation">[</span>shuffle_index<span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>X_train<span class="token punctuation">.</span>shape<span class="token punctuation">)</span></code></pre>
+<pre><code>(60000, 784)</code></pre><h1 id="Binary-classifier二分类"><a href="#Binary-classifier二分类" class="headerlink" title="Binary classifier二分类"></a>Binary classifier二分类</h1><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#训练一个二元分类器</span>
+y_train <span class="token operator">=</span> y_train<span class="token punctuation">.</span>astype<span class="token punctuation">(</span>np<span class="token punctuation">.</span>int8<span class="token punctuation">)</span><span class="token comment" spellcheck="true">#将充满false的数组强制转换为int8</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>y_train_5<span class="token punctuation">)</span>
+y_train_5 <span class="token operator">=</span> <span class="token punctuation">(</span>y_train <span class="token operator">==</span> <span class="token number">5</span><span class="token punctuation">)</span>
+y_test_5 <span class="token operator">=</span> <span class="token punctuation">(</span>y_test <span class="token operator">==</span> <span class="token number">5</span><span class="token punctuation">)</span></code></pre>
+<pre><code>[False False  True ... False False False]</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>linear_model <span class="token keyword">import</span> SGDClassifier
+<span class="token comment" spellcheck="true">#挑选一个分类器并开始训练，SGDClassifier在训练时是完全随机的。</span>
+sgd_clf <span class="token operator">=</span> SGDClassifier<span class="token punctuation">(</span>random_state<span class="token operator">=</span><span class="token number">42</span><span class="token punctuation">)</span>
+sgd_clf<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>X_train<span class="token punctuation">,</span> y_train_5<span class="token punctuation">)</span></code></pre>
+<pre><code>SGDClassifier(random_state=42)</code></pre><pre class=" language-python"><code class="language-python">sgd_clf<span class="token punctuation">.</span>predict<span class="token punctuation">(</span><span class="token punctuation">[</span>some_digit<span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre>
+<pre><code>array([False])</code></pre><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#交叉验证是评估模型的好办法</span>
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>model_selection <span class="token keyword">import</span> cross_val_score
+<span class="token comment" spellcheck="true">##用cross_val_score（） 函数来评估SGDClassifier模型， 采用K-fold交叉验证法， 3个折叠。</span>
+<span class="token comment" spellcheck="true">#K-fold交叉验证的意思是将训练集分解成K个折叠（在本例中， 为3折） ， 然后每次留其中1个折叠进行预测， 剩余的折叠用来训练</span>
+cross_val_score<span class="token punctuation">(</span>sgd_clf<span class="token punctuation">,</span> X_train<span class="token punctuation">,</span> y_train_5<span class="token punctuation">,</span> cv<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> scoring<span class="token operator">=</span><span class="token string">"accuracy"</span><span class="token punctuation">)</span></code></pre>
+<pre><code>array([0.9334, 0.9644, 0.9568])</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>model_selection <span class="token keyword">import</span> StratifiedKFold
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>base <span class="token keyword">import</span> clone
+
+skfolds <span class="token operator">=</span> StratifiedKFold<span class="token punctuation">(</span>n_splits<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> random_state<span class="token operator">=</span><span class="token number">42</span><span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> train_index<span class="token punctuation">,</span> test_index <span class="token keyword">in</span> skfolds<span class="token punctuation">.</span>split<span class="token punctuation">(</span>X_train<span class="token punctuation">,</span> y_train_5<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    clone_clf <span class="token operator">=</span> clone<span class="token punctuation">(</span>sgd_clf<span class="token punctuation">)</span>
+    X_train_folds <span class="token operator">=</span> X_train<span class="token punctuation">[</span>train_index<span class="token punctuation">]</span>
+    y_train_folds <span class="token operator">=</span> <span class="token punctuation">(</span>y_train_5<span class="token punctuation">[</span>train_index<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    X_test_fold <span class="token operator">=</span> X_train<span class="token punctuation">[</span>test_index<span class="token punctuation">]</span>
+    y_test_fold <span class="token operator">=</span> <span class="token punctuation">(</span>y_train_5<span class="token punctuation">[</span>test_index<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+    clone_clf<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>X_train_folds<span class="token punctuation">,</span> y_train_folds<span class="token punctuation">)</span>
+    y_pred <span class="token operator">=</span> clone_clf<span class="token punctuation">.</span>predict<span class="token punctuation">(</span>X_test_fold<span class="token punctuation">)</span>
+    n_correct <span class="token operator">=</span> sum<span class="token punctuation">(</span>y_pred <span class="token operator">==</span> y_test_fold<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>n_correct <span class="token operator">/</span> len<span class="token punctuation">(</span>y_pred<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<pre><code>D:\Anaconda3\envs\learn\lib\site-packages\sklearn\model_selection\_split.py:297: FutureWarning: Setting a random_state has no effect since shuffle is False. This will raise an error in 0.24. You should leave random_state to its default (None), or set shuffle=True.
+  FutureWarning
+0.9334
+0.9644
+0.9568</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>base <span class="token keyword">import</span> BaseEstimator
+<span class="token keyword">class</span> <span class="token class-name">Never5Classifier</span><span class="token punctuation">(</span>BaseEstimator<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">fit</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> X<span class="token punctuation">,</span> y<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">pass</span>
+    <span class="token keyword">def</span> <span class="token function">predict</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> X<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span>len<span class="token punctuation">(</span>X<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>bool<span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">never_5_clf <span class="token operator">=</span> Never5Classifier<span class="token punctuation">(</span><span class="token punctuation">)</span>
+cross_val_score<span class="token punctuation">(</span>never_5_clf<span class="token punctuation">,</span> X_train<span class="token punctuation">,</span> y_train_5<span class="token punctuation">,</span> cv<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> scoring<span class="token operator">=</span><span class="token string">"accuracy"</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#准确率超过90%，这是因为只有大约10%的图像是数字9，所以如果你猜一张图不是9， 90%的时间你都是正确的</span>
+<span class="token comment" spellcheck="true">#说明准确率通常无法成为分类器的首要性能指标</span></code></pre>
+<pre><code>array([0.90855, 0.9093 , 0.9111 ])</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>model_selection <span class="token keyword">import</span> cross_val_predict
+
+y_train_pred <span class="token operator">=</span> cross_val_predict<span class="token punctuation">(</span>sgd_clf<span class="token punctuation">,</span> X_train<span class="token punctuation">,</span> y_train_5<span class="token punctuation">,</span> cv<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> confusion_matrix
+
+confusion_matrix<span class="token punctuation">(</span>y_train_5<span class="token punctuation">,</span> y_train_pred<span class="token punctuation">)</span></code></pre>
+<pre><code>array([[53124,  1455],
+       [ 949,  4472]], dtype=int64)</code></pre><pre class=" language-python"><code class="language-python">y_train_perfect_predictions <span class="token operator">=</span> y_train_5
+<span class="token triple-quoted-string string">'''混淆矩阵中的行表示实际类别， 列表示预测类别。 本例中第一行
+表示所有“非5”（负类） 的图片中： 53065张被正确地分为“非5”类别
+（真负类） ， 1455张被错误地分类成了“5”（假正类） ； 第二行表示
+所有“5”（正类） 的图片中： 949张被错误地分为“非5”类别（假负
+类） ， 4472张被正确地分在了“5”这一类别（真正类） 。 一个完美的
+分类器只有真正类和真负类， 所以它的混淆矩阵只会在其对角线（左
+上到右下） 上有非零值：'''</span></code></pre>
+<pre class=" language-python"><code class="language-python">confusion_matrix<span class="token punctuation">(</span>y_train_5<span class="token punctuation">,</span> y_train_perfect_predictions<span class="token punctuation">)</span></code></pre>
+<pre><code>array([[54579,     0],
+       [    0,  5421]], dtype=int64)</code></pre><p><strong>正类预测的准确度也可称为分类器的精度</strong></p>
+<blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20200712101652169.png" alt="在这里插入图片描述"><br><strong>TP是真正类的数量， FP是假正类的数量。</strong></p>
+</blockquote>
+<blockquote>
+<p>精度通常与另一个指标一起使用，这个指标就是召回率（recall），也称为灵敏度（sensitivity）或者真正类率（TPR）：它是分类器正确检测到的正类实例的比率<br><img src="https://img-blog.csdnimg.cn/20200712102437447.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<p>FN是假负类的数量。</p>
+<blockquote>
+<p>图解混淆矩阵<img src="https://img-blog.csdnimg.cn/20200712102620453.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<h5 id="精度和召回率"><a href="#精度和召回率" class="headerlink" title="精度和召回率"></a>精度和召回率</h5><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> precision_score<span class="token punctuation">,</span> recall_score
+
+precision_score<span class="token punctuation">(</span>y_train_5<span class="token punctuation">,</span> y_train_pred<span class="token punctuation">)</span><span class="token comment" spellcheck="true">#TP/(TP+FP)    4472/ (4472+ 1455)</span>
+<span class="token comment" spellcheck="true">#array([[53124,  1455],     TN   FP</span>
+ <span class="token comment" spellcheck="true">#          [ 949,  4472]]   FN    TP</span></code></pre>
+<pre><code>0.754513244474439</code></pre><pre class=" language-python"><code class="language-python">recall_score<span class="token punctuation">(</span>y_train_5<span class="token punctuation">,</span> y_train_pred<span class="token punctuation">)</span><span class="token comment" spellcheck="true">#TP/(TP+FN)  4472/(4472+949)</span></code></pre>
+<pre><code>0.8249400479616307</code></pre><p>因此我们可以很方便地将精度和召回率组合成一个单一的指标，称为F1分数。 当你需要一个简单的方法来比较两种分类器时， 这是个非常不错的指标。 F1分数是精度和召回率的谐波平均值 。 正常的平均值平等对待所有的值， 而谐波平均值会给予较低的值更高的权重。 因此， 只有当召回率和精度都很高时， 分类器才能得到较高的F1分数</p>
+<blockquote>
+<p>F1分数<br><img src="https://img-blog.csdnimg.cn/20200712104926562.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> f1_score
+f1_score<span class="token punctuation">(</span>y_train_5<span class="token punctuation">,</span> y_train_pred<span class="token punctuation">)</span><span class="token comment" spellcheck="true">#4472/ (4472+ (949+ 1455)/2)</span></code></pre>
+<pre><code>0.7881565033486078</code></pre><pre class=" language-python"><code class="language-python"><span class="token number">4472</span><span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">4472</span><span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">949</span><span class="token operator">+</span> <span class="token number">1455</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span></code></pre>
+<pre><code>0.7881565033486078</code></pre><h4 id="精度-召回率权衡"><a href="#精度-召回率权衡" class="headerlink" title="精度/召回率权衡"></a>精度/召回率权衡</h4><p>Scikit-Learn不允许直接设置阈值，但是可以访问它用于预测的决策分数。不是调用分类器的predict（）方法，而是调用decision_function（）方法，这个方法返回每个实例的分数，然后就可以根据这些分数，使用任意阈值进行预测了：</p>
+<pre class=" language-python"><code class="language-python">y_scores <span class="token operator">=</span> sgd_clf<span class="token punctuation">.</span>decision_function<span class="token punctuation">(</span><span class="token punctuation">[</span>some_digit<span class="token punctuation">]</span><span class="token punctuation">)</span>
+y_scores</code></pre>
+<pre><code>array([ 161855.74572176])</code></pre><pre class=" language-python"><code class="language-python">threshold <span class="token operator">=</span> <span class="token number">0</span>
+y_some_digit_pred <span class="token operator">=</span> <span class="token punctuation">(</span>y_scores <span class="token operator">></span> threshold<span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">y_some_digit_pred</code></pre>
+<p>   array([ True], dtype=bool)<br>SGDClassifier分类器使用的阈值是0， 所以前面的代码返回结果<br>与predict（） 方法一样（也就是True） 。 我们来试试提升阈值：</p>
+<pre class=" language-python"><code class="language-python">threshold <span class="token operator">=</span> <span class="token number">200000</span>
+y_some_digit_pred <span class="token operator">=</span> <span class="token punctuation">(</span>y_scores <span class="token operator">></span> threshold<span class="token punctuation">)</span>
+y_some_digit_pred</code></pre>
+<pre><code>array([False], dtype=bool)</code></pre><p>这证明了提高阈值确实可以降低召回率。 这张图确实是5， 当阈值为0时， 分类器可以检测到该图， 但是当阈值提高到200000时， 就错过了这张图。</p>
+<ul>
+<li>那么要如何决定使用什么阈值呢？ 首先， 使用cross_val_predict（） 函数获取训练集中所有实例的分数， 但是这次需要它返回的是决策分数而不是预测结果：<pre class=" language-python"><code class="language-python">y_scores <span class="token operator">=</span> cross_val_predict<span class="token punctuation">(</span>sgd_clf<span class="token punctuation">,</span> X_train<span class="token punctuation">,</span> y_train_5<span class="token punctuation">,</span> cv<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span>
+                           method<span class="token operator">=</span><span class="token string">"decision_function"</span><span class="token punctuation">)</span></code></pre>
+</li>
+</ul>
+<p>Note: there is an <a href="https://github.com/scikit-learn/scikit-learn/issues/9589" target="_blank" rel="noopener">issue</a> introduced in Scikit-Learn 0.19.0 where the result of <code>cross_val_predict()</code> is incorrect in the binary classification case when using <code>method="decision_function"</code>, as in the code above. The resulting array has an extra first dimension full of 0s. We need to add this small hack for now to work around this issue:</p>
+<pre class=" language-python"><code class="language-python">y_scores<span class="token punctuation">.</span>shape</code></pre>
+<pre><code>(60000, 2)</code></pre><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># hack to work around issue #9589 introduced in Scikit-Learn 0.19.0</span>
+<span class="token keyword">if</span> y_scores<span class="token punctuation">.</span>ndim <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">:</span>
+    y_scores <span class="token operator">=</span> y_scores<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span></code></pre>
+<p>有了这些分数， 可以使用precision_recall_curve（） 函数来计算<br>所有可能的阈值的精度和召回率：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> precision_recall_curve
+
+precisions<span class="token punctuation">,</span> recalls<span class="token punctuation">,</span> thresholds <span class="token operator">=</span> precision_recall_curve<span class="token punctuation">(</span>y_train_5<span class="token punctuation">,</span> y_scores<span class="token punctuation">)</span></code></pre>
+<p>最后， 使用Matplotlib绘制精度和召回率相对于阈值的函数图</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">plot_precision_recall_vs_threshold</span><span class="token punctuation">(</span>precisions<span class="token punctuation">,</span> recalls<span class="token punctuation">,</span> thresholds<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>thresholds<span class="token punctuation">,</span> precisions<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"b--"</span><span class="token punctuation">,</span> label<span class="token operator">=</span><span class="token string">"Precision"</span><span class="token punctuation">,</span> linewidth<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>thresholds<span class="token punctuation">,</span> recalls<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"g-"</span><span class="token punctuation">,</span> label<span class="token operator">=</span><span class="token string">"Recall"</span><span class="token punctuation">,</span> linewidth<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">"Threshold"</span><span class="token punctuation">,</span> fontsize<span class="token operator">=</span><span class="token number">16</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span>loc<span class="token operator">=</span><span class="token string">"upper left"</span><span class="token punctuation">,</span> fontsize<span class="token operator">=</span><span class="token number">16</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>ylim<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plot_precision_recall_vs_threshold<span class="token punctuation">(</span>precisions<span class="token punctuation">,</span> recalls<span class="token punctuation">,</span> thresholds<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlim<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">700000</span><span class="token punctuation">,</span> <span class="token number">700000</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+save_fig<span class="token punctuation">(</span><span class="token string">"precision_recall_vs_threshold_plot"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre><code>Saving figure precision_recall_vs_threshold_plot</code></pre><p><img src="https://img-blog.csdnimg.cn/20200712114715852.png" alt="在这里插入图片描述"></p>
+<pre class=" language-python"><code class="language-python"><span class="token punctuation">(</span>y_train_pred <span class="token operator">==</span> <span class="token punctuation">(</span>y_scores <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>all<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre><code>True</code></pre><pre class=" language-python"><code class="language-python">y_train_pred_90 <span class="token operator">=</span> <span class="token punctuation">(</span>y_scores <span class="token operator">></span> <span class="token number">70000</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">precision_score<span class="token punctuation">(</span>y_train_5<span class="token punctuation">,</span> y_train_pred_90<span class="token punctuation">)</span></code></pre>
+<pre><code>0.86592051164915484</code></pre><pre class=" language-python"><code class="language-python">recall_score<span class="token punctuation">(</span>y_train_5<span class="token punctuation">,</span> y_train_pred_90<span class="token punctuation">)</span></code></pre>
+<pre><code>0.69931746910164172</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">plot_precision_vs_recall</span><span class="token punctuation">(</span>precisions<span class="token punctuation">,</span> recalls<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>recalls<span class="token punctuation">,</span> precisions<span class="token punctuation">,</span> <span class="token string">"b-"</span><span class="token punctuation">,</span> linewidth<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">"Recall"</span><span class="token punctuation">,</span> fontsize<span class="token operator">=</span><span class="token number">16</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">"Precision"</span><span class="token punctuation">,</span> fontsize<span class="token operator">=</span><span class="token number">16</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plot_precision_vs_recall<span class="token punctuation">(</span>precisions<span class="token punctuation">,</span> recalls<span class="token punctuation">)</span>
+save_fig<span class="token punctuation">(</span><span class="token string">"precision_vs_recall_plot"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre><code>Saving figure precision_vs_recall_plot</code></pre><p><img src="https://img-blog.csdnimg.cn/20200712141839897.png" alt="在这里插入图片描述"></p>
+<h1 id="ROC-曲线"><a href="#ROC-曲线" class="headerlink" title="ROC 曲线"></a>ROC 曲线</h1><p>ROC叫受试者工作特征曲线。它与精度/召回率曲线非常相似，但绘制的不<br>是精度和召回率，而是真正类率（召回率的另一名称）和假正类率（<code>FPR</code>）。 FPR是被错误分为正类的负类实例比率。它等于1减去真负类率<code>（TNR）</code>，后者是被正确分类为负类的负类实例比率，也称为特异度。因此， ROC曲线绘制的是灵敏度和（1-<code>特异度</code>）的关系。</p>
+<pre><code>要绘制ROC曲线，首先需要使用roc_curve（）函数计算多种阈值的TPR和FPR：</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> roc_curve
+fpr<span class="token punctuation">,</span> tpr<span class="token punctuation">,</span> thresholds <span class="token operator">=</span> roc_curve<span class="token punctuation">(</span>y_train_5<span class="token punctuation">,</span> y_scores<span class="token punctuation">)</span></code></pre>
+<pre><code>然后，使用Matplotlib绘制FPR对TPR的曲线。</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">plot_roc_curve</span><span class="token punctuation">(</span>fpr<span class="token punctuation">,</span> tpr<span class="token punctuation">,</span> label<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>fpr<span class="token punctuation">,</span> tpr<span class="token punctuation">,</span> linewidth<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> label<span class="token operator">=</span>label<span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'k--'</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'False Positive Rate'</span><span class="token punctuation">,</span> fontsize<span class="token operator">=</span><span class="token number">16</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'True Positive Rate'</span><span class="token punctuation">,</span> fontsize<span class="token operator">=</span><span class="token number">16</span><span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plot_roc_curve<span class="token punctuation">(</span>fpr<span class="token punctuation">,</span> tpr<span class="token punctuation">)</span>
+save_fig<span class="token punctuation">(</span><span class="token string">"roc_curve_plot"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre><code>Saving figure roc_curve_plot</code></pre><p><img src="https://img-blog.csdnimg.cn/20200712142233693.png" alt="在这里插入图片描述"><br><strong>召回率（TPR） 越高， 分类器产生的假正类（FPR） 就越多。 虚线表示纯随机分类器的ROC曲线；一个优秀的分类器应该离这条线越远越好（向左上角） 。</strong></p>
+<hr>
+<p>　　<br>　　有一种比较分类器的方法是测量曲线下面积（AUC） 。 完美的分类器的ROC AUC等于1， 而纯随机分类器的ROC AUC等于0.5。Scikit-Learn提供计算ROC AUC的函数：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> roc_auc_score
+roc_auc_score<span class="token punctuation">(</span>y_train_5<span class="token punctuation">,</span> y_scores<span class="token punctuation">)</span></code></pre>
+<pre><code>0.96244965559671547</code></pre><p>由于ROC曲线与精度/召回率（或PR） 曲线非常相似，有时候我们会选择使用哪种曲线，有一个经验法则是， 当正类非常少见或者你更关注假正类而不是假负类时， 你应该选择PR曲线， 反之则是ROC曲线。PR曲线可以暗示分类器还有改进的空间（曲线更接近右上角）。</p>
+<p><strong>下面训练一个RandomForestClassifier分类器，并比较它和SGDClassifier分类器的ROC曲线和ROC AUC分数。</strong>    </p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>ensemble <span class="token keyword">import</span> RandomForestClassifier
+forest_clf <span class="token operator">=</span> RandomForestClassifier<span class="token punctuation">(</span>random_state<span class="token operator">=</span><span class="token number">42</span><span class="token punctuation">)</span>
+y_probas_forest <span class="token operator">=</span> cross_val_predict<span class="token punctuation">(</span>forest_clf<span class="token punctuation">,</span> X_train<span class="token punctuation">,</span> y_train_5<span class="token punctuation">,</span> cv<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span>
+                                    method<span class="token operator">=</span><span class="token string">"predict_proba"</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">y_scores_forest <span class="token operator">=</span> y_probas_forest<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># score = proba of positive class</span>
+fpr_forest<span class="token punctuation">,</span> tpr_forest<span class="token punctuation">,</span> thresholds_forest <span class="token operator">=</span> roc_curve<span class="token punctuation">(</span>y_train_5<span class="token punctuation">,</span>y_scores_forest<span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>fpr<span class="token punctuation">,</span> tpr<span class="token punctuation">,</span> <span class="token string">"b:"</span><span class="token punctuation">,</span> linewidth<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> label<span class="token operator">=</span><span class="token string">"SGD"</span><span class="token punctuation">)</span>
+plot_roc_curve<span class="token punctuation">(</span>fpr_forest<span class="token punctuation">,</span> tpr_forest<span class="token punctuation">,</span> <span class="token string">"Random Forest"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span>loc<span class="token operator">=</span><span class="token string">"lower right"</span><span class="token punctuation">,</span> fontsize<span class="token operator">=</span><span class="token number">16</span><span class="token punctuation">)</span>
+save_fig<span class="token punctuation">(</span><span class="token string">"roc_curve_comparison_plot"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre><code>Saving figure roc_curve_comparison_plot</code></pre><p><img src="https://img-blog.csdnimg.cn/20200712144550778.png" alt="在这里插入图片描述"><br>如上图所示， RandomForestClassifier的ROC曲线看起来比SGDClassifier好很多： 它离左上角更接近。 因此它的ROC AUC分数也高得多：</p>
+<pre class=" language-python"><code class="language-python">roc_auc_score<span class="token punctuation">(</span>y_train_5<span class="token punctuation">,</span> y_scores_forest<span class="token punctuation">)</span></code></pre>
+<pre><code>0.99312433660038291</code></pre><pre class=" language-python"><code class="language-python">y_train_pred_forest <span class="token operator">=</span> cross_val_predict<span class="token punctuation">(</span>forest_clf<span class="token punctuation">,</span> X_train<span class="token punctuation">,</span> y_train_5<span class="token punctuation">,</span> cv<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span>
+precision_score<span class="token punctuation">(</span>y_train_5<span class="token punctuation">,</span> y_train_pred_forest<span class="token punctuation">)</span><span class="token comment" spellcheck="true">#精度</span></code></pre>
+<pre><code>0.98529734474434938</code></pre><pre class=" language-python"><code class="language-python">recall_score<span class="token punctuation">(</span>y_train_5<span class="token punctuation">,</span> y_train_pred_forest<span class="token punctuation">)</span><span class="token comment" spellcheck="true">#召回率</span></code></pre>
+<pre><code>0.82826046854823832
+再测一测精度和召回率的分数： 98.5%的精度和82.8%的召回率， 也还不错！</code></pre><h1 id="Multiclass-classification多类别分类器"><a href="#Multiclass-classification多类别分类器" class="headerlink" title="Multiclass classification多类别分类器"></a>Multiclass classification多类别分类器</h1><p>二元分类器在两个类别中区分，而多类别分类器（也称为多项分类器）可以区分两个以上的类别。</p>
+<p>Scikit-Learn可以检测到你尝试使用二元分类算法进行多类别分类任务，它会自动运行OvA（SVM分类器除外，它会使用OvO）。我们用SGDClassifier试试：</p>
+<pre class=" language-python"><code class="language-python">sgd_clf<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>X_train<span class="token punctuation">,</span> y_train<span class="token punctuation">)</span>
+sgd_clf<span class="token punctuation">.</span>predict<span class="token punctuation">(</span><span class="token punctuation">[</span>some_digit<span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre>
+<pre><code>array([ 5.])</code></pre><p>可以调用decision_function（ ） 方法，Scikit-Learns实际上训练了10个二元分类器，获得它们对图片的决策分数， 然后选择了分数最高的类别。</p>
+<pre class=" language-python"><code class="language-python">some_digit_scores <span class="token operator">=</span> sgd_clf<span class="token punctuation">.</span>decision_function<span class="token punctuation">(</span><span class="token punctuation">[</span>some_digit<span class="token punctuation">]</span><span class="token punctuation">)</span>
+some_digit_scores</code></pre>
+<pre><code>array([[-311402.62954431, -363517.28355739, -446449.5306454 ,
+        -183226.61023518, -414337.15339485,  161855.74572176,
+        -452576.39616343, -471957.14962573, -518542.33997148,
+        -536774.63961222]])</code></pre><pre class=" language-python"><code class="language-python">np<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>some_digit_scores<span class="token punctuation">)</span><span class="token comment" spellcheck="true">#最好分是对应数字5这个类别</span></code></pre>
+<pre><code>5</code></pre><pre class=" language-python"><code class="language-python">sgd_clf<span class="token punctuation">.</span>classes_</code></pre>
+<pre><code>array([ 0.,  1.,  2.,  3.,  4.,  5.,  6.,  7.,  8.,  9.])</code></pre><pre class=" language-python"><code class="language-python">sgd_clf<span class="token punctuation">.</span>classes_<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token comment" spellcheck="true">#当训练分类器时， 目标类别的列表会存储在classes_这个属性中， 按值的大小排序。</span></code></pre>
+<pre><code>5.0</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>multiclass <span class="token keyword">import</span> OneVsOneClassifier
+ovo_clf <span class="token operator">=</span> OneVsOneClassifier<span class="token punctuation">(</span>SGDClassifier<span class="token punctuation">(</span>random_state<span class="token operator">=</span><span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+ovo_clf<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>X_train<span class="token punctuation">,</span> y_train<span class="token punctuation">)</span>
+ovo_clf<span class="token punctuation">.</span>predict<span class="token punctuation">(</span><span class="token punctuation">[</span>some_digit<span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre>
+<pre><code>array([ 5.])</code></pre><pre class=" language-python"><code class="language-python">len<span class="token punctuation">(</span>ovo_clf<span class="token punctuation">.</span>estimators_<span class="token punctuation">)</span></code></pre>
+<pre><code>45</code></pre><pre class=" language-python"><code class="language-python">forest_clf<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>X_train<span class="token punctuation">,</span> y_train<span class="token punctuation">)</span>
+forest_clf<span class="token punctuation">.</span>predict<span class="token punctuation">(</span><span class="token punctuation">[</span>some_digit<span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre>
+<pre><code>array([ 5.])</code></pre><pre class=" language-python"><code class="language-python">forest_clf<span class="token punctuation">.</span>predict_proba<span class="token punctuation">(</span><span class="token punctuation">[</span>some_digit<span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre>
+<pre><code>array([[ 0.1,  0. ,  0. ,  0.1,  0. ,  0.8,  0. ,  0. ,  0. ,  0. ]])</code></pre><pre class=" language-python"><code class="language-python">cross_val_score<span class="token punctuation">(</span>sgd_clf<span class="token punctuation">,</span> X_train<span class="token punctuation">,</span> y_train<span class="token punctuation">,</span> cv<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> scoring<span class="token operator">=</span><span class="token string">"accuracy"</span><span class="token punctuation">)</span></code></pre>
+<pre><code>array([ 0.84063187,  0.84899245,  0.86652998])</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>preprocessing <span class="token keyword">import</span> StandardScaler
+scaler <span class="token operator">=</span> StandardScaler<span class="token punctuation">(</span><span class="token punctuation">)</span>
+X_train_scaled <span class="token operator">=</span> scaler<span class="token punctuation">.</span>fit_transform<span class="token punctuation">(</span>X_train<span class="token punctuation">.</span>astype<span class="token punctuation">(</span>np<span class="token punctuation">.</span>float64<span class="token punctuation">)</span><span class="token punctuation">)</span>
+cross_val_score<span class="token punctuation">(</span>sgd_clf<span class="token punctuation">,</span> X_train_scaled<span class="token punctuation">,</span> y_train<span class="token punctuation">,</span> cv<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> scoring<span class="token operator">=</span><span class="token string">"accuracy"</span><span class="token punctuation">)</span></code></pre>
+<pre><code>array([ 0.91011798,  0.90874544,  0.906636  ])</code></pre><h4 id="错误分析"><a href="#错误分析" class="headerlink" title="错误分析"></a>错误分析</h4><p>一般机器学习项目包含：探索数据准备的选项， 尝试多个模型， 列出最佳模型并用GridSearchCV对其超参数进行微调， 尽可能自动化。假设当前已经找到了一个由潜力的模型，现在想进一步微调参数。<br><strong>首先， 看看混淆矩阵。 就像之前做的， 使用cross_val_predict（）函数进行预测， 然后调用confusion_matrix（） 函数：</strong></p>
+<pre class=" language-python"><code class="language-python">y_train_pred <span class="token operator">=</span> cross_val_predict<span class="token punctuation">(</span>sgd_clf<span class="token punctuation">,</span> X_train_scaled<span class="token punctuation">,</span> y_train<span class="token punctuation">,</span> cv<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span>
+conf_mx <span class="token operator">=</span> confusion_matrix<span class="token punctuation">(</span>y_train<span class="token punctuation">,</span> y_train_pred<span class="token punctuation">)</span>
+conf_mx</code></pre>
+<pre><code>array([[5725,    3,   24,    9,   10,   49,   50,   10,   39,    4],
+       [   2, 6493,   43,   25,    7,   40,    5,   10,  109,    8],
+       [  51,   41, 5321,  104,   89,   26,   87,   60,  166,   13],
+       [  47,   46,  141, 5342,    1,  231,   40,   50,  141,   92],
+       [  19,   29,   41,   10, 5366,    9,   56,   37,   86,  189],
+       [  73,   45,   36,  193,   64, 4582,  111,   30,  193,   94],
+       [  29,   34,   44,    2,   42,   85, 5627,   10,   45,    0],
+       [  25,   24,   74,   32,   54,   12,    6, 5787,   15,  236],
+       [  52,  161,   73,  156,   10,  163,   61,   25, 5027,  123],
+       [  43,   35,   26,   92,  178,   28,    2,  223,   82, 5240]])</code></pre><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">plot_confusion_matrix</span><span class="token punctuation">(</span>matrix<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""If you prefer color and a colorbar"""</span>
+    fig <span class="token operator">=</span> plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    ax <span class="token operator">=</span> fig<span class="token punctuation">.</span>add_subplot<span class="token punctuation">(</span><span class="token number">111</span><span class="token punctuation">)</span>
+    cax <span class="token operator">=</span> ax<span class="token punctuation">.</span>matshow<span class="token punctuation">(</span>matrix<span class="token punctuation">)</span>
+    fig<span class="token punctuation">.</span>colorbar<span class="token punctuation">(</span>cax<span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">plt<span class="token punctuation">.</span>matshow<span class="token punctuation">(</span>conf_mx<span class="token punctuation">,</span> cmap<span class="token operator">=</span>plt<span class="token punctuation">.</span>cm<span class="token punctuation">.</span>gray<span class="token punctuation">)</span>
+save_fig<span class="token punctuation">(</span><span class="token string">"confusion_matrix_plot"</span><span class="token punctuation">,</span> tight_layout<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre><code>Saving figure confusion_matrix_plot</code></pre><p><img src="https://img-blog.csdnimg.cn/20200712154942119.png" alt="在这里插入图片描述"><br>混淆矩阵看起来很不错，因为大多数图片都在主对角线上，这说明它们被正确分类。</p>
+<p>让我们把焦点放在错误上。首先，你需要将混淆矩阵中的每个值除以相应类别中的图片数量，这样你比较的就是错误率而不是错误的绝对值（后者对图片数量较多的类别不公平）：</p>
+<pre class=" language-python"><code class="language-python">row_sums <span class="token operator">=</span> conf_mx<span class="token punctuation">.</span>sum<span class="token punctuation">(</span>axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> keepdims<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+norm_conf_mx <span class="token operator">=</span> conf_mx <span class="token operator">/</span> row_sums</code></pre>
+<p>用0填充对角线，只保留错误，重新绘制结果：</p>
+<pre class=" language-python"><code class="language-python">np<span class="token punctuation">.</span>fill_diagonal<span class="token punctuation">(</span>norm_conf_mx<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>matshow<span class="token punctuation">(</span>norm_conf_mx<span class="token punctuation">,</span> cmap<span class="token operator">=</span>plt<span class="token punctuation">.</span>cm<span class="token punctuation">.</span>gray<span class="token punctuation">)</span>
+save_fig<span class="token punctuation">(</span><span class="token string">"confusion_matrix_errors_plot"</span><span class="token punctuation">,</span> tight_layout<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre><code>Saving figure confusion_matrix_errors_plot</code></pre><p><img src="https://img-blog.csdnimg.cn/20200712155723349.png" alt="在这里插入图片描述"><br>　　现在可以清晰地看到分类器产生的错误种类了。 记住， 每行代表实际类别， 而每列表示预测类别。 第8列和第9列整体看起来非常亮，说明有许多图片被错误地分类为数字8或数字9了。 同样， 类别8和类别9的行看起来也偏亮， 说明数字8和数字9经常会跟其他数字混淆。相反， 一些行很暗， 比如行1， 这意味着大多数数字1都被正确地分类（有一些与数字8弄混， 但仅此而已） 。 注意， 错误不是完全对称的， 比如， 数字5被错误分类为数字8的数量比数字8被错误分类为数字5的数量要更多。<br>　　分析混淆矩阵通常可以帮助你深入了解如何改进分类器。 通过上面那张图来看， 你的精力可以花在改进数字8和数字9的分类， 以及修正数字3和数字5的混淆上。</p>
+<blockquote>
+<p>分析单个的错误也可以为分类器提供洞察： 它在做什么？ 它为什<br>么失败？ 但这通常更加困难和耗时。 例如， 我们来看看数字3和数字5<br>的例子：</p>
+</blockquote>
+<pre class=" language-python"><code class="language-python">cl_a<span class="token punctuation">,</span> cl_b <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span>
+X_aa <span class="token operator">=</span> X_train<span class="token punctuation">[</span><span class="token punctuation">(</span>y_train <span class="token operator">==</span> cl_a<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token punctuation">(</span>y_train_pred <span class="token operator">==</span> cl_a<span class="token punctuation">)</span><span class="token punctuation">]</span>
+X_ab <span class="token operator">=</span> X_train<span class="token punctuation">[</span><span class="token punctuation">(</span>y_train <span class="token operator">==</span> cl_a<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token punctuation">(</span>y_train_pred <span class="token operator">==</span> cl_b<span class="token punctuation">)</span><span class="token punctuation">]</span>
+X_ba <span class="token operator">=</span> X_train<span class="token punctuation">[</span><span class="token punctuation">(</span>y_train <span class="token operator">==</span> cl_b<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token punctuation">(</span>y_train_pred <span class="token operator">==</span> cl_a<span class="token punctuation">)</span><span class="token punctuation">]</span>
+X_bb <span class="token operator">=</span> X_train<span class="token punctuation">[</span><span class="token punctuation">(</span>y_train <span class="token operator">==</span> cl_b<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token punctuation">(</span>y_train_pred <span class="token operator">==</span> cl_b<span class="token punctuation">)</span><span class="token punctuation">]</span>
+
+plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">221</span><span class="token punctuation">)</span><span class="token punctuation">;</span> plot_digits<span class="token punctuation">(</span>X_aa<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">25</span><span class="token punctuation">]</span><span class="token punctuation">,</span> images_per_row<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">222</span><span class="token punctuation">)</span><span class="token punctuation">;</span> plot_digits<span class="token punctuation">(</span>X_ab<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">25</span><span class="token punctuation">]</span><span class="token punctuation">,</span> images_per_row<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">223</span><span class="token punctuation">)</span><span class="token punctuation">;</span> plot_digits<span class="token punctuation">(</span>X_ba<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">25</span><span class="token punctuation">]</span><span class="token punctuation">,</span> images_per_row<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">224</span><span class="token punctuation">)</span><span class="token punctuation">;</span> plot_digits<span class="token punctuation">(</span>X_bb<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">25</span><span class="token punctuation">]</span><span class="token punctuation">,</span> images_per_row<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span>
+save_fig<span class="token punctuation">(</span><span class="token string">"error_analysis_digits_plot"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre><code>Saving figure error_analysis_digits_plot</code></pre><p><img src="https://img-blog.csdnimg.cn/20200712155734642.png" alt="在这里插入图片描述"><br>　　左侧的两个5×5矩阵显示了被分类为数字3的图片，右侧的两个5×5矩阵显示了被分类为数字5的图片。分类器弄错的数字（即左下方和右上方的矩阵）里，确实有一些写得非常糟糕，即便是人类也很难做出区分（例如，第8行第1列的数字5看起来真的很像数字3）。然而，对我们来说，大多数错误分类的图片看起来还是非常明显的错误，我们很难理解分类器为什么会弄错。 原因在于，我们使用的简单的SGDClassifier模型是一个线性模型。它所做的就是为每个像素分配一个各个类别的权重，当它看到新的图像时，将加权后的像素强度汇总，从而得到一个分数进行分类。而数字3和数字5只在一部分像素位上有区别，所以分类器很容易将其弄混。<br>数字3和数字5之间的主要区别是在于连接顶线和下方弧线的中间那段小线条的位置。如果你写的数字3将连接点略往左移，分类器就可能将其分类为数字5，反之亦然。换言之，这个分类器对图像移位和旋转非常敏感。因此，减少数字3和数字5混淆的方法之一，就是对<code>图片进行预处理</code>， 确保它们位于中心位置并且没有旋转。 这也同样有助于减少其他错误。</p>
+<h1 id="Multilabel-classification多标签分类"><a href="#Multilabel-classification多标签分类" class="headerlink" title="Multilabel classification多标签分类"></a>Multilabel classification多标签分类</h1><p>　　<br>　　&nbsp; &nbsp; 到目前为止，每个实例都只会被分在一个类别里。而在某些情况下，你希望分类器为每个实例产出多个类别。例如，人脸识别的分类器：如果在一张照片里识别出多个人怎么办？当然，应该为识别出来的每个人都附上一个标签。假设分类器经过训练，已经可以识别出三张脸——爱丽丝、鲍勃和查理，那么当看到一张爱丽丝和查理的照片时，它应该输出[1， 0， 1]（意思是“是爱丽丝，不是鲍勃，是查理”）这种输出多个二元标签的分类系统称为多标签分类系统。<br>来看一个例子：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>neighbors <span class="token keyword">import</span> KNeighborsClassifier
+
+y_train_large <span class="token operator">=</span> <span class="token punctuation">(</span>y_train <span class="token operator">>=</span> <span class="token number">7</span><span class="token punctuation">)</span>
+y_train_odd <span class="token operator">=</span> <span class="token punctuation">(</span>y_train <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+y_multilabel <span class="token operator">=</span> np<span class="token punctuation">.</span>c_<span class="token punctuation">[</span>y_train_large<span class="token punctuation">,</span> y_train_odd<span class="token punctuation">]</span>
+
+knn_clf <span class="token operator">=</span> KNeighborsClassifier<span class="token punctuation">(</span><span class="token punctuation">)</span>
+knn_clf<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>X_train<span class="token punctuation">,</span> y_multilabel<span class="token punctuation">)</span></code></pre>
+<p>这段代码会创建一个y_multilabel数组，其中包含两个数字图片的目标标签：第一个表示数字是否是大数（7、 8、 9），第二个表示是否为奇数。下一行创建一个KNeighborsClassifier实例（它支持多标签分类，不是所有的分类器都支持），然后使用多个目标数组对它进行训练。现在用它做一个预测，注意它输出的两个标签：</p>
+<pre><code>KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform')</code></pre><pre class=" language-python"><code class="language-python">knn_clf<span class="token punctuation">.</span>predict<span class="token punctuation">(</span><span class="token punctuation">[</span>some_digit<span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre>
+<pre><code>array([[False,  True]], dtype=bool)</code></pre><p><strong>结果是正确的！数字5确实不大（False），为奇数（True）。</strong><br>评估多标签分类器的方法很多，如何选择正确的度量指标取决于你的项目。比如方法之一是测量每个标签的F1分数（或者是之前讨论过的任何其他二元分类器指标），然后简单地平均。下面这段代码计算所有标签的平均F1分数：</p>
+<pre class=" language-python"><code class="language-python">y_train_knn_pred <span class="token operator">=</span> cross_val_predict<span class="token punctuation">(</span>knn_clf<span class="token punctuation">,</span> X_train<span class="token punctuation">,</span> y_multilabel<span class="token punctuation">,</span> cv<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span>
+f1_score<span class="token punctuation">(</span>y_multilabel<span class="token punctuation">,</span> y_train_knn_pred<span class="token punctuation">,</span> average<span class="token operator">=</span><span class="token string">"macro"</span><span class="token punctuation">)</span></code></pre>
+<pre><code>0.97709078477525002</code></pre><p>这里假设了所有的标签都同等重要， 但实际可能不是这样。 特别是， 如果训练的照片里爱丽丝比鲍勃和查理要多很多， 你可能想给区分爱丽丝的分类器更高的权重。 一个简单的办法是给每个标签设置一个等于其自身支持的权重（也就是具有该目标标签的实例的数量） 。只需要在上面的代码中设置average=”weighted”即可。</p>
+<h1 id="Multioutput-classification多输出-多类别分类"><a href="#Multioutput-classification多输出-多类别分类" class="headerlink" title="Multioutput classification多输出-多类别分类"></a>Multioutput classification多输出-多类别分类</h1><p>举个例子：为了说明这一点，构建一个系统去除图片中的噪声。给它输入一张有噪声的图片，它将（希望）输出一张干净的数字图片，跟其他MNIST图片一样，以像素强度的一个数组作为呈现方式。请注意，这个分类器的输出是多个标签（一个像素点一个标签），每个标签可以有多个值（像素强度范围为0到225）。所以这是个多输出分类器系统的例子</p>
+<blockquote>
+<p>还先从创建训练集和测试集开始，使用NumPy的randint（）函数为MNIST图片的像素强度增加噪声。目标是将图片还原为原始图片：</p>
+</blockquote>
+<pre class=" language-python"><code class="language-python">noise <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>len<span class="token punctuation">(</span>X_train<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">784</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+X_train_mod <span class="token operator">=</span> X_train <span class="token operator">+</span> noise
+noise <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>len<span class="token punctuation">(</span>X_test<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">784</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+X_test_mod <span class="token operator">=</span> X_test <span class="token operator">+</span> noise
+y_train_mod <span class="token operator">=</span> X_train
+y_test_mod <span class="token operator">=</span> X_test</code></pre>
+<pre class=" language-python"><code class="language-python">some_index <span class="token operator">=</span> <span class="token number">5500</span>
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">121</span><span class="token punctuation">)</span><span class="token punctuation">;</span> plot_digit<span class="token punctuation">(</span>X_test_mod<span class="token punctuation">[</span>some_index<span class="token punctuation">]</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">122</span><span class="token punctuation">)</span><span class="token punctuation">;</span> plot_digit<span class="token punctuation">(</span>y_test_mod<span class="token punctuation">[</span>some_index<span class="token punctuation">]</span><span class="token punctuation">)</span>
+save_fig<span class="token punctuation">(</span><span class="token string">"noisy_digit_example_plot"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre><code>Saving figure noisy_digit_example_plot</code></pre><p><img src="https://img-blog.csdnimg.cn/20200712155747653.png" alt="在这里插入图片描述"><br>左边是有噪声的输入图片， 右边是干净的目标图片。 现在通过训练分类器， 清洗这张图片：</p>
+<pre class=" language-python"><code class="language-python">knn_clf<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>X_train_mod<span class="token punctuation">,</span> y_train_mod<span class="token punctuation">)</span>
+clean_digit <span class="token operator">=</span> knn_clf<span class="token punctuation">.</span>predict<span class="token punctuation">(</span><span class="token punctuation">[</span>X_test_mod<span class="token punctuation">[</span>some_index<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+plot_digit<span class="token punctuation">(</span>clean_digit<span class="token punctuation">)</span>
+save_fig<span class="token punctuation">(</span><span class="token string">"cleaned_digit_example_plot"</span><span class="token punctuation">)</span></code></pre>
+<pre><code>Saving figure cleaned_digit_example_plot</code></pre><p><img src="https://img-blog.csdnimg.cn/20200712155756178.png" alt="在这里插入图片描述"></p>
+<p>看起来这张图片离目标足够接近了。<br>`阅读《机器学习实战-基于Scikit-Learn和TensorFlow》这本书第三章，上述笔记基本参考此书。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.rongyao-blog.top" rel="external nofollow noreferrer">honor</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.rongyao-blog.top/posts/f8eb.html">https://www.rongyao-blog.top/posts/f8eb.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://www.rongyao-blog.top" target="_blank">honor</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/python/">
+                                    <span class="chip bg-color">python</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">请我喝杯奶茶吧~</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'Uv47nTzvk6C8tvV0aXpJmQkQ-gzGzoHsz',
+        appKey: 'bTwjEJQCSWFvbc23Xwe1Uk0N',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '给我的文章加点评论吧~'
+    });
+</script>
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/6e6c.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="完美解决Tensorflow不支持AVX2指令集问题|指令集加速">
+                        
+                        <span class="card-title">完美解决Tensorflow不支持AVX2指令集问题|指令集加速</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+
+ 在pycharm中安装tensorflow后    运行如下测试代码：
+import tensorflow as tf
+x = tf.Variable(3, name="x")
+y = tf.Variable(4, name="y")
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-12
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            honor
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/tensorflow-AVX2-pycharm-%E6%8C%87%E4%BB%A4%E9%9B%86%E5%8A%A0%E9%80%9F/">
+                        <span class="chip bg-color">tensorflow AVX2 pycharm 指令集加速</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/fb35.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="python基础学习">
+                        
+                        <span class="card-title">python基础学习</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+
+python基础注释python中单行注释以#开头，多行注释可以用多个#号，或者采用'''和"""
+行与缩进python最具特色的就是使用缩进来表示代码块，不需要使用大括号 { }
+字符串python中单引号和双引号使用完全相同。使用三
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            honor
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://www.rongyao-blog.top" target="_blank">honor</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">60.9k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "2";
+                    var startDate = "22";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+			<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+			<script type="text/javascript"> 
+			document.write('您的IP地址：'+returnCitySN["cip"]+','+'欢迎来自'+returnCitySN["cname"]+'的朋友') 
+			</script>
+			<br>
+            
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
+                <a href="http://www.beian.miit.gov.cn/" target="_blank">鄂ICP备20002551号</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/honor-ry/" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:995688198@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=995688198" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 995688198" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+
+
+
+
+    <a href="https://blog.csdn.net/baidu_36415362" class="tooltipped" target="_blank" data-tooltip="关注我的CSDN: https://blog.csdn.net/baidu_36415362" data-position="top" data-delay="50">
+        <i class="fab fa-csdn">C</i>
+    </a>
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+	
+	<script src="/js/click_show_text.js"></script>
+	
+	<!-- tianqi -->
+	<script type="text/javascript">
+	WIDGET = {FID: 'hITis4M6BI'}
+	</script>
+	<script type="text/javascript" src="https://apip.weatherdt.com/float/static/js/r.js?v=1111"></script>
+	
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: "7932b868"
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
