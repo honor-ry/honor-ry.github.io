@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>leveldb-study</title>
+      <link href="/posts/a6e0.html"/>
+      <url>/posts/a6e0.html</url>
+      
+        <content type="html"><![CDATA[<p>2020年11月我学习了leveldb，google开发的一个高效KV数据库</p><a id="more"></a><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>C++-example</title>
       <link href="/posts/9071.html"/>
       <url>/posts/9071.html</url>

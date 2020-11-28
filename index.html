@@ -75,8 +75,8 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/atom.xml" title="honor" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="honor" type="application/atom+xml">
+</head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -161,6 +161,72 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.rongyao-blog.top/posts/a6e0.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logol1.png">
+      <meta itemprop="name" content="honor">
+      <meta itemprop="description" content="记录学习、科研、生活的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="honor">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/a6e0.html" class="post-title-link" itemprop="url">leveldb-study</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-28 11:07:28 / 修改时间：11:08:30" itemprop="dateCreated datePublished" datetime="2020-11-28T11:07:28+08:00">2020-11-28</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2020年11月我学习了leveldb，google开发的一个高效KV数据库</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/a6e0.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -2748,174 +2814,6 @@ output<span class="token punctuation">.</span>to_csv<span class="token punctuati
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.rongyao-blog.top/posts/63ec.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logol1.png">
-      <meta itemprop="name" content="honor">
-      <meta itemprop="description" content="记录学习、科研、生活的点滴">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="honor">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/63ec.html" class="post-title-link" itemprop="url">python+opencv实现人脸识别|采用现成训练好的模型</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-23 19:23:33" itemprop="dateCreated datePublished" datetime="2020-06-23T19:23:33+08:00">2020-06-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-30 21:32:20" itemprop="dateModified" datetime="2020-08-30T21:32:20+08:00">2020-08-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <a id="more"></a>
-
-<h3 id="一、图片人脸检测（opencv）"><a href="#一、图片人脸检测（opencv）" class="headerlink" title="一、图片人脸检测（opencv）"></a>一、图片人脸检测（opencv）</h3><h4 id="1、安装opencv环境"><a href="#1、安装opencv环境" class="headerlink" title="1、安装opencv环境"></a>1、安装opencv环境</h4><p>介绍windows中opencv在python3上的实现，我的系统环境win10+python3.6+opcv3.4.1</p>
-<p>首先去网站下载OpenCV对应的.whl版本压缩包，网址：<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#opencv" target="_blank" rel="noopener">https://www.lfd.uci.edu/~gohlke/pythonlibs/#opencv</a> 本人下载的版本是：opencv_python‑3.4.1‑cp36‑cp36m‑win_amd64.whl 64位系统对应python3.6的，下载到F盘根目录。<br>链接：<a href="https://pan.baidu.com/s/1aXK97tnxFVA15fH7TFi1_Q" target="_blank" rel="noopener">百度云链接</a><br>提取码：j5uy<br>接着用pip命令安装</p>
-<blockquote>
-<p><code>pip install F:\opencv_python-3.4.1-cp36-cp36m-win_amd64.whl</code></p>
-</blockquote>
-<p>当命令行窗口显示：</p>
-<blockquote>
-<p>Processing F:\opencv_python-3.4.1-cp36-cp36m-win_amd64.whl<br>Installing collected packages: opencv-python<br>Successfully installed opencv-python-3.4.1</p>
-</blockquote>
-<p>说明已经安装成功。<br>到此，opencv的环境配置已经弄好了，可以在命令行中运行python，然后import cv2  打印输出opencv的版本号，看能否正常输出。<br><img src="https://img-blog.csdnimg.cn/2020062316223081.png" alt="在这里插入图片描述"></p>
-<h4 id="2、具体实现代码"><a href="#2、具体实现代码" class="headerlink" title="2、具体实现代码"></a>2、具体实现代码</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> cv2
-
-img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'img/1.png'</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 读取图片</span>
-gray <span class="token operator">=</span> cv2<span class="token punctuation">.</span>cvtColor<span class="token punctuation">(</span>img<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>COLOR_BGR2GRAY<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 转换灰色</span>
-
-<span class="token comment" spellcheck="true"># OpenCV人脸识别分类器</span>
-classifier <span class="token operator">=</span> cv2<span class="token punctuation">.</span>CascadeClassifier<span class="token punctuation">(</span>r<span class="token string">'F:\python-project\opencv-master\haarcascade_frontalface_default.xml'</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#创建人脸检测级联分类器对象实例</span>
-color <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 定义绘制颜色为绿色</span>
-<span class="token comment" spellcheck="true"># 调用识别人脸</span>
-faceRects <span class="token operator">=</span> classifier<span class="token punctuation">.</span>detectMultiScale<span class="token punctuation">(</span>
-    gray<span class="token punctuation">,</span> scaleFactor<span class="token operator">=</span><span class="token number">1.2</span><span class="token punctuation">,</span> minNeighbors<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> minSize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">#参数说明，scaleFactor：图像缩放比例，可理解为相机的X倍镜，minNeighbors：对特征检测点周边多少有效点同时检测，这样可避免因选取的特征检测点太小而导致遗漏</span>
-<span class="token comment" spellcheck="true">#minSize：特征检测点的最小尺寸</span>
-<span class="token keyword">if</span> len<span class="token punctuation">(</span>faceRects<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># 大于0则检测到人脸</span>
-    <span class="token keyword">for</span> faceRect <span class="token keyword">in</span> faceRects<span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># 单独框出每一张人脸</span>
-        x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> w<span class="token punctuation">,</span> h <span class="token operator">=</span> faceRect
-        <span class="token comment" spellcheck="true"># 框出人脸</span>
-        cv2<span class="token punctuation">.</span>rectangle<span class="token punctuation">(</span>img<span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>x <span class="token operator">+</span> h<span class="token punctuation">,</span> y <span class="token operator">+</span> w<span class="token punctuation">)</span><span class="token punctuation">,</span> color<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true"># 左眼</span>
-        <span class="token comment" spellcheck="true">#cv2.circle(img, (x + w // 4, y + h // 4 + 30), min(w // 8, h // 8),</span>
-          <span class="token comment" spellcheck="true">#         color)</span>
-        <span class="token comment" spellcheck="true">#右眼</span>
-        <span class="token comment" spellcheck="true">#cv2.circle(img, (x + 3 * w // 4, y + h // 4 + 30), min(w // 8, h // 8),</span>
-         <span class="token comment" spellcheck="true">#          color)</span>
-        <span class="token comment" spellcheck="true">#嘴巴</span>
-        cv2<span class="token punctuation">.</span>rectangle<span class="token punctuation">(</span>img<span class="token punctuation">,</span> <span class="token punctuation">(</span>x <span class="token operator">+</span> <span class="token number">3</span> <span class="token operator">*</span> w <span class="token operator">//</span> <span class="token number">8</span><span class="token punctuation">,</span> y <span class="token operator">+</span> <span class="token number">3</span> <span class="token operator">*</span> h <span class="token operator">//</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-                      <span class="token punctuation">(</span>x <span class="token operator">+</span> <span class="token number">5</span> <span class="token operator">*</span> w <span class="token operator">//</span> <span class="token number">8</span><span class="token punctuation">,</span> y <span class="token operator">+</span> <span class="token number">7</span> <span class="token operator">*</span> h <span class="token operator">//</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span> color<span class="token punctuation">)</span>
-
-cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">"image-detection"</span><span class="token punctuation">,</span> img<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 显示图像</span>
-
-cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">#表示程序会无限制的等待用户的按键事件</span>
-cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#关闭所有窗口</span></code></pre>
-<h4 id="3、识别结果"><a href="#3、识别结果" class="headerlink" title="3、识别结果"></a>3、识别结果</h4><p><img src="https://img-blog.csdnimg.cn/20200623192140868.png" alt="在这里插入图片描述"></p>
-<h3 id="二、图片人脸检测（dlib）"><a href="#二、图片人脸检测（dlib）" class="headerlink" title="二、图片人脸检测（dlib）"></a>二、图片人脸检测（dlib）</h3><p>比opencv更加精准的图片人脸检测库Dlib，Dlib可以检测脸部68甚至更多的特征点。</p>
-<h4 id="1、安装dlib"><a href="#1、安装dlib" class="headerlink" title="1、安装dlib"></a>1、安装dlib</h4><p>下载地址：<a href="https://pypi.org/simple/dlib/" target="_blank" rel="noopener">https://pypi.org/simple/dlib/</a><br>我的环境为win10+python3.6.5<br>选择dlib的版本为：<code>dlib-19.8.1-cp36-cp36m-win_amd64.whl</code><br><img src="https://img-blog.csdnimg.cn/2020062318571914.png" alt="在这里插入图片描述"><br>接着用pip命令安装：</p>
-<blockquote>
-<p>pip install dlib-19.8.1-cp36-cp36m-win_amd64.whl</p>
-</blockquote>
-<h4 id="2、训练模型"><a href="#2、训练模型" class="headerlink" title="2、训练模型"></a>2、训练模型</h4><p>下载链接：<a href="https://pan.baidu.com/s/1xai1X_L8JvDfFJyU3f_0Ig" target="_blank" rel="noopener">https://pan.baidu.com/s/1xai1X_L8JvDfFJyU3f_0Ig </a><br>提取码：g24q</p>
-<h4 id="3、具体实现代码"><a href="#3、具体实现代码" class="headerlink" title="3、具体实现代码"></a>3、具体实现代码</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> cv2
-<span class="token keyword">import</span> dlib
-
-path <span class="token operator">=</span> <span class="token string">"img/1.png"</span>
-img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span>path<span class="token punctuation">)</span>
-gray <span class="token operator">=</span> cv2<span class="token punctuation">.</span>cvtColor<span class="token punctuation">(</span>img<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>COLOR_BGR2GRAY<span class="token punctuation">)</span><span class="token comment" spellcheck="true">#转成灰度图</span>
-
-<span class="token comment" spellcheck="true">#人脸分类器</span>
-detector <span class="token operator">=</span> dlib<span class="token punctuation">.</span>get_frontal_face_detector<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true"># 获取人脸检测器</span>
-predictor <span class="token operator">=</span> dlib<span class="token punctuation">.</span>shape_predictor<span class="token punctuation">(</span>
-        <span class="token string">"F:\\python-project\\shape_predictor_68_face_landmarks.dat"</span>
-<span class="token punctuation">)</span>
-
-dets <span class="token operator">=</span> detector<span class="token punctuation">(</span>gray<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
-<span class="token keyword">for</span> face <span class="token keyword">in</span> dets<span class="token punctuation">:</span>
-    shape <span class="token operator">=</span> predictor<span class="token punctuation">(</span>img<span class="token punctuation">,</span> face<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 寻找人脸的68个标定点</span>
-    <span class="token comment" spellcheck="true"># 遍历所有点，打印出其坐标，并圈出来</span>
-    <span class="token keyword">for</span> pt <span class="token keyword">in</span> shape<span class="token punctuation">.</span>parts<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        pt_pos <span class="token operator">=</span> <span class="token punctuation">(</span>pt<span class="token punctuation">.</span>x<span class="token punctuation">,</span> pt<span class="token punctuation">.</span>y<span class="token punctuation">)</span>
-        cv2<span class="token punctuation">.</span>circle<span class="token punctuation">(</span>img<span class="token punctuation">,</span> pt_pos<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
-    cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">"image"</span><span class="token punctuation">,</span> img<span class="token punctuation">)</span>
-
-cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
-cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-<h4 id="4、识别结果"><a href="#4、识别结果" class="headerlink" title="4、识别结果"></a>4、识别结果</h4><p><img src="https://img-blog.csdnimg.cn/20200623192047787.png" alt="在这里插入图片描述"><br>参考链接：<a href="https://github.com/vipstone/faceai/blob/master/doc/detectionOpenCV.md" target="_blank" rel="noopener">https://github.com/vipstone/faceai/blob/master/doc/detectionOpenCV.md</a></p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2987,7 +2885,7 @@ cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token p
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

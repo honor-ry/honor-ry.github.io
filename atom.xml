@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.rongyao-blog.top/"/>
-  <updated>2020-11-28T02:17:33.104Z</updated>
+  <updated>2020-11-28T03:08:30.775Z</updated>
   <id>https://www.rongyao-blog.top/</id>
   
   <author>
@@ -15,6 +15,23 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leveldb-study</title>
+    <link href="https://www.rongyao-blog.top/posts/a6e0.html"/>
+    <id>https://www.rongyao-blog.top/posts/a6e0.html</id>
+    <published>2020-11-28T03:07:28.000Z</published>
+    <updated>2020-11-28T03:08:30.775Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;2020年11月我学习了leveldb，google开发的一个高效KV数据库&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>C++-example</title>
@@ -542,35 +559,6 @@
     
     
       <category term="神经网络" scheme="https://www.rongyao-blog.top/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>机器学习-李宏毅| keras demo | python</title>
-    <link href="https://www.rongyao-blog.top/posts/33cb.html"/>
-    <id>https://www.rongyao-blog.top/posts/33cb.html</id>
-    <published>2020-03-30T13:47:05.000Z</published>
-    <updated>2020-08-30T13:32:20.181Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h3 id=&quot;利用keras实现手写数字辨识&quot;&gt;&lt;a href=&quot;#利用keras实现手写数字辨识&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://www.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="机器学习 python" scheme="https://www.rongyao-blog.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-python/"/>
     
   </entry>
   
