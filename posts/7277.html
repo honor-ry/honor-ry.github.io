@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.rongyao-blog.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="强化学习入门路线：  基础入门：基础概念，基本原理 理论补充：专业教材，高校课程 经典算法复现:DQN、DDPG、PPO、A3C 前沿论文阅读：顶会论文  什么是强化学习简单来说就是让机器像人一样学习：  对已知环境进行规划 对未知环境进行探索&#x2F;试错  强化学习（英语：Reinforcement learning，简称RL）是机器学习中的一个领域，强调如何基于环境而行动，以取得最大化的预期利">
+<meta property="og:type" content="article">
+<meta property="og:title" content="强化学习课程|paddle|入门">
+<meta property="og:url" content="https://www.rongyao-blog.top/posts/7277.html">
+<meta property="og:site_name" content="honor">
+<meta property="og:description" content="强化学习入门路线：  基础入门：基础概念，基本原理 理论补充：专业教材，高校课程 经典算法复现:DQN、DDPG、PPO、A3C 前沿论文阅读：顶会论文  什么是强化学习简单来说就是让机器像人一样学习：  对已知环境进行规划 对未知环境进行探索&#x2F;试错  强化学习（英语：Reinforcement learning，简称RL）是机器学习中的一个领域，强调如何基于环境而行动，以取得最大化的预期利">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200620175111245.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200620175420753.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200620175802913.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200620180038547.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020062018221986.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200620182314856.png">
+<meta property="article:published_time" content="2020-06-20T11:28:58.000Z">
+<meta property="article:modified_time" content="2020-08-30T13:32:22.000Z">
+<meta property="article:author" content="honor">
+<meta property="article:tag" content="python 人工智能 强化学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200620175111245.png">
+
+<link rel="canonical" href="https://www.rongyao-blog.top/posts/7277.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>强化学习课程|paddle|入门 | honor</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="honor" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">honor</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">爱笑的小土豆~</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.rongyao-blog.top/posts/7277.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logol1.png">
+      <meta itemprop="name" content="honor">
+      <meta itemprop="description" content="记录学习、科研、生活的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="honor">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          强化学习课程|paddle|入门
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-20 19:28:58" itemprop="dateCreated datePublished" datetime="2020-06-20T19:28:58+08:00">2020-06-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-30 21:32:22" itemprop="dateModified" datetime="2020-08-30T21:32:22+08:00">2020-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <a id="more"></a>
+
+
+<p>强化学习入门路线：</p>
+<ul>
+<li>基础入门：基础概念，基本原理</li>
+<li>理论补充：专业教材，高校课程</li>
+<li>经典算法复现:DQN、DDPG、PPO、A3C</li>
+<li>前沿论文阅读：顶会论文</li>
+</ul>
+<h3 id="什么是强化学习"><a href="#什么是强化学习" class="headerlink" title="什么是强化学习"></a>什么是强化学习</h3><p>简单来说就是让机器像人一样学习：</p>
+<ul>
+<li>对已知环境进行规划</li>
+<li>对未知环境进行探索/试错</li>
+</ul>
+<p>强化学习（英语：<code>Reinforcement learning</code>，简称RL）是机器学习中的一个领域，强调如何基于环境而行动，以取得最大化的预期利益。<br>核心思想：智能体<code>agent</code>在环境<code>environment</code>中学习，根据环境的状态state（或观测到的<code>observation</code>），执行动作<code>action</code>，并根据环境的反馈<code>reward</code>（奖励）来指导更好的动作。<br>注意：从环境中获取的状态，有时候叫state，有时候叫<code>observation</code>，这两个其实一个代表全局状态，一个代表局部观测值，在多智能体环境里会有差别，但我们刚开始学习遇到的环境还没有那么复杂，可以先把这两个概念划上等号。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200620175111245.png" alt="在这里插入图片描述"><br>这里地球来表示environment环境，大脑表示agent，agent从environment里面去观察导state状态，然后输出action动作来去和environment做交互，会从环境中得到反馈reward来指导自己的action动作是不是正确的。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200620175420753.png" alt="在这里插入图片描述"></p>
+<h3 id="列举强化学习的一些应用"><a href="#列举强化学习的一些应用" class="headerlink" title="列举强化学习的一些应用"></a>列举强化学习的一些应用</h3><p><img src="https://img-blog.csdnimg.cn/20200620175802913.png" alt="在这里插入图片描述"></p>
+<h3 id="强化学习与其他机器学习的关系"><a href="#强化学习与其他机器学习的关系" class="headerlink" title="强化学习与其他机器学习的关系"></a>强化学习与其他机器学习的关系</h3><p><img src="https://img-blog.csdnimg.cn/20200620180038547.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>监督学习（分类、回归；）：（认知：是什么）可理解为输入一个x，输出你想要的y。监督学习的训练数据一般样本和样本之间是独立同分布的，</li>
+<li>非监督学习（聚类）：输入一批x，需要分辨这个x和那个x不一样，</li>
+<li>强化学习（决策：怎么做）：输入的是环境的state，输出是action跟环境去交互。<br>上一个样本可能和下一个样本有联系，上一个样本输出的动作可能会影响下一个样本的状态。序列决策数据</li>
+</ul>
+<h3 id="强化学习的两种学习方案"><a href="#强化学习的两种学习方案" class="headerlink" title="强化学习的两种学习方案"></a>强化学习的两种学习方案</h3><p>1、基于价值 Value-based （每一步 State 给奖励）—— 最终 Agent 获得每一步最优解（确定性策略）</p>
+<ul>
+<li>Sarsa</li>
+<li>Q-learning</li>
+<li>DQN<br><img src="https://img-blog.csdnimg.cn/2020062018221986.png" alt="在这里插入图片描述"><br>2、基于策略 Policy-based （最终给出奖励）—— 最终 Agent 获得每一步的概率分布（随机性策略）</li>
+<li>Policy gradient<br><img src="https://img-blog.csdnimg.cn/20200620182314856.png" alt="在这里插入图片描述"><h4 id="PARL实现DQN训练"><a href="#PARL实现DQN训练" class="headerlink" title="PARL实现DQN训练"></a>PARL实现DQN训练</h4><h5 id="1、导入依赖"><a href="#1、导入依赖" class="headerlink" title="1、导入依赖"></a>1、导入依赖</h5></li>
+</ul>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> parl
+<span class="token keyword">from</span> parl <span class="token keyword">import</span> layers
+<span class="token keyword">import</span> paddle<span class="token punctuation">.</span>fluid <span class="token keyword">as</span> fluid
+<span class="token keyword">import</span> copy
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> os
+<span class="token keyword">import</span> gym
+<span class="token keyword">from</span> parl<span class="token punctuation">.</span>utils <span class="token keyword">import</span> logger</code></pre>
+<h5 id="2、设定一些hyperparameter超参数"><a href="#2、设定一些hyperparameter超参数" class="headerlink" title="2、设定一些hyperparameter超参数"></a>2、设定一些hyperparameter超参数</h5><pre class=" language-python"><code class="language-python">LEARN_FREQ <span class="token operator">=</span> <span class="token number">5</span> <span class="token comment" spellcheck="true"># 训练频率，不需要每一个step都learn，攒一些新增经验后再learn，提高效率</span>
+MEMORY_SIZE <span class="token operator">=</span> <span class="token number">20000</span>    <span class="token comment" spellcheck="true"># replay memory的大小，越大越占用内存</span>
+MEMORY_WARMUP_SIZE <span class="token operator">=</span> <span class="token number">200</span>  <span class="token comment" spellcheck="true"># replay_memory 里需要预存一些经验数据，再从里面sample一个batch的经验让agent去learn</span>
+BATCH_SIZE <span class="token operator">=</span> <span class="token number">32</span>   <span class="token comment" spellcheck="true"># 每次给agent learn的数据数量，从replay memory随机里sample一批数据出来</span>
+GAMMA <span class="token operator">=</span> <span class="token number">0.99</span> <span class="token comment" spellcheck="true"># reward 的衰减因子，一般取 0.9 到 0.999 不等</span>
+LEARNING_RATE <span class="token operator">=</span> <span class="token number">0.005</span> <span class="token comment" spellcheck="true"># 学习率</span></code></pre>
+<h5 id="3、搭建Model、Algorithm、Agent架构"><a href="#3、搭建Model、Algorithm、Agent架构" class="headerlink" title="3、搭建Model、Algorithm、Agent架构"></a>3、搭建Model、Algorithm、Agent架构</h5><ul>
+<li>Agent把产生的数据传给algorithm，algorithm根据model的模型结构计算出Loss，使用SGD或者其他优化器不断的优化，PARL架构可以很方便的应用在各类深度强化学习问题中。</li>
+<li>Agent直接跟环境来交互</li>
+<li>Model 是一个神经网络模型，输入State输出对于所有 action 估计的Q Values（我们会使用2个神经网络模型，一个是 Current Q Network 一个是 Target Q Network）</li>
+<li>Algorithm 提供Loss Function和Optimization Algorithm，接收Agent的信息，用来优化神经网络</li>
+</ul>
+<h5 id="4、Model"><a href="#4、Model" class="headerlink" title="4、Model"></a>4、Model</h5><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#Model用来定义前向(Forward)网络，用户可以自由的定制自己的网络结构。</span>
+<span class="token keyword">class</span> <span class="token class-name">Model</span><span class="token punctuation">(</span>parl<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> act_dim<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        hid1_size <span class="token operator">=</span> <span class="token number">128</span>
+        hid2_size <span class="token operator">=</span> <span class="token number">128</span>
+        <span class="token comment" spellcheck="true"># 3层全连接网络</span>
+        self<span class="token punctuation">.</span>fc1 <span class="token operator">=</span> layers<span class="token punctuation">.</span>fc<span class="token punctuation">(</span>size<span class="token operator">=</span>hid1_size<span class="token punctuation">,</span> act<span class="token operator">=</span><span class="token string">'relu'</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>fc2 <span class="token operator">=</span> layers<span class="token punctuation">.</span>fc<span class="token punctuation">(</span>size<span class="token operator">=</span>hid2_size<span class="token punctuation">,</span> act<span class="token operator">=</span><span class="token string">'relu'</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>fc3 <span class="token operator">=</span> layers<span class="token punctuation">.</span>fc<span class="token punctuation">(</span>size<span class="token operator">=</span>act_dim<span class="token punctuation">,</span> act<span class="token operator">=</span>None<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">value</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 定义网络</span>
+        <span class="token comment" spellcheck="true"># 输入state，输出所有action对应的Q，[Q(s,a1), Q(s,a2), Q(s,a3)...]</span>
+
+        h1 <span class="token operator">=</span> self<span class="token punctuation">.</span>fc1<span class="token punctuation">(</span>obs<span class="token punctuation">)</span>
+        h2 <span class="token operator">=</span> self<span class="token punctuation">.</span>fc2<span class="token punctuation">(</span>h1<span class="token punctuation">)</span>
+        Q <span class="token operator">=</span> self<span class="token punctuation">.</span>fc3<span class="token punctuation">(</span>h2<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> Q</code></pre>
+<h5 id="5、Algorithm"><a href="#5、Algorithm" class="headerlink" title="5、Algorithm"></a>5、Algorithm</h5><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># from parl.algorithms import DQN # 也可以直接从parl库中导入DQN算法</span>
+
+<span class="token keyword">class</span> <span class="token class-name">DQN</span><span class="token punctuation">(</span>parl<span class="token punctuation">.</span>Algorithm<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> model<span class="token punctuation">,</span> act_dim<span class="token operator">=</span>None<span class="token punctuation">,</span> gamma<span class="token operator">=</span>None<span class="token punctuation">,</span> lr<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">""" DQN algorithm
+
+        Args:
+            model (parl.Model): 定义Q函数的前向网络结构
+            act_dim (int): action空间的维度，即有几个action
+            gamma (float): reward的衰减因子
+            lr (float): learning rate 学习率.
+        """</span>
+        self<span class="token punctuation">.</span>model <span class="token operator">=</span> model <span class="token comment" spellcheck="true"># 我们用来获取 current Q 的模型</span>
+        self<span class="token punctuation">.</span>target_model <span class="token operator">=</span> copy<span class="token punctuation">.</span>deepcopy<span class="token punctuation">(</span>model<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 创建一个target Q模型，创建的策略是直接从model复制给target</span>
+
+        <span class="token keyword">assert</span> isinstance<span class="token punctuation">(</span>act_dim<span class="token punctuation">,</span> int<span class="token punctuation">)</span>
+        <span class="token keyword">assert</span> isinstance<span class="token punctuation">(</span>gamma<span class="token punctuation">,</span> float<span class="token punctuation">)</span>
+        <span class="token keyword">assert</span> isinstance<span class="token punctuation">(</span>lr<span class="token punctuation">,</span> float<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>act_dim <span class="token operator">=</span> act_dim <span class="token comment" spellcheck="true"># 把这些参数变成class properties</span>
+        self<span class="token punctuation">.</span>gamma <span class="token operator">=</span> gamma
+        self<span class="token punctuation">.</span>lr <span class="token operator">=</span> lr
+
+    <span class="token keyword">def</span> <span class="token function">predict</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obs<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true"># 使用 current Q network 获取所有action的 Q values</span>
+        <span class="token triple-quoted-string string">""" 使用self.model的value网络来获取 [Q(s,a1),Q(s,a2),...]
+        """</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>model<span class="token punctuation">.</span>value<span class="token punctuation">(</span>obs<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">learn</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obs<span class="token punctuation">,</span> action<span class="token punctuation">,</span> reward<span class="token punctuation">,</span> next_obs<span class="token punctuation">,</span> terminal<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">""" 使用DQN算法更新self.model的value网络
+        """</span>
+        <span class="token comment" spellcheck="true"># 从target_model中获取 max Q' 的值，用于计算target_Q</span>
+        next_pred_value <span class="token operator">=</span> self<span class="token punctuation">.</span>target_model<span class="token punctuation">.</span>value<span class="token punctuation">(</span>next_obs<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 获取 target Q network 的所有action的 Q values</span>
+        best_v <span class="token operator">=</span> layers<span class="token punctuation">.</span>reduce_max<span class="token punctuation">(</span>next_pred_value<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 获取最大的Q值</span>
+        best_v<span class="token punctuation">.</span>stop_gradient <span class="token operator">=</span> <span class="token boolean">True</span>  <span class="token comment" spellcheck="true"># 阻止梯度传递</span>
+        terminal <span class="token operator">=</span> layers<span class="token punctuation">.</span>cast<span class="token punctuation">(</span>terminal<span class="token punctuation">,</span> dtype<span class="token operator">=</span><span class="token string">'float32'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 把terminal （是否终止）换为一个float32类型的数组，如果终止里面存储1，如果不终止里面存储0</span>
+        target <span class="token operator">=</span> reward <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">1.0</span> <span class="token operator">-</span> terminal<span class="token punctuation">)</span> <span class="token operator">*</span> self<span class="token punctuation">.</span>gamma <span class="token operator">*</span> best_v <span class="token comment" spellcheck="true"># 这里如果终止， 1-terminal 对应的元素为0，就不需要取best_v，不然还是要取best_v</span>
+
+        pred_value <span class="token operator">=</span> self<span class="token punctuation">.</span>model<span class="token punctuation">.</span>value<span class="token punctuation">(</span>obs<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 获取 current Q network 的所有action的 Q values</span>
+
+        <span class="token comment" spellcheck="true"># 接着我们需要获取action对应的Q，这里使用了一个one-hot encoding来做乘法运算，相当于选中了Q values中action对应的那个值</span>
+
+        <span class="token comment" spellcheck="true"># 将action转one-hot向量，比如：3 => [0,0,0,1,0]</span>
+        action_onehot <span class="token operator">=</span> layers<span class="token punctuation">.</span>one_hot<span class="token punctuation">(</span>action<span class="token punctuation">,</span> self<span class="token punctuation">.</span>act_dim<span class="token punctuation">)</span>
+        action_onehot <span class="token operator">=</span> layers<span class="token punctuation">.</span>cast<span class="token punctuation">(</span>action_onehot<span class="token punctuation">,</span> dtype<span class="token operator">=</span><span class="token string">'float32'</span><span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># 下面一行是逐元素相乘，拿到action对应的 Q(s,a)</span>
+        <span class="token comment" spellcheck="true"># 比如：pred_value = [[2.3, 5.7, 1.2, 3.9, 1.4]], action_onehot = [[0,0,0,1,0]]</span>
+        <span class="token comment" spellcheck="true">#  ==> pred_action_value = [[3.9]]</span>
+        pred_action_value <span class="token operator">=</span> layers<span class="token punctuation">.</span>reduce_sum<span class="token punctuation">(</span>
+            layers<span class="token punctuation">.</span>elementwise_mul<span class="token punctuation">(</span>action_onehot<span class="token punctuation">,</span> pred_value<span class="token punctuation">)</span><span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+        <span class="token comment" spellcheck="true"># 计算 Q(s,a) 与 target_Q的MSE均方差，得到loss</span>
+        cost <span class="token operator">=</span> layers<span class="token punctuation">.</span>square_error_cost<span class="token punctuation">(</span>pred_action_value<span class="token punctuation">,</span> target<span class="token punctuation">)</span>
+        cost <span class="token operator">=</span> layers<span class="token punctuation">.</span>reduce_mean<span class="token punctuation">(</span>cost<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># Loss 对于每一个样本都是一个数字，为了优化我们求平均数</span>
+        optimizer <span class="token operator">=</span> fluid<span class="token punctuation">.</span>optimizer<span class="token punctuation">.</span>Adam<span class="token punctuation">(</span>learning_rate<span class="token operator">=</span>self<span class="token punctuation">.</span>lr<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 使用Adam优化器，Adam是一种优化算法</span>
+        optimizer<span class="token punctuation">.</span>minimize<span class="token punctuation">(</span>cost<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> cost
+
+    <span class="token keyword">def</span> <span class="token function">sync_target</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">""" 把 self.model 的模型参数值同步到 self.target_model
+        """</span>
+        self<span class="token punctuation">.</span>model<span class="token punctuation">.</span>sync_weights_to<span class="token punctuation">(</span>self<span class="token punctuation">.</span>target_model<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 这个函数主要是为了更新 Target Q，因为每一段时间我们就需要使用 Current Q Network 更新一次Target Q Network</span></code></pre>
+<h5 id="6、Agent"><a href="#6、Agent" class="headerlink" title="6、Agent"></a>6、Agent</h5><pre class=" language-python"><code class="language-python">Algorithm定义了具体的算法来更新前向网络<span class="token punctuation">(</span>Model<span class="token punctuation">)</span>，也就是通过定义损失函数来更新Model，和算法相关的计算都放在algorithm中。
+<span class="token keyword">class</span> <span class="token class-name">Agent</span><span class="token punctuation">(</span>parl<span class="token punctuation">.</span>Agent<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>
+                 algorithm<span class="token punctuation">,</span>
+                 obs_dim<span class="token punctuation">,</span>
+                 act_dim<span class="token punctuation">,</span>
+                 e_greed<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">,</span>
+                 e_greed_decrement<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">assert</span> isinstance<span class="token punctuation">(</span>obs_dim<span class="token punctuation">,</span> int<span class="token punctuation">)</span>
+        <span class="token keyword">assert</span> isinstance<span class="token punctuation">(</span>act_dim<span class="token punctuation">,</span> int<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>obs_dim <span class="token operator">=</span> obs_dim
+        self<span class="token punctuation">.</span>act_dim <span class="token operator">=</span> act_dim
+        super<span class="token punctuation">(</span>Agent<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span>algorithm<span class="token punctuation">)</span>
+
+        self<span class="token punctuation">.</span>global_step <span class="token operator">=</span> <span class="token number">0</span>
+        self<span class="token punctuation">.</span>update_target_steps <span class="token operator">=</span> <span class="token number">200</span>  <span class="token comment" spellcheck="true"># 每隔200个training steps再把model的参数复制到target_model中</span>
+
+        self<span class="token punctuation">.</span>e_greed <span class="token operator">=</span> e_greed  <span class="token comment" spellcheck="true"># 有一定概率随机选取动作，探索</span>
+        self<span class="token punctuation">.</span>e_greed_decrement <span class="token operator">=</span> e_greed_decrement  <span class="token comment" spellcheck="true"># 随着训练逐步收敛，探索的程度慢慢降低</span>
+
+    <span class="token keyword">def</span> <span class="token function">build_program</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>pred_program <span class="token operator">=</span> fluid<span class="token punctuation">.</span>Program<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>learn_program <span class="token operator">=</span> fluid<span class="token punctuation">.</span>Program<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">with</span> fluid<span class="token punctuation">.</span>program_guard<span class="token punctuation">(</span>self<span class="token punctuation">.</span>pred_program<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># 搭建计算图用于 预测动作，定义输入输出变量</span>
+            obs <span class="token operator">=</span> layers<span class="token punctuation">.</span>data<span class="token punctuation">(</span>
+                name<span class="token operator">=</span><span class="token string">'obs'</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">[</span>self<span class="token punctuation">.</span>obs_dim<span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span><span class="token string">'float32'</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>value <span class="token operator">=</span> self<span class="token punctuation">.</span>alg<span class="token punctuation">.</span>predict<span class="token punctuation">(</span>obs<span class="token punctuation">)</span>
+
+        <span class="token keyword">with</span> fluid<span class="token punctuation">.</span>program_guard<span class="token punctuation">(</span>self<span class="token punctuation">.</span>learn_program<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># 搭建计算图用于 更新Q网络，定义输入输出变量</span>
+            obs <span class="token operator">=</span> layers<span class="token punctuation">.</span>data<span class="token punctuation">(</span>
+                name<span class="token operator">=</span><span class="token string">'obs'</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">[</span>self<span class="token punctuation">.</span>obs_dim<span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span><span class="token string">'float32'</span><span class="token punctuation">)</span>
+            action <span class="token operator">=</span> layers<span class="token punctuation">.</span>data<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">'act'</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span><span class="token string">'int32'</span><span class="token punctuation">)</span>
+            reward <span class="token operator">=</span> layers<span class="token punctuation">.</span>data<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">'reward'</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span><span class="token string">'float32'</span><span class="token punctuation">)</span>
+            next_obs <span class="token operator">=</span> layers<span class="token punctuation">.</span>data<span class="token punctuation">(</span>
+                name<span class="token operator">=</span><span class="token string">'next_obs'</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">[</span>self<span class="token punctuation">.</span>obs_dim<span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span><span class="token string">'float32'</span><span class="token punctuation">)</span>
+            terminal <span class="token operator">=</span> layers<span class="token punctuation">.</span>data<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">'terminal'</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span><span class="token string">'bool'</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>cost <span class="token operator">=</span> self<span class="token punctuation">.</span>alg<span class="token punctuation">.</span>learn<span class="token punctuation">(</span>obs<span class="token punctuation">,</span> action<span class="token punctuation">,</span> reward<span class="token punctuation">,</span> next_obs<span class="token punctuation">,</span> terminal<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">sample</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        sample <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>rand<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 产生0~1之间的小数</span>
+        <span class="token keyword">if</span> sample <span class="token operator">&lt;</span> self<span class="token punctuation">.</span>e_greed<span class="token punctuation">:</span>
+            act <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span>self<span class="token punctuation">.</span>act_dim<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 探索：每个动作都有概率被选择</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            act <span class="token operator">=</span> self<span class="token punctuation">.</span>predict<span class="token punctuation">(</span>obs<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 选择最优动作</span>
+        self<span class="token punctuation">.</span>e_greed <span class="token operator">=</span> max<span class="token punctuation">(</span>
+            <span class="token number">0.01</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>e_greed <span class="token operator">-</span> self<span class="token punctuation">.</span>e_greed_decrement<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 随着训练逐步收敛，探索的程度慢慢降低</span>
+        <span class="token keyword">return</span> act
+
+    <span class="token keyword">def</span> <span class="token function">predict</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obs<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># 选择最优动作</span>
+        obs <span class="token operator">=</span> np<span class="token punctuation">.</span>expand_dims<span class="token punctuation">(</span>obs<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+        pred_Q <span class="token operator">=</span> self<span class="token punctuation">.</span>fluid_executor<span class="token punctuation">.</span>run<span class="token punctuation">(</span>
+            self<span class="token punctuation">.</span>pred_program<span class="token punctuation">,</span>
+            feed<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">'obs'</span><span class="token punctuation">:</span> obs<span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token string">'float32'</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+            fetch_list<span class="token operator">=</span><span class="token punctuation">[</span>self<span class="token punctuation">.</span>value<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        pred_Q <span class="token operator">=</span> np<span class="token punctuation">.</span>squeeze<span class="token punctuation">(</span>pred_Q<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+        act <span class="token operator">=</span> np<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>pred_Q<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 选择Q最大的下标，即对应的动作</span>
+        <span class="token keyword">return</span> act
+
+    <span class="token keyword">def</span> <span class="token function">learn</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obs<span class="token punctuation">,</span> act<span class="token punctuation">,</span> reward<span class="token punctuation">,</span> next_obs<span class="token punctuation">,</span> terminal<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 每隔200个training steps同步一次model和target_model的参数</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>global_step <span class="token operator">%</span> self<span class="token punctuation">.</span>update_target_steps <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>alg<span class="token punctuation">.</span>sync_target<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>global_step <span class="token operator">+=</span> <span class="token number">1</span>
+
+        act <span class="token operator">=</span> np<span class="token punctuation">.</span>expand_dims<span class="token punctuation">(</span>act<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        feed <span class="token operator">=</span> <span class="token punctuation">{</span>
+            <span class="token string">'obs'</span><span class="token punctuation">:</span> obs<span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token string">'float32'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token string">'act'</span><span class="token punctuation">:</span> act<span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token string">'int32'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token string">'reward'</span><span class="token punctuation">:</span> reward<span class="token punctuation">,</span>
+            <span class="token string">'next_obs'</span><span class="token punctuation">:</span> next_obs<span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token string">'float32'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token string">'terminal'</span><span class="token punctuation">:</span> terminal
+        <span class="token punctuation">}</span>
+        cost <span class="token operator">=</span> self<span class="token punctuation">.</span>fluid_executor<span class="token punctuation">.</span>run<span class="token punctuation">(</span>
+            self<span class="token punctuation">.</span>learn_program<span class="token punctuation">,</span> feed<span class="token operator">=</span>feed<span class="token punctuation">,</span> fetch_list<span class="token operator">=</span><span class="token punctuation">[</span>self<span class="token punctuation">.</span>cost<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>  <span class="token comment" spellcheck="true"># 训练一次网络</span>
+        <span class="token keyword">return</span> cost</code></pre>
+<h5 id="7、ReplayMemory"><a href="#7、ReplayMemory" class="headerlink" title="7、ReplayMemory"></a>7、ReplayMemory</h5><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># replay_memory.py</span>
+<span class="token comment" spellcheck="true"># 经验池，用于存储多条经验，实现经验回放。</span>
+<span class="token keyword">import</span> random
+<span class="token keyword">import</span> collections
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+
+
+<span class="token keyword">class</span> <span class="token class-name">ReplayMemory</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> max_size<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>buffer <span class="token operator">=</span> collections<span class="token punctuation">.</span>deque<span class="token punctuation">(</span>maxlen<span class="token operator">=</span>max_size<span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 增加一条经验到经验池中</span>
+    <span class="token keyword">def</span> <span class="token function">append</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> exp<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>buffer<span class="token punctuation">.</span>append<span class="token punctuation">(</span>exp<span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 从经验池中选取N条经验出来</span>
+    <span class="token keyword">def</span> <span class="token function">sample</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> batch_size<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        mini_batch <span class="token operator">=</span> random<span class="token punctuation">.</span>sample<span class="token punctuation">(</span>self<span class="token punctuation">.</span>buffer<span class="token punctuation">,</span> batch_size<span class="token punctuation">)</span>
+        obs_batch<span class="token punctuation">,</span> action_batch<span class="token punctuation">,</span> reward_batch<span class="token punctuation">,</span> next_obs_batch<span class="token punctuation">,</span> done_batch <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+        <span class="token keyword">for</span> experience <span class="token keyword">in</span> mini_batch<span class="token punctuation">:</span>
+            s<span class="token punctuation">,</span> a<span class="token punctuation">,</span> r<span class="token punctuation">,</span> s_p<span class="token punctuation">,</span> done <span class="token operator">=</span> experience
+            obs_batch<span class="token punctuation">.</span>append<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+            action_batch<span class="token punctuation">.</span>append<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+            reward_batch<span class="token punctuation">.</span>append<span class="token punctuation">(</span>r<span class="token punctuation">)</span>
+            next_obs_batch<span class="token punctuation">.</span>append<span class="token punctuation">(</span>s_p<span class="token punctuation">)</span>
+            done_batch<span class="token punctuation">.</span>append<span class="token punctuation">(</span>done<span class="token punctuation">)</span>
+
+        <span class="token keyword">return</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>obs_batch<span class="token punctuation">)</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token string">'float32'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> \
+            np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>action_batch<span class="token punctuation">)</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token string">'float32'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>reward_batch<span class="token punctuation">)</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token string">'float32'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>\
+            np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>next_obs_batch<span class="token punctuation">)</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token string">'float32'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>done_batch<span class="token punctuation">)</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token string">'float32'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>buffer<span class="token punctuation">)</span>
+</code></pre>
+<h5 id="8、Training-amp-amp-Test（训练-amp-amp-测试）"><a href="#8、Training-amp-amp-Test（训练-amp-amp-测试）" class="headerlink" title="8、Training &amp;&amp; Test（训练&amp;&amp;测试）"></a>8、Training &amp;&amp; Test（训练&amp;&amp;测试）</h5><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 训练一个episode</span>
+<span class="token keyword">def</span> <span class="token function">run_episode</span><span class="token punctuation">(</span>env<span class="token punctuation">,</span> agent<span class="token punctuation">,</span> rpm<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    total_reward <span class="token operator">=</span> <span class="token number">0</span>
+    obs <span class="token operator">=</span> env<span class="token punctuation">.</span>reset<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    step <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+        step <span class="token operator">+=</span> <span class="token number">1</span>
+        action <span class="token operator">=</span> agent<span class="token punctuation">.</span>sample<span class="token punctuation">(</span>obs<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 采样动作，所有动作都有概率被尝试到</span>
+        next_obs<span class="token punctuation">,</span> reward<span class="token punctuation">,</span> done<span class="token punctuation">,</span> _ <span class="token operator">=</span> env<span class="token punctuation">.</span>step<span class="token punctuation">(</span>action<span class="token punctuation">)</span>
+        rpm<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>obs<span class="token punctuation">,</span> action<span class="token punctuation">,</span> reward<span class="token punctuation">,</span> next_obs<span class="token punctuation">,</span> done<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+        <span class="token comment" spellcheck="true"># train model</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>len<span class="token punctuation">(</span>rpm<span class="token punctuation">)</span> <span class="token operator">></span> MEMORY_WARMUP_SIZE<span class="token punctuation">)</span> <span class="token operator">and</span> <span class="token punctuation">(</span>step <span class="token operator">%</span> LEARN_FREQ <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token punctuation">(</span>batch_obs<span class="token punctuation">,</span> batch_action<span class="token punctuation">,</span> batch_reward<span class="token punctuation">,</span> batch_next_obs<span class="token punctuation">,</span>
+             batch_done<span class="token punctuation">)</span> <span class="token operator">=</span> rpm<span class="token punctuation">.</span>sample<span class="token punctuation">(</span>BATCH_SIZE<span class="token punctuation">)</span>
+            train_loss <span class="token operator">=</span> agent<span class="token punctuation">.</span>learn<span class="token punctuation">(</span>batch_obs<span class="token punctuation">,</span> batch_action<span class="token punctuation">,</span> batch_reward<span class="token punctuation">,</span>
+                                     batch_next_obs<span class="token punctuation">,</span>
+                                     batch_done<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># s,a,r,s',done</span>
+
+        total_reward <span class="token operator">+=</span> reward
+        obs <span class="token operator">=</span> next_obs
+        <span class="token keyword">if</span> done<span class="token punctuation">:</span>
+            <span class="token keyword">break</span>
+    <span class="token keyword">return</span> total_reward
+
+
+<span class="token comment" spellcheck="true"># 评估 agent, 跑 5 个episode，总reward求平均</span>
+<span class="token keyword">def</span> <span class="token function">evaluate</span><span class="token punctuation">(</span>env<span class="token punctuation">,</span> agent<span class="token punctuation">,</span> render<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    eval_reward <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        obs <span class="token operator">=</span> env<span class="token punctuation">.</span>reset<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        episode_reward <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+            action <span class="token operator">=</span> agent<span class="token punctuation">.</span>predict<span class="token punctuation">(</span>obs<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 预测动作，只选最优动作</span>
+            obs<span class="token punctuation">,</span> reward<span class="token punctuation">,</span> done<span class="token punctuation">,</span> _ <span class="token operator">=</span> env<span class="token punctuation">.</span>step<span class="token punctuation">(</span>action<span class="token punctuation">)</span>
+            episode_reward <span class="token operator">+=</span> reward
+            <span class="token keyword">if</span> render<span class="token punctuation">:</span>
+                env<span class="token punctuation">.</span>render<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> done<span class="token punctuation">:</span>
+                <span class="token keyword">break</span>
+        eval_reward<span class="token punctuation">.</span>append<span class="token punctuation">(</span>episode_reward<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>eval_reward<span class="token punctuation">)</span></code></pre>
+<h5 id="9、创建环境和Agent，创建经验池，启动训练，保存模型，运行代码"><a href="#9、创建环境和Agent，创建经验池，启动训练，保存模型，运行代码" class="headerlink" title="9、创建环境和Agent，创建经验池，启动训练，保存模型，运行代码"></a>9、创建环境和Agent，创建经验池，启动训练，保存模型，运行代码</h5><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 创建环境</span>
+env <span class="token operator">=</span> gym<span class="token punctuation">.</span>make<span class="token punctuation">(</span><span class="token string">'MountainCar-v0'</span><span class="token punctuation">)</span>
+action_dim <span class="token operator">=</span> env<span class="token punctuation">.</span>action_space<span class="token punctuation">.</span>n  <span class="token comment" spellcheck="true"># MountainCar-v0: 3</span>
+obs_shape <span class="token operator">=</span> env<span class="token punctuation">.</span>observation_space<span class="token punctuation">.</span>shape  <span class="token comment" spellcheck="true"># MountainCar-v0: (2,)</span>
+
+<span class="token comment" spellcheck="true"># 创建经验池</span>
+rpm <span class="token operator">=</span> ReplayMemory<span class="token punctuation">(</span>MEMORY_SIZE<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># DQN的经验回放池</span>
+
+
+
+<span class="token comment" spellcheck="true"># 根据parl框架构建agent</span>
+<span class="token comment" spellcheck="true">######################################################################</span>
+<span class="token comment" spellcheck="true">#</span>
+<span class="token comment" spellcheck="true">#请参考课堂Demo，嵌套Model, DQN, Agent构建 agent</span>
+<span class="token comment" spellcheck="true">#</span>
+<span class="token comment" spellcheck="true">######################################################################</span>
+model <span class="token operator">=</span> Model<span class="token punctuation">(</span>act_dim<span class="token operator">=</span>action_dim<span class="token punctuation">)</span>
+algorithm <span class="token operator">=</span> DQN<span class="token punctuation">(</span>model<span class="token punctuation">,</span> act_dim<span class="token operator">=</span>action_dim<span class="token punctuation">,</span> gamma<span class="token operator">=</span>GAMMA<span class="token punctuation">,</span> lr<span class="token operator">=</span>LEARNING_RATE<span class="token punctuation">)</span>
+agent <span class="token operator">=</span> Agent<span class="token punctuation">(</span>
+    algorithm<span class="token punctuation">,</span>
+    obs_dim<span class="token operator">=</span>obs_shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    act_dim<span class="token operator">=</span>action_dim<span class="token punctuation">,</span>
+    e_greed<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true"># 有一定概率随机选取动作，探索</span>
+    e_greed_decrement<span class="token operator">=</span><span class="token number">1e</span><span class="token operator">-</span><span class="token number">6</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 随着训练逐步收敛，探索的程度慢慢降低</span>
+
+<span class="token comment" spellcheck="true"># 加载模型</span>
+<span class="token comment" spellcheck="true"># save_path = './dqn_model.ckpt'</span>
+<span class="token comment" spellcheck="true"># agent.restore(save_path)</span>
+
+<span class="token comment" spellcheck="true"># 先往经验池里存一些数据，避免最开始训练的时候样本丰富度不够</span>
+<span class="token keyword">while</span> len<span class="token punctuation">(</span>rpm<span class="token punctuation">)</span> <span class="token operator">&lt;</span> MEMORY_WARMUP_SIZE<span class="token punctuation">:</span>
+    run_episode<span class="token punctuation">(</span>env<span class="token punctuation">,</span> agent<span class="token punctuation">,</span> rpm<span class="token punctuation">)</span>
+
+max_episode <span class="token operator">=</span> <span class="token number">2000</span>
+
+<span class="token comment" spellcheck="true"># 开始训练</span>
+episode <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">while</span> episode <span class="token operator">&lt;</span> max_episode<span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># 训练max_episode个回合，test部分不计算入episode数量</span>
+    <span class="token comment" spellcheck="true"># train part</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        total_reward <span class="token operator">=</span> run_episode<span class="token punctuation">(</span>env<span class="token punctuation">,</span> agent<span class="token punctuation">,</span> rpm<span class="token punctuation">)</span>
+        episode <span class="token operator">+=</span> <span class="token number">1</span>
+
+    <span class="token comment" spellcheck="true"># test part</span>
+    eval_reward <span class="token operator">=</span> evaluate<span class="token punctuation">(</span>env<span class="token punctuation">,</span> agent<span class="token punctuation">,</span> render<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># render=True 查看显示效果</span>
+    logger<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">'episode:{}    e_greed:{}   test_reward:{}'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>
+        episode<span class="token punctuation">,</span> agent<span class="token punctuation">.</span>e_greed<span class="token punctuation">,</span> eval_reward<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 训练结束，保存模型</span>
+save_path <span class="token operator">=</span> <span class="token string">'./dqn_model.ckpt'</span>
+agent<span class="token punctuation">.</span>save<span class="token punctuation">(</span>save_path<span class="token punctuation">)</span></code></pre>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>Donate comment here.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechat.jpg" alt="honor 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="honor 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD-%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" rel="tag"># python 人工智能 强化学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/3826.html" rel="prev" title="python安装dlib遇到的错误:AttributeError:module ‘dlib’ has no attribute ‘get_frontal_face_detector’问题解决">
+      <i class="fa fa-chevron-left"></i> python安装dlib遇到的错误:AttributeError:module ‘dlib’ has no attribute ‘get_frontal_face_detector’问题解决
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/63ec.html" rel="next" title="python+opencv实现人脸识别|采用现成训练好的模型">
+      python+opencv实现人脸识别|采用现成训练好的模型 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是强化学习"><span class="nav-number">1.</span> <span class="nav-text">什么是强化学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列举强化学习的一些应用"><span class="nav-number">2.</span> <span class="nav-text">列举强化学习的一些应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#强化学习与其他机器学习的关系"><span class="nav-number">3.</span> <span class="nav-text">强化学习与其他机器学习的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#强化学习的两种学习方案"><span class="nav-number">4.</span> <span class="nav-text">强化学习的两种学习方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PARL实现DQN训练"><span class="nav-number">4.1.</span> <span class="nav-text">PARL实现DQN训练</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、导入依赖"><span class="nav-number">4.1.1.</span> <span class="nav-text">1、导入依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、设定一些hyperparameter超参数"><span class="nav-number">4.1.2.</span> <span class="nav-text">2、设定一些hyperparameter超参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、搭建Model、Algorithm、Agent架构"><span class="nav-number">4.1.3.</span> <span class="nav-text">3、搭建Model、Algorithm、Agent架构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、Model"><span class="nav-number">4.1.4.</span> <span class="nav-text">4、Model</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5、Algorithm"><span class="nav-number">4.1.5.</span> <span class="nav-text">5、Algorithm</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6、Agent"><span class="nav-number">4.1.6.</span> <span class="nav-text">6、Agent</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7、ReplayMemory"><span class="nav-number">4.1.7.</span> <span class="nav-text">7、ReplayMemory</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8、Training-amp-amp-Test（训练-amp-amp-测试）"><span class="nav-number">4.1.8.</span> <span class="nav-text">8、Training &amp;&amp; Test（训练&amp;&amp;测试）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9、创建环境和Agent，创建经验池，启动训练，保存模型，运行代码"><span class="nav-number">4.1.9.</span> <span class="nav-text">9、创建环境和Agent，创建经验池，启动训练，保存模型，运行代码</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="honor"
+      src="/images/logol1.png">
+  <p class="site-author-name" itemprop="name">honor</p>
+  <div class="site-description" itemprop="description">记录学习、科研、生活的点滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/honor-ry" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;honor-ry" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yourname@gmail.com" title="E-Mail → mailto:yourname@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">honor</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+<div class="powered-by">
+<i class="fa fa-user-md"></i>
+<span id="busuanzi_container_site_uv">
+  本站总访客数:<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;| 
+</span>
+<span id="busuanzi_container_site_pv">
+    &nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
