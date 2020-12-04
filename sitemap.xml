@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.rongyao-blog.top/posts/6efa.html</loc>
+    
+    <lastmod>2020-12-04</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.rongyao-blog.top/posts/3eeb.html</loc>
     
     <lastmod>2020-12-04</lastmod>
@@ -305,14 +312,14 @@
 
   
   <url>
-    <loc>https://www.rongyao-blog.top/tags/c/</loc>
+    <loc>https://www.rongyao-blog.top/tags/anaconda-python/</loc>
     <lastmod>2020-12-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.rongyao-blog.top/tags/anaconda-python/</loc>
+    <loc>https://www.rongyao-blog.top/tags/c/</loc>
     <lastmod>2020-12-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -410,6 +417,13 @@
   </url>
   
   <url>
+    <loc>https://www.rongyao-blog.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2020-12-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.rongyao-blog.top/tags/tensorflow-AVX2-pycharm-%E6%8C%87%E4%BB%A4%E9%9B%86%E5%8A%A0%E9%80%9F/</loc>
     <lastmod>2020-12-04</lastmod>
     <changefreq>daily</changefreq>
@@ -468,14 +482,14 @@
 
   
   <url>
-    <loc>https://www.rongyao-blog.top/categories/C-%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://www.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2020-12-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://www.rongyao-blog.top/categories/C-%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2020-12-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
