@@ -66,9 +66,15 @@
       <link href="posts/241f.html"/>
       <url>posts/241f.html</url>
       
-        <content type="html"><![CDATA[<p>学习C++过程中的记录</p><a id="more"></a><p>1、python<br>2、C++<br>3、http<br>4、数据库</p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+        <content type="html"><![CDATA[<p>学习C++过程中的记录</p><a id="more"></a><h1 id="1、python"><a href="#1、python" class="headerlink" title="1、python"></a>1、python</h1><p>123</p><h1 id="2、C"><a href="#2、C" class="headerlink" title="2、C++"></a>2、C++</h1><p>456</p><h1 id="3、http"><a href="#3、http" class="headerlink" title="3、http"></a>3、http</h1><p>789</p><h1 id="4、数据库"><a href="#4、数据库" class="headerlink" title="4、数据库"></a>4、数据库</h1><p>123</p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+        </tags>
       
     </entry>
     

@@ -191,14 +191,14 @@
   </url>
   
   <url>
-    <loc>https://www.rongyao-blog.top/posts/1666.html</loc>
+    <loc>https://www.rongyao-blog.top/posts/7093.html</loc>
     
     <lastmod>2020-08-30</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.rongyao-blog.top/posts/7093.html</loc>
+    <loc>https://www.rongyao-blog.top/posts/1666.html</loc>
     
     <lastmod>2020-08-30</lastmod>
     
@@ -320,6 +320,13 @@
   
   <url>
     <loc>https://www.rongyao-blog.top/tags/c/</loc>
+    <lastmod>2020-12-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rongyao-blog.top/tags/C/</loc>
     <lastmod>2020-12-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
