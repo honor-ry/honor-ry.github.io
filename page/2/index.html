@@ -165,6 +165,501 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.rongyao-blog.top/posts/ac4f.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logol1.png">
+      <meta itemprop="name" content="honor">
+      <meta itemprop="description" content="记录学习、科研、生活的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="honor">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/ac4f.html" class="post-title-link" itemprop="url">NLP入门-文本分类|paddle</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-04 10:54:58" itemprop="dateCreated datePublished" datetime="2020-07-04T10:54:58+08:00">2020-07-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-30 21:32:20" itemprop="dateModified" datetime="2020-08-30T21:32:20+08:00">2020-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">NLP 机器学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<h4 id="文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。"><a href="#文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。" class="headerlink" title="文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。"></a>文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。</h4><blockquote>
+<ul>
+<li>数据来源：从网站上爬取56821条数据中文新闻摘要<ul>
+<li>数据内容：包含10种类别，国际、文化、娱乐、体育、财经、汽车、教育、科技、房产、证券</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9haS1zdHVkaW8tc3RhdGljLW9ubGluZS5jZG4uYmNlYm9zLmNvbS8xNzg5ZWQ1OTM5ZDI0MTM0YjljZTRkNDVjYTE1ZTBmZGYyMWYyNWFhNDAwYzRmNjg5OGNjNGUwMmFlYTVjNzRl?x-oss-process=image/format,png" alt=""><br>严格意义上来说这个新闻的数据集不是太好，每个类目的新闻数目不是一致的，一个好的数据集对于各个类别分布是比较均匀的。</p>
+<h1 id="1、准备数据"><a href="#1、准备数据" class="headerlink" title="1、准备数据:"></a><strong>1、准备数据:</strong></h1><pre><code>数据进行预处理
+
+创建数据集和数据字典
+
+创建数据读取器train_reader 和test_reader</code></pre><h1 id="2、配置网络"><a href="#2、配置网络" class="headerlink" title="2、配置网络"></a><strong>2、配置网络</strong></h1><p>定义网络</p>
+<p>定义损失函数：交叉熵损失函数</p>
+<p>定义优化算法：选择优化器，adam，SGD等等</p>
+<h1 id="3、训练网络"><a href="#3、训练网络" class="headerlink" title="3、训练网络"></a><strong>3、训练网络</strong></h1><p>需要对网络进行训练，丢入训练集，去训练我们的模型</p>
+<h1 id="4、模型评估"><a href="#4、模型评估" class="headerlink" title="4、模型评估"></a><strong>4、模型评估</strong></h1><h1 id="5、模型预测"><a href="#5、模型预测" class="headerlink" title="5、模型预测"></a><strong>5、模型预测</strong></h1><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 查看当前挂载的数据集目录</span>
+!ls <span class="token operator">/</span>home<span class="token operator">/</span>aistudio<span class="token operator">/</span>data<span class="token operator">/</span>
+<span class="token comment" spellcheck="true">#将数据移动到 /home/aistudio/data/ 目录下</span>
+!cp data<span class="token operator">/</span>data6825<span class="token operator">/</span>news_classify_data<span class="token punctuation">.</span>txt data<span class="token operator">/</span></code></pre>
+<pre><code>data6825</code></pre><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9haS1zdHVkaW8tc3RhdGljLW9ubGluZS5jZG4uYmNlYm9zLmNvbS81NGE4MzIxZWNkMDg0YWU1YjY1OWQ3M2IwYjFlNThiYzFlNDU4MzVkMDdiMjQyZTFhMmZjNWI0NmJiYWU3N2Yx?x-oss-process=image/format,png" alt=""></p>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 导入必要的包</span>
+<span class="token keyword">import</span> os  <span class="token comment" spellcheck="true">#系统操作包</span>
+<span class="token keyword">from</span> multiprocessing <span class="token keyword">import</span> cpu_count
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np <span class="token comment" spellcheck="true">#计算包</span>
+<span class="token keyword">import</span> shutil
+<span class="token keyword">import</span> paddle <span class="token comment" spellcheck="true">#paddle的工具包</span>
+<span class="token keyword">import</span> paddle<span class="token punctuation">.</span>fluid <span class="token keyword">as</span> fluid</code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 创建数据集和数据字典</span>
+
+data_root_path<span class="token operator">=</span><span class="token string">'/home/aistudio/data/'</span> <span class="token comment" spellcheck="true">#选择数据路径</span>
+<span class="token comment" spellcheck="true">#对我们读取出来的路径创建数据词典</span>
+<span class="token keyword">def</span> <span class="token function">create_data_list</span><span class="token punctuation">(</span>data_root_path<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>data_root_path <span class="token operator">+</span> <span class="token string">'test_list.txt'</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        <span class="token keyword">pass</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>data_root_path <span class="token operator">+</span> <span class="token string">'train_list.txt'</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        <span class="token keyword">pass</span>
+
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>data_root_path<span class="token punctuation">,</span> <span class="token string">'dict_txt.txt'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f_data<span class="token punctuation">:</span>
+        dict_txt <span class="token operator">=</span> eval<span class="token punctuation">(</span>f_data<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>data_root_path<span class="token punctuation">,</span> <span class="token string">'news_classify_data.txt'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f_data<span class="token punctuation">:</span>
+        lines <span class="token operator">=</span> f_data<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    i <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">for</span> line <span class="token keyword">in</span> lines<span class="token punctuation">:</span>
+        title <span class="token operator">=</span> line<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'_!_'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span>
+        l <span class="token operator">=</span> line<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'_!_'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+        labs <span class="token operator">=</span> <span class="token string">""</span>
+        <span class="token keyword">if</span> i <span class="token operator">%</span> <span class="token number">10</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            <span class="token keyword">with</span> open<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>data_root_path<span class="token punctuation">,</span> <span class="token string">'test_list.txt'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'a'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f_test<span class="token punctuation">:</span>
+                <span class="token keyword">for</span> s <span class="token keyword">in</span> title<span class="token punctuation">:</span>
+                    lab <span class="token operator">=</span> str<span class="token punctuation">(</span>dict_txt<span class="token punctuation">[</span>s<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                    labs <span class="token operator">=</span> labs <span class="token operator">+</span> lab <span class="token operator">+</span> <span class="token string">','</span>
+                labs <span class="token operator">=</span> labs<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
+                labs <span class="token operator">=</span> labs <span class="token operator">+</span> <span class="token string">'\t'</span> <span class="token operator">+</span> l <span class="token operator">+</span> <span class="token string">'\n'</span>
+                f_test<span class="token punctuation">.</span>write<span class="token punctuation">(</span>labs<span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">with</span> open<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>data_root_path<span class="token punctuation">,</span> <span class="token string">'train_list.txt'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'a'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f_train<span class="token punctuation">:</span>
+                <span class="token keyword">for</span> s <span class="token keyword">in</span> title<span class="token punctuation">:</span>
+                    lab <span class="token operator">=</span> str<span class="token punctuation">(</span>dict_txt<span class="token punctuation">[</span>s<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                    labs <span class="token operator">=</span> labs <span class="token operator">+</span> lab <span class="token operator">+</span> <span class="token string">','</span>
+                labs <span class="token operator">=</span> labs<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
+                labs <span class="token operator">=</span> labs <span class="token operator">+</span> <span class="token string">'\t'</span> <span class="token operator">+</span> l <span class="token operator">+</span> <span class="token string">'\n'</span>
+                f_train<span class="token punctuation">.</span>write<span class="token punctuation">(</span>labs<span class="token punctuation">)</span>
+        i <span class="token operator">+=</span> <span class="token number">1</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"数据列表生成完成！"</span><span class="token punctuation">)</span>
+
+
+<span class="token comment" spellcheck="true"># 把下载得数据生成一个字典</span>
+<span class="token comment" spellcheck="true">#将每一个文本每一个子映射到词典得到一个数字ID，因为输入到模型里面的不是汉字，是一个数字ID</span>
+<span class="token keyword">def</span> <span class="token function">create_dict</span><span class="token punctuation">(</span>data_path<span class="token punctuation">,</span> dict_path<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    dict_set <span class="token operator">=</span> set<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 读取已经下载得数据</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>data_path<span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        lines <span class="token operator">=</span> f<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 把数据生成一个元组</span>
+    <span class="token keyword">for</span> line <span class="token keyword">in</span> lines<span class="token punctuation">:</span>
+        title <span class="token operator">=</span> line<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'_!_'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> s <span class="token keyword">in</span> title<span class="token punctuation">:</span>
+            dict_set<span class="token punctuation">.</span>add<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 把元组转换成字典，一个字对应一个数字</span>
+    dict_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    i <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">for</span> s <span class="token keyword">in</span> dict_set<span class="token punctuation">:</span>
+        dict_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">[</span>s<span class="token punctuation">,</span> i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        i <span class="token operator">+=</span> <span class="token number">1</span>
+    <span class="token comment" spellcheck="true"># 添加未知字符</span>
+    dict_txt <span class="token operator">=</span> dict<span class="token punctuation">(</span>dict_list<span class="token punctuation">)</span>
+    end_dict <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"&lt;unk>"</span><span class="token punctuation">:</span> i<span class="token punctuation">}</span>
+    dict_txt<span class="token punctuation">.</span>update<span class="token punctuation">(</span>end_dict<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 把这些字典保存到本地中</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>dict_path<span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>str<span class="token punctuation">(</span>dict_txt<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"数据字典生成完成！"</span><span class="token punctuation">)</span>
+
+
+<span class="token comment" spellcheck="true"># 获取字典的长度</span>
+<span class="token keyword">def</span> <span class="token function">get_dict_len</span><span class="token punctuation">(</span>dict_path<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>dict_path<span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        line <span class="token operator">=</span> eval<span class="token punctuation">(</span>f<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> len<span class="token punctuation">(</span>line<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 把生产的数据列表都放在自己的总类别文件夹中</span>
+    data_root_path <span class="token operator">=</span> <span class="token string">"/home/aistudio/data/"</span>
+    data_path <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>data_root_path<span class="token punctuation">,</span> <span class="token string">'news_classify_data.txt'</span><span class="token punctuation">)</span>
+    dict_path <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>data_root_path<span class="token punctuation">,</span> <span class="token string">"dict_txt.txt"</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 创建数据字典</span>
+    create_dict<span class="token punctuation">(</span>data_path<span class="token punctuation">,</span> dict_path<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 创建数据列表</span>
+    create_data_list<span class="token punctuation">(</span>data_root_path<span class="token punctuation">)</span></code></pre>
+<pre><code>数据字典生成完成！
+数据列表生成完成！</code></pre><p>创建好的字典：每一个字会对应一个数字ID<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9haS1zdHVkaW8tc3RhdGljLW9ubGluZS5jZG4uYmNlYm9zLmNvbS9lY2FkN2I3MTYzMzM0NjQ4YjE3NDkyOWEwM2M5NjI0Yjg2MGI5MjI0YjhhODRlMDg4MTZjMWU5MTQ2YjA2ZDkz?x-oss-process=image/format,png" alt=""></p>
+<p>创建好的数据列表：文本转化为序列化的表示</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9haS1zdHVkaW8tc3RhdGljLW9ubGluZS5jZG4uYmNlYm9zLmNvbS84NDNkNTE3MjhlMDY0N2E3OWZhODNmYzdjZWRiY2NiZjliOGU1YjlhZGFhYjQyZGI5MGE0MTRkMDAzYTM1ZGQ4?x-oss-process=image/format,png" alt=""><br>每一行代表一句新闻，就是一个样本。</p>
+<p>paddle.reader.xmap_readers():通过多线程方式，通过用户自定义的映射器mapper来映射reader返回的样本（到输出队列)。</p>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 创建数据读取器train_reader 和test_reader</span>
+<span class="token comment" spellcheck="true"># 训练/测试数据的预处理</span>
+<span class="token keyword">def</span> <span class="token function">data_mapper</span><span class="token punctuation">(</span>sample<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    data<span class="token punctuation">,</span> label <span class="token operator">=</span> sample
+    data <span class="token operator">=</span> <span class="token punctuation">[</span>int<span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token keyword">for</span> data <span class="token keyword">in</span> data<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">','</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token keyword">return</span> data<span class="token punctuation">,</span> int<span class="token punctuation">(</span>label<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 创建数据读取器train_reader</span>
+<span class="token keyword">def</span> <span class="token function">train_reader</span><span class="token punctuation">(</span>train_list_path<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">reader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">with</span> open<span class="token punctuation">(</span>train_list_path<span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+            lines <span class="token operator">=</span> f<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token comment" spellcheck="true"># 打乱数据</span>
+            np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>shuffle<span class="token punctuation">(</span>lines<span class="token punctuation">)</span>
+            <span class="token comment" spellcheck="true"># 开始获取每张图像和标签</span>
+            <span class="token keyword">for</span> line <span class="token keyword">in</span> lines<span class="token punctuation">:</span>
+                data<span class="token punctuation">,</span> label <span class="token operator">=</span> line<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'\t'</span><span class="token punctuation">)</span>
+                <span class="token keyword">yield</span> data<span class="token punctuation">,</span> label
+    <span class="token keyword">return</span> paddle<span class="token punctuation">.</span>reader<span class="token punctuation">.</span>xmap_readers<span class="token punctuation">(</span>data_mapper<span class="token punctuation">,</span> reader<span class="token punctuation">,</span> cpu_count<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1024</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#  创建数据读取器test_reader</span>
+<span class="token keyword">def</span> <span class="token function">test_reader</span><span class="token punctuation">(</span>test_list_path<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">reader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">with</span> open<span class="token punctuation">(</span>test_list_path<span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+            lines <span class="token operator">=</span> f<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">for</span> line <span class="token keyword">in</span> lines<span class="token punctuation">:</span>
+                data<span class="token punctuation">,</span> label <span class="token operator">=</span> line<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'\t'</span><span class="token punctuation">)</span>
+                <span class="token keyword">yield</span> data<span class="token punctuation">,</span> label
+
+    <span class="token keyword">return</span> paddle<span class="token punctuation">.</span>reader<span class="token punctuation">.</span>xmap_readers<span class="token punctuation">(</span>data_mapper<span class="token punctuation">,</span> reader<span class="token punctuation">,</span> cpu_count<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1024</span><span class="token punctuation">)</span></code></pre>
+<p>至此，数据准备工作已经完成了。 </p>
+<h1 id="卷积神经网络（Convolutional-Neural-Networks-CNN）"><a href="#卷积神经网络（Convolutional-Neural-Networks-CNN）" class="headerlink" title="卷积神经网络（Convolutional Neural Networks, CNN）"></a>卷积神经网络（Convolutional Neural Networks, CNN）</h1><p>输入词向量序列，产生一个特征图（feature map），对特征图采用时间维度上的最大池化（max pooling over time）操作得到此卷积核对应的整句话的特征，最后，将所有卷积核得到的特征拼接起来即为文本的定长向量表示，对于文本分类问题，将其连接至softmax即构建出完整的模型。</p>
+<p>在实际应用中，我们会使用多个卷积核来处理句子，窗口大小相同的卷积核堆叠起来形成一个矩阵，这样可以更高效的完成运算。</p>
+<p>另外，我们也可使用窗口大小不同的卷积核来处理句子.</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9haS1zdHVkaW8tc3RhdGljLW9ubGluZS5jZG4uYmNlYm9zLmNvbS8zNzY2MjYxZjI0YjU0NTE0YjZjYmMwZDMwMjcwYzZhM2YzOGMxZDBhYWY4ZjQ1MGM5N2U4MzAzZWNhNTFmMjA0?x-oss-process=image/format,png" alt=""></p>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 创建CNN网络</span>
+
+<span class="token keyword">def</span> <span class="token function">CNN_net</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span>dict_dim<span class="token punctuation">,</span> class_dim<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span> emb_dim<span class="token operator">=</span><span class="token number">128</span><span class="token punctuation">,</span> hid_dim<span class="token operator">=</span><span class="token number">128</span><span class="token punctuation">,</span>hid_dim2<span class="token operator">=</span><span class="token number">98</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        emb <span class="token operator">=</span> fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>embedding<span class="token punctuation">(</span>input<span class="token operator">=</span>data<span class="token punctuation">,</span><span class="token comment" spellcheck="true">#进模型之前需要得到一个emb词嵌入，得到一个矩阵的编码</span>
+                                 size<span class="token operator">=</span><span class="token punctuation">[</span>dict_dim<span class="token punctuation">,</span> emb_dim<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        conv_3 <span class="token operator">=</span> fluid<span class="token punctuation">.</span>nets<span class="token punctuation">.</span>sequence_conv_pool<span class="token punctuation">(</span>
+                                                 input<span class="token operator">=</span>emb<span class="token punctuation">,</span>
+                                                 num_filters<span class="token operator">=</span>hid_dim<span class="token punctuation">,</span>
+                                                 filter_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">#卷积核</span>
+                                                 act<span class="token operator">=</span><span class="token string">"tanh"</span><span class="token punctuation">,</span>
+                                                 pool_type<span class="token operator">=</span><span class="token string">"sqrt"</span><span class="token punctuation">)</span>
+        conv_4 <span class="token operator">=</span> fluid<span class="token punctuation">.</span>nets<span class="token punctuation">.</span>sequence_conv_pool<span class="token punctuation">(</span>
+                                                 input<span class="token operator">=</span>emb<span class="token punctuation">,</span>
+                                                 num_filters<span class="token operator">=</span>hid_dim2<span class="token punctuation">,</span>
+                                                 filter_size<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span>
+                                                 act<span class="token operator">=</span><span class="token string">"tanh"</span><span class="token punctuation">,</span>
+                                                 pool_type<span class="token operator">=</span><span class="token string">"sqrt"</span><span class="token punctuation">)</span>
+
+        output <span class="token operator">=</span> fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>fc<span class="token punctuation">(</span>
+            input<span class="token operator">=</span><span class="token punctuation">[</span>conv_3<span class="token punctuation">,</span> conv_4<span class="token punctuation">]</span><span class="token punctuation">,</span> size<span class="token operator">=</span>class_dim<span class="token punctuation">,</span> act<span class="token operator">=</span><span class="token string">'softmax'</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#经过全连接层，将两个cnn的结果拼接起来</span>
+        <span class="token keyword">return</span> output<span class="token comment" spellcheck="true">#1x10的概率分布的矩阵，10个数，概率最大的数就是当前模型的预测结果</span>
+</code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 定义输入数据， lod_level不为0指定输入数据为序列数据</span>
+words <span class="token operator">=</span> fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>data<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">'words'</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span><span class="token string">'int64'</span><span class="token punctuation">,</span> lod_level<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#lod_level 处理变长序列，paddle官网的文档中LoDtensor lodlayer的索引 定长的数据不需要考虑这个问题</span>
+label <span class="token operator">=</span> fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>data<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">'label'</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span><span class="token string">'int64'</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 获取数据字典长度</span>
+dict_dim <span class="token operator">=</span> get_dict_len<span class="token punctuation">(</span><span class="token string">'/home/aistudio/data/dict_txt.txt'</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 获取卷积神经网络</span>
+<span class="token comment" spellcheck="true"># model = CNN_net(words, dict_dim, 15)</span>
+<span class="token comment" spellcheck="true"># 获取分类器</span>
+model <span class="token operator">=</span> CNN_net<span class="token punctuation">(</span>words<span class="token punctuation">,</span> dict_dim<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 获取损失函数和准确率</span>
+cost <span class="token operator">=</span> fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>cross_entropy<span class="token punctuation">(</span>input<span class="token operator">=</span>model<span class="token punctuation">,</span> label<span class="token operator">=</span>label<span class="token punctuation">)</span><span class="token comment" spellcheck="true">#损失函数</span>
+avg_cost <span class="token operator">=</span> fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>cost<span class="token punctuation">)</span><span class="token comment" spellcheck="true">#每次训练都是一个batch，求一个平均</span>
+acc <span class="token operator">=</span> fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>accuracy<span class="token punctuation">(</span>input<span class="token operator">=</span>model<span class="token punctuation">,</span> label<span class="token operator">=</span>label<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 获取预测程序</span>
+test_program <span class="token operator">=</span> fluid<span class="token punctuation">.</span>default_main_program<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>clone<span class="token punctuation">(</span>for_test<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#clone克隆函数</span>
+
+<span class="token comment" spellcheck="true"># 定义优化方法</span>
+optimizer <span class="token operator">=</span> fluid<span class="token punctuation">.</span>optimizer<span class="token punctuation">.</span>AdagradOptimizer<span class="token punctuation">(</span>learning_rate<span class="token operator">=</span><span class="token number">0.002</span><span class="token punctuation">)</span>
+opt <span class="token operator">=</span> optimizer<span class="token punctuation">.</span>minimize<span class="token punctuation">(</span>avg_cost<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 创建一个执行器，CPU训练速度比较慢</span>
+<span class="token comment" spellcheck="true">#place = fluid.CPUPlace()</span>
+place <span class="token operator">=</span> fluid<span class="token punctuation">.</span>CUDAPlace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#GPU执行</span>
+exe <span class="token operator">=</span> fluid<span class="token punctuation">.</span>Executor<span class="token punctuation">(</span>place<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 进行参数初始化</span>
+exe<span class="token punctuation">.</span>run<span class="token punctuation">(</span>fluid<span class="token punctuation">.</span>default_startup_program<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<pre><code>[]</code></pre><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 获取训练数据读取器和测试数据读取器</span>
+train_reader <span class="token operator">=</span> paddle<span class="token punctuation">.</span>batch<span class="token punctuation">(</span>reader<span class="token operator">=</span>train_reader<span class="token punctuation">(</span><span class="token string">'/home/aistudio/data/train_list.txt'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">128</span><span class="token punctuation">)</span>
+test_reader <span class="token operator">=</span> paddle<span class="token punctuation">.</span>batch<span class="token punctuation">(</span>reader<span class="token operator">=</span>test_reader<span class="token punctuation">(</span><span class="token string">'/home/aistudio/data/test_list.txt'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">128</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 定义数据映射器</span>
+feeder <span class="token operator">=</span> fluid<span class="token punctuation">.</span>DataFeeder<span class="token punctuation">(</span>place<span class="token operator">=</span>place<span class="token punctuation">,</span> feed_list<span class="token operator">=</span><span class="token punctuation">[</span>words<span class="token punctuation">,</span> label<span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-python"><code class="language-python">EPOCH_NUM<span class="token operator">=</span><span class="token number">20</span><span class="token comment" spellcheck="true">#迭代次数</span>
+model_save_dir <span class="token operator">=</span> <span class="token string">'/home/aistudio/work/infer_model/'</span>
+<span class="token comment" spellcheck="true"># 开始训练</span>
+
+<span class="token keyword">for</span> pass_id <span class="token keyword">in</span> range<span class="token punctuation">(</span>EPOCH_NUM<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 进行训练</span>
+    <span class="token keyword">for</span> batch_id<span class="token punctuation">,</span> data <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>train_reader<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        train_cost<span class="token punctuation">,</span> train_acc <span class="token operator">=</span> exe<span class="token punctuation">.</span>run<span class="token punctuation">(</span>program<span class="token operator">=</span>fluid<span class="token punctuation">.</span>default_main_program<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                             feed<span class="token operator">=</span>feeder<span class="token punctuation">.</span>feed<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                             fetch_list<span class="token operator">=</span><span class="token punctuation">[</span>avg_cost<span class="token punctuation">,</span> acc<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> batch_id <span class="token operator">%</span> <span class="token number">100</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span><span class="token comment" spellcheck="true">#每执行100次，打印一次</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Pass:%d, Batch:%d, Cost:%0.5f, Acc:%0.5f'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>pass_id<span class="token punctuation">,</span> batch_id<span class="token punctuation">,</span> train_cost<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> train_acc<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 进行测试，读入一批陌生的数据，模型没有见过的数据，</span>
+    test_costs <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    test_accs <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> batch_id<span class="token punctuation">,</span> data <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>test_reader<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        test_cost<span class="token punctuation">,</span> test_acc <span class="token operator">=</span> exe<span class="token punctuation">.</span>run<span class="token punctuation">(</span>program<span class="token operator">=</span>test_program<span class="token punctuation">,</span>
+                                              feed<span class="token operator">=</span>feeder<span class="token punctuation">.</span>feed<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                                              fetch_list<span class="token operator">=</span><span class="token punctuation">[</span>avg_cost<span class="token punctuation">,</span> acc<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        test_costs<span class="token punctuation">.</span>append<span class="token punctuation">(</span>test_cost<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        test_accs<span class="token punctuation">.</span>append<span class="token punctuation">(</span>test_acc<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 计算平均预测损失在和准确率</span>
+    test_cost <span class="token operator">=</span> <span class="token punctuation">(</span>sum<span class="token punctuation">(</span>test_costs<span class="token punctuation">)</span> <span class="token operator">/</span> len<span class="token punctuation">(</span>test_costs<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    test_acc <span class="token operator">=</span> <span class="token punctuation">(</span>sum<span class="token punctuation">(</span>test_accs<span class="token punctuation">)</span> <span class="token operator">/</span> len<span class="token punctuation">(</span>test_accs<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Test:%d, Cost:%0.5f, ACC:%0.5f'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>pass_id<span class="token punctuation">,</span> test_cost<span class="token punctuation">,</span> test_acc<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 保存预测模型，可以考虑将这段保存模型的代码放到for循环里面，将每一轮的模型都保存起来</span>
+<span class="token keyword">if</span> <span class="token operator">not</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>exists<span class="token punctuation">(</span>model_save_dir<span class="token punctuation">)</span><span class="token punctuation">:</span> 
+    os<span class="token punctuation">.</span>makedirs<span class="token punctuation">(</span>model_save_dir<span class="token punctuation">)</span> 
+fluid<span class="token punctuation">.</span>io<span class="token punctuation">.</span>save_inference_model<span class="token punctuation">(</span>model_save_dir<span class="token punctuation">,</span> 
+                            feeded_var_names<span class="token operator">=</span><span class="token punctuation">[</span>words<span class="token punctuation">.</span>name<span class="token punctuation">]</span><span class="token punctuation">,</span> 
+                            target_vars<span class="token operator">=</span><span class="token punctuation">[</span>model<span class="token punctuation">]</span><span class="token punctuation">,</span> 
+                            executor<span class="token operator">=</span>exe<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'训练模型保存完成！'</span><span class="token punctuation">)</span> </code></pre>
+<pre><code>Pass:0, Batch:0, Cost:2.30681, Acc:0.09375
+Pass:0, Batch:100, Cost:0.99743, Acc:0.68750
+Pass:0, Batch:200, Cost:0.89360, Acc:0.76562
+Pass:0, Batch:300, Cost:0.92248, Acc:0.70312
+Test:0, Cost:0.81883, ACC:0.73921
+Pass:1, Batch:0, Cost:0.90457, Acc:0.67969
+Pass:1, Batch:100, Cost:0.67305, Acc:0.83594
+Pass:1, Batch:200, Cost:0.63098, Acc:0.80469
+Pass:1, Batch:300, Cost:0.76019, Acc:0.77344
+Test:1, Cost:0.75819, ACC:0.75909
+Pass:2, Batch:0, Cost:0.73232, Acc:0.76562
+Pass:2, Batch:100, Cost:0.70476, Acc:0.77344
+Pass:2, Batch:200, Cost:0.71542, Acc:0.75781
+Pass:2, Batch:300, Cost:0.63258, Acc:0.78125
+Test:2, Cost:0.73717, ACC:0.76160
+Pass:3, Batch:0, Cost:0.56025, Acc:0.82812
+Pass:3, Batch:100, Cost:0.48580, Acc:0.86719
+Pass:3, Batch:200, Cost:0.54991, Acc:0.84375
+Pass:3, Batch:300, Cost:0.67272, Acc:0.78906
+Test:3, Cost:0.72726, ACC:0.76317
+Pass:4, Batch:0, Cost:0.53660, Acc:0.82812
+Pass:4, Batch:100, Cost:0.73550, Acc:0.78906
+Pass:4, Batch:200, Cost:0.53774, Acc:0.80469
+Pass:4, Batch:300, Cost:0.46155, Acc:0.85156
+Test:4, Cost:0.72185, ACC:0.76169
+Pass:5, Batch:0, Cost:0.65421, Acc:0.78906
+Pass:5, Batch:100, Cost:0.59889, Acc:0.80469
+Pass:5, Batch:200, Cost:0.71301, Acc:0.79688
+Pass:5, Batch:300, Cost:0.69682, Acc:0.81250
+Test:5, Cost:0.71626, ACC:0.76525
+Pass:6, Batch:0, Cost:0.72434, Acc:0.75000
+Pass:6, Batch:100, Cost:0.59109, Acc:0.77344
+Pass:6, Batch:200, Cost:0.48783, Acc:0.81250
+Pass:6, Batch:300, Cost:0.57463, Acc:0.81250
+Test:6, Cost:0.71520, ACC:0.76447
+Pass:7, Batch:0, Cost:0.50502, Acc:0.84375
+Pass:7, Batch:100, Cost:0.62133, Acc:0.79688
+Pass:7, Batch:200, Cost:0.68593, Acc:0.76562
+Pass:7, Batch:300, Cost:0.55528, Acc:0.80469
+Test:7, Cost:0.71300, ACC:0.76769
+Pass:8, Batch:0, Cost:0.60046, Acc:0.76562
+Pass:8, Batch:100, Cost:0.47617, Acc:0.82812
+Pass:8, Batch:200, Cost:0.59591, Acc:0.79688
+Pass:8, Batch:300, Cost:0.66050, Acc:0.76562
+Test:8, Cost:0.71475, ACC:0.76594
+Pass:9, Batch:0, Cost:0.40968, Acc:0.84375
+Pass:9, Batch:100, Cost:0.50980, Acc:0.81250
+Pass:9, Batch:200, Cost:0.55923, Acc:0.85156
+Pass:9, Batch:300, Cost:0.42255, Acc:0.87500
+Test:9, Cost:0.71282, ACC:0.76717
+Pass:10, Batch:0, Cost:0.44147, Acc:0.88281
+Pass:10, Batch:100, Cost:0.55140, Acc:0.85938
+Pass:10, Batch:200, Cost:0.50935, Acc:0.84375
+Pass:10, Batch:300, Cost:0.56366, Acc:0.83594
+Test:10, Cost:0.71520, ACC:0.76586
+Pass:11, Batch:0, Cost:0.55133, Acc:0.79688
+Pass:11, Batch:100, Cost:0.45308, Acc:0.80469
+Pass:11, Batch:200, Cost:0.63471, Acc:0.78125
+Pass:11, Batch:300, Cost:0.52810, Acc:0.80469
+Test:11, Cost:0.71511, ACC:0.76673
+Pass:12, Batch:0, Cost:0.51947, Acc:0.83594
+Pass:12, Batch:100, Cost:0.63086, Acc:0.80469
+Pass:12, Batch:200, Cost:0.57166, Acc:0.82812
+Pass:12, Batch:300, Cost:0.59658, Acc:0.75781
+Test:12, Cost:0.71533, ACC:0.76673
+Pass:13, Batch:0, Cost:0.34512, Acc:0.89062
+Pass:13, Batch:100, Cost:0.47249, Acc:0.82812
+Pass:13, Batch:200, Cost:0.51224, Acc:0.85156
+Pass:13, Batch:300, Cost:0.45350, Acc:0.84375
+Test:13, Cost:0.71736, ACC:0.76647
+Pass:14, Batch:0, Cost:0.45494, Acc:0.85156
+Pass:14, Batch:100, Cost:0.68085, Acc:0.78125
+Pass:14, Batch:200, Cost:0.48124, Acc:0.83594
+Pass:14, Batch:300, Cost:0.47296, Acc:0.85938
+Test:14, Cost:0.71745, ACC:0.76760
+Pass:15, Batch:0, Cost:0.73750, Acc:0.77344
+Pass:15, Batch:100, Cost:0.55038, Acc:0.83594
+Pass:15, Batch:200, Cost:0.59775, Acc:0.74219
+Pass:15, Batch:300, Cost:0.47932, Acc:0.82812
+Test:15, Cost:0.72163, ACC:0.76673
+Pass:16, Batch:0, Cost:0.31890, Acc:0.90625
+Pass:16, Batch:100, Cost:0.38017, Acc:0.85156
+Pass:16, Batch:200, Cost:0.57517, Acc:0.79688
+Pass:16, Batch:300, Cost:0.44878, Acc:0.87500
+Test:16, Cost:0.72158, ACC:0.76786
+Pass:17, Batch:0, Cost:0.43048, Acc:0.88281
+Pass:17, Batch:100, Cost:0.47145, Acc:0.82031
+Pass:17, Batch:200, Cost:0.47934, Acc:0.82812
+Pass:17, Batch:300, Cost:0.36709, Acc:0.89062
+Test:17, Cost:0.72381, ACC:0.76647
+Pass:18, Batch:0, Cost:0.35568, Acc:0.88281
+Pass:18, Batch:100, Cost:0.61057, Acc:0.82031
+Pass:18, Batch:200, Cost:0.40052, Acc:0.88281
+Pass:18, Batch:300, Cost:0.45469, Acc:0.83594
+Test:18, Cost:0.72549, ACC:0.76743
+Pass:19, Batch:0, Cost:0.41658, Acc:0.86719
+Pass:19, Batch:100, Cost:0.48703, Acc:0.86719
+Pass:19, Batch:200, Cost:0.47010, Acc:0.83594
+Pass:19, Batch:300, Cost:0.35333, Acc:0.84375
+Test:19, Cost:0.72887, ACC:0.76690
+训练模型保存完成！</code></pre><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 用训练好的模型进行预测并输出预测结果</span>
+<span class="token comment" spellcheck="true"># 创建执行器</span>
+<span class="token comment" spellcheck="true">#place = fluid.CPUPlace()</span>
+place <span class="token operator">=</span> fluid<span class="token punctuation">.</span>CUDAPlace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+exe <span class="token operator">=</span> fluid<span class="token punctuation">.</span>Executor<span class="token punctuation">(</span>place<span class="token punctuation">)</span>
+exe<span class="token punctuation">.</span>run<span class="token punctuation">(</span>fluid<span class="token punctuation">.</span>default_startup_program<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+save_path <span class="token operator">=</span> <span class="token string">'/home/aistudio/work/infer_model/'</span>
+
+<span class="token comment" spellcheck="true"># 从模型中获取预测程序、输入数据名称列表、分类器</span>
+<span class="token punctuation">[</span>infer_program<span class="token punctuation">,</span> feeded_var_names<span class="token punctuation">,</span> target_var<span class="token punctuation">]</span> <span class="token operator">=</span> fluid<span class="token punctuation">.</span>io<span class="token punctuation">.</span>load_inference_model<span class="token punctuation">(</span>dirname<span class="token operator">=</span>save_path<span class="token punctuation">,</span> executor<span class="token operator">=</span>exe<span class="token punctuation">)</span>
+
+
+<span class="token comment" spellcheck="true"># 获取数据</span>
+<span class="token keyword">def</span> <span class="token function">get_data</span><span class="token punctuation">(</span>sentence<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 读取数据字典</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">'/home/aistudio/data/dict_txt.txt'</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f_data<span class="token punctuation">:</span>
+        dict_txt <span class="token operator">=</span> eval<span class="token punctuation">(</span>f_data<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    dict_txt <span class="token operator">=</span> dict<span class="token punctuation">(</span>dict_txt<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 把字符串数据转换成列表数据</span>
+    keys <span class="token operator">=</span> dict_txt<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> s <span class="token keyword">in</span> sentence<span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 判断是否存在未知字符</span>
+        <span class="token keyword">if</span> <span class="token operator">not</span> s <span class="token keyword">in</span> keys<span class="token punctuation">:</span>
+            s <span class="token operator">=</span> <span class="token string">'&lt;unk>'</span>
+        data<span class="token punctuation">.</span>append<span class="token punctuation">(</span>int<span class="token punctuation">(</span>dict_txt<span class="token punctuation">[</span>s<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> data
+
+
+data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token comment" spellcheck="true"># 获取图片数据</span>
+data1 <span class="token operator">=</span> get_data<span class="token punctuation">(</span><span class="token string">'在获得诺贝尔文学奖7年之后，莫言15日晚间在山西汾阳贾家庄如是说'</span><span class="token punctuation">)</span>
+data2 <span class="token operator">=</span> get_data<span class="token punctuation">(</span><span class="token string">'综合“今日美国”、《世界日报》等当地媒体报道，芝加哥河滨警察局表示，'</span><span class="token punctuation">)</span>
+data<span class="token punctuation">.</span>append<span class="token punctuation">(</span>data1<span class="token punctuation">)</span>
+data<span class="token punctuation">.</span>append<span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 获取每句话的单词数量</span>
+base_shape <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>len<span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token keyword">for</span> c <span class="token keyword">in</span> data<span class="token punctuation">]</span><span class="token punctuation">]</span>
+
+<span class="token comment" spellcheck="true"># 生成预测数据</span>
+tensor_words <span class="token operator">=</span> fluid<span class="token punctuation">.</span>create_lod_tensor<span class="token punctuation">(</span>data<span class="token punctuation">,</span> base_shape<span class="token punctuation">,</span> place<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 执行预测</span>
+result <span class="token operator">=</span> exe<span class="token punctuation">.</span>run<span class="token punctuation">(</span>program<span class="token operator">=</span>infer_program<span class="token punctuation">,</span>
+                 feed<span class="token operator">=</span><span class="token punctuation">{</span>feeded_var_names<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">:</span> tensor_words<span class="token punctuation">}</span><span class="token punctuation">,</span>
+                 fetch_list<span class="token operator">=</span>target_var<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 分类名称</span>
+names <span class="token operator">=</span> <span class="token punctuation">[</span> <span class="token string">'文化'</span><span class="token punctuation">,</span> <span class="token string">'娱乐'</span><span class="token punctuation">,</span> <span class="token string">'体育'</span><span class="token punctuation">,</span> <span class="token string">'财经'</span><span class="token punctuation">,</span><span class="token string">'房产'</span><span class="token punctuation">,</span> <span class="token string">'汽车'</span><span class="token punctuation">,</span> <span class="token string">'教育'</span><span class="token punctuation">,</span> <span class="token string">'科技'</span><span class="token punctuation">,</span> <span class="token string">'国际'</span><span class="token punctuation">,</span> <span class="token string">'证券'</span><span class="token punctuation">]</span>
+
+<span class="token comment" spellcheck="true"># 获取结果概率最大的label</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>len<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    lab <span class="token operator">=</span> np<span class="token punctuation">.</span>argsort<span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token comment" spellcheck="true">#10个概率值，对其进行排序，选择最大的那个概率，(-1)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'预测结果标签为：%d， 名称为：%s， 概率为：%f'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>lab<span class="token punctuation">,</span> names<span class="token punctuation">[</span>lab<span class="token punctuation">]</span><span class="token punctuation">,</span> result<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>lab<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<pre><code>预测结果标签为：0， 名称为：文化， 概率为：0.949490
+预测结果标签为：8， 名称为：国际， 概率为：0.472569</code></pre><pre class=" language-python"><code class="language-python"></code></pre>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.rongyao-blog.top/posts/8a27.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2449,181 +2944,6 @@ result<span class="token operator">=</span> model<span class="token punctuation"
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.rongyao-blog.top/posts/103.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logol1.png">
-      <meta itemprop="name" content="honor">
-      <meta itemprop="description" content="记录学习、科研、生活的点滴">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="honor">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/103.html" class="post-title-link" itemprop="url">leetcode|剑指offter|面试题6：从尾到头打印链表</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-28 22:21:51" itemprop="dateCreated datePublished" datetime="2020-03-28T22:21:51+08:00">2020-03-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-30 21:32:22" itemprop="dateModified" datetime="2020-08-30T21:32:22+08:00">2020-08-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%96%E7%A8%8B%E7%BB%83%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">编程练习</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <a id="more"></a>
-
-<h3 id="面试题06-从尾到头打印链表"><a href="#面试题06-从尾到头打印链表" class="headerlink" title="面试题06. 从尾到头打印链表"></a>面试题06. 从尾到头打印链表</h3><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。</p>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><blockquote>
-<p>输入：<code>head = [1,3,2]</code><br>输出：<code>[2,3,1]</code></p>
-</blockquote>
-<p>我们很自然地可以想到把链表中链接节点的指针反转过来，改变链表的方向，然后就可以从头到尾输出了。但是这种方法会改变原来的链表结构，如果要求不修改链表的结构可以有以下方法：<br>解法一：<br>遍历链表的顺序是从头到尾，但是题目要求输出的顺序却是从尾到头，第一个遍历到的节点最后一个输出，而最后一个遍历到的节点第一个输出。是典型的”后进先出”，栈这种数据结构具有该特点，我们可以在从头到尾遍历的时候，把经过的每个节点放入栈中，遍历完后，再从栈的顶端开始逐个输出节点的值。</p>
-<h4 id="leetcode解答："><a href="#leetcode解答：" class="headerlink" title="leetcode解答："></a>leetcode解答：</h4><pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */</span>
-<span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> result<span class="token punctuation">;</span>
-    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">reversePrint</span><span class="token punctuation">(</span>ListNode<span class="token operator">*</span> head<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-         stack<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span>s <span class="token punctuation">;</span>
-         <span class="token keyword">while</span><span class="token punctuation">(</span>head<span class="token punctuation">)</span>
-         <span class="token punctuation">{</span>
-             s<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>head<span class="token operator">-</span><span class="token operator">></span>val<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//循环遍历，入栈</span>
-             head<span class="token operator">=</span>head<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
-         <span class="token punctuation">}</span>
-         <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token operator">!</span>s<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-         <span class="token punctuation">{</span>
-            result<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//出栈</span>
-            s<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-         <span class="token punctuation">}</span>
-         <span class="token keyword">return</span> result<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
-<p>解法二：<br>递归在本质上就是一个栈结构，可以用递归来实现。当访问到每个节点的时候，先递归输出它后面的节点，再输出该节点，最后链表的输出结果就反过来了。</p>
-<h4 id="leetcode解答：-1"><a href="#leetcode解答：-1" class="headerlink" title="leetcode解答："></a>leetcode解答：</h4><pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */</span>
-<span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> result<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//输出</span>
-    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">reversePrint</span><span class="token punctuation">(</span>ListNode<span class="token operator">*</span> head<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>head<span class="token operator">==</span><span class="token keyword">nullptr</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
-        <span class="token function">reversePrint</span><span class="token punctuation">(</span>head<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//递归</span>
-        result<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>head<span class="token operator">-</span><span class="token operator">></span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
-<p>解法三：改变链表的结构<br>直接翻转指针。<br><img src="https://img-blog.csdnimg.cn/20200328221130283.png" alt="在这里插入图片描述"><br>  初始状态，pre是NULL，head指向当前的头节点A，next指向A节点的下一个节点B。首先从A节点开始逆序，将A节点的next指针指向pre，因为pre的当前值是NULL，所以A节点就从链表中脱离出来了，然后移动head和next指针，使它们分别指向B节点和B的下一个节点C（因为当前的next已经指向B节点了，因此修改A节点的next指针不会导致链表丢失）。逆向节点A之后，链表的状态如图下图所示：<br>  <img src="https://img-blog.csdnimg.cn/20200328221523995.png" alt="在这里插入图片描述"><br>  经过一轮迭代：<br>  <img src="https://img-blog.csdnimg.cn/20200328221551100.png" alt="在这里插入图片描述"><br>再经过一轮迭代：<br><img src="https://img-blog.csdnimg.cn/20200328221644843.png" alt="在这里插入图片描述"><br>可以看出再经过一轮就可以完成链表的逆序排序，循环的终止条件为head为空NULL</p>
-<p>链表的状态图 参考:<a href="https://blog.csdn.net/lycnjupt/article/details/47103433" target="_blank" rel="noopener">单链表的逆序</a><br>leetcode解答:</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */</span>
-<span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> result<span class="token punctuation">;</span>
-    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">reversePrint</span><span class="token punctuation">(</span>ListNode<span class="token operator">*</span> head<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        ListNode <span class="token operator">*</span>next<span class="token punctuation">;</span>
-        ListNode <span class="token operator">*</span>pre<span class="token operator">=</span><span class="token keyword">nullptr</span><span class="token punctuation">;</span>
-        <span class="token keyword">while</span><span class="token punctuation">(</span>head<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            next<span class="token operator">=</span>head<span class="token operator">-</span><span class="token operator">></span>next <span class="token punctuation">;</span><span class="token comment" spellcheck="true">//保存当前节点的下一节点</span>
-            head<span class="token operator">-</span><span class="token operator">></span>next<span class="token operator">=</span>pre<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//当前节点指向前一个节点，反向改变指针。</span>
-            pre<span class="token operator">=</span>head<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//更新前一个节点</span>
-            head<span class="token operator">=</span>next<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//更新当前节点</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">while</span><span class="token punctuation">(</span>pre<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token comment" spellcheck="true">//上一个while循环结束后，pre指向新的链表头</span>
-            result<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>pre<span class="token operator">-</span><span class="token operator">></span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            pre <span class="token operator">=</span> pre<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
-
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2695,7 +3015,7 @@ result<span class="token operator">=</span> model<span class="token punctuation"
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

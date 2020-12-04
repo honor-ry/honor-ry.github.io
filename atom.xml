@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.rongyao-blog.top/"/>
-  <updated>2020-12-04T02:01:45.618Z</updated>
+  <updated>2020-11-20T07:49:26.691Z</updated>
   <id>https://www.rongyao-blog.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>经典排序算法</title>
+    <link href="https://www.rongyao-blog.top/posts/9a95.html"/>
+    <id>https://www.rongyao-blog.top/posts/9a95.html</id>
+    <published>2020-12-04T10:47:15.897Z</published>
+    <updated>2020-11-20T07:49:26.691Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;排序算法&quot;&gt;&lt;a href=&quot;#排序算法&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>ubuntu16.04安装tensorflow教程</title>
@@ -507,35 +530,6 @@
     
     
       <category term="c++" scheme="https://www.rongyao-blog.top/tags/c/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DNN|CNN|百度paddle学习</title>
-    <link href="https://www.rongyao-blog.top/posts/d902.html"/>
-    <id>https://www.rongyao-blog.top/posts/d902.html</id>
-    <published>2020-04-08T01:38:32.000Z</published>
-    <updated>2020-08-30T13:32:20.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h3 id=&quot;深度学习三个步骤：&quot;&gt;&lt;a href=&quot;#深度学习三个步骤：&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://www.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="python 卷积神经网络" scheme="https://www.rongyao-blog.top/tags/python-%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
