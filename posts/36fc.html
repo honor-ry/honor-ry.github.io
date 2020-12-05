@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.rongyao-blog.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"www.rongyao-blog.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Markdown是一种可以使用普通文本编辑器编写的标记语言，通过类似HTML的标记语法，它可以使普通文本内容具有一定的格式。但是它本身是不支持修改字体、字号与颜色等功能的！    CSDN-markdown编辑器是其衍生版本，扩展了Markdown的功能（如表格、脚注、内嵌HTML等等）！对，就是内嵌HTML，接下来要讲的功能就需要使用内嵌HTML的方法来实现。    字体、字号与颜色">
@@ -189,10 +189,6 @@
     </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
 
 
     <main class="main">
@@ -293,12 +289,9 @@
 
 
 
-<pre><code>&lt;font face="黑体"&gt;我是黑体字&lt;/font&gt;
-&lt;font face="微软雅黑"&gt;我是微软雅黑&lt;/font&gt;
-&lt;font face="STCAIYUN"&gt;我是华文彩云&lt;/font&gt;
-&lt;font color=#0099ff size=7 face="黑体"&gt;color=#0099ff size=72 face="黑体"&lt;/font&gt;
-&lt;font color=#00ffff size=72&gt;color=#00ffff&lt;/font&gt;
-&lt;font color=gray size=72&gt;color=gray&lt;/font&gt;</code></pre><p>Size：规定文本的尺寸大小。可能的值：从 1 到 7 的数字。浏览器默认值是 3。</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;font <span class="attribute">face</span>=<span class="string">"黑体"</span>&gt;我是黑体字&lt;/font&gt;</span><br><span class="line">&lt;font <span class="attribute">face</span>=<span class="string">"微软雅黑"</span>&gt;我是微软雅黑&lt;/font&gt;</span><br><span class="line">&lt;font <span class="attribute">face</span>=<span class="string">"STCAIYUN"</span>&gt;我是华文彩云&lt;/font&gt;</span><br><span class="line">&lt;font <span class="attribute">color</span>=#0099ff <span class="attribute">size</span>=7 <span class="attribute">face</span>=<span class="string">"黑体"</span>&gt;color=#0099ff <span class="attribute">size</span>=72 <span class="attribute">face</span>=<span class="string">"黑体"</span>&lt;/font&gt;</span><br><span class="line">&lt;font <span class="attribute">color</span>=#00ffff <span class="attribute">size</span>=72&gt;color=#00ffff&lt;/font&gt;</span><br><span class="line">&lt;font <span class="attribute">color</span>=gray <span class="attribute">size</span>=72&gt;color=gray&lt;/font&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>Size：规定文本的尺寸大小。可能的值：从 1 到 7 的数字。浏览器默认值是 3。</p>
 
 
 
@@ -370,6 +363,23 @@
       </div>
 
   </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>honor
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.rongyao-blog.top/posts/36fc.html" title="CSDN-markdown编辑器语法——字体、字号与颜色设置">https://www.rongyao-blog.top/posts/36fc.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 </div>
 
 
@@ -492,10 +502,17 @@
         <a href="mailto:yourname@gmail.com" title="E-Mail → mailto:yourname@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
   </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
 
 
 
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
 
     </div>
   </aside>

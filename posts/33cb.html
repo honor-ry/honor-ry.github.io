@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.rongyao-blog.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"www.rongyao-blog.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="利用keras实现手写数字辨识首先要建一个Network scratch，input是28∗28的dimension，其实就是说这是一张image，image的解析度是28∗28，把它拉成长度是28∗28维的向量。output呢？现在做的是手写数字辨识，所以要决定它是0-9的哪个数字，output就是每一维对应的数字，所以output就是10维。中间假设你要两个layer，每个layer有50">
@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200330213935621.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200330214539656.png">
 <meta property="article:published_time" content="2020-03-30T13:47:05.000Z">
-<meta property="article:modified_time" content="2020-08-30T13:32:22.000Z">
+<meta property="article:modified_time" content="2020-12-05T13:47:31.648Z">
 <meta property="article:author" content="honor">
 <meta property="article:tag" content="机器学习 python">
 <meta name="twitter:card" content="summary">
@@ -195,10 +195,6 @@
     </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
 
 
     <main class="main">
@@ -243,7 +239,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-30 21:32:22" itemprop="dateModified" datetime="2020-08-30T21:32:22+08:00">2020-08-30</time>
+                <time title="修改时间：2020-12-05 21:47:31" itemprop="dateModified" datetime="2020-12-05T21:47:31+08:00">2020-12-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -290,75 +286,36 @@
         <a id="more"></a>
 
 <h3 id="利用keras实现手写数字辨识"><a href="#利用keras实现手写数字辨识" class="headerlink" title="利用keras实现手写数字辨识"></a>利用keras实现手写数字辨识</h3><p>首先要建一个Network scratch，input是<code>28∗28</code>的dimension，其实就是说这是一张image，image的解析度是<code>28∗28</code>，把它拉成长度是<code>28∗28</code>维的向量。output呢？现在做的是手写数字辨识，所以要决定它是0-9的哪个数字，output就是每一维对应的数字，所以output就是10维。中间假设你要两个layer，每个layer有500个hidden neuro</p>
-<h4 id="创建一个network"><a href="#创建一个network" class="headerlink" title="创建一个network"></a>创建一个network</h4><pre><code>model=Sequential()</code></pre><p>添加第一个hidden layer,  　Dense意思为添加一个全连接网络，Ｃon2d表示添加一个convolution layer卷积层，input_dim表示输入维度，units表示hidden layer的神经元个数，activation表示激活函数，可以为relu，sigmoid，tanh，softmax，hard_sigmoid，linear等</p>
-<pre><code>model.add(Dense(input_dim=28*28,units=500,activation='relu'))</code></pre><p>再添加一个layer</p>
-<pre><code>model.add(Dense(units=500,activation='relu'))</code></pre><p>最后的输出层，由于是数字识别一共10个数字，所以output是10维，units=10,激活函数选择softmax</p>
-<pre><code>model.add(Dense(units=10,activation='softmax'))</code></pre><h4 id="configuration配置"><a href="#configuration配置" class="headerlink" title="configuration配置"></a>configuration配置</h4><p>　　需要定义loss function，选择optimizer，以及评估指标metrics，其实所有的optimizer都是Gradent descent based，只是有不同的方法来决定learning rate，比如Adam，SGD，RMSprop，Adagrad，Adalta，Adamax ，Nadam等，configuration完成之后就可以开始train创建的Network。</p>
-<pre><code>model.compile(loss='categorical crossentropy',optimizer='adam',metrics=['accuracy'])</code></pre><p>　　</p>
+<!--more-->
+
+<h4 id="创建一个network"><a href="#创建一个network" class="headerlink" title="创建一个network"></a>创建一个network</h4><figure class="highlight ini"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">model</span>=Sequential()</span><br></pre></td></tr></tbody></table></figure>
+<p>添加第一个hidden layer,  　Dense意思为添加一个全连接网络，Ｃon2d表示添加一个convolution layer卷积层，input_dim表示输入维度，units表示hidden layer的神经元个数，activation表示激活函数，可以为relu，sigmoid，tanh，softmax，hard_sigmoid，linear等</p>
+<figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.add(<span class="constructor">Dense(<span class="params">input_dim</span>=28<span class="operator">*</span>28,<span class="params">units</span>=500,<span class="params">activation</span>='<span class="params">relu</span>')</span>)</span><br></pre></td></tr></tbody></table></figure>
+<p>再添加一个layer</p>
+<figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.add(<span class="constructor">Dense(<span class="params">units</span>=500,<span class="params">activation</span>='<span class="params">relu</span>')</span>)</span><br></pre></td></tr></tbody></table></figure>
+<p>最后的输出层，由于是数字识别一共10个数字，所以output是10维，units=10,激活函数选择softmax</p>
+<figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.add(<span class="constructor">Dense(<span class="params">units</span>=10,<span class="params">activation</span>='<span class="params">softmax</span>')</span>)</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="configuration配置"><a href="#configuration配置" class="headerlink" title="configuration配置"></a>configuration配置</h4><p>　　需要定义loss function，选择optimizer，以及评估指标metrics，其实所有的optimizer都是Gradent descent based，只是有不同的方法来决定learning rate，比如Adam，SGD，RMSprop，Adagrad，Adalta，Adamax ，Nadam等，configuration完成之后就可以开始train创建的Network。</p>
+<figure class="highlight gams"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">model</span>.compile(loss=<span class="string">'categorical crossentropy'</span>,optimizer=<span class="string">'adam'</span>,metrics=[<span class="string">'accuracy'</span>])</span><br></pre></td></tr></tbody></table></figure>
+
+
 <h4 id="pick-the-best-function"><a href="#pick-the-best-function" class="headerlink" title="pick the best function"></a>pick the best function</h4><p>model.fit方法，开始用Gradent Descent帮你去train你的Network，那么你要给它你的train_data input 和label，这里x_train代表image，y_train代表image的label，关于x_train和y_train的格式，你都要存成numpy array。</p>
-<pre><code>model.fit(x_train,y_train,batch_size=100,epochs=20)</code></pre><h4 id="使用模型"><a href="#使用模型" class="headerlink" title="使用模型"></a>使用模型</h4><p>接下来要拿train的network来使用，使用有两个不同的情景，这两个不同的情景一个是evaluation，意思就是说你的model在test data 上到底表现得怎样，call evaluate这个函数，然后把x_test，y_test喂给它，就会自动给你计算出Accuracy。它会output一个二维的向量，第一个维度代表了在test set上loss，第二个维度代表了在test set上的accuracy，这两个值是不一样的。loss可能用cross_entropy，Accuraccy是对与不对，即正确率。</p>
+<figure class="highlight angelscript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.fit(x_train,y_train,batch_size=<span class="number">100</span>,epochs=<span class="number">20</span>)</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="使用模型"><a href="#使用模型" class="headerlink" title="使用模型"></a>使用模型</h4><p>接下来要拿train的network来使用，使用有两个不同的情景，这两个不同的情景一个是evaluation，意思就是说你的model在test data 上到底表现得怎样，call evaluate这个函数，然后把x_test，y_test喂给它，就会自动给你计算出Accuracy。它会output一个二维的向量，第一个维度代表了在test set上loss，第二个维度代表了在test set上的accuracy，这两个值是不一样的。loss可能用cross_entropy，Accuraccy是对与不对，即正确率。</p>
 <ul>
-<li>case 1<pre><code>score = model.evaluate(x_test,y_test)
-print('Total loss on Testiong Set : ',score[0])
-print('Accuracy of Testiong Set : ',score[1])</code></pre>第二种是做predict，就是系统上线后，没有正确答案的，call predict进行预测</li>
-<li>case 2<pre><code>result = model.predict(x_test)</code></pre><h4 id="快速理解epoch、iteration和batch"><a href="#快速理解epoch、iteration和batch" class="headerlink" title="快速理解epoch、iteration和batch"></a>快速理解epoch、iteration和batch</h4>假设有1000个训练样本，batch_size=20,则iteration就是50，将所有的训练样本在同一个模型中训练5遍<br>batch_size * iteration = 样本数量，epoch=5.<br>所有样本完成一次前向传播+反向传播为一个epoch<blockquote>
+<li>case 1<figure class="highlight stata"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">score</span> = model.evaluate(x_test,y_test)</span><br><span class="line"><span class="keyword">print</span>('<span class="keyword">Total</span> loss <span class="keyword">on</span> Testiong <span class="keyword">Set</span> : ',<span class="keyword">score</span>[0])</span><br><span class="line"><span class="keyword">print</span>('Accuracy of Testiong <span class="keyword">Set</span> : ',<span class="keyword">score</span>[1])</span><br></pre></td></tr></tbody></table></figure>
+第二种是做predict，就是系统上线后，没有正确答案的，call predict进行预测</li>
+<li>case 2<figure class="highlight ini"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">result</span> = model.predict(x_test)</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="快速理解epoch、iteration和batch"><a href="#快速理解epoch、iteration和batch" class="headerlink" title="快速理解epoch、iteration和batch"></a>快速理解epoch、iteration和batch</h4>假设有1000个训练样本，batch_size=20,则iteration就是50，将所有的训练样本在同一个模型中训练5遍<br>batch_size * iteration = 样本数量，epoch=5.<br>所有样本完成一次前向传播+反向传播为一个epoch<blockquote>
 <p>batchsize：简单点说，就是我们一次要将多少个数据扔进模型去训练，这个值介于1和训练样本总个数之间。<br>iteration：迭代的次数（向模型中扔数据的次数）,一个迭代= 同一批batchsize数据的一个正向通过+一个反向通过。<br>Epoch: 训练集中的全部样本都在训练模型中走了一遍，并返回一次（有去有回），为一个epoch。</p>
 </blockquote>
 </li>
 </ul>
 <p>由于这个例子中需要使用MNIST数据集，给出的源码中使用(x_train, y_train), (x_test, y_test) = mnist.load_data()  下载数据集，但是过程中需要翻墙，故我在此先将MNIST数据集的包下载下来，然后稍微修改下代码，完成数据的import.其中，numpy.load() 函数可以读取 .npy .npz 等文件类型，并返回对应的数据类型。<br>1）如果文件类型是 .pny 则返回一个1维数组。<br>2）如果文件类型是 .npz 则返回一个类似字典的数据类型，包含 {filename: array} 键值对。</p>
-<pre class=" language-python"><code class="language-python">path <span class="token operator">=</span> <span class="token string">'C:\\Users\\Administrator\\Desktop\\mnist.npz'</span>
-    f <span class="token operator">=</span> np<span class="token punctuation">.</span>load<span class="token punctuation">(</span>path<span class="token punctuation">)</span>
-    x_train<span class="token punctuation">,</span> y_train <span class="token operator">=</span> f<span class="token punctuation">[</span><span class="token string">'x_train'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span><span class="token string">'y_train'</span><span class="token punctuation">]</span>
-    x_test<span class="token punctuation">,</span> y_test <span class="token operator">=</span> f<span class="token punctuation">[</span><span class="token string">'x_test'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span><span class="token string">'y_test'</span><span class="token punctuation">]</span>
-    f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">path = <span class="string">'C:\\Users\\Administrator\\Desktop\\mnist.npz'</span></span><br><span class="line">    f = np.load(path)</span><br><span class="line">    x_train, y_train = f[<span class="string">'x_train'</span>], f[<span class="string">'y_train'</span>]</span><br><span class="line">    x_test, y_test = f[<span class="string">'x_test'</span>], f[<span class="string">'y_test'</span>]</span><br><span class="line">    f.close()</span><br></pre></td></tr></tbody></table></figure>
 <p>下载地址：<a href="https://pan.baidu.com/s/1EQdC4QfNL4OeMeWtJk9DEQ" target="_blank" rel="noopener">mnist数据集</a><br>提取码：gyt8 </p>
-<h4 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
-<span class="token keyword">from</span> keras<span class="token punctuation">.</span>models <span class="token keyword">import</span> Sequential
-<span class="token keyword">from</span> keras<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>core <span class="token keyword">import</span> Dense<span class="token punctuation">,</span>Dropout<span class="token punctuation">,</span>Activation
-<span class="token keyword">from</span> keras<span class="token punctuation">.</span>optimizers <span class="token keyword">import</span> SGD<span class="token punctuation">,</span>Adam
-<span class="token keyword">from</span> keras<span class="token punctuation">.</span>utils <span class="token keyword">import</span> np_utils
-<span class="token keyword">from</span> keras<span class="token punctuation">.</span>datasets <span class="token keyword">import</span> mnist
-
-<span class="token keyword">def</span> <span class="token function">load_data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    path <span class="token operator">=</span> <span class="token string">'C:\\Users\\Administrator\\Desktop\\mnist.npz'</span>
-    f <span class="token operator">=</span> np<span class="token punctuation">.</span>load<span class="token punctuation">(</span>path<span class="token punctuation">)</span>
-    x_train<span class="token punctuation">,</span> y_train <span class="token operator">=</span> f<span class="token punctuation">[</span><span class="token string">'x_train'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span><span class="token string">'y_train'</span><span class="token punctuation">]</span>
-    x_test<span class="token punctuation">,</span> y_test <span class="token operator">=</span> f<span class="token punctuation">[</span><span class="token string">'x_test'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span><span class="token string">'y_test'</span><span class="token punctuation">]</span>
-    f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    number<span class="token operator">=</span><span class="token number">10000</span>
-    x_train<span class="token operator">=</span>x_train<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span>number<span class="token punctuation">]</span>
-    y_train<span class="token operator">=</span>y_train<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span>number<span class="token punctuation">]</span>
-    x_train<span class="token operator">=</span>x_train<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>number<span class="token punctuation">,</span><span class="token number">28</span><span class="token operator">*</span><span class="token number">28</span><span class="token punctuation">)</span>
-    x_test<span class="token operator">=</span>x_test<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>x_test<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token number">28</span><span class="token operator">*</span><span class="token number">28</span><span class="token punctuation">)</span>
-    x_train<span class="token operator">=</span>x_train<span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token string">'float32'</span><span class="token punctuation">)</span>
-    x_test<span class="token operator">=</span>x_test<span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token string">'float32'</span><span class="token punctuation">)</span>
-    y_train<span class="token operator">=</span>np_utils<span class="token punctuation">.</span>to_categorical<span class="token punctuation">(</span>y_train<span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span>
-    y_test<span class="token operator">=</span>np_utils<span class="token punctuation">.</span>to_categorical<span class="token punctuation">(</span>y_test<span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span>
-    x_train<span class="token operator">=</span>x_train
-    x_test<span class="token operator">=</span>x_test
-    x_train<span class="token operator">=</span>x_train<span class="token operator">/</span><span class="token number">255</span>
-    x_test<span class="token operator">=</span>x_test<span class="token operator">/</span><span class="token number">255</span>
-    <span class="token keyword">return</span> <span class="token punctuation">(</span>x_train<span class="token punctuation">,</span>y_train<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>x_test<span class="token punctuation">,</span>y_test<span class="token punctuation">)</span>
-
-<span class="token punctuation">(</span>x_train<span class="token punctuation">,</span>y_train<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>x_test<span class="token punctuation">,</span>y_test<span class="token punctuation">)</span><span class="token operator">=</span>load_data<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">#载入数据</span>
-
-model<span class="token operator">=</span>Sequential<span class="token punctuation">(</span><span class="token punctuation">)</span>
-model<span class="token punctuation">.</span>add<span class="token punctuation">(</span>Dense<span class="token punctuation">(</span>input_dim<span class="token operator">=</span><span class="token number">28</span><span class="token operator">*</span><span class="token number">28</span><span class="token punctuation">,</span>units<span class="token operator">=</span><span class="token number">633</span><span class="token punctuation">,</span>activation<span class="token operator">=</span><span class="token string">'sigmoid'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">#维度28*28，激活函数为sigmoid</span>
-model<span class="token punctuation">.</span>add<span class="token punctuation">(</span>Dense<span class="token punctuation">(</span>units<span class="token operator">=</span><span class="token number">633</span><span class="token punctuation">,</span>activation<span class="token operator">=</span><span class="token string">'sigmoid'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-model<span class="token punctuation">.</span>add<span class="token punctuation">(</span>Dense<span class="token punctuation">(</span>units<span class="token operator">=</span><span class="token number">633</span><span class="token punctuation">,</span>activation<span class="token operator">=</span><span class="token string">'sigmoid'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    model<span class="token punctuation">.</span>add<span class="token punctuation">(</span>Dense<span class="token punctuation">(</span>units<span class="token operator">=</span><span class="token number">689</span><span class="token punctuation">,</span>activation<span class="token operator">=</span><span class="token string">'sigmoid'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-model<span class="token punctuation">.</span>add<span class="token punctuation">(</span>Dense<span class="token punctuation">(</span>units<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span>activation<span class="token operator">=</span><span class="token string">'softmax'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">#输出层一定要是10维，units=10;</span>
-
-model<span class="token punctuation">.</span>compile<span class="token punctuation">(</span>loss<span class="token operator">=</span><span class="token string">'mse'</span><span class="token punctuation">,</span>optimizer<span class="token operator">=</span>SGD<span class="token punctuation">(</span>lr<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>metrics<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'accuracy'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">#config</span>
-
-model<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>x_train<span class="token punctuation">,</span>y_train<span class="token punctuation">,</span>batch_size<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">,</span>epochs<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">)</span>
-
-result<span class="token operator">=</span> model<span class="token punctuation">.</span>evaluate<span class="token punctuation">(</span>x_test<span class="token punctuation">,</span>y_test<span class="token punctuation">)</span>
-
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nTEST ACC:'</span><span class="token punctuation">,</span>result<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre>
+<h4 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</span><br><span class="line"><span class="keyword">from</span> keras.layers.core <span class="keyword">import</span> Dense,Dropout,Activation</span><br><span class="line"><span class="keyword">from</span> keras.optimizers <span class="keyword">import</span> SGD,Adam</span><br><span class="line"><span class="keyword">from</span> keras.utils <span class="keyword">import</span> np_utils</span><br><span class="line"><span class="keyword">from</span> keras.datasets <span class="keyword">import</span> mnist</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">()</span>:</span></span><br><span class="line">    path = <span class="string">'C:\\Users\\Administrator\\Desktop\\mnist.npz'</span></span><br><span class="line">    f = np.load(path)</span><br><span class="line">    x_train, y_train = f[<span class="string">'x_train'</span>], f[<span class="string">'y_train'</span>]</span><br><span class="line">    x_test, y_test = f[<span class="string">'x_test'</span>], f[<span class="string">'y_test'</span>]</span><br><span class="line">    f.close()</span><br><span class="line">    number=<span class="number">10000</span></span><br><span class="line">    x_train=x_train[<span class="number">0</span>:number]</span><br><span class="line">    y_train=y_train[<span class="number">0</span>:number]</span><br><span class="line">    x_train=x_train.reshape(number,<span class="number">28</span>*<span class="number">28</span>)</span><br><span class="line">    x_test=x_test.reshape(x_test.shape[<span class="number">0</span>],<span class="number">28</span>*<span class="number">28</span>)</span><br><span class="line">    x_train=x_train.astype(<span class="string">'float32'</span>)</span><br><span class="line">    x_test=x_test.astype(<span class="string">'float32'</span>)</span><br><span class="line">    y_train=np_utils.to_categorical(y_train,<span class="number">10</span>)</span><br><span class="line">    y_test=np_utils.to_categorical(y_test,<span class="number">10</span>)</span><br><span class="line">    x_train=x_train</span><br><span class="line">    x_test=x_test</span><br><span class="line">    x_train=x_train/<span class="number">255</span></span><br><span class="line">    x_test=x_test/<span class="number">255</span></span><br><span class="line">    <span class="keyword">return</span> (x_train,y_train),(x_test,y_test)</span><br><span class="line"></span><br><span class="line">(x_train,y_train),(x_test,y_test)=load_data() <span class="comment">#载入数据</span></span><br><span class="line"></span><br><span class="line">model=Sequential()</span><br><span class="line">model.add(Dense(input_dim=<span class="number">28</span>*<span class="number">28</span>,units=<span class="number">633</span>,activation=<span class="string">'sigmoid'</span>)) <span class="comment">#维度28*28，激活函数为sigmoid</span></span><br><span class="line">model.add(Dense(units=<span class="number">633</span>,activation=<span class="string">'sigmoid'</span>))</span><br><span class="line">model.add(Dense(units=<span class="number">633</span>,activation=<span class="string">'sigmoid'</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">	model.add(Dense(units=<span class="number">689</span>,activation=<span class="string">'sigmoid'</span>))</span><br><span class="line">	</span><br><span class="line">model.add(Dense(units=<span class="number">10</span>,activation=<span class="string">'softmax'</span>)) <span class="comment">#输出层一定要是10维，units=10;</span></span><br><span class="line"></span><br><span class="line">model.compile(loss=<span class="string">'mse'</span>,optimizer=SGD(lr=<span class="number">0.1</span>),metrics=[<span class="string">'accuracy'</span>])  <span class="comment">#config</span></span><br><span class="line"></span><br><span class="line">model.fit(x_train,y_train,batch_size=<span class="number">100</span>,epochs=<span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">result= model.evaluate(x_test,y_test)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'\nTEST ACC:'</span>,result[<span class="number">1</span>])</span><br></pre></td></tr></tbody></table></figure>
 <p>添加10层，发现结果还是11%的accuracy<br><img src="https://img-blog.csdnimg.cn/2020033020550831.png" alt="在这里插入图片描述"><br>首先先看你在train data的performer，如果它在train data上做得好，那么可能是过拟合，如果在train data上做得不好，怎么能让它做到举一反三呢。所以至少先让它在train data 上得到好的结果。<br><img src="https://img-blog.csdnimg.cn/20200330211229389.png" alt="在这里插入图片描述">)<img src="https://img-blog.csdnimg.cn/20200330211316773.png" alt="在这里插入图片描述"><br>由得到的结果发现train data acc 也是差的，就说明train没有train好，并不是overfiting过拟合。<br>接下来进行调参过程:<br>MSE均方误差不适合于分类问题，将loss function改为categorical_crossentropy，看看结果如何：<br><img src="https://img-blog.csdnimg.cn/20200330213935621.png" alt="在这里插入图片描述"><br>发现一换成交叉熵categorical_crossentropy，在train set上的结果就变得很好了。得到86.21%的正确率。</p>
 <h4 id="activation-function"><a href="#activation-function" class="headerlink" title="activation function"></a>activation function</h4><p>把sigmoid都改为relu，发现在train的accuracy就爬起来了，train的acc已经将近100分了，test 上也可以得到95.45%<br><img src="https://img-blog.csdnimg.cn/20200330214539656.png" alt="在这里插入图片描述"></p>
 <script>
@@ -403,6 +360,23 @@ result<span class="token operator">=</span> model<span class="token punctuation"
       </div>
 
   </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>honor
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.rongyao-blog.top/posts/33cb.html" title="机器学习-李宏毅| keras demo | python">https://www.rongyao-blog.top/posts/33cb.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 </div>
 
 
@@ -525,10 +499,17 @@ result<span class="token operator">=</span> model<span class="token punctuation"
         <a href="mailto:yourname@gmail.com" title="E-Mail → mailto:yourname@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
   </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
 
 
 
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
 
     </div>
   </aside>
