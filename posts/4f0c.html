@@ -9,6 +9,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="<meta name="baidu-site-verification" content="code-T11b7wRKA4" />">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -17,13 +20,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.rongyao-blog.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"honor-ry.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Machine Learning(机器学习)是研究计算机怎样模拟或实现人类的学习行为，以获取新的知识或技能，重新组织已有的知识结构使之不断改善自身的性能。 有一个算法叫支持向量机，里面有个巧妙的数学技巧，能让计算机处理无限多个特征。   监督学习：其基本思想是数据集中的每个样本都有相应的“正确答案”，再根据这些样本作出预测。例如垃圾邮件问题。无监督学习：在无监督学习中，不同于监督学习的数据的样">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习|Andrew Ng|学习笔记">
-<meta property="og:url" content="https://www.rongyao-blog.top/posts/4f0c.html">
+<meta property="og:url" content="http://honor-ry.github.io/posts/4f0c.html">
 <meta property="og:site_name" content="honor">
 <meta property="og:description" content="Machine Learning(机器学习)是研究计算机怎样模拟或实现人类的学习行为，以获取新的知识或技能，重新组织已有的知识结构使之不断改善自身的性能。 有一个算法叫支持向量机，里面有个巧妙的数学技巧，能让计算机处理无限多个特征。   监督学习：其基本思想是数据集中的每个样本都有相应的“正确答案”，再根据这些样本作出预测。例如垃圾邮件问题。无监督学习：在无监督学习中，不同于监督学习的数据的样">
 <meta property="og:locale" content="zh_CN">
@@ -57,7 +60,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/2020040111102134.png">
 
-<link rel="canonical" href="https://www.rongyao-blog.top/posts/4f0c.html">
+<link rel="canonical" href="http://honor-ry.github.io/posts/4f0c.html">
 
 
 <script id="page-configurations">
@@ -173,7 +176,7 @@
   </li>
         <li class="menu-item menu-item-photo">
 
-    <a href="https://wangrongyao.lofter.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-heartbeat"></i>摄影</a>
+    <span class="exturl" data-url="aHR0cHM6Ly93YW5ncm9uZ3lhby5sb2Z0ZXIuY29t"><i class="fa fa-fw fa-heartbeat"></i>摄影</span>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -227,7 +230,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.rongyao-blog.top/posts/4f0c.html">
+    <link itemprop="mainEntityOfPage" href="http://honor-ry.github.io/posts/4f0c.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logol1.png">
@@ -409,10 +412,10 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www.rongyao-blog.top/posts/4f0c.html" title="机器学习|Andrew Ng|学习笔记">https://www.rongyao-blog.top/posts/4f0c.html</a>
+    <a href="http://honor-ry.github.io/posts/4f0c.html" title="机器学习|Andrew Ng|学习笔记">http://honor-ry.github.io/posts/4f0c.html</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -531,14 +534,14 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/honor-ry" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;honor-ry" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hvbm9yLXJ5" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;honor-ry"><i class="fa fa-fw fa-github"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:yourname@gmail.com" title="E-Mail → mailto:yourname@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+        <span class="exturl" data-url="bWFpbHRvOnlvdXJuYW1lQGdtYWlsLmNvbQ==" title="E-Mail → mailto:yourname@gmail.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</span>
       </span>
   </div>
   <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
   </div>
 
 
@@ -572,7 +575,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">honor</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9taXN0LnRoZW1lLW5leHQub3Jn">NexT.Mist</span> 强力驱动
   </div>
 <div class="powered-by">
 <i class="fa fa-user-md"></i>
@@ -636,6 +639,15 @@
 
 
   
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
 
 
 
