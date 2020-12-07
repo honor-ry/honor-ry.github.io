@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://top.rongyao-blog.top/"/>
-  <updated>2020-12-04T02:01:45.618Z</updated>
+  <updated>2020-12-07T11:24:12.635Z</updated>
   <id>https://top.rongyao-blog.top/</id>
   
   <author>
@@ -15,6 +15,72 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SSD学习小结(三)FTL</title>
+    <link href="https://top.rongyao-blog.top/posts/41f4.html"/>
+    <id>https://top.rongyao-blog.top/posts/41f4.html</id>
+    <published>2020-12-07T11:24:50.542Z</published>
+    <updated>2020-12-07T11:24:12.635Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;FTL是SSD固件的核心组成。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="SSD" scheme="https://top.rongyao-blog.top/categories/SSD/"/>
+    
+    
+      <category term="SSD" scheme="https://top.rongyao-blog.top/tags/SSD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SSD学习小结(二)</title>
+    <link href="https://top.rongyao-blog.top/posts/caa7.html"/>
+    <id>https://top.rongyao-blog.top/posts/caa7.html</id>
+    <published>2020-12-07T11:24:50.540Z</published>
+    <updated>2020-12-07T11:24:19.760Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;SLC、MLC、TLC、QLC&quot;&gt;&lt;a href=&quot;#SLC、MLC、TLC、QLC&quot; class=&quot;headerlink&quot; title=&quot;SLC、MLC、TLC、QLC&quot;&gt;&lt;/a&gt;SLC、MLC、TLC、QLC&lt;/h3&gt;&lt;p&gt;SLC：一个存储单元存储1bit数据&lt;/p&gt;
+&lt;p&gt;MLC：存储2bit数据&lt;/p&gt;
+&lt;p&gt;TLC：存储3bit数据&lt;/p&gt;
+&lt;p&gt;QLC: 存储4bit数据&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="SSD" scheme="https://top.rongyao-blog.top/categories/SSD/"/>
+    
+    
+      <category term="SSD" scheme="https://top.rongyao-blog.top/tags/SSD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SSD学习小结(一)</title>
+    <link href="https://top.rongyao-blog.top/posts/a03.html"/>
+    <id>https://top.rongyao-blog.top/posts/a03.html</id>
+    <published>2020-12-07T11:24:50.537Z</published>
+    <updated>2020-12-07T11:24:22.341Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;SSDvsHDD&quot;&gt;&lt;a href=&quot;#SSDvsHDD&quot; class=&quot;headerlink&quot; title=&quot;SSDvsHDD&quot;&gt;&lt;/a&gt;SSDvsHDD&lt;/h3&gt;&lt;p&gt;传统的HDD是“马达+磁头+磁盘”的机械结构&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="SSD" scheme="https://top.rongyao-blog.top/categories/SSD/"/>
+    
+    
+      <category term="SSD" scheme="https://top.rongyao-blog.top/tags/SSD/"/>
+    
+  </entry>
   
   <entry>
     <title>ubuntu16.04安装tensorflow教程</title>
@@ -79,20 +145,11 @@
     <link href="https://top.rongyao-blog.top/posts/9071.html"/>
     <id>https://top.rongyao-blog.top/posts/9071.html</id>
     <published>2020-08-26T12:07:47.000Z</published>
-    <updated>2020-11-28T02:17:34.000Z</updated>
+    <updated>2020-12-07T11:25:56.628Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;script&gt;
-        document.querySelectorAll(&#39;.github-emoji&#39;)
-          .forEach(el =&gt; {
-            if (!el.dataset.src) {
-        
-      
+      &lt;p&gt;CCCCCCCCCCCCCCCCCCCCCCC&lt;/p&gt;
     
     </summary>
     
@@ -124,11 +181,11 @@
     <link href="https://top.rongyao-blog.top/posts/6e6c.html"/>
     <id>https://top.rongyao-blog.top/posts/6e6c.html</id>
     <published>2020-07-12T15:10:35.000Z</published>
-    <updated>2020-11-28T02:50:10.000Z</updated>
+    <updated>2020-12-07T11:25:37.551Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt; 在pycharm中安装tensorflow后&lt;br&gt;    &lt;img src=&quot;https://img-blog.csdnimg.cn/20200712190018795.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;运行如下测试代码：&lt;/p&gt;
+      &lt;p&gt; 在pycharm中安装tensorflow后&lt;/p&gt;
     
     </summary>
     
@@ -143,22 +200,11 @@
     <link href="https://top.rongyao-blog.top/posts/f8eb.html"/>
     <id>https://top.rongyao-blog.top/posts/f8eb.html</id>
     <published>2020-07-12T08:23:44.000Z</published>
-    <updated>2020-12-05T13:55:23.246Z</updated>
+    <updated>2020-12-07T11:26:08.092Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;p&gt;&lt;strong&gt;Classification&lt;/strong&gt;&lt;/p&gt;
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;监督学习任务（分类）&quot;&gt;&lt;a href=&quot;#监督学习任务（分类）&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;p&gt;&lt;strong&gt;Classification&lt;/strong&gt;&lt;/p&gt;
     
     </summary>
     
@@ -316,19 +362,19 @@
     <link href="https://top.rongyao-blog.top/posts/ac4f.html"/>
     <id>https://top.rongyao-blog.top/posts/ac4f.html</id>
     <published>2020-07-04T02:54:58.000Z</published>
-    <updated>2020-08-30T13:32:20.000Z</updated>
+    <updated>2020-12-07T11:28:27.473Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h4 id=&quot;文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。&quot;&gt;&lt;a
-        
-      
+      &lt;h4 id=&quot;文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。&quot;&gt;&lt;a href=&quot;#文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。&quot; class=&quot;headerlink&quot; title=&quot;文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。&quot;&gt;&lt;/a&gt;文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。&lt;/h4&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;数据来源：从网站上爬取56821条数据中文新闻摘要&lt;ul&gt;
+&lt;li&gt;数据内容：包含10种类别，国际、文化、娱乐、体育、财经、汽车、教育、科技、房产、证券&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://imgconvert.csdnimg.cn/aHR0cHM6Ly9haS1zdHVkaW8tc3RhdGljLW9ubGluZS5jZG4uYmNlYm9zLmNvbS8xNzg5ZWQ1OTM5ZDI0MTM0YjljZTRkNDVjYTE1ZTBmZGYyMWYyNWFhNDAwYzRmNjg5OGNjNGUwMmFlYTVjNzRl?x-oss-process=image/format,png&quot; alt=&quot;&quot;&gt;&lt;br&gt;严格意义上来说这个新闻的数据集不是太好，每个类目的新闻数目不是一致的，一个好的数据集对于各个类别分布是比较均匀的。&lt;/p&gt;
     
     </summary>
     
@@ -372,19 +418,15 @@
     <link href="https://top.rongyao-blog.top/posts/d25d.html"/>
     <id>https://top.rongyao-blog.top/posts/d25d.html</id>
     <published>2020-06-27T14:23:21.000Z</published>
-    <updated>2020-08-30T13:32:20.000Z</updated>
+    <updated>2020-12-07T11:26:34.498Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h3 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;h3 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;泰坦尼克号的沉没是历史上最臭名昭著的沉船事件之一。1912年4月15日，泰坦尼克号在处女航中撞上冰山沉没，2224名乘客和船员中1502人遇难。这一耸人听闻的悲剧震惊了国际社会，并导致了更好的船舶安全条例。&lt;/li&gt;
+&lt;li&gt;沉船造成如此巨大人员伤亡的原因之一是没有足够的救生艇来容纳乘客和船员。虽然在沉船事件中幸存下来也有一些运气的因素，但有些人比其他人更有可能幸存下来，比如妇女、儿童和上层阶级。&lt;/li&gt;
+&lt;li&gt;在这个挑战中，我们要求你完成对可能存活下来的人的分析。我们特别要求你们运用机器学习工具来预测哪些乘客在灾难中幸存下来。&lt;br&gt;数据来源：&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly93d3cua2FnZ2xlLmNvbS9jL3RpdGFuaWMvZGF0YQ==&quot; title=&quot;https://www.kaggle.com/c/titanic/data&quot;&gt;https://www.kaggle.com/c/titanic/data&lt;i class=&quot;fa fa-external-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -401,19 +443,11 @@
     <link href="https://top.rongyao-blog.top/posts/63ec.html"/>
     <id>https://top.rongyao-blog.top/posts/63ec.html</id>
     <published>2020-06-23T11:23:33.000Z</published>
-    <updated>2020-12-05T13:52:13.340Z</updated>
+    <updated>2020-12-07T11:26:57.563Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h3 id=&quot;一、图片人脸检测（opencv）&quot;&gt;&lt;a href=&quot;#一、图片人脸检测（opencv）&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;h3 id=&quot;一、图片人脸检测（opencv）&quot;&gt;&lt;a href=&quot;#一、图片人脸检测（opencv）&quot; class=&quot;headerlink&quot; title=&quot;一、图片人脸检测（opencv）&quot;&gt;&lt;/a&gt;一、图片人脸检测（opencv）&lt;/h3&gt;&lt;h4 id=&quot;1、安装opencv环境&quot;&gt;&lt;a href=&quot;#1、安装opencv环境&quot; class=&quot;headerlink&quot; title=&quot;1、安装opencv环境&quot;&gt;&lt;/a&gt;1、安装opencv环境&lt;/h4&gt;&lt;p&gt;介绍windows中opencv在python3上的实现，我的系统环境win10+python3.6+opcv3.4.1&lt;/p&gt;
     
     </summary>
     
@@ -449,89 +483,6 @@
     
     
       <category term="python 人工智能 强化学习" scheme="https://top.rongyao-blog.top/tags/python-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD-%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python安装dlib遇到的错误:AttributeError:module ‘dlib’ has no attribute ‘get_frontal_face_detector’问题解决</title>
-    <link href="https://top.rongyao-blog.top/posts/3826.html"/>
-    <id>https://top.rongyao-blog.top/posts/3826.html</id>
-    <published>2020-06-16T14:17:01.000Z</published>
-    <updated>2020-08-30T13:32:22.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;p&gt;dlib是一个非常好用的跨平台的通用库，但是在安装过程中遇到了许多问题，我在使用Anaconda安装dlib过程中，用pip install 安装，安装成功后，import没有问题&lt;br&gt;如下图，import
-        
-      
-    
-    </summary>
-    
-    
-    
-      <category term="python opencv" scheme="https://top.rongyao-blog.top/tags/python-opencv/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>matlab对控制系统进行时域和频域联合分析</title>
-    <link href="https://top.rongyao-blog.top/posts/4d65.html"/>
-    <id>https://top.rongyao-blog.top/posts/4d65.html</id>
-    <published>2020-06-09T12:20:16.000Z</published>
-    <updated>2020-12-05T13:51:49.806Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h2 id=&quot;时域频域联合分析&quot;&gt;&lt;a href=&quot;#时域频域联合分析&quot; class=&quot;headerlink&quot; title=&quot;时域频域联合分析&quot;&gt;&lt;/a&gt;时域频域联合分析&lt;/h2&gt;&lt;p&gt;  
-        
-      
-    
-    </summary>
-    
-    
-      <category term="控制" scheme="https://top.rongyao-blog.top/categories/%E6%8E%A7%E5%88%B6/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>C++ |标准模板库STL</title>
-    <link href="https://top.rongyao-blog.top/posts/988f.html"/>
-    <id>https://top.rongyao-blog.top/posts/988f.html</id>
-    <published>2020-04-20T10:21:53.000Z</published>
-    <updated>2020-12-05T13:47:27.613Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h3 id=&quot;Vector&quot;&gt;&lt;a href=&quot;#Vector&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="C++学习" scheme="https://top.rongyao-blog.top/categories/C-%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="c++" scheme="https://top.rongyao-blog.top/tags/c/"/>
     
   </entry>
   

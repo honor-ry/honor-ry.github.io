@@ -23,35 +23,25 @@
     var CONFIG = {"hostname":"top.rongyao-blog.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Anaconda3下载下载地址：https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;archive&#x2F;选择anaconda 3.5.2 对应的python版本是python3.6    安装anaconda3点击next 点击I Agree 然后选择Install for All Users，点击Next选择安装位置，建议不要安装在C盘。默认第一项是没有选">
+  <meta name="description" content="SLC、MLC、TLC、QLCSLC：一个存储单元存储1bit数据 MLC：存储2bit数据 TLC：存储3bit数据 QLC: 存储4bit数据">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Anaconda3安装教程(详细)">
-<meta property="og:url" content="https://top.rongyao-blog.top/posts/bf8d.html">
+<meta property="og:title" content="SSD学习小结(二)">
+<meta property="og:url" content="https://top.rongyao-blog.top/posts/caa7.html">
 <meta property="og:site_name" content="honor">
-<meta property="og:description" content="Anaconda3下载下载地址：https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;archive&#x2F;选择anaconda 3.5.2 对应的python版本是python3.6    安装anaconda3点击next 点击I Agree 然后选择Install for All Users，点击Next选择安装位置，建议不要安装在C盘。默认第一项是没有选">
+<meta property="og:description" content="SLC、MLC、TLC、QLCSLC：一个存储单元存储1bit数据 MLC：存储2bit数据 TLC：存储3bit数据 QLC: 存储4bit数据">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200319185750950.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200319185859583.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020031918593948.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200319190001173.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020031919012346.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200319200626716.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200319200952980.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200319202441221.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200319202521557.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200319202840535.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200320102608665.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200320102827481.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200320102847141.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020032010311961.png">
-<meta property="article:published_time" content="2020-03-19T12:29:38.000Z">
-<meta property="article:modified_time" content="2020-12-05T13:49:02.356Z">
+<meta property="og:image" content="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207110416671.png">
+<meta property="og:image" content="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207112003659.png">
+<meta property="og:image" content="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207112055793.png">
+<meta property="og:image" content="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207162433285.png">
+<meta property="article:published_time" content="2020-12-07T11:24:50.540Z">
+<meta property="article:modified_time" content="2020-12-07T11:24:19.760Z">
 <meta property="article:author" content="honor">
-<meta property="article:tag" content="anaconda python">
+<meta property="article:tag" content="SSD">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200319185750950.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70">
+<meta name="twitter:image" content="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207110416671.png">
 
-<link rel="canonical" href="https://top.rongyao-blog.top/posts/bf8d.html">
+<link rel="canonical" href="https://top.rongyao-blog.top/posts/caa7.html">
 
 
 <script id="page-configurations">
@@ -64,7 +54,7 @@
   };
 </script>
 
-  <title>Anaconda3安装教程(详细) | honor</title>
+  <title>SSD学习小结(二) | honor</title>
   
 
 
@@ -221,7 +211,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://top.rongyao-blog.top/posts/bf8d.html">
+    <link itemprop="mainEntityOfPage" href="https://top.rongyao-blog.top/posts/caa7.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logol1.png">
@@ -234,7 +224,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Anaconda3安装教程(详细)
+          SSD学习小结(二)
         </h1>
 
         <div class="post-meta">
@@ -243,23 +233,17 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-03-19 20:29:38" itemprop="dateCreated datePublished" datetime="2020-03-19T20:29:38+08:00">2020-03-19</time>
+              <time title="创建时间：2020-12-07 19:24:50 / 修改时间：19:24:19" itemprop="dateCreated datePublished" datetime="2020-12-07T19:24:50+08:00">2020-12-07</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-05 21:49:02" itemprop="dateModified" datetime="2020-12-05T21:49:02+08:00">2020-12-05</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                  <a href="/categories/SSD/" itemprop="url" rel="index"><span itemprop="name">SSD</span></a>
                 </span>
             </span>
 
@@ -279,8 +263,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/posts/bf8d.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/bf8d.html" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/caa7.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/caa7.html" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -295,23 +279,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <a id="more"></a>
+        <h3 id="SLC、MLC、TLC、QLC"><a href="#SLC、MLC、TLC、QLC" class="headerlink" title="SLC、MLC、TLC、QLC"></a>SLC、MLC、TLC、QLC</h3><p>SLC：一个存储单元存储1bit数据</p>
+<p>MLC：存储2bit数据</p>
+<p>TLC：存储3bit数据</p>
+<p>QLC: 存储4bit数据</p>
+<a id="more"></a>
 
-<h2 id="Anaconda3下载"><a href="#Anaconda3下载" class="headerlink" title="Anaconda3下载"></a>Anaconda3下载</h2><p>下载地址：<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/</a><br>选择anaconda 3.5.2 对应的python版本是python3.6</p>
-<!--more-->
-
-<p><img src="https://img-blog.csdnimg.cn/20200319185750950.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt=" "></p>
-<h2 id="安装anaconda3"><a href="#安装anaconda3" class="headerlink" title="安装anaconda3"></a>安装anaconda3</h2><p><img src="https://img-blog.csdnimg.cn/20200319185859583.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt=" "><br>点击next</p>
-<p><img src="https://img-blog.csdnimg.cn/2020031918593948.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt=" "><br>点击I Agree</p>
-<p><img src="https://img-blog.csdnimg.cn/20200319190001173.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt=" "><br>然后选择Install for All Users，点击Next<br><img src="https://img-blog.csdnimg.cn/2020031919012346.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt=" "><br>选择安装位置，建议不要安装在C盘。<br><img src="https://img-blog.csdnimg.cn/20200319200626716.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt=" "><br>默认第一项是没有选择的，这里我把它勾上，添加anaconda到系统环境变量中，然后点击Install<br><img src="https://img-blog.csdnimg.cn/20200319200952980.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt=" "><br>等待安装完成。<br><img src="https://img-blog.csdnimg.cn/20200319202441221.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt=" "><br>接下来有安装VScode的选项，这里选择跳过，点击Skip<br><img src="https://img-blog.csdnimg.cn/20200319202521557.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt=" "><br>安装完成，点击Finished</p>
-<h3 id="验证anaconda是否安装成功"><a href="#验证anaconda是否安装成功" class="headerlink" title="验证anaconda是否安装成功"></a>验证anaconda是否安装成功</h3><p>打开cmd命令行，输入conda -V，如果能看到conda版本号，说明anaconda已经安装好了。<br><img src="https://img-blog.csdnimg.cn/20200319202840535.png" alt=" "></p>
-<h2 id="用conda创建python虚拟环境"><a href="#用conda创建python虚拟环境" class="headerlink" title="用conda创建python虚拟环境"></a>用conda创建python虚拟环境</h2><p>  　　使用conda create -n your_env_name python=X.X（2.7、3.6等)命令创建python版本为X.X、名字为your_env_name的虚拟环境。your_env_name文件可以在Anaconda安装目录envs文件下找到。</p>
-<figure class="highlight plain"><figcaption><span>create -n learn python</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">我选择建立一个名为learn的python版本为3.6的虚拟环境</span><br><span class="line"></span><br><span class="line">### activate激活虚拟环境</span><br><span class="line">![ ](https://img-blog.csdnimg.cn/20200320102010525.png)</span><br><span class="line">在这里输入activate tensorflow</span><br><span class="line">显示激活成功。</span><br><span class="line">输入deactivate回到默认环境中</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">如果想要删除创建的虚拟环境：</span><br><span class="line">使用conda remove -n your_env_name(虚拟环境名称) --all命令</span><br><span class="line">在虚拟环境中安装额外的包：</span><br><span class="line">使用命令conda install -n your_env_name [package]即可安装package到your_env_name中</span><br><span class="line">用pip安装tensorflow换成国内源快速安装：</span><br><span class="line">```pip install --index-url https://pypi.douban.com/simple tensorflow</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="安装tensorflow和keras"><a href="#安装tensorflow和keras" class="headerlink" title="安装tensorflow和keras"></a>安装tensorflow和keras</h3><p>使用命令<code>conda install -n your_env_name tensorflow</code>安装，如果想要指定tensorflow的版本号，直接tensorflow==X.X.X</p>
-<p><strong>想要在jupyter notebook中import tensorflow</strong><br>需要执行以下命令：</p>
-<figure class="highlight plain"><figcaption><span>install ipython```</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">```conda install jupyter</span><br></pre></td></tr></tbody></table></figure>
-<p>最后输入<code>conda install keras</code>安装keras<br><img src="https://img-blog.csdnimg.cn/20200320102608665.png" alt=" "><br>检查以下tensorflow和keras是否安装成功<br><img src="https://img-blog.csdnimg.cn/20200320102827481.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt=" "><br><img src="https://img-blog.csdnimg.cn/20200320102847141.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt=" "><br>cmd命令行输入jupyter notebook，import tensorflow看是否报错<br><img src="https://img-blog.csdnimg.cn/2020032010311961.png" alt=" "><br>没有输出任何信息，证明已经安装好了。</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207110416671.png" alt="image-20201207110416671"></p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207112003659.png" alt="image-20201207112003659"></p>
+<p>上图是一个闪存块（Block）的组织架构。一个Wordline对应着一个或若干个Page，具体是多少取决于是SLC、MLC或者TLC。对SLC来说，一个Wordline对应一个Page; MLC则对应2个Page，这两个Page是一对（Lower Page和UpperPage）; TLC对应3个Page（Lower Page、Upper Page和Extra Page）</p>
+<hr>
+<p>一个闪存芯片有若干个DIE（或者叫LUN），每个DIE有若干个Plane，每个Plane有若干个Block，每个Block有若干个Page，每个Page对应着一个Wordline, Wordline由成千上万个存储单元构成。</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207112055793.png" alt="image-20201207112055793"></p>
+<p>LUN、Plane、Block、Page</p>
+<h4 id="闪存存在的问题"><a href="#闪存存在的问题" class="headerlink" title="闪存存在的问题"></a>闪存存在的问题</h4><p>1、闪存坏块</p>
+<p>2、读干扰：当在读取一个闪存页（page）的时候，闪存块当中未被选取的闪存页的控制极都会加一个正电压，以保证未被选中的MOS管是导通的。但是频繁地在一个MOS管控制极加正电压，就可能导致电子被吸进浮栅极，形成轻微写，从而导致比特翻转，如图3-44所示。但是，这不是永久性损伤，重新擦除闪存块还能正常使用。<font color="orange"> 读干扰影响的是同一个闪存块中的其他闪存页，而非读取的闪存页本身。</font></p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207162433285.png" alt="image-20201207162433285"></p>
+<p>3、写干扰：</p>
+<p>写干扰也会导致比特反转，<font color="orange"> 与读干扰不同的是，写干扰影响的不仅是同一个闪存块当中的其他闪存页，自身闪存页也会受到影响。相同的是，都会因不期望的轻微写导致比特翻转，都会产生非永久性损伤，经擦除后，闪存块还能再次使用。</font></p>
+<p>4、存储单元的耦合：存储单元之间存在耦合电容，这会使存储单元内的电荷发生意外变化，最终导致数据读取错误。</p>
+<p>5、电荷泄漏问题：存储在闪存存储单元的电荷，如果长期不使用，会发生电荷泄漏。这同样会导致非永久性损伤，擦除后闪存块还能使用</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -365,7 +352,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://top.rongyao-blog.top/posts/bf8d.html" title="Anaconda3安装教程(详细)">https://top.rongyao-blog.top/posts/bf8d.html</a>
+    <a href="https://top.rongyao-blog.top/posts/caa7.html" title="SSD学习小结(二)">https://top.rongyao-blog.top/posts/caa7.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
@@ -376,7 +363,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/anaconda-python/" rel="tag"># anaconda python</a>
+              <a href="/tags/SSD/" rel="tag"># SSD</a>
           </div>
 
         
@@ -385,12 +372,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/7f55.html" rel="prev" title="解决Anaconda在开始菜单找不到navigator和prompt的问题">
-      <i class="fa fa-chevron-left"></i> 解决Anaconda在开始菜单找不到navigator和prompt的问题
+    <a href="/posts/a03.html" rel="prev" title="SSD学习小结(一)">
+      <i class="fa fa-chevron-left"></i> SSD学习小结(一)
     </a></div>
       <div class="post-nav-item">
-    <a href="/posts/7093.html" rel="next" title="leetcode|剑指offter|面试题3：数组中重复的数字">
-      leetcode|剑指offter|面试题3：数组中重复的数字 <i class="fa fa-chevron-right"></i>
+    <a href="/posts/41f4.html" rel="next" title="SSD学习小结(三)FTL">
+      SSD学习小结(三)FTL <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -451,7 +438,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Anaconda3下载"><span class="nav-number">1.</span> <span class="nav-text">Anaconda3下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装anaconda3"><span class="nav-number">2.</span> <span class="nav-text">安装anaconda3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#验证anaconda是否安装成功"><span class="nav-number">2.1.</span> <span class="nav-text">验证anaconda是否安装成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用conda创建python虚拟环境"><span class="nav-number">3.</span> <span class="nav-text">用conda创建python虚拟环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装tensorflow和keras"><span class="nav-number">3.1.</span> <span class="nav-text">安装tensorflow和keras</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SLC、MLC、TLC、QLC"><span class="nav-number">1.</span> <span class="nav-text">SLC、MLC、TLC、QLC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#闪存存在的问题"><span class="nav-number">1.1.</span> <span class="nav-text">闪存存在的问题</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
