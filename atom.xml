@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://top.rongyao-blog.top/"/>
-  <updated>2020-12-07T11:24:12.635Z</updated>
+  <updated>2020-12-09T01:52:55.228Z</updated>
   <id>https://top.rongyao-blog.top/</id>
   
   <author>
@@ -17,11 +17,61 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>leveldb性能测试</title>
+    <link href="https://top.rongyao-blog.top/posts/65b3.html"/>
+    <id>https://top.rongyao-blog.top/posts/65b3.html</id>
+    <published>2020-12-09T01:52:54.991Z</published>
+    <updated>2020-12-09T01:52:55.228Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;测试环境&quot;&gt;&lt;a href=&quot;#测试环境&quot; class=&quot;headerlink&quot; title=&quot;测试环境&quot;&gt;&lt;/a&gt;测试环境&lt;/h3&gt;&lt;p&gt;CPU:   48 * Intel(R) Xeon(R) CPU E5-2678 v3 @
+        
+      
+    
+    </summary>
+    
+    
+      <category term="leveldb" scheme="https://top.rongyao-blog.top/categories/leveldb/"/>
+    
+    
+      <category term="leveldb" scheme="https://top.rongyao-blog.top/tags/leveldb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leveldb源码学习记录-整体架构</title>
+    <link href="https://top.rongyao-blog.top/posts/41b.html"/>
+    <id>https://top.rongyao-blog.top/posts/41b.html</id>
+    <published>2020-12-09T01:52:50.422Z</published>
+    <updated>2020-12-09T01:52:50.647Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0-开篇&quot;&gt;&lt;a href=&quot;#0-开篇&quot; class=&quot;headerlink&quot; title=&quot;0.开篇&quot;&gt;&lt;/a&gt;0.开篇&lt;/h2&gt;&lt;p&gt;leveldb是一个高性能、可靠的单机KV数据库。&lt;/p&gt;
+&lt;p&gt;一个高性能的单机数据库，往往是如何平衡读性能、写性能、存储大小的问题，思考这个问题，才能够理解 leveldb 的&lt;code&gt;write-ahead logging&lt;/code&gt; &lt;code&gt;MemTable&lt;/code&gt; &lt;code&gt;SSTable&lt;/code&gt;等设计。leveldb 正是通过这一系列架构设计和代码技巧，提供了一个优秀的存储引擎解决这个问题。&lt;/p&gt;
+&lt;p&gt;本系列文章是自己阅读leveldb源码过程中记录的一些笔记，方便日后查看。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="leveldb" scheme="https://top.rongyao-blog.top/categories/leveldb/"/>
+    
+    
+      <category term="leveldb" scheme="https://top.rongyao-blog.top/tags/leveldb/"/>
+    
+  </entry>
+  
+  <entry>
     <title>SSD学习小结(三)FTL</title>
     <link href="https://top.rongyao-blog.top/posts/41f4.html"/>
     <id>https://top.rongyao-blog.top/posts/41f4.html</id>
     <published>2020-12-07T11:24:50.542Z</published>
-    <updated>2020-12-07T11:24:12.635Z</updated>
+    <updated>2020-12-07T11:29:49.625Z</updated>
     
     <summary type="html">
     
@@ -42,7 +92,7 @@
     <link href="https://top.rongyao-blog.top/posts/caa7.html"/>
     <id>https://top.rongyao-blog.top/posts/caa7.html</id>
     <published>2020-12-07T11:24:50.540Z</published>
-    <updated>2020-12-07T11:24:19.760Z</updated>
+    <updated>2020-12-07T11:29:49.626Z</updated>
     
     <summary type="html">
     
@@ -66,7 +116,7 @@
     <link href="https://top.rongyao-blog.top/posts/a03.html"/>
     <id>https://top.rongyao-blog.top/posts/a03.html</id>
     <published>2020-12-07T11:24:50.537Z</published>
-    <updated>2020-12-07T11:24:22.341Z</updated>
+    <updated>2020-12-07T11:29:49.623Z</updated>
     
     <summary type="html">
     
@@ -87,11 +137,11 @@
     <link href="https://top.rongyao-blog.top/posts/6efa.html"/>
     <id>https://top.rongyao-blog.top/posts/6efa.html</id>
     <published>2020-12-04T02:00:21.000Z</published>
-    <updated>2020-12-04T02:01:45.618Z</updated>
+    <updated>2020-12-07T11:29:21.204Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;教程链接：&lt;a href=&quot;https://www.tensorflow.org/install/pip&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.tensorflow.org/install/pip&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;教程链接：&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly93d3cudGVuc29yZmxvdy5vcmcvaW5zdGFsbC9waXA=&quot; title=&quot;https://www.tensorflow.org/install/pip&quot;&gt;https://www.tensorflow.org/install/pip&lt;i class=&quot;fa fa-external-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;在系统上安装python开发环境&lt;/li&gt;
 &lt;li&gt;安装python、pip软件包管理器和Virtualenv&lt;br&gt;sudo apt update&lt;br&gt;sudo apt install python3-dev python3-pip&lt;br&gt;sudo pip3 install -U virtualenv  # system-wide install&lt;/li&gt;
@@ -114,7 +164,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+      &lt;p&gt;Welcome to &lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9oZXhvLmlvLw==&quot; title=&quot;https://hexo.io/&quot;&gt;Hexo&lt;i class=&quot;fa fa-external-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;! This is your very first post. Check &lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9oZXhvLmlvL2RvY3Mv&quot; title=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;i class=&quot;fa fa-external-link&quot;&gt;&lt;/i&gt;&lt;/span&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9oZXhvLmlvL2RvY3MvdHJvdWJsZXNob290aW5nLmh0bWw=&quot; title=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;i class=&quot;fa fa-external-link&quot;&gt;&lt;/i&gt;&lt;/span&gt; or you can ask me on &lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvL2lzc3Vlcw==&quot; title=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;i class=&quot;fa fa-external-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;.&lt;/p&gt;
 &lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
@@ -221,19 +271,11 @@
     <link href="https://top.rongyao-blog.top/posts/fb35.html"/>
     <id>https://top.rongyao-blog.top/posts/fb35.html</id>
     <published>2020-07-10T13:26:06.000Z</published>
-    <updated>2020-12-05T13:54:42.976Z</updated>
+    <updated>2020-12-07T11:31:41.144Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h3 id=&quot;python基础&quot;&gt;&lt;a href=&quot;#python基础&quot; class=&quot;headerlink&quot; title=&quot;python基础&quot;&gt;&lt;/a&gt;python基础&lt;/h3&gt;&lt;h6 id=&quot;注释&quot;&gt;&lt;a href=&quot;#注释&quot;
-        
-      
+      &lt;h3 id=&quot;python基础&quot;&gt;&lt;a href=&quot;#python基础&quot; class=&quot;headerlink&quot; title=&quot;python基础&quot;&gt;&lt;/a&gt;python基础&lt;/h3&gt;&lt;h6 id=&quot;注释&quot;&gt;&lt;a href=&quot;#注释&quot; class=&quot;headerlink&quot; title=&quot;注释&quot;&gt;&lt;/a&gt;注释&lt;/h6&gt;&lt;p&gt;python中单行注释以&lt;code&gt;#&lt;/code&gt;开头，多行注释可以用多个&lt;code&gt;#&lt;/code&gt;号，或者采用&lt;code&gt;&#39;&#39;&#39;&lt;/code&gt;和&lt;code&gt;&quot;&quot;&quot;&lt;/code&gt;&lt;/p&gt;
     
     </summary>
     
@@ -248,7 +290,7 @@
     <link href="https://top.rongyao-blog.top/posts/9a95.html"/>
     <id>https://top.rongyao-blog.top/posts/9a95.html</id>
     <published>2020-07-10T03:16:04.000Z</published>
-    <updated>2020-12-04T11:47:11.505Z</updated>
+    <updated>2020-12-08T12:37:48.223Z</updated>
     
     <summary type="html">
     
@@ -298,19 +340,11 @@
     <link href="https://top.rongyao-blog.top/posts/7b80.html"/>
     <id>https://top.rongyao-blog.top/posts/7b80.html</id>
     <published>2020-07-05T13:33:28.000Z</published>
-    <updated>2020-12-05T13:47:18.197Z</updated>
+    <updated>2020-12-07T11:44:31.001Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h3 id=&quot;端到端的机器学习项目&quot;&gt;&lt;a href=&quot;#端到端的机器学习项目&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;h3 id=&quot;端到端的机器学习项目&quot;&gt;&lt;a href=&quot;#端到端的机器学习项目&quot; class=&quot;headerlink&quot; title=&quot;端到端的机器学习项目&quot;&gt;&lt;/a&gt;端到端的机器学习项目&lt;/h3&gt;&lt;p&gt;主要步骤：&lt;br&gt;1.观察大局。&lt;br&gt;2.获得数据。&lt;br&gt;3.从数据探索和可视化中获得洞见。&lt;br&gt;4.机器学习算法的数据准备。&lt;br&gt;5.选择和训练模型。&lt;br&gt;6.微调模型。&lt;br&gt;7.展示解决方案。&lt;br&gt;8.启动、监控和维护系统。&lt;/p&gt;
     
     </summary>
     
@@ -435,54 +469,6 @@
     
     
       <category term="python kaggle 机器学习" scheme="https://top.rongyao-blog.top/tags/python-kaggle-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python+opencv实现人脸识别|采用现成训练好的模型</title>
-    <link href="https://top.rongyao-blog.top/posts/63ec.html"/>
-    <id>https://top.rongyao-blog.top/posts/63ec.html</id>
-    <published>2020-06-23T11:23:33.000Z</published>
-    <updated>2020-12-07T11:26:57.563Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;一、图片人脸检测（opencv）&quot;&gt;&lt;a href=&quot;#一、图片人脸检测（opencv）&quot; class=&quot;headerlink&quot; title=&quot;一、图片人脸检测（opencv）&quot;&gt;&lt;/a&gt;一、图片人脸检测（opencv）&lt;/h3&gt;&lt;h4 id=&quot;1、安装opencv环境&quot;&gt;&lt;a href=&quot;#1、安装opencv环境&quot; class=&quot;headerlink&quot; title=&quot;1、安装opencv环境&quot;&gt;&lt;/a&gt;1、安装opencv环境&lt;/h4&gt;&lt;p&gt;介绍windows中opencv在python3上的实现，我的系统环境win10+python3.6+opcv3.4.1&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://top.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="opencv 人脸识别 python" scheme="https://top.rongyao-blog.top/tags/opencv-%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB-python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>强化学习课程|paddle|入门</title>
-    <link href="https://top.rongyao-blog.top/posts/7277.html"/>
-    <id>https://top.rongyao-blog.top/posts/7277.html</id>
-    <published>2020-06-20T11:28:58.000Z</published>
-    <updated>2020-12-05T13:48:40.864Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://top.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="python 人工智能 强化学习" scheme="https://top.rongyao-blog.top/tags/python-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD-%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
