@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.2.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -23,7 +23,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"top.rongyao-blog.top","root":"/","images":"/images","scheme":"Mist","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"top.rongyao-blog.top","root":"/","images":"/images","scheme":"Mist","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="向量的范数首先定义一个向量为：x&#x3D;[-5，6，8, -10]1-范数：  ，即向量的各个元素的绝对值之和，matlab调用函数norm(x, 1) 。则上述x的1-范数结果是29   2-范数： ，Euclid范数（欧几里得范数，常用计算向量长度），即向量元素绝对值的平方和再开方，matlab调用函数norm(x, 2)。 -范数： ，即所有向量元素绝对值中的最大值，matlab调用函数nor">
 <meta property="og:type" content="article">
@@ -229,7 +229,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#向量的范数"><span class="nav-number">1.</span> <span class="nav-text">向量的范数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵范数"><span class="nav-number">2.</span> <span class="nav-text">矩阵范数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#L0范数和L1范数"><span class="nav-number">2.1.</span> <span class="nav-text">L0范数和L1范数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#L2范数"><span class="nav-number">2.2.</span> <span class="nav-text">L2范数</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E7%9A%84%E8%8C%83%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">向量的范数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E8%8C%83%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">矩阵范数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#L0%E8%8C%83%E6%95%B0%E5%92%8CL1%E8%8C%83%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">L0范数和L1范数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#L2%E8%8C%83%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">L2范数</span></a></li></ol></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -391,8 +391,8 @@
 <p>L1范数是指向量中各个元素的绝对值之和，也叫”系数规则算子（Lasso regularization）“。L1范数也可以实现稀疏，通过将无用特征对应的参数W置为零实现。</p>
 <p>L0和L1都可以实现稀疏化，不过一般选用L1而不用L0，原因包括：1）L0范数很难优化求解（NP难）；2）L1是L0的最优凸近似，比L0更容易优化求解。（这一段解释过于数学化，姑且当做结论记住）<br>稀疏化的好处是是什么？<br>1）特征选择<br>​实现特征的自动选择，去除无用特征。稀疏化可以去掉这些无用特征，将特征对应的权重置为零。<br>2）可解释性（interpretability）​<br>例如判断某种病的患病率时，最初有1000个特征，建模后参数经过稀疏化，最终只有5个特征的参数是非零的，那么就可以说影响患病率的主要就是这5个特征。</p>
 <h4 id="L2范数"><a href="#L2范数" class="headerlink" title="L2范数"></a>L2范数</h4><p>L2范数​​是指向量各元素的平方和然后开方，用在回归模型中也称为岭回归（Ridge regression）。<br>L2避免过拟合的原理是：让L2范数的规则项||W||2 尽可能小，可以使得W每个元素都很小，接近于零，但是与L1不同的是，不会等于0；这样得到的模型抗干扰能力强，参数很小时，即使样本数据x发生很大的变化，模型预测值y的变化也会很有限。</p>
-<p>参考链接：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vTWVuZ1lhbi1Mb25nWW91L3AvNDA1MDg2Mi5odG1s" title="https://www.cnblogs.com/MengYan-LongYou/p/4050862.html">https://www.cnblogs.com/MengYan-LongYou/p/4050862.html<i class="fa fa-external-link"></i></span></p>
-<p>  　　　　 <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01pY2hhZWxfX0Nvcmxlb25lL2FydGljbGUvZGV0YWlscy83NTIxMzEyMw==" title="https://blog.csdn.net/Michael__Corleone/article/details/75213123">https://blog.csdn.net/Michael__Corleone/article/details/75213123<i class="fa fa-external-link"></i></span></p>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/MengYan-LongYou/p/4050862.html">https://www.cnblogs.com/MengYan-LongYou/p/4050862.html</a></p>
+<p>  　　　　 <a target="_blank" rel="noopener" href="https://blog.csdn.net/Michael__Corleone/article/details/75213123">https://blog.csdn.net/Michael__Corleone/article/details/75213123</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -467,8 +467,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/9a95.html" rel="next" title="经典排序算法">
-                  经典排序算法 <i class="fa fa-chevron-right"></i>
+                <a href="/posts/9a95.html" rel="next" title="">
+                   <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
