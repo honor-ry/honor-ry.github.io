@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://top.rongyao-blog.top/"/>
-  <updated>2020-12-09T01:52:55.228Z</updated>
+  <updated>2020-12-21T09:27:13.489Z</updated>
   <id>https://top.rongyao-blog.top/</id>
   
   <author>
@@ -15,6 +15,143 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="https://top.rongyao-blog.top/posts/0.html"/>
+    <id>https://top.rongyao-blog.top/posts/0.html</id>
+    <published>2020-12-21T09:29:04.747Z</published>
+    <updated>2020-12-21T09:27:13.489Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;leveldb之文件&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;title: leveldb学习记录-文件&lt;br&gt;tags: leveldb&lt;br&gt;categories: leveldb&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;leveldb的文件命名&quot;&gt;&lt;a href=&quot;#leveldb的文件命名&quot; class=&quot;headerlink&quot; title=&quot;*leveldb的文件命名&quot;&gt;&lt;/a&gt;*leveldb的文件命名&lt;/h3&gt;&lt;p&gt;当运行一次leveldb来写入数据时，leveldb可能会生成很多个log文件和SSTable文件，而这些文件的命名都是类似的，都是固定前缀+文件编号+固定后缀的。这些文件的名称是调用函数MakeFileName()来生成的。&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://top.rongyao-blog.top/posts/0.html"/>
+    <id>https://top.rongyao-blog.top/posts/0.html</id>
+    <published>2020-12-21T09:29:04.731Z</published>
+    <updated>2020-12-11T12:06:40.550Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;LevelDB 首先会去查看内存中的 Memtable，如果 Memtable 中包含 key 及其对应的value，则返回 value 值即可；&lt;/p&gt;
+&lt;p&gt;如果在 Memtable 没有读到key，则接下来到同样处于内存中的 Immutable Memtable
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://top.rongyao-blog.top/posts/0.html"/>
+    <id>https://top.rongyao-blog.top/posts/0.html</id>
+    <published>2020-12-21T09:29:04.728Z</published>
+    <updated>2020-12-21T09:27:37.074Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;leveldb之编码&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;title: leveldb学习记录-编码&lt;br&gt;tags: leveldb&lt;br&gt;categories:
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://top.rongyao-blog.top/posts/0.html"/>
+    <id>https://top.rongyao-blog.top/posts/0.html</id>
+    <published>2020-12-21T09:29:04.726Z</published>
+    <updated>2020-12-21T09:27:42.417Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;leveldb学习记录-skiplist&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;title: leveldb学习记录-skiplist&lt;br&gt;tags: leveldb&lt;br&gt;categories:
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://top.rongyao-blog.top/posts/0.html"/>
+    <id>https://top.rongyao-blog.top/posts/0.html</id>
+    <published>2020-12-21T09:29:04.723Z</published>
+    <updated>2020-12-21T09:27:23.640Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;leveldb学习记录-memtable&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;title: leveldb学习记录-memtable&lt;br&gt;tags: leveldb&lt;br&gt;categories: leveldb&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;上一篇博客文章介绍了skiplist，skiplist是leveldb中一个非常重要的数据结构，实现了高效的数据查找和插入，时间复杂度为O(log(n))&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://top.rongyao-blog.top/posts/0.html"/>
+    <id>https://top.rongyao-blog.top/posts/0.html</id>
+    <published>2020-12-21T09:29:04.720Z</published>
+    <updated>2020-12-21T09:27:31.701Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;leveldb笔记之log文件&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;title: leveldb学习记录-log文件&lt;br&gt;tags: leveldb&lt;br&gt;categories: leveldb&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;log文件在leveldb的主要作用是防止系统宕机的时候，数据丢失。所以在将键值对写入位于内存的memtable之前，会先写入Log文件中，保证数据的持久化。这样即使系统发生故障，memtable中的数据没有及时Dump到磁盘上，LevelDB仍然可以根据log文件恢复数据。&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>leveldb性能测试</title>
@@ -231,7 +368,7 @@
     <link href="https://top.rongyao-blog.top/posts/6e6c.html"/>
     <id>https://top.rongyao-blog.top/posts/6e6c.html</id>
     <published>2020-07-12T15:10:35.000Z</published>
-    <updated>2020-12-07T11:25:37.551Z</updated>
+    <updated>2020-12-17T01:23:13.316Z</updated>
     
     <summary type="html">
     
@@ -303,172 +440,6 @@
     
       <category term="数据结构与算法" scheme="https://top.rongyao-blog.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>常用的向量与矩阵的范数总结[L0、L1、L2范数]</title>
-    <link href="https://top.rongyao-blog.top/posts/f5c7.html"/>
-    <id>https://top.rongyao-blog.top/posts/f5c7.html</id>
-    <published>2020-07-09T03:16:04.000Z</published>
-    <updated>2020-12-05T13:55:58.112Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h3 id=&quot;向量的范数&quot;&gt;&lt;a href=&quot;#向量的范数&quot; class=&quot;headerlink&quot; title=&quot;向量的范数&quot;&gt;&lt;/a&gt;向量的范数&lt;/h3&gt;&lt;p&gt;首先定义一个向量为：x=[-5，6，8, -10]&lt;br&gt;1-范数：
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://top.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="范数 矩阵算子范数 矩阵范数" scheme="https://top.rongyao-blog.top/tags/%E8%8C%83%E6%95%B0-%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E8%8C%83%E6%95%B0-%E7%9F%A9%E9%98%B5%E8%8C%83%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>端到端的机器学习项目，预测房价</title>
-    <link href="https://top.rongyao-blog.top/posts/7b80.html"/>
-    <id>https://top.rongyao-blog.top/posts/7b80.html</id>
-    <published>2020-07-05T13:33:28.000Z</published>
-    <updated>2020-12-07T11:44:31.001Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;端到端的机器学习项目&quot;&gt;&lt;a href=&quot;#端到端的机器学习项目&quot; class=&quot;headerlink&quot; title=&quot;端到端的机器学习项目&quot;&gt;&lt;/a&gt;端到端的机器学习项目&lt;/h3&gt;&lt;p&gt;主要步骤：&lt;br&gt;1.观察大局。&lt;br&gt;2.获得数据。&lt;br&gt;3.从数据探索和可视化中获得洞见。&lt;br&gt;4.机器学习算法的数据准备。&lt;br&gt;5.选择和训练模型。&lt;br&gt;6.微调模型。&lt;br&gt;7.展示解决方案。&lt;br&gt;8.启动、监控和维护系统。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://top.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="python 可视化" scheme="https://top.rongyao-blog.top/tags/python-%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NLP入门-情感分析|paddle</title>
-    <link href="https://top.rongyao-blog.top/posts/a21b.html"/>
-    <id>https://top.rongyao-blog.top/posts/a21b.html</id>
-    <published>2020-07-04T05:13:03.000Z</published>
-    <updated>2020-12-05T13:52:30.124Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;pre&gt;&lt;code&gt;### 任务介绍：
-
-在自然语言处理中，情感分析一般指判断一段文本所表达的情绪状态，属于文本分类问题。
-
-情绪：正面/负面&lt;/code&gt;&lt;/pre&gt;&lt;!--more--&gt;
-
-&lt;h4 id=&quot;数据集介绍：&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="NLP 机器学习" scheme="https://top.rongyao-blog.top/categories/NLP-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="python 机器学习 paddle" scheme="https://top.rongyao-blog.top/tags/python-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-paddle/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NLP入门-文本分类|paddle</title>
-    <link href="https://top.rongyao-blog.top/posts/ac4f.html"/>
-    <id>https://top.rongyao-blog.top/posts/ac4f.html</id>
-    <published>2020-07-04T02:54:58.000Z</published>
-    <updated>2020-12-07T11:28:27.473Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。&quot;&gt;&lt;a href=&quot;#文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。&quot; class=&quot;headerlink&quot; title=&quot;文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。&quot;&gt;&lt;/a&gt;文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。&lt;/h4&gt;&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;数据来源：从网站上爬取56821条数据中文新闻摘要&lt;ul&gt;
-&lt;li&gt;数据内容：包含10种类别，国际、文化、娱乐、体育、财经、汽车、教育、科技、房产、证券&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;https://imgconvert.csdnimg.cn/aHR0cHM6Ly9haS1zdHVkaW8tc3RhdGljLW9ubGluZS5jZG4uYmNlYm9zLmNvbS8xNzg5ZWQ1OTM5ZDI0MTM0YjljZTRkNDVjYTE1ZTBmZGYyMWYyNWFhNDAwYzRmNjg5OGNjNGUwMmFlYTVjNzRl?x-oss-process=image/format,png&quot; alt=&quot;&quot;&gt;&lt;br&gt;严格意义上来说这个新闻的数据集不是太好，每个类目的新闻数目不是一致的，一个好的数据集对于各个类别分布是比较均匀的。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="NLP 机器学习" scheme="https://top.rongyao-blog.top/categories/NLP-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="python 机器学习" scheme="https://top.rongyao-blog.top/tags/python-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>生成对抗样本的方法|攻击方法</title>
-    <link href="https://top.rongyao-blog.top/posts/8a27.html"/>
-    <id>https://top.rongyao-blog.top/posts/8a27.html</id>
-    <published>2020-07-03T09:01:59.000Z</published>
-    <updated>2020-12-05T13:48:45.419Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h2 id=&quot;对抗样本&quot;&gt;&lt;a href=&quot;#对抗样本&quot; class=&quot;headerlink&quot; title=&quot;对抗样本&quot;&gt;&lt;/a&gt;对抗样本&lt;/h2&gt;&lt;h3 id=&quot;1-Biggio′s-attack&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://top.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Kaggle-泰坦尼克号生存者预测比赛|初级入门</title>
-    <link href="https://top.rongyao-blog.top/posts/d25d.html"/>
-    <id>https://top.rongyao-blog.top/posts/d25d.html</id>
-    <published>2020-06-27T14:23:21.000Z</published>
-    <updated>2020-12-07T11:26:34.498Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;泰坦尼克号的沉没是历史上最臭名昭著的沉船事件之一。1912年4月15日，泰坦尼克号在处女航中撞上冰山沉没，2224名乘客和船员中1502人遇难。这一耸人听闻的悲剧震惊了国际社会，并导致了更好的船舶安全条例。&lt;/li&gt;
-&lt;li&gt;沉船造成如此巨大人员伤亡的原因之一是没有足够的救生艇来容纳乘客和船员。虽然在沉船事件中幸存下来也有一些运气的因素，但有些人比其他人更有可能幸存下来，比如妇女、儿童和上层阶级。&lt;/li&gt;
-&lt;li&gt;在这个挑战中，我们要求你完成对可能存活下来的人的分析。我们特别要求你们运用机器学习工具来预测哪些乘客在灾难中幸存下来。&lt;br&gt;数据来源：&lt;a href=&quot;https://www.kaggle.com/c/titanic/data&quot;&gt;https://www.kaggle.com/c/titanic/data&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://top.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="python kaggle 机器学习" scheme="https://top.rongyao-blog.top/tags/python-kaggle-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
