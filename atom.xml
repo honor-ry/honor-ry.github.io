@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://top.rongyao-blog.top/"/>
-  <updated>2020-12-21T09:27:13.489Z</updated>
+  <updated>2020-12-21T10:34:32.764Z</updated>
   <id>https://top.rongyao-blog.top/</id>
   
   <author>
@@ -17,56 +17,54 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="https://top.rongyao-blog.top/posts/0.html"/>
-    <id>https://top.rongyao-blog.top/posts/0.html</id>
+    <title>leveldb学习记录-文件</title>
+    <link href="https://top.rongyao-blog.top/posts/7f6d2289.html"/>
+    <id>https://top.rongyao-blog.top/posts/7f6d2289.html</id>
     <published>2020-12-21T09:29:04.747Z</published>
-    <updated>2020-12-21T09:27:13.489Z</updated>
+    <updated>2020-12-21T10:34:32.764Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;leveldb之文件&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;title: leveldb学习记录-文件&lt;br&gt;tags: leveldb&lt;br&gt;categories: leveldb&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&quot;leveldb的文件命名&quot;&gt;&lt;a href=&quot;#leveldb的文件命名&quot; class=&quot;headerlink&quot; title=&quot;*leveldb的文件命名&quot;&gt;&lt;/a&gt;*leveldb的文件命名&lt;/h3&gt;&lt;p&gt;当运行一次leveldb来写入数据时，leveldb可能会生成很多个log文件和SSTable文件，而这些文件的命名都是类似的，都是固定前缀+文件编号+固定后缀的。这些文件的名称是调用函数MakeFileName()来生成的。&lt;/p&gt;
+      &lt;h3 id=&quot;leveldb的文件命名&quot;&gt;&lt;a href=&quot;#leveldb的文件命名&quot; class=&quot;headerlink&quot; title=&quot;*leveldb的文件命名&quot;&gt;&lt;/a&gt;*leveldb的文件命名&lt;/h3&gt;&lt;p&gt;当运行一次leveldb来写入数据时，leveldb可能会生成很多个log文件和SSTable文件，而这些文件的命名都是类似的，都是固定前缀+文件编号+固定后缀的。这些文件的名称是调用函数MakeFileName()来生成的。&lt;/p&gt;
     
     </summary>
     
     
+      <category term="leveldb" scheme="https://top.rongyao-blog.top/categories/leveldb/"/>
+    
+    
+      <category term="leveldb" scheme="https://top.rongyao-blog.top/tags/leveldb/"/>
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://top.rongyao-blog.top/posts/0.html"/>
-    <id>https://top.rongyao-blog.top/posts/0.html</id>
+    <title>leveldb之读过程</title>
+    <link href="https://top.rongyao-blog.top/posts/27a72563.html"/>
+    <id>https://top.rongyao-blog.top/posts/27a72563.html</id>
     <published>2020-12-21T09:29:04.731Z</published>
-    <updated>2020-12-11T12:06:40.550Z</updated>
+    <updated>2020-12-21T10:34:14.252Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;LevelDB 首先会去查看内存中的 Memtable，如果 Memtable 中包含 key 及其对应的value，则返回 value 值即可；&lt;/p&gt;
-&lt;p&gt;如果在 Memtable 没有读到key，则接下来到同样处于内存中的 Immutable Memtable
-        
-      
+      &lt;p&gt;LevelDB 首先会去查看内存中的 Memtable，如果 Memtable 中包含 key 及其对应的value，则返回 value 值即可；&lt;/p&gt;
+&lt;p&gt;如果在 Memtable 没有读到key，则接下来到同样处于内存中的 Immutable Memtable 中去读取，类似地，如果读到就返回，若是没有读到,那么只能万般无奈下从磁盘中的大量SSTable文件中查找。&lt;/p&gt;
     
     </summary>
     
     
+      <category term="leveldb" scheme="https://top.rongyao-blog.top/categories/leveldb/"/>
+    
+    
+      <category term="leveldb" scheme="https://top.rongyao-blog.top/tags/leveldb/"/>
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://top.rongyao-blog.top/posts/0.html"/>
-    <id>https://top.rongyao-blog.top/posts/0.html</id>
+    <title>leveldb学习记录-编码</title>
+    <link href="https://top.rongyao-blog.top/posts/c42826bf.html"/>
+    <id>https://top.rongyao-blog.top/posts/c42826bf.html</id>
     <published>2020-12-21T09:29:04.728Z</published>
-    <updated>2020-12-21T09:27:37.074Z</updated>
+    <updated>2020-12-21T10:31:57.267Z</updated>
     
     <summary type="html">
     
@@ -74,24 +72,29 @@
       
         
         
-          &lt;p&gt;leveldb之编码&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;title: leveldb学习记录-编码&lt;br&gt;tags: leveldb&lt;br&gt;categories:
+          &lt;p&gt;计算机硬件有两种数据存储的方式：大端字节序和小端字节序&lt;/p&gt;
+&lt;p&gt;举例来说，数值&lt;code&gt;0x2211&lt;/code&gt;使用两个字节储存：高位字节是&lt;code&gt;0x22&lt;/code&gt;，低位字节是&lt;code&gt;0x11&lt;/code&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul
         
       
     
     </summary>
     
     
+      <category term="leveldb" scheme="https://top.rongyao-blog.top/categories/leveldb/"/>
+    
+    
+      <category term="leveldb" scheme="https://top.rongyao-blog.top/tags/leveldb/"/>
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://top.rongyao-blog.top/posts/0.html"/>
-    <id>https://top.rongyao-blog.top/posts/0.html</id>
+    <title>leveldb学习记录-skiplist</title>
+    <link href="https://top.rongyao-blog.top/posts/7ad579e7.html"/>
+    <id>https://top.rongyao-blog.top/posts/7ad579e7.html</id>
     <published>2020-12-21T09:29:04.726Z</published>
-    <updated>2020-12-21T09:27:42.417Z</updated>
+    <updated>2020-12-21T10:30:56.224Z</updated>
     
     <summary type="html">
     
@@ -99,57 +102,60 @@
       
         
         
-          &lt;p&gt;leveldb学习记录-skiplist&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;title: leveldb学习记录-skiplist&lt;br&gt;tags: leveldb&lt;br&gt;categories:
+          &lt;p&gt;leveldb中memtable的实现是采用skiplist跳表的，了解skiplist这种数据结构，便于我们分析理解memtable。&lt;/p&gt;
+&lt;h2 id=&quot;1-skiplist跳表的数据结构&quot;&gt;&lt;a href=&quot;#1-skiplist跳表的数据结构&quot;
         
       
     
     </summary>
     
     
+      <category term="leveldb" scheme="https://top.rongyao-blog.top/categories/leveldb/"/>
+    
+    
+      <category term="leveldb" scheme="https://top.rongyao-blog.top/tags/leveldb/"/>
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://top.rongyao-blog.top/posts/0.html"/>
-    <id>https://top.rongyao-blog.top/posts/0.html</id>
+    <title>leveldb学习记录-memtable</title>
+    <link href="https://top.rongyao-blog.top/posts/741fdc25.html"/>
+    <id>https://top.rongyao-blog.top/posts/741fdc25.html</id>
     <published>2020-12-21T09:29:04.723Z</published>
-    <updated>2020-12-21T09:27:23.640Z</updated>
+    <updated>2020-12-21T10:32:16.083Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;leveldb学习记录-memtable&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;title: leveldb学习记录-memtable&lt;br&gt;tags: leveldb&lt;br&gt;categories: leveldb&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;上一篇博客文章介绍了skiplist，skiplist是leveldb中一个非常重要的数据结构，实现了高效的数据查找和插入，时间复杂度为O(log(n))&lt;/p&gt;
+      &lt;p&gt;上一篇博客文章介绍了skiplist，skiplist是leveldb中一个非常重要的数据结构，实现了高效的数据查找和插入，时间复杂度为O(log(n))&lt;/p&gt;
     
     </summary>
     
     
+      <category term="leveldb" scheme="https://top.rongyao-blog.top/categories/leveldb/"/>
+    
+    
+      <category term="leveldb" scheme="https://top.rongyao-blog.top/tags/leveldb/"/>
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://top.rongyao-blog.top/posts/0.html"/>
-    <id>https://top.rongyao-blog.top/posts/0.html</id>
+    <title>leveldb学习记录-log文件</title>
+    <link href="https://top.rongyao-blog.top/posts/223d4dcc.html"/>
+    <id>https://top.rongyao-blog.top/posts/223d4dcc.html</id>
     <published>2020-12-21T09:29:04.720Z</published>
-    <updated>2020-12-21T09:27:31.701Z</updated>
+    <updated>2020-12-21T10:30:56.222Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;leveldb笔记之log文件&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;title: leveldb学习记录-log文件&lt;br&gt;tags: leveldb&lt;br&gt;categories: leveldb&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;log文件在leveldb的主要作用是防止系统宕机的时候，数据丢失。所以在将键值对写入位于内存的memtable之前，会先写入Log文件中，保证数据的持久化。这样即使系统发生故障，memtable中的数据没有及时Dump到磁盘上，LevelDB仍然可以根据log文件恢复数据。&lt;/p&gt;
+      &lt;p&gt;log文件在leveldb的主要作用是防止系统宕机的时候，数据丢失。所以在将键值对写入位于内存的memtable之前，会先写入Log文件中，保证数据的持久化。这样即使系统发生故障，memtable中的数据没有及时Dump到磁盘上，LevelDB仍然可以根据log文件恢复数据。&lt;/p&gt;
     
     </summary>
     
     
+      <category term="leveldb" scheme="https://top.rongyao-blog.top/categories/leveldb/"/>
+    
+    
+      <category term="leveldb" scheme="https://top.rongyao-blog.top/tags/leveldb/"/>
     
   </entry>
   
