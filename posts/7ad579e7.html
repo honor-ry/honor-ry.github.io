@@ -25,7 +25,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"top.rongyao-blog.top","root":"/","images":"/images","scheme":"Mist","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"top.rongyao-blog.top","root":"/","images":"/images","scheme":"Mist","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="leveldb中memtable的实现是采用skiplist跳表的，了解skiplist这种数据结构，便于我们分析理解memtable。 1.skiplist跳表的数据结构SkipList是一种用来代替平衡树的数据结构。    虽然在最坏的情况下SkipList的效率要低于平衡树，但是大多数情况下效率仍然非常高，其插入、删除、查找的时间复杂度都是O(log(N))。除了高效外，其实现和维护非常简单">
 <meta property="og:type" content="article">
@@ -34,14 +34,14 @@
 <meta property="og:site_name" content="honor">
 <meta property="og:description" content="leveldb中memtable的实现是采用skiplist跳表的，了解skiplist这种数据结构，便于我们分析理解memtable。 1.skiplist跳表的数据结构SkipList是一种用来代替平衡树的数据结构。    虽然在最坏的情况下SkipList的效率要低于平衡树，但是大多数情况下效率仍然非常高，其插入、删除、查找的时间复杂度都是O(log(N))。除了高效外，其实现和维护非常简单">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/honor-ry/my_pic_bed/raw/master/20150530165353841">
-<meta property="og:image" content="https://gitee.com/honor-ry/my_pic_bed/raw/master/20150530170615663">
+<meta property="og:image" content="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201221194025728.png">
+<meta property="og:image" content="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201221194105759.png">
 <meta property="article:published_time" content="2020-12-21T09:29:04.726Z">
-<meta property="article:modified_time" content="2020-12-21T10:30:56.224Z">
+<meta property="article:modified_time" content="2020-12-21T11:41:28.116Z">
 <meta property="article:author" content="honor">
 <meta property="article:tag" content="leveldb">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/honor-ry/my_pic_bed/raw/master/20150530165353841">
+<meta name="twitter:image" content="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201221194025728.png">
 
 
 <link rel="canonical" href="https://top.rongyao-blog.top/posts/7ad579e7.html">
@@ -225,7 +225,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-skiplist%E8%B7%B3%E8%A1%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">1.skiplist跳表的数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE"><span class="nav-number">1.0.1.</span> <span class="nav-text">查找</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%85%A5"><span class="nav-number">1.0.2.</span> <span class="nav-text">插入</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-skiplist%E7%B1%BB%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">2.skiplist类介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#skiplist%E7%9A%84%E5%AE%8C%E6%95%B4%E5%AE%9A%E4%B9%89"><span class="nav-number">2.0.1.</span> <span class="nav-text">skiplist的完整定义</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-insert%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">3.insert操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#FindGreaterOrEqual%E5%87%BD%E6%95%B0"><span class="nav-number">3.0.1.</span> <span class="nav-text">FindGreaterOrEqual函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Contains%E5%87%BD%E6%95%B0"><span class="nav-number">3.0.2.</span> <span class="nav-text">Contains函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FindLessThan%E5%92%8CFindLast"><span class="nav-number">3.0.3.</span> <span class="nav-text">FindLessThan和FindLast</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-iterator"><span class="nav-number">4.</span> <span class="nav-text">4.iterator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">5.总结</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-skiplist%E8%B7%B3%E8%A1%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-text">1.skiplist跳表的数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE"><span class="nav-text">查找</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%85%A5"><span class="nav-text">插入</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-skiplist%E7%B1%BB%E4%BB%8B%E7%BB%8D"><span class="nav-text">2.skiplist类介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#skiplist%E7%9A%84%E5%AE%8C%E6%95%B4%E5%AE%9A%E4%B9%89"><span class="nav-text">skiplist的完整定义</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-insert%E6%93%8D%E4%BD%9C"><span class="nav-text">3.insert操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#FindGreaterOrEqual%E5%87%BD%E6%95%B0"><span class="nav-text">FindGreaterOrEqual函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Contains%E5%87%BD%E6%95%B0"><span class="nav-text">Contains函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FindLessThan%E5%92%8CFindLast"><span class="nav-text">FindLessThan和FindLast</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-iterator"><span class="nav-text">4.iterator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%80%BB%E7%BB%93"><span class="nav-text">5.总结</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -331,7 +331,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2020-12-21 17:29:04 / 修改时间：18:30:56" itemprop="dateCreated datePublished" datetime="2020-12-21T17:29:04+08:00">2020-12-21</time>
+      <time title="创建时间：2020-12-21 17:29:04 / 修改时间：19:41:28" itemprop="dateCreated datePublished" datetime="2020-12-21T17:29:04+08:00">2020-12-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -365,7 +365,7 @@
 <figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skiplist是多层的有序链表</span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h4><p>以查找19为例</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/20150530165353841" alt="img"></p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201221194025728.png" alt="image-20201221194025728"></p>
 <p>先从最上层的跳跃区间大的层开始查找。从头结点开始，首先和23进行比较，小于23，（此时查找指针在图中“1”位置处），查找指针到下一层继续查找。</p>
 <p>然后和9进行判断，大于9，查找指针再往前走一步和23比较，小于23，（此时查找指针在图中“2”位置处） 此时这个值肯定在9结点和23结点之间。查找指针到下一层继续查找。</p>
 <p>然后和13进行判断，大于13，查找指针再往前走一步和23比较，小于23，（此时查找指针在图中“3”位置处）此时这个值肯定在13结点和23结点之间。查找指针到下一层继续查找。此时，我们和19进行判断，找到了。</p>
@@ -374,7 +374,7 @@
 <p>2、申请新的节点</p>
 <p>3、调整指针</p>
 <p>因为在找到插入点之后，新生成节点，新节点按概率出现在每层上，故需要保存所有层的后续指针，这里用一个临时数组保存所有层的插入点处的后续指针。</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/20150530170615663" alt="img"></p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201221194105759.png" alt="image-20201221194105759"></p>
 <p>以上图为例，现在要插入15这个节点。<br>其过程和查找类似，唯一的问题是，前面的节点的指针是如何保留下来的？</p>
 <p>我们可以看到插入结束后，13的level=0的指针指向了15，13的level=1的指针指向了15。<br>这就意味着，在插入的时候我们就需要保留13的level=0的指针和13的level=1的指针。</p>
 <p>在SkipList中是这样做的，有一个update数组，这个数组的大小为maxLevel。<br>还是以上图为例，在15插入之前，update这个数组中就已经存储了当前每个level的指针。</p>
