@@ -64,20 +64,19 @@
     <link href="https://top.rongyao-blog.top/posts/c42826bf.html"/>
     <id>https://top.rongyao-blog.top/posts/c42826bf.html</id>
     <published>2020-12-21T09:29:04.728Z</published>
-    <updated>2020-12-21T10:35:23.117Z</updated>
+    <updated>2020-12-26T08:57:36.221Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;计算机硬件有两种数据存储的方式：大端字节序和小端字节序&lt;/p&gt;
+      &lt;p&gt;计算机硬件有两种数据存储的方式：大端字节序和小端字节序&lt;/p&gt;
 &lt;p&gt;举例来说，数值&lt;code&gt;0x2211&lt;/code&gt;使用两个字节储存：高位字节是&lt;code&gt;0x22&lt;/code&gt;，低位字节是&lt;code&gt;0x11&lt;/code&gt;。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;ul
-        
-      
+&lt;ul&gt;
+&lt;li&gt;大端字节序：高位字节在前，低位字节在后，这是人类读写数值的方法。&lt;/li&gt;
+&lt;li&gt;小端字节序：低位字节在前，高位字节在后，即以&lt;code&gt;0x1122&lt;/code&gt;形式储存。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;编码分为变长的VarInt和固定大小的FixedInt两种，每种分32位和64位。&lt;/p&gt;
     
     </summary>
     
@@ -94,18 +93,12 @@
     <link href="https://top.rongyao-blog.top/posts/7ad579e7.html"/>
     <id>https://top.rongyao-blog.top/posts/7ad579e7.html</id>
     <published>2020-12-21T09:29:04.726Z</published>
-    <updated>2020-12-21T11:41:28.116Z</updated>
+    <updated>2020-12-26T08:58:06.973Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;leveldb中memtable的实现是采用skiplist跳表的，了解skiplist这种数据结构，便于我们分析理解memtable。&lt;/p&gt;
-&lt;h2 id=&quot;1-skiplist跳表的数据结构&quot;&gt;&lt;a href=&quot;#1-skiplist跳表的数据结构&quot;
-        
-      
+      &lt;p&gt;leveldb中memtable的实现是采用skiplist跳表的，了解skiplist这种数据结构，便于我们分析理解memtable。&lt;/p&gt;
+&lt;h2 id=&quot;1-skiplist跳表的数据结构&quot;&gt;&lt;a href=&quot;#1-skiplist跳表的数据结构&quot; class=&quot;headerlink&quot; title=&quot;1.skiplist跳表的数据结构&quot;&gt;&lt;/a&gt;1.skiplist跳表的数据结构&lt;/h2&gt;&lt;p&gt;SkipList是一种用来代替平衡树的数据结构。&lt;br&gt;    虽然在最坏的情况下SkipList的效率要低于平衡树，但是大多数情况下效率仍然非常高，其插入、删除、查找的时间复杂度都是O(log(N))。&lt;br&gt;除了高效外，其实现和维护非常简单也是一大优势。SkipList的使用还是比较广泛的，比如在LevelDB中的MemTable就是使用SkipList实现的。&lt;/p&gt;
     
     </summary>
     
@@ -164,17 +157,12 @@
     <link href="https://top.rongyao-blog.top/posts/65b3.html"/>
     <id>https://top.rongyao-blog.top/posts/65b3.html</id>
     <published>2020-12-09T01:52:54.991Z</published>
-    <updated>2020-12-09T01:52:55.228Z</updated>
+    <updated>2020-12-26T08:58:18.422Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h3 id=&quot;测试环境&quot;&gt;&lt;a href=&quot;#测试环境&quot; class=&quot;headerlink&quot; title=&quot;测试环境&quot;&gt;&lt;/a&gt;测试环境&lt;/h3&gt;&lt;p&gt;CPU:   48 * Intel(R) Xeon(R) CPU E5-2678 v3 @
-        
-      
+      &lt;h3 id=&quot;测试环境&quot;&gt;&lt;a href=&quot;#测试环境&quot; class=&quot;headerlink&quot; title=&quot;测试环境&quot;&gt;&lt;/a&gt;测试环境&lt;/h3&gt;&lt;p&gt;CPU:   48 * Intel(R) Xeon(R) CPU E5-2678 v3 @ 2.50GHz&lt;/p&gt;
+&lt;p&gt;memory：64G&lt;/p&gt;
     
     </summary>
     
@@ -259,11 +247,12 @@
     <link href="https://top.rongyao-blog.top/posts/a03.html"/>
     <id>https://top.rongyao-blog.top/posts/a03.html</id>
     <published>2020-12-07T11:24:50.537Z</published>
-    <updated>2020-12-07T11:29:49.623Z</updated>
+    <updated>2020-12-26T08:40:56.675Z</updated>
     
     <summary type="html">
     
       &lt;h3 id=&quot;SSDvsHDD&quot;&gt;&lt;a href=&quot;#SSDvsHDD&quot; class=&quot;headerlink&quot; title=&quot;SSDvsHDD&quot;&gt;&lt;/a&gt;SSDvsHDD&lt;/h3&gt;&lt;p&gt;传统的HDD是“马达+磁头+磁盘”的机械结构&lt;/p&gt;
+&lt;p&gt;SSD则是“闪存截止+主控”的半导体存储芯片结构&lt;/p&gt;
     
     </summary>
     

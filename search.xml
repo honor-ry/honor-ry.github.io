@@ -3,10 +3,8 @@
   <entry>
     <title>Anaconda3安装教程(详细)</title>
     <url>/posts/bf8d.html</url>
-    <content><![CDATA[<a id="more"></a>
-
-<h2 id="Anaconda3下载"><a href="#Anaconda3下载" class="headerlink" title="Anaconda3下载"></a>Anaconda3下载</h2><p>下载地址：<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/</a><br>选择anaconda 3.5.2 对应的python版本是python3.6</p>
-<!--more-->
+    <content><![CDATA[<h2 id="Anaconda3下载"><a href="#Anaconda3下载" class="headerlink" title="Anaconda3下载"></a>Anaconda3下载</h2><p>下载地址：<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/</a><br>选择anaconda 3.5.2 对应的python版本是python3.6</p>
+<a id="more"></a>
 
 <p><img src="https://img-blog.csdnimg.cn/20200319185750950.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt=" "></p>
 <h2 id="安装anaconda3"><a href="#安装anaconda3" class="headerlink" title="安装anaconda3"></a>安装anaconda3</h2><p><img src="https://img-blog.csdnimg.cn/20200319185859583.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt=" "><br>点击next</p>
@@ -889,9 +887,9 @@ save models to /home/aistudio/work/emotionclassify.inference.model
     <title>SSD学习小结(一)</title>
     <url>/posts/a03.html</url>
     <content><![CDATA[<h3 id="SSDvsHDD"><a href="#SSDvsHDD" class="headerlink" title="SSDvsHDD"></a>SSDvsHDD</h3><p>传统的HDD是“马达+磁头+磁盘”的机械结构</p>
+<p>SSD则是“闪存截止+主控”的半导体存储芯片结构</p>
 <a id="more"></a>
 
-<p>SSD则是“闪存截止+主控”的半导体存储芯片结构</p>
 <p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207085126089.png" alt="image-20201207085126089"></p>
 <p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207085134371.png" alt="image-20201207085134371"></p>
 <h3 id="SSD基本工作原理"><a href="#SSD基本工作原理" class="headerlink" title="SSD基本工作原理"></a>SSD基本工作原理</h3><p>​     从主机PC端开始，用户从操作系统应用层面对SSD发出请求，文件系统将读写请求经驱动转化为相应的符合协议的读写和其他命令，SSD收到命令执行相应操作，然后输出结果。</p>
@@ -1478,6 +1476,8 @@ save models to /home/aistudio/work/emotionclassify.inference.model
     <url>/posts/7ad579e7.html</url>
     <content><![CDATA[<p>leveldb中memtable的实现是采用skiplist跳表的，了解skiplist这种数据结构，便于我们分析理解memtable。</p>
 <h2 id="1-skiplist跳表的数据结构"><a href="#1-skiplist跳表的数据结构" class="headerlink" title="1.skiplist跳表的数据结构"></a>1.skiplist跳表的数据结构</h2><p>SkipList是一种用来代替平衡树的数据结构。<br>    虽然在最坏的情况下SkipList的效率要低于平衡树，但是大多数情况下效率仍然非常高，其插入、删除、查找的时间复杂度都是O(log(N))。<br>除了高效外，其实现和维护非常简单也是一大优势。SkipList的使用还是比较广泛的，比如在LevelDB中的MemTable就是使用SkipList实现的。</p>
+<a id="more"></a>
+
 <figure class="highlight txt"><table><tbody><tr><td class="code"><pre><span class="line">skiplist是多层的有序链表</span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h4><p>以查找19为例</p>
@@ -1657,6 +1657,9 @@ save models to /home/aistudio/work/emotionclassify.inference.model
 </ul>
 </blockquote>
 <p>编码分为变长的VarInt和固定大小的FixedInt两种，每种分32位和64位。</p>
+<a id="more"></a>
+
+
 <h3 id="变长编码"><a href="#变长编码" class="headerlink" title="变长编码"></a>变长编码</h3><p>为了节省空间，设计了一种varint变长编码方式来表示整型，越小的数字所占用的字节数越少。不采用变长编码，存放一个int类型的1，一般情况下需要4个字节，采用变长编码后，仅需要1个字节就可以保存。leveldb的变长编码也是采用小端序</p>
 <blockquote>
 <p>Varint 中的每个 byte 的最高位 bit 是标识位有特殊的含义。 如果该位为 1，表示后续的 byte 也是该数字的一部分，<br>如果该位为 0，则结束。 其他的 7 个 bit 都用来表示数字。</p>
@@ -1726,6 +1729,13 @@ save models to /home/aistudio/work/emotionclassify.inference.model
     <url>/posts/65b3.html</url>
     <content><![CDATA[<h3 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h3><p>CPU:   48 * Intel(R) Xeon(R) CPU E5-2678 v3 @ 2.50GHz</p>
 <p>memory：64G</p>
+<a id="more"></a>
+
+
+
+
+
+
 <h3 id="开始测试"><a href="#开始测试" class="headerlink" title="开始测试"></a>开始测试</h3><p>A、一百万条记录测试</p>
 <p>执行<code>./db_bench --num=1000000 --write_buffer_size=$((256*1024*1024))</code></p>
 <p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201206152943040.png" alt="image-20201206152943040"></p>
@@ -1823,10 +1833,8 @@ save models to /home/aistudio/work/emotionclassify.inference.model
   <entry>
     <title>matlab对控制系统进行时域和频域联合分析</title>
     <url>/posts/4d65.html</url>
-    <content><![CDATA[<a id="more"></a>
-
-<h2 id="时域频域联合分析"><a href="#时域频域联合分析" class="headerlink" title="时域频域联合分析"></a>时域频域联合分析</h2><p>   这个例子说明如何使用交互式线性系统分析及应用程序并排比较多种类型的响应，包括时域和频域响应。<br>   创建一个想要比较其响应的模型，如比较一个三阶模型G和G与两个不同控制器C1和C2的闭环响应。</p>
-<!--more-->
+    <content><![CDATA[<h2 id="时域频域联合分析"><a href="#时域频域联合分析" class="headerlink" title="时域频域联合分析"></a>时域频域联合分析</h2><p>   这个例子说明如何使用交互式线性系统分析及应用程序并排比较多种类型的响应，包括时域和频域响应。<br>   创建一个想要比较其响应的模型，如比较一个三阶模型G和G与两个不同控制器C1和C2的闭环响应。</p>
+<a id="more"></a>
 
 
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">G = zpk([],[<span class="number">-5</span> <span class="number">-5</span> <span class="number">-10</span>],<span class="number">100</span>);%z,p,k</span><br><span class="line">C1 = pid(<span class="number">0</span>,<span class="number">4.4</span>);</span><br><span class="line">T1 = feedback(G*C1,<span class="number">1</span>);</span><br><span class="line">C2 = pid(<span class="number">2.9</span>,<span class="number">7.1</span>);</span><br><span class="line">T2 = feedback(G*C2,<span class="number">1</span>);</span><br></pre></td></tr></tbody></table></figure>
