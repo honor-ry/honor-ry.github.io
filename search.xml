@@ -325,6 +325,99 @@ st.erase(value)，其中value为需要删除元素的值。时间复杂度为O(l
       </tags>
   </entry>
   <entry>
+    <title>Kaggle-泰坦尼克号生存者预测比赛|初级入门</title>
+    <url>/posts/d25d.html</url>
+    <content><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><ul>
+<li>泰坦尼克号的沉没是历史上最臭名昭著的沉船事件之一。1912年4月15日，泰坦尼克号在处女航中撞上冰山沉没，2224名乘客和船员中1502人遇难。这一耸人听闻的悲剧震惊了国际社会，并导致了更好的船舶安全条例。</li>
+<li>沉船造成如此巨大人员伤亡的原因之一是没有足够的救生艇来容纳乘客和船员。虽然在沉船事件中幸存下来也有一些运气的因素，但有些人比其他人更有可能幸存下来，比如妇女、儿童和上层阶级。</li>
+<li>在这个挑战中，我们要求你完成对可能存活下来的人的分析。我们特别要求你们运用机器学习工具来预测哪些乘客在灾难中幸存下来。<br>数据来源：<a href="https://www.kaggle.com/c/titanic/data">https://www.kaggle.com/c/titanic/data</a></li>
+</ul>
+<a id="more"></a>
+
+<h3 id="初探数据"><a href="#初探数据" class="headerlink" title="初探数据"></a>初探数据</h3><p>首先看看数据，长什么样</p>
+<p>pandas是常用的python数据处理包，把csv文件读入称dataframe格式，数据分为两部分：训练集和测试集，训练集891行12列，测试集419行11列（无survived列）。<br><img src="https://img-blog.csdnimg.cn/20200626190549962.png" alt="在这里插入图片描述"><br>各列的含义如下：<br>|PassengerId   |乘客ID编号  |<br>|–|–|<br>| Pclass | 乘客等级|<br>|Name   | 姓名 |<br>|Sex   | 性别 |<br>| Age  | 年龄 |<br>| SibSp  |堂兄弟/妹个数  |<br>| Parch  |父母与小孩个数  |<br>| Ticket   |船票信息  |<br>| Fare   |票价  |<br>|Cabin    |客舱  |<br>| Embarked   |登船港口C,Q,S  |</p>
+<h4 id="1-数据初步认识"><a href="#1-数据初步认识" class="headerlink" title="1.数据初步认识"></a>1.数据初步认识</h4><figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">print(df_train.info())</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200627073604715.png" alt="在这里插入图片描述"><br>上面的数据告诉我们训练集共有891名乘客，但是他们有些属性不全，比如：</p>
+<ul>
+<li>Age属性只有714名乘客有记录</li>
+<li>Cabin则只有204名乘客有记录<br>可以采用pandans中的describe()方法，对数据中的每一列数进行统计分析。得到数值型数据的一些分布（而有些属性比如姓名是文本型，登船港口是类目性，这些用describe()方法是看不到的）<br>df_train.describe()<br><img src="https://img-blog.csdnimg.cn/20200627074330643.png" alt="在这里插入图片描述"><br>上面可以得出，大概有38.3%的人获救了，乘客的平均年龄是29.7岁。<h4 id="2-数据初步分析"><a href="#2-数据初步分析" class="headerlink" title="2.数据初步分析"></a>2.数据初步分析</h4>每个乘客都有这么多属性，如何知道哪些属性更有用，又该如何使用呢。所以我们要知道，对数据的认识非常重要！看看单一/多个属性和最后的survived之间有什么样的关系。<br>下面使用统计学与绘图，了解数据之间的相关性，主要在以下方面：</li>
+<li>1.性别与幸存率的关系</li>
+<li>2.乘客社会等级与幸存率的关系</li>
+<li>3.配偶及兄弟姐妹数与幸存率的关系</li>
+<li>4.父母及子女数与幸存率的关系</li>
+<li>5.年龄与幸存率的关系</li>
+<li>6.Embarked登港港口与幸存率的关系</li>
+<li>7.称呼与幸存率的关系</li>
+<li>8.家庭人数与幸存率的关系</li>
+<li>9.不同船舱的乘客与幸存率的关系<h5 id="2-1性别与幸存率的关系"><a href="#2-1性别与幸存率的关系" class="headerlink" title="2.1性别与幸存率的关系"></a>2.1性别与幸存率的关系</h5><img src="https://img-blog.csdnimg.cn/20200627082626924.png" alt="在这里插入图片描述"><h5 id="2-乘客社会等级与幸存率的关系"><a href="#2-乘客社会等级与幸存率的关系" class="headerlink" title="2.乘客社会等级与幸存率的关系"></a>2.乘客社会等级与幸存率的关系</h5></li>
+</ul>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">sns.barplot(x=<span class="string">'Pclass'</span>, y=<span class="string">'Survived'</span>, data=train)</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200627082753277.png" alt="在这里插入图片描述"><br>由图看出，乘客社会等级越高，幸存率越高。</p>
+<h5 id="3-配偶及兄弟姐妹数与幸存率的关系"><a href="#3-配偶及兄弟姐妹数与幸存率的关系" class="headerlink" title="3.配偶及兄弟姐妹数与幸存率的关系"></a>3.配偶及兄弟姐妹数与幸存率的关系</h5><figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">sns.barplot(x=<span class="string">'SibSp'</span>, y=<span class="string">'Survived'</span>, data=train)</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200627082847917.png" alt="在这里插入图片描述"><br>4.父母及子女数与幸存率的关系</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">sns.barplot(x=<span class="string">'Parch'</span>, y=<span class="string">'Survived'</span>, data=train)</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/2020062708292029.png" alt="在这里插入图片描述"><br>父母与子女数适中的乘客幸存率较高</p>
+<h5 id="5-年龄与幸存率的关系"><a href="#5-年龄与幸存率的关系" class="headerlink" title="5.年龄与幸存率的关系"></a>5.年龄与幸存率的关系</h5><figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">facet = sns.FacetGrid(train, hue=<span class="string">"Survived"</span>,aspect=<span class="number">2</span>)</span><br><span class="line">facet.<span class="built_in">map</span>(sns.kdeplot,<span class="string">'Age'</span>,shade= <span class="literal">True</span>)</span><br><span class="line">facet.<span class="built_in">set</span>(xlim=(<span class="number">0</span>, train[<span class="string">'Age'</span>].<span class="built_in">max</span>()))</span><br><span class="line">facet.add_legend()</span><br><span class="line">plt.xlabel(<span class="string">'Age'</span>) </span><br><span class="line">plt.ylabel(<span class="string">'density'</span>) </span><br></pre></td></tr></tbody></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200627084408414.png" alt="在这里插入图片描述"><br>从不同生还情况的密度图可以看出，在年龄15岁的左侧，生还率有明显差别，密度图非交叉区域面积非常大，但在其他年龄段，则差别不是很明显，认为是随机所致，因此可以考虑将年龄偏小的区域分离出来。</p>
+<h5 id="6-Embarked登港港口与幸存率的关系"><a href="#6-Embarked登港港口与幸存率的关系" class="headerlink" title="6.Embarked登港港口与幸存率的关系"></a>6.Embarked登港港口与幸存率的关系</h5><p>登船港口（Embarked）：</p>
+<ul>
+<li>出发地点：S = 英国南安普顿Southampton</li>
+<li>途径地点1：C = 法国 瑟堡市Cherbourg</li>
+<li>途径地点2：Q = 爱尔兰 昆士敦Queenstown<br><img src="https://img-blog.csdnimg.cn/20200627084910905.png" alt="在这里插入图片描述"><br>由图发现C地的生存率更高。</li>
+</ul>
+<p>7.称呼与幸存率的关系<br>定义以下几种头衔类型，</p>
+<ul>
+<li>Officer政府官员</li>
+<li>Royalty王室（皇室）</li>
+<li>Mr已婚男士</li>
+<li>Mrs已婚妇女</li>
+<li>Miss年轻未婚女子</li>
+<li>Master有技能的人/教师<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">all_data = pd.concat([train, test], ignore_index=<span class="literal">True</span>)</span><br><span class="line">all_data[<span class="string">'Title'</span>] = all_data[<span class="string">'Name'</span>].apply(<span class="keyword">lambda</span> x:x.split(<span class="string">','</span>)[<span class="number">1</span>].split(<span class="string">'.'</span>)[<span class="number">0</span>].strip())</span><br><span class="line">Title_Dict = {}</span><br><span class="line">Title_Dict.update(<span class="built_in">dict</span>.fromkeys([<span class="string">'Capt'</span>, <span class="string">'Col'</span>, <span class="string">'Major'</span>, <span class="string">'Dr'</span>, <span class="string">'Rev'</span>], <span class="string">'Officer'</span>))</span><br><span class="line">Title_Dict.update(<span class="built_in">dict</span>.fromkeys([<span class="string">'Don'</span>, <span class="string">'Sir'</span>, <span class="string">'the Countess'</span>, <span class="string">'Dona'</span>, <span class="string">'Lady'</span>], <span class="string">'Royalty'</span>))</span><br><span class="line">Title_Dict.update(<span class="built_in">dict</span>.fromkeys([<span class="string">'Mme'</span>, <span class="string">'Ms'</span>, <span class="string">'Mrs'</span>], <span class="string">'Mrs'</span>))</span><br><span class="line">Title_Dict.update(<span class="built_in">dict</span>.fromkeys([<span class="string">'Mlle'</span>, <span class="string">'Miss'</span>], <span class="string">'Miss'</span>))</span><br><span class="line">Title_Dict.update(<span class="built_in">dict</span>.fromkeys([<span class="string">'Mr'</span>], <span class="string">'Mr'</span>))</span><br><span class="line">Title_Dict.update(<span class="built_in">dict</span>.fromkeys([<span class="string">'Master'</span>,<span class="string">'Jonkheer'</span>], <span class="string">'Master'</span>))</span><br><span class="line"></span><br><span class="line">all_data[<span class="string">'Title'</span>] = all_data[<span class="string">'Title'</span>].<span class="built_in">map</span>(Title_Dict)</span><br><span class="line">sns.barplot(x=<span class="string">"Title"</span>, y=<span class="string">"Survived"</span>, data=all_data)</span><br><span class="line">plt.show()</span><br></pre></td></tr></tbody></table></figure>
+
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20200627085132971.png" alt="在这里插入图片描述"></p>
+<p>8.家庭人数与幸存率的关系<br>这里新增FamilyLabel特征，这个特征等于父母儿童+配偶兄弟姐妹+1，在文中就是 FamilyLabel=Parch+SibSp+1，然后将FamilySize分为三类：</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">all_data[<span class="string">'FamilySize'</span>]=all_data[<span class="string">'SibSp'</span>]+all_data[<span class="string">'Parch'</span>]+<span class="number">1</span></span><br><span class="line">sns.barplot(x=<span class="string">"FamilySize"</span>, y=<span class="string">"Survived"</span>, data=all_data)</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200627094509738.png" alt="在这里插入图片描述"></p>
+<h5 id="数据探索"><a href="#数据探索" class="headerlink" title="数据探索"></a>数据探索</h5><figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(action=<span class="string">"ignore"</span>)</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">plt.figure(figsize=[<span class="number">12</span>, <span class="number">10</span>])</span><br><span class="line">plt.subplot(<span class="number">3</span>,<span class="number">3</span>,<span class="number">1</span>)</span><br><span class="line">sns.barplot(<span class="string">'Pclass'</span>, <span class="string">'Survived'</span>, data=train)</span><br><span class="line">plt.subplot(<span class="number">3</span>,<span class="number">3</span>,<span class="number">2</span>)</span><br><span class="line">sns.barplot(<span class="string">'SibSp'</span>, <span class="string">'Survived'</span>, data=train)</span><br><span class="line">plt.subplot(<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line">sns.barplot(<span class="string">'Parch'</span>, <span class="string">'Survived'</span>, data=train)</span><br><span class="line">plt.subplot(<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">sns.barplot(<span class="string">'Sex'</span>, <span class="string">'Survived'</span>, data=train)</span><br><span class="line">plt.subplot(<span class="number">3</span>,<span class="number">3</span>,<span class="number">5</span>)</span><br><span class="line">sns.barplot(<span class="string">'Ticket'</span>, <span class="string">'Survived'</span>, data=train)</span><br><span class="line">plt.subplot(<span class="number">3</span>,<span class="number">3</span>,<span class="number">6</span>)</span><br><span class="line">sns.barplot(<span class="string">'Cabin'</span>, <span class="string">'Survived'</span>, data=train)</span><br><span class="line">plt.subplot(<span class="number">3</span>,<span class="number">3</span>,<span class="number">7</span>)</span><br><span class="line">sns.barplot(<span class="string">'Embarked'</span>, <span class="string">'Survived'</span>, data=train)</span><br><span class="line">plt.subplot(<span class="number">3</span>,<span class="number">3</span>,<span class="number">8</span>)</span><br><span class="line">sns.distplot(train[train.Survived==<span class="number">1</span>].Age, color=<span class="string">'green'</span>, kde=<span class="literal">False</span>)</span><br><span class="line">sns.distplot(train[train.Survived==<span class="number">0</span>].Age, color=<span class="string">'orange'</span>, kde=<span class="literal">False</span>)</span><br><span class="line">plt.subplot(<span class="number">3</span>,<span class="number">3</span>,<span class="number">9</span>)</span><br><span class="line">sns.distplot(train[train.Survived==<span class="number">1</span>].Fare, color=<span class="string">'green'</span>, kde=<span class="literal">False</span>)</span><br><span class="line">sns.distplot(train[train.Survived==<span class="number">0</span>].Fare, color=<span class="string">'orange'</span>, kde=<span class="literal">False</span>)</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h4><figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">train.drop([<span class="string">'PassengerId'</span>,<span class="string">'Name'</span>,<span class="string">'Ticket'</span>,<span class="string">'SibSp'</span>,<span class="string">'Parch'</span>,<span class="string">'Ticket'</span>,<span class="string">'Cabin'</span>],axis=<span class="number">1</span>,inplace=<span class="literal">True</span>)</span><br><span class="line">test.drop([<span class="string">'PassengerId'</span>,<span class="string">'Name'</span>,<span class="string">'Ticket'</span>,<span class="string">'SibSp'</span>,<span class="string">'Parch'</span>,<span class="string">'Ticket'</span>,<span class="string">'Cabin'</span>],axis=<span class="number">1</span>,inplace=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">titanic=pd.concat([train, test], sort=<span class="literal">False</span>)</span><br><span class="line">titanic=pd.get_dummies(titanic)<span class="comment">#get_dummies one-hot encoding将离散特征的取值扩展到欧式空间，比如性别本事是一个特征，经过one-hot编码后，就变成了男或女两个特征</span></span><br><span class="line">train=titanic[:len_train]<span class="comment">#前len_train行为训练集</span></span><br><span class="line">test=titanic[len_train:]<span class="comment">#后面的为测试集</span></span><br><span class="line"><span class="comment"># Lets change type of target</span></span><br><span class="line">train.Survived=train.Survived.astype(<span class="string">'int'</span>)</span><br><span class="line">train.Survived.dtype</span><br><span class="line">xtrain=train.drop(<span class="string">"Survived"</span>,axis=<span class="number">1</span>)</span><br><span class="line">ytrain=train[<span class="string">'Survived'</span>]</span><br><span class="line">xtest=test.drop(<span class="string">"Survived"</span>, axis=<span class="number">1</span>)</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="模型的构建及训练"><a href="#模型的构建及训练" class="headerlink" title="模型的构建及训练"></a>模型的构建及训练</h4><p>随机森林</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">RF=RandomForestClassifier(random_state=<span class="number">1</span>)</span><br><span class="line">PRF=[{<span class="string">'n_estimators'</span>:[<span class="number">10</span>,<span class="number">100</span>],<span class="string">'max_depth'</span>:[<span class="number">3</span>,<span class="number">6</span>],<span class="string">'criterion'</span>:[<span class="string">'gini'</span>,<span class="string">'entropy'</span>]}]</span><br><span class="line">GSRF=GridSearchCV(estimator=RF, param_grid=PRF, scoring=<span class="string">'accuracy'</span>,cv=<span class="number">2</span>)</span><br><span class="line">scores_rf=cross_val_score(GSRF,xtrain,ytrain,scoring=<span class="string">'accuracy'</span>,cv=<span class="number">5</span>)</span><br><span class="line">np.mean(scores_rf)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>SVC</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">svc=make_pipeline(StandardScaler(),SVC(random_state=<span class="number">1</span>))</span><br><span class="line">r=[<span class="number">0.0001</span>,<span class="number">0.001</span>,<span class="number">0.1</span>,<span class="number">1</span>,<span class="number">10</span>,<span class="number">50</span>,<span class="number">100</span>]</span><br><span class="line">PSVM=[{<span class="string">'svc__C'</span>:r, <span class="string">'svc__kernel'</span>:[<span class="string">'linear'</span>]},</span><br><span class="line">      {<span class="string">'svc__C'</span>:r, <span class="string">'svc__gamma'</span>:r, <span class="string">'svc__kernel'</span>:[<span class="string">'rbf'</span>]}]</span><br><span class="line">GSSVM=GridSearchCV(estimator=svc, param_grid=PSVM, scoring=<span class="string">'accuracy'</span>, cv=<span class="number">2</span>)</span><br><span class="line">scores_svm=cross_val_score(GSSVM, xtrain.astype(<span class="built_in">float</span>), ytrain,scoring=<span class="string">'accuracy'</span>, cv=<span class="number">5</span>)</span><br><span class="line">np.mean(scores_svm)</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="完整实现代码"><a href="#完整实现代码" class="headerlink" title="完整实现代码"></a>完整实现代码</h4><figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> make_pipeline</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(action=<span class="string">"ignore"</span>)</span><br><span class="line"></span><br><span class="line">train=pd.read_csv(<span class="string">"input/train.csv"</span>)</span><br><span class="line">test=pd.read_csv(<span class="string">"input/test.csv"</span>)</span><br><span class="line">test2=pd.read_csv(<span class="string">"input/test.csv"</span>)</span><br><span class="line">titanic=pd.concat([train, test], sort=<span class="literal">False</span>)</span><br><span class="line">len_train=train.shape[<span class="number">0</span>]<span class="comment">#train数据的行数</span></span><br><span class="line">print(titanic)</span><br><span class="line">print(titanic.dtypes.sort_values())<span class="comment">#对数据进行排序</span></span><br><span class="line">titanic.select_dtypes(include=<span class="string">'int'</span>).tail()</span><br><span class="line"></span><br><span class="line">titanic.select_dtypes(include=<span class="string">'object'</span>).head() <span class="comment">#查看特定类型的数据行</span></span><br><span class="line"></span><br><span class="line">titanic.select_dtypes(include= <span class="string">'float'</span>).head()</span><br><span class="line"></span><br><span class="line">print(titanic.isnull().<span class="built_in">sum</span>()[titanic.isnull().<span class="built_in">sum</span>()&gt;<span class="number">0</span>])<span class="comment">#只显示存在缺失值的属性，如果没有titanic.isnull().sum()&gt;0则不确实的特征属性会显示为0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">train.Fare=train.Fare.fillna(train.Fare.mean())<span class="comment">#Fare票价的缺失值用平均值填充</span></span><br><span class="line">test.Fare=test.Fare.fillna(train.Fare.mean())</span><br><span class="line"></span><br><span class="line">train.Cabin=train.Cabin.fillna(<span class="string">"unknow"</span>)<span class="comment">#船舱座位号空的用unknow填充</span></span><br><span class="line">test.Cabin=test.Cabin.fillna(<span class="string">"unknow"</span>)</span><br><span class="line"></span><br><span class="line">train.Embarked=train.Embarked.fillna(train.Embarked.mode()[<span class="number">0</span>])<span class="comment">#mode为求众数(频数最高的值)</span></span><br><span class="line">test.Embarked=test.Embarked.fillna(train.Embarked.mode()[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">train[<span class="string">'title'</span>]=train.Name.apply(<span class="keyword">lambda</span> x: x.split(<span class="string">'.'</span>)[<span class="number">0</span>].split(<span class="string">','</span>)[<span class="number">1</span>].strip())</span><br><span class="line">test[<span class="string">'title'</span>]=test.Name.apply(<span class="keyword">lambda</span> x: x.split(<span class="string">'.'</span>)[<span class="number">0</span>].split(<span class="string">','</span>)[<span class="number">1</span>].strip())</span><br><span class="line"><span class="comment">#对年龄缺失值的补全，先提取姓名中的称谓，判断大致身份，然后根据各不同称谓的平均年龄，对同类</span></span><br><span class="line"><span class="comment">#缺失值进行补齐。</span></span><br><span class="line">newtitles={</span><br><span class="line">    <span class="string">"Capt"</span>:       <span class="string">"Officer"</span>,</span><br><span class="line">    <span class="string">"Col"</span>:        <span class="string">"Officer"</span>,</span><br><span class="line">    <span class="string">"Major"</span>:      <span class="string">"Officer"</span>,</span><br><span class="line">    <span class="string">"Jonkheer"</span>:   <span class="string">"Royalty"</span>,</span><br><span class="line">    <span class="string">"Don"</span>:        <span class="string">"Royalty"</span>,</span><br><span class="line">    <span class="string">"Sir"</span> :       <span class="string">"Royalty"</span>,</span><br><span class="line">    <span class="string">"Dr"</span>:         <span class="string">"Officer"</span>,</span><br><span class="line">    <span class="string">"Rev"</span>:        <span class="string">"Officer"</span>,</span><br><span class="line">    <span class="string">"the Countess"</span>:<span class="string">"Royalty"</span>,</span><br><span class="line">    <span class="string">"Dona"</span>:       <span class="string">"Royalty"</span>,</span><br><span class="line">    <span class="string">"Mme"</span>:        <span class="string">"Mrs"</span>,</span><br><span class="line">    <span class="string">"Mlle"</span>:       <span class="string">"Miss"</span>,</span><br><span class="line">    <span class="string">"Ms"</span>:         <span class="string">"Mrs"</span>,</span><br><span class="line">    <span class="string">"Mr"</span> :        <span class="string">"Mr"</span>,</span><br><span class="line">    <span class="string">"Mrs"</span> :       <span class="string">"Mrs"</span>,</span><br><span class="line">    <span class="string">"Miss"</span> :      <span class="string">"Miss"</span>,</span><br><span class="line">    <span class="string">"Master"</span> :    <span class="string">"Master"</span>,</span><br><span class="line">    <span class="string">"Lady"</span> :      <span class="string">"Royalty"</span>}</span><br><span class="line"></span><br><span class="line">train[<span class="string">'title'</span>]=train.title.<span class="built_in">map</span>(newtitles)</span><br><span class="line">test[<span class="string">'title'</span>]=test.title.<span class="built_in">map</span>(newtitles)</span><br><span class="line"></span><br><span class="line">train.groupby([<span class="string">'title'</span>,<span class="string">'Sex'</span>]).Age.mean()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">newage</span> (<span class="params">cols</span>):</span></span><br><span class="line">    title=cols[<span class="number">0</span>]</span><br><span class="line">    Sex=cols[<span class="number">1</span>]</span><br><span class="line">    Age=cols[<span class="number">2</span>]</span><br><span class="line">    <span class="keyword">if</span> pd.isnull(Age):</span><br><span class="line">        <span class="keyword">if</span> title==<span class="string">'Master'</span> <span class="keyword">and</span> Sex==<span class="string">"male"</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">4.57</span></span><br><span class="line">        <span class="keyword">elif</span> title==<span class="string">'Miss'</span> <span class="keyword">and</span> Sex==<span class="string">'female'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">21.8</span></span><br><span class="line">        <span class="keyword">elif</span> title==<span class="string">'Mr'</span> <span class="keyword">and</span> Sex==<span class="string">'male'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">32.37</span></span><br><span class="line">        <span class="keyword">elif</span> title==<span class="string">'Mrs'</span> <span class="keyword">and</span> Sex==<span class="string">'female'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">35.72</span></span><br><span class="line">        <span class="keyword">elif</span> title==<span class="string">'Officer'</span> <span class="keyword">and</span> Sex==<span class="string">'female'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">49</span></span><br><span class="line">        <span class="keyword">elif</span> title==<span class="string">'Officer'</span> <span class="keyword">and</span> Sex==<span class="string">'male'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">46.56</span></span><br><span class="line">        <span class="keyword">elif</span> title==<span class="string">'Royalty'</span> <span class="keyword">and</span> Sex==<span class="string">'female'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">40.50</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">42.33</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> Age</span><br><span class="line">train.Age = train[[<span class="string">'title'</span>, <span class="string">'Sex'</span>, <span class="string">'Age'</span>]].apply(newage, axis=<span class="number">1</span>)</span><br><span class="line">test.Age = test[[<span class="string">'title'</span>, <span class="string">'Sex'</span>, <span class="string">'Age'</span>]].apply(newage, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#droping features I won't use in model</span></span><br><span class="line"><span class="comment">#train.drop(['PassengerId','Name','Ticket','SibSp','Parch','Ticket','Cabin']</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 数据准备</span></span><br><span class="line">train.drop([<span class="string">'PassengerId'</span>,<span class="string">'Name'</span>,<span class="string">'Ticket'</span>,<span class="string">'SibSp'</span>,<span class="string">'Parch'</span>,<span class="string">'Ticket'</span>,<span class="string">'Cabin'</span>],axis=<span class="number">1</span>,inplace=<span class="literal">True</span>)</span><br><span class="line">test.drop([<span class="string">'PassengerId'</span>,<span class="string">'Name'</span>,<span class="string">'Ticket'</span>,<span class="string">'SibSp'</span>,<span class="string">'Parch'</span>,<span class="string">'Ticket'</span>,<span class="string">'Cabin'</span>],axis=<span class="number">1</span>,inplace=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">titanic=pd.concat([train, test], sort=<span class="literal">False</span>)</span><br><span class="line">titanic=pd.get_dummies(titanic)<span class="comment">#get_dummies one-hot encoding将离散特征的取值扩展到欧式空间，比如性别本事是一个特征，经过one-hot编码后，就变成了男或女两个特征</span></span><br><span class="line">train=titanic[:len_train]<span class="comment">#前len_train行为训练集</span></span><br><span class="line">test=titanic[len_train:]<span class="comment">#后面的为测试集</span></span><br><span class="line"><span class="comment"># Lets change type of target</span></span><br><span class="line">train.Survived=train.Survived.astype(<span class="string">'int'</span>)</span><br><span class="line">train.Survived.dtype</span><br><span class="line">xtrain=train.drop(<span class="string">"Survived"</span>,axis=<span class="number">1</span>)</span><br><span class="line">ytrain=train[<span class="string">'Survived'</span>]</span><br><span class="line">xtest=test.drop(<span class="string">"Survived"</span>, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">RF=RandomForestClassifier(random_state=<span class="number">1</span>)</span><br><span class="line">PRF=[{<span class="string">'n_estimators'</span>:[<span class="number">10</span>,<span class="number">100</span>],<span class="string">'max_depth'</span>:[<span class="number">3</span>,<span class="number">6</span>],<span class="string">'criterion'</span>:[<span class="string">'gini'</span>,<span class="string">'entropy'</span>]}]</span><br><span class="line">GSRF=GridSearchCV(estimator=RF, param_grid=PRF, scoring=<span class="string">'accuracy'</span>,cv=<span class="number">2</span>)</span><br><span class="line">scores_rf=cross_val_score(GSRF,xtrain,ytrain,scoring=<span class="string">'accuracy'</span>,cv=<span class="number">5</span>)</span><br><span class="line">np.mean(scores_rf)</span><br><span class="line"></span><br><span class="line">svc=make_pipeline(StandardScaler(),SVC(random_state=<span class="number">1</span>))</span><br><span class="line">r=[<span class="number">0.0001</span>,<span class="number">0.001</span>,<span class="number">0.1</span>,<span class="number">1</span>,<span class="number">10</span>,<span class="number">50</span>,<span class="number">100</span>]</span><br><span class="line">PSVM=[{<span class="string">'svc__C'</span>:r, <span class="string">'svc__kernel'</span>:[<span class="string">'linear'</span>]},</span><br><span class="line">      {<span class="string">'svc__C'</span>:r, <span class="string">'svc__gamma'</span>:r, <span class="string">'svc__kernel'</span>:[<span class="string">'rbf'</span>]}]</span><br><span class="line">GSSVM=GridSearchCV(estimator=svc, param_grid=PSVM, scoring=<span class="string">'accuracy'</span>, cv=<span class="number">2</span>)</span><br><span class="line">scores_svm=cross_val_score(GSSVM, xtrain.astype(<span class="built_in">float</span>), ytrain,scoring=<span class="string">'accuracy'</span>, cv=<span class="number">5</span>)</span><br><span class="line">np.mean(scores_svm)</span><br><span class="line"></span><br><span class="line">model=GSSVM.fit(xtrain, ytrain)</span><br><span class="line">pred=model.predict(xtest)</span><br><span class="line">output=pd.DataFrame({<span class="string">'PassengerId'</span>:test2[<span class="string">'PassengerId'</span>],<span class="string">'Survived'</span>:pred})</span><br><span class="line">output.to_csv(<span class="string">'submission.csv'</span>, index=<span class="literal">False</span>)</span><br></pre></td></tr></tbody></table></figure>
+
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>python kaggle 机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Markdown测试</title>
     <url>/posts/ff42.html</url>
     <content><![CDATA[<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><hr>
@@ -526,198 +619,6 @@ st.erase(value)，其中value为需要删除元素的值。时间复杂度为O(l
       </tags>
   </entry>
   <entry>
-    <title>Kaggle-泰坦尼克号生存者预测比赛|初级入门</title>
-    <url>/posts/d25d.html</url>
-    <content><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><ul>
-<li>泰坦尼克号的沉没是历史上最臭名昭著的沉船事件之一。1912年4月15日，泰坦尼克号在处女航中撞上冰山沉没，2224名乘客和船员中1502人遇难。这一耸人听闻的悲剧震惊了国际社会，并导致了更好的船舶安全条例。</li>
-<li>沉船造成如此巨大人员伤亡的原因之一是没有足够的救生艇来容纳乘客和船员。虽然在沉船事件中幸存下来也有一些运气的因素，但有些人比其他人更有可能幸存下来，比如妇女、儿童和上层阶级。</li>
-<li>在这个挑战中，我们要求你完成对可能存活下来的人的分析。我们特别要求你们运用机器学习工具来预测哪些乘客在灾难中幸存下来。<br>数据来源：<a href="https://www.kaggle.com/c/titanic/data">https://www.kaggle.com/c/titanic/data</a></li>
-</ul>
-<a id="more"></a>
-
-<h3 id="初探数据"><a href="#初探数据" class="headerlink" title="初探数据"></a>初探数据</h3><p>首先看看数据，长什么样</p>
-<p>pandas是常用的python数据处理包，把csv文件读入称dataframe格式，数据分为两部分：训练集和测试集，训练集891行12列，测试集419行11列（无survived列）。<br><img src="https://img-blog.csdnimg.cn/20200626190549962.png" alt="在这里插入图片描述"><br>各列的含义如下：<br>|PassengerId   |乘客ID编号  |<br>|–|–|<br>| Pclass | 乘客等级|<br>|Name   | 姓名 |<br>|Sex   | 性别 |<br>| Age  | 年龄 |<br>| SibSp  |堂兄弟/妹个数  |<br>| Parch  |父母与小孩个数  |<br>| Ticket   |船票信息  |<br>| Fare   |票价  |<br>|Cabin    |客舱  |<br>| Embarked   |登船港口C,Q,S  |</p>
-<h4 id="1-数据初步认识"><a href="#1-数据初步认识" class="headerlink" title="1.数据初步认识"></a>1.数据初步认识</h4><figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">print(df_train.info())</span><br></pre></td></tr></tbody></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20200627073604715.png" alt="在这里插入图片描述"><br>上面的数据告诉我们训练集共有891名乘客，但是他们有些属性不全，比如：</p>
-<ul>
-<li>Age属性只有714名乘客有记录</li>
-<li>Cabin则只有204名乘客有记录<br>可以采用pandans中的describe()方法，对数据中的每一列数进行统计分析。得到数值型数据的一些分布（而有些属性比如姓名是文本型，登船港口是类目性，这些用describe()方法是看不到的）<br>df_train.describe()<br><img src="https://img-blog.csdnimg.cn/20200627074330643.png" alt="在这里插入图片描述"><br>上面可以得出，大概有38.3%的人获救了，乘客的平均年龄是29.7岁。<h4 id="2-数据初步分析"><a href="#2-数据初步分析" class="headerlink" title="2.数据初步分析"></a>2.数据初步分析</h4>每个乘客都有这么多属性，如何知道哪些属性更有用，又该如何使用呢。所以我们要知道，对数据的认识非常重要！看看单一/多个属性和最后的survived之间有什么样的关系。<br>下面使用统计学与绘图，了解数据之间的相关性，主要在以下方面：</li>
-<li>1.性别与幸存率的关系</li>
-<li>2.乘客社会等级与幸存率的关系</li>
-<li>3.配偶及兄弟姐妹数与幸存率的关系</li>
-<li>4.父母及子女数与幸存率的关系</li>
-<li>5.年龄与幸存率的关系</li>
-<li>6.Embarked登港港口与幸存率的关系</li>
-<li>7.称呼与幸存率的关系</li>
-<li>8.家庭人数与幸存率的关系</li>
-<li>9.不同船舱的乘客与幸存率的关系<h5 id="2-1性别与幸存率的关系"><a href="#2-1性别与幸存率的关系" class="headerlink" title="2.1性别与幸存率的关系"></a>2.1性别与幸存率的关系</h5><img src="https://img-blog.csdnimg.cn/20200627082626924.png" alt="在这里插入图片描述"><h5 id="2-乘客社会等级与幸存率的关系"><a href="#2-乘客社会等级与幸存率的关系" class="headerlink" title="2.乘客社会等级与幸存率的关系"></a>2.乘客社会等级与幸存率的关系</h5></li>
-</ul>
-<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">sns.barplot(x=<span class="string">'Pclass'</span>, y=<span class="string">'Survived'</span>, data=train)</span><br></pre></td></tr></tbody></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20200627082753277.png" alt="在这里插入图片描述"><br>由图看出，乘客社会等级越高，幸存率越高。</p>
-<h5 id="3-配偶及兄弟姐妹数与幸存率的关系"><a href="#3-配偶及兄弟姐妹数与幸存率的关系" class="headerlink" title="3.配偶及兄弟姐妹数与幸存率的关系"></a>3.配偶及兄弟姐妹数与幸存率的关系</h5><figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">sns.barplot(x=<span class="string">'SibSp'</span>, y=<span class="string">'Survived'</span>, data=train)</span><br></pre></td></tr></tbody></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20200627082847917.png" alt="在这里插入图片描述"><br>4.父母及子女数与幸存率的关系</p>
-<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">sns.barplot(x=<span class="string">'Parch'</span>, y=<span class="string">'Survived'</span>, data=train)</span><br></pre></td></tr></tbody></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/2020062708292029.png" alt="在这里插入图片描述"><br>父母与子女数适中的乘客幸存率较高</p>
-<h5 id="5-年龄与幸存率的关系"><a href="#5-年龄与幸存率的关系" class="headerlink" title="5.年龄与幸存率的关系"></a>5.年龄与幸存率的关系</h5><figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">facet = sns.FacetGrid(train, hue=<span class="string">"Survived"</span>,aspect=<span class="number">2</span>)</span><br><span class="line">facet.<span class="built_in">map</span>(sns.kdeplot,<span class="string">'Age'</span>,shade= <span class="literal">True</span>)</span><br><span class="line">facet.<span class="built_in">set</span>(xlim=(<span class="number">0</span>, train[<span class="string">'Age'</span>].<span class="built_in">max</span>()))</span><br><span class="line">facet.add_legend()</span><br><span class="line">plt.xlabel(<span class="string">'Age'</span>) </span><br><span class="line">plt.ylabel(<span class="string">'density'</span>) </span><br></pre></td></tr></tbody></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20200627084408414.png" alt="在这里插入图片描述"><br>从不同生还情况的密度图可以看出，在年龄15岁的左侧，生还率有明显差别，密度图非交叉区域面积非常大，但在其他年龄段，则差别不是很明显，认为是随机所致，因此可以考虑将年龄偏小的区域分离出来。</p>
-<h5 id="6-Embarked登港港口与幸存率的关系"><a href="#6-Embarked登港港口与幸存率的关系" class="headerlink" title="6.Embarked登港港口与幸存率的关系"></a>6.Embarked登港港口与幸存率的关系</h5><p>登船港口（Embarked）：</p>
-<ul>
-<li>出发地点：S = 英国南安普顿Southampton</li>
-<li>途径地点1：C = 法国 瑟堡市Cherbourg</li>
-<li>途径地点2：Q = 爱尔兰 昆士敦Queenstown<br><img src="https://img-blog.csdnimg.cn/20200627084910905.png" alt="在这里插入图片描述"><br>由图发现C地的生存率更高。</li>
-</ul>
-<p>7.称呼与幸存率的关系<br>定义以下几种头衔类型，</p>
-<ul>
-<li>Officer政府官员</li>
-<li>Royalty王室（皇室）</li>
-<li>Mr已婚男士</li>
-<li>Mrs已婚妇女</li>
-<li>Miss年轻未婚女子</li>
-<li>Master有技能的人/教师<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">all_data = pd.concat([train, test], ignore_index=<span class="literal">True</span>)</span><br><span class="line">all_data[<span class="string">'Title'</span>] = all_data[<span class="string">'Name'</span>].apply(<span class="keyword">lambda</span> x:x.split(<span class="string">','</span>)[<span class="number">1</span>].split(<span class="string">'.'</span>)[<span class="number">0</span>].strip())</span><br><span class="line">Title_Dict = {}</span><br><span class="line">Title_Dict.update(<span class="built_in">dict</span>.fromkeys([<span class="string">'Capt'</span>, <span class="string">'Col'</span>, <span class="string">'Major'</span>, <span class="string">'Dr'</span>, <span class="string">'Rev'</span>], <span class="string">'Officer'</span>))</span><br><span class="line">Title_Dict.update(<span class="built_in">dict</span>.fromkeys([<span class="string">'Don'</span>, <span class="string">'Sir'</span>, <span class="string">'the Countess'</span>, <span class="string">'Dona'</span>, <span class="string">'Lady'</span>], <span class="string">'Royalty'</span>))</span><br><span class="line">Title_Dict.update(<span class="built_in">dict</span>.fromkeys([<span class="string">'Mme'</span>, <span class="string">'Ms'</span>, <span class="string">'Mrs'</span>], <span class="string">'Mrs'</span>))</span><br><span class="line">Title_Dict.update(<span class="built_in">dict</span>.fromkeys([<span class="string">'Mlle'</span>, <span class="string">'Miss'</span>], <span class="string">'Miss'</span>))</span><br><span class="line">Title_Dict.update(<span class="built_in">dict</span>.fromkeys([<span class="string">'Mr'</span>], <span class="string">'Mr'</span>))</span><br><span class="line">Title_Dict.update(<span class="built_in">dict</span>.fromkeys([<span class="string">'Master'</span>,<span class="string">'Jonkheer'</span>], <span class="string">'Master'</span>))</span><br><span class="line"></span><br><span class="line">all_data[<span class="string">'Title'</span>] = all_data[<span class="string">'Title'</span>].<span class="built_in">map</span>(Title_Dict)</span><br><span class="line">sns.barplot(x=<span class="string">"Title"</span>, y=<span class="string">"Survived"</span>, data=all_data)</span><br><span class="line">plt.show()</span><br></pre></td></tr></tbody></table></figure>
-
-</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/20200627085132971.png" alt="在这里插入图片描述"></p>
-<p>8.家庭人数与幸存率的关系<br>这里新增FamilyLabel特征，这个特征等于父母儿童+配偶兄弟姐妹+1，在文中就是 FamilyLabel=Parch+SibSp+1，然后将FamilySize分为三类：</p>
-<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">all_data[<span class="string">'FamilySize'</span>]=all_data[<span class="string">'SibSp'</span>]+all_data[<span class="string">'Parch'</span>]+<span class="number">1</span></span><br><span class="line">sns.barplot(x=<span class="string">"FamilySize"</span>, y=<span class="string">"Survived"</span>, data=all_data)</span><br></pre></td></tr></tbody></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20200627094509738.png" alt="在这里插入图片描述"></p>
-<h5 id="数据探索"><a href="#数据探索" class="headerlink" title="数据探索"></a>数据探索</h5><figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(action=<span class="string">"ignore"</span>)</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">plt.figure(figsize=[<span class="number">12</span>, <span class="number">10</span>])</span><br><span class="line">plt.subplot(<span class="number">3</span>,<span class="number">3</span>,<span class="number">1</span>)</span><br><span class="line">sns.barplot(<span class="string">'Pclass'</span>, <span class="string">'Survived'</span>, data=train)</span><br><span class="line">plt.subplot(<span class="number">3</span>,<span class="number">3</span>,<span class="number">2</span>)</span><br><span class="line">sns.barplot(<span class="string">'SibSp'</span>, <span class="string">'Survived'</span>, data=train)</span><br><span class="line">plt.subplot(<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line">sns.barplot(<span class="string">'Parch'</span>, <span class="string">'Survived'</span>, data=train)</span><br><span class="line">plt.subplot(<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">sns.barplot(<span class="string">'Sex'</span>, <span class="string">'Survived'</span>, data=train)</span><br><span class="line">plt.subplot(<span class="number">3</span>,<span class="number">3</span>,<span class="number">5</span>)</span><br><span class="line">sns.barplot(<span class="string">'Ticket'</span>, <span class="string">'Survived'</span>, data=train)</span><br><span class="line">plt.subplot(<span class="number">3</span>,<span class="number">3</span>,<span class="number">6</span>)</span><br><span class="line">sns.barplot(<span class="string">'Cabin'</span>, <span class="string">'Survived'</span>, data=train)</span><br><span class="line">plt.subplot(<span class="number">3</span>,<span class="number">3</span>,<span class="number">7</span>)</span><br><span class="line">sns.barplot(<span class="string">'Embarked'</span>, <span class="string">'Survived'</span>, data=train)</span><br><span class="line">plt.subplot(<span class="number">3</span>,<span class="number">3</span>,<span class="number">8</span>)</span><br><span class="line">sns.distplot(train[train.Survived==<span class="number">1</span>].Age, color=<span class="string">'green'</span>, kde=<span class="literal">False</span>)</span><br><span class="line">sns.distplot(train[train.Survived==<span class="number">0</span>].Age, color=<span class="string">'orange'</span>, kde=<span class="literal">False</span>)</span><br><span class="line">plt.subplot(<span class="number">3</span>,<span class="number">3</span>,<span class="number">9</span>)</span><br><span class="line">sns.distplot(train[train.Survived==<span class="number">1</span>].Fare, color=<span class="string">'green'</span>, kde=<span class="literal">False</span>)</span><br><span class="line">sns.distplot(train[train.Survived==<span class="number">0</span>].Fare, color=<span class="string">'orange'</span>, kde=<span class="literal">False</span>)</span><br></pre></td></tr></tbody></table></figure>
-<h4 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h4><figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">train.drop([<span class="string">'PassengerId'</span>,<span class="string">'Name'</span>,<span class="string">'Ticket'</span>,<span class="string">'SibSp'</span>,<span class="string">'Parch'</span>,<span class="string">'Ticket'</span>,<span class="string">'Cabin'</span>],axis=<span class="number">1</span>,inplace=<span class="literal">True</span>)</span><br><span class="line">test.drop([<span class="string">'PassengerId'</span>,<span class="string">'Name'</span>,<span class="string">'Ticket'</span>,<span class="string">'SibSp'</span>,<span class="string">'Parch'</span>,<span class="string">'Ticket'</span>,<span class="string">'Cabin'</span>],axis=<span class="number">1</span>,inplace=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">titanic=pd.concat([train, test], sort=<span class="literal">False</span>)</span><br><span class="line">titanic=pd.get_dummies(titanic)<span class="comment">#get_dummies one-hot encoding将离散特征的取值扩展到欧式空间，比如性别本事是一个特征，经过one-hot编码后，就变成了男或女两个特征</span></span><br><span class="line">train=titanic[:len_train]<span class="comment">#前len_train行为训练集</span></span><br><span class="line">test=titanic[len_train:]<span class="comment">#后面的为测试集</span></span><br><span class="line"><span class="comment"># Lets change type of target</span></span><br><span class="line">train.Survived=train.Survived.astype(<span class="string">'int'</span>)</span><br><span class="line">train.Survived.dtype</span><br><span class="line">xtrain=train.drop(<span class="string">"Survived"</span>,axis=<span class="number">1</span>)</span><br><span class="line">ytrain=train[<span class="string">'Survived'</span>]</span><br><span class="line">xtest=test.drop(<span class="string">"Survived"</span>, axis=<span class="number">1</span>)</span><br></pre></td></tr></tbody></table></figure>
-
-<h4 id="模型的构建及训练"><a href="#模型的构建及训练" class="headerlink" title="模型的构建及训练"></a>模型的构建及训练</h4><p>随机森林</p>
-<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">RF=RandomForestClassifier(random_state=<span class="number">1</span>)</span><br><span class="line">PRF=[{<span class="string">'n_estimators'</span>:[<span class="number">10</span>,<span class="number">100</span>],<span class="string">'max_depth'</span>:[<span class="number">3</span>,<span class="number">6</span>],<span class="string">'criterion'</span>:[<span class="string">'gini'</span>,<span class="string">'entropy'</span>]}]</span><br><span class="line">GSRF=GridSearchCV(estimator=RF, param_grid=PRF, scoring=<span class="string">'accuracy'</span>,cv=<span class="number">2</span>)</span><br><span class="line">scores_rf=cross_val_score(GSRF,xtrain,ytrain,scoring=<span class="string">'accuracy'</span>,cv=<span class="number">5</span>)</span><br><span class="line">np.mean(scores_rf)</span><br></pre></td></tr></tbody></table></figure>
-
-<p>SVC</p>
-<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">svc=make_pipeline(StandardScaler(),SVC(random_state=<span class="number">1</span>))</span><br><span class="line">r=[<span class="number">0.0001</span>,<span class="number">0.001</span>,<span class="number">0.1</span>,<span class="number">1</span>,<span class="number">10</span>,<span class="number">50</span>,<span class="number">100</span>]</span><br><span class="line">PSVM=[{<span class="string">'svc__C'</span>:r, <span class="string">'svc__kernel'</span>:[<span class="string">'linear'</span>]},</span><br><span class="line">      {<span class="string">'svc__C'</span>:r, <span class="string">'svc__gamma'</span>:r, <span class="string">'svc__kernel'</span>:[<span class="string">'rbf'</span>]}]</span><br><span class="line">GSSVM=GridSearchCV(estimator=svc, param_grid=PSVM, scoring=<span class="string">'accuracy'</span>, cv=<span class="number">2</span>)</span><br><span class="line">scores_svm=cross_val_score(GSSVM, xtrain.astype(<span class="built_in">float</span>), ytrain,scoring=<span class="string">'accuracy'</span>, cv=<span class="number">5</span>)</span><br><span class="line">np.mean(scores_svm)</span><br></pre></td></tr></tbody></table></figure>
-
-<h4 id="完整实现代码"><a href="#完整实现代码" class="headerlink" title="完整实现代码"></a>完整实现代码</h4><figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> make_pipeline</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(action=<span class="string">"ignore"</span>)</span><br><span class="line"></span><br><span class="line">train=pd.read_csv(<span class="string">"input/train.csv"</span>)</span><br><span class="line">test=pd.read_csv(<span class="string">"input/test.csv"</span>)</span><br><span class="line">test2=pd.read_csv(<span class="string">"input/test.csv"</span>)</span><br><span class="line">titanic=pd.concat([train, test], sort=<span class="literal">False</span>)</span><br><span class="line">len_train=train.shape[<span class="number">0</span>]<span class="comment">#train数据的行数</span></span><br><span class="line">print(titanic)</span><br><span class="line">print(titanic.dtypes.sort_values())<span class="comment">#对数据进行排序</span></span><br><span class="line">titanic.select_dtypes(include=<span class="string">'int'</span>).tail()</span><br><span class="line"></span><br><span class="line">titanic.select_dtypes(include=<span class="string">'object'</span>).head() <span class="comment">#查看特定类型的数据行</span></span><br><span class="line"></span><br><span class="line">titanic.select_dtypes(include= <span class="string">'float'</span>).head()</span><br><span class="line"></span><br><span class="line">print(titanic.isnull().<span class="built_in">sum</span>()[titanic.isnull().<span class="built_in">sum</span>()&gt;<span class="number">0</span>])<span class="comment">#只显示存在缺失值的属性，如果没有titanic.isnull().sum()&gt;0则不确实的特征属性会显示为0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">train.Fare=train.Fare.fillna(train.Fare.mean())<span class="comment">#Fare票价的缺失值用平均值填充</span></span><br><span class="line">test.Fare=test.Fare.fillna(train.Fare.mean())</span><br><span class="line"></span><br><span class="line">train.Cabin=train.Cabin.fillna(<span class="string">"unknow"</span>)<span class="comment">#船舱座位号空的用unknow填充</span></span><br><span class="line">test.Cabin=test.Cabin.fillna(<span class="string">"unknow"</span>)</span><br><span class="line"></span><br><span class="line">train.Embarked=train.Embarked.fillna(train.Embarked.mode()[<span class="number">0</span>])<span class="comment">#mode为求众数(频数最高的值)</span></span><br><span class="line">test.Embarked=test.Embarked.fillna(train.Embarked.mode()[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">train[<span class="string">'title'</span>]=train.Name.apply(<span class="keyword">lambda</span> x: x.split(<span class="string">'.'</span>)[<span class="number">0</span>].split(<span class="string">','</span>)[<span class="number">1</span>].strip())</span><br><span class="line">test[<span class="string">'title'</span>]=test.Name.apply(<span class="keyword">lambda</span> x: x.split(<span class="string">'.'</span>)[<span class="number">0</span>].split(<span class="string">','</span>)[<span class="number">1</span>].strip())</span><br><span class="line"><span class="comment">#对年龄缺失值的补全，先提取姓名中的称谓，判断大致身份，然后根据各不同称谓的平均年龄，对同类</span></span><br><span class="line"><span class="comment">#缺失值进行补齐。</span></span><br><span class="line">newtitles={</span><br><span class="line">    <span class="string">"Capt"</span>:       <span class="string">"Officer"</span>,</span><br><span class="line">    <span class="string">"Col"</span>:        <span class="string">"Officer"</span>,</span><br><span class="line">    <span class="string">"Major"</span>:      <span class="string">"Officer"</span>,</span><br><span class="line">    <span class="string">"Jonkheer"</span>:   <span class="string">"Royalty"</span>,</span><br><span class="line">    <span class="string">"Don"</span>:        <span class="string">"Royalty"</span>,</span><br><span class="line">    <span class="string">"Sir"</span> :       <span class="string">"Royalty"</span>,</span><br><span class="line">    <span class="string">"Dr"</span>:         <span class="string">"Officer"</span>,</span><br><span class="line">    <span class="string">"Rev"</span>:        <span class="string">"Officer"</span>,</span><br><span class="line">    <span class="string">"the Countess"</span>:<span class="string">"Royalty"</span>,</span><br><span class="line">    <span class="string">"Dona"</span>:       <span class="string">"Royalty"</span>,</span><br><span class="line">    <span class="string">"Mme"</span>:        <span class="string">"Mrs"</span>,</span><br><span class="line">    <span class="string">"Mlle"</span>:       <span class="string">"Miss"</span>,</span><br><span class="line">    <span class="string">"Ms"</span>:         <span class="string">"Mrs"</span>,</span><br><span class="line">    <span class="string">"Mr"</span> :        <span class="string">"Mr"</span>,</span><br><span class="line">    <span class="string">"Mrs"</span> :       <span class="string">"Mrs"</span>,</span><br><span class="line">    <span class="string">"Miss"</span> :      <span class="string">"Miss"</span>,</span><br><span class="line">    <span class="string">"Master"</span> :    <span class="string">"Master"</span>,</span><br><span class="line">    <span class="string">"Lady"</span> :      <span class="string">"Royalty"</span>}</span><br><span class="line"></span><br><span class="line">train[<span class="string">'title'</span>]=train.title.<span class="built_in">map</span>(newtitles)</span><br><span class="line">test[<span class="string">'title'</span>]=test.title.<span class="built_in">map</span>(newtitles)</span><br><span class="line"></span><br><span class="line">train.groupby([<span class="string">'title'</span>,<span class="string">'Sex'</span>]).Age.mean()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">newage</span> (<span class="params">cols</span>):</span></span><br><span class="line">    title=cols[<span class="number">0</span>]</span><br><span class="line">    Sex=cols[<span class="number">1</span>]</span><br><span class="line">    Age=cols[<span class="number">2</span>]</span><br><span class="line">    <span class="keyword">if</span> pd.isnull(Age):</span><br><span class="line">        <span class="keyword">if</span> title==<span class="string">'Master'</span> <span class="keyword">and</span> Sex==<span class="string">"male"</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">4.57</span></span><br><span class="line">        <span class="keyword">elif</span> title==<span class="string">'Miss'</span> <span class="keyword">and</span> Sex==<span class="string">'female'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">21.8</span></span><br><span class="line">        <span class="keyword">elif</span> title==<span class="string">'Mr'</span> <span class="keyword">and</span> Sex==<span class="string">'male'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">32.37</span></span><br><span class="line">        <span class="keyword">elif</span> title==<span class="string">'Mrs'</span> <span class="keyword">and</span> Sex==<span class="string">'female'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">35.72</span></span><br><span class="line">        <span class="keyword">elif</span> title==<span class="string">'Officer'</span> <span class="keyword">and</span> Sex==<span class="string">'female'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">49</span></span><br><span class="line">        <span class="keyword">elif</span> title==<span class="string">'Officer'</span> <span class="keyword">and</span> Sex==<span class="string">'male'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">46.56</span></span><br><span class="line">        <span class="keyword">elif</span> title==<span class="string">'Royalty'</span> <span class="keyword">and</span> Sex==<span class="string">'female'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">40.50</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">42.33</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> Age</span><br><span class="line">train.Age = train[[<span class="string">'title'</span>, <span class="string">'Sex'</span>, <span class="string">'Age'</span>]].apply(newage, axis=<span class="number">1</span>)</span><br><span class="line">test.Age = test[[<span class="string">'title'</span>, <span class="string">'Sex'</span>, <span class="string">'Age'</span>]].apply(newage, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#droping features I won't use in model</span></span><br><span class="line"><span class="comment">#train.drop(['PassengerId','Name','Ticket','SibSp','Parch','Ticket','Cabin']</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 数据准备</span></span><br><span class="line">train.drop([<span class="string">'PassengerId'</span>,<span class="string">'Name'</span>,<span class="string">'Ticket'</span>,<span class="string">'SibSp'</span>,<span class="string">'Parch'</span>,<span class="string">'Ticket'</span>,<span class="string">'Cabin'</span>],axis=<span class="number">1</span>,inplace=<span class="literal">True</span>)</span><br><span class="line">test.drop([<span class="string">'PassengerId'</span>,<span class="string">'Name'</span>,<span class="string">'Ticket'</span>,<span class="string">'SibSp'</span>,<span class="string">'Parch'</span>,<span class="string">'Ticket'</span>,<span class="string">'Cabin'</span>],axis=<span class="number">1</span>,inplace=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">titanic=pd.concat([train, test], sort=<span class="literal">False</span>)</span><br><span class="line">titanic=pd.get_dummies(titanic)<span class="comment">#get_dummies one-hot encoding将离散特征的取值扩展到欧式空间，比如性别本事是一个特征，经过one-hot编码后，就变成了男或女两个特征</span></span><br><span class="line">train=titanic[:len_train]<span class="comment">#前len_train行为训练集</span></span><br><span class="line">test=titanic[len_train:]<span class="comment">#后面的为测试集</span></span><br><span class="line"><span class="comment"># Lets change type of target</span></span><br><span class="line">train.Survived=train.Survived.astype(<span class="string">'int'</span>)</span><br><span class="line">train.Survived.dtype</span><br><span class="line">xtrain=train.drop(<span class="string">"Survived"</span>,axis=<span class="number">1</span>)</span><br><span class="line">ytrain=train[<span class="string">'Survived'</span>]</span><br><span class="line">xtest=test.drop(<span class="string">"Survived"</span>, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">RF=RandomForestClassifier(random_state=<span class="number">1</span>)</span><br><span class="line">PRF=[{<span class="string">'n_estimators'</span>:[<span class="number">10</span>,<span class="number">100</span>],<span class="string">'max_depth'</span>:[<span class="number">3</span>,<span class="number">6</span>],<span class="string">'criterion'</span>:[<span class="string">'gini'</span>,<span class="string">'entropy'</span>]}]</span><br><span class="line">GSRF=GridSearchCV(estimator=RF, param_grid=PRF, scoring=<span class="string">'accuracy'</span>,cv=<span class="number">2</span>)</span><br><span class="line">scores_rf=cross_val_score(GSRF,xtrain,ytrain,scoring=<span class="string">'accuracy'</span>,cv=<span class="number">5</span>)</span><br><span class="line">np.mean(scores_rf)</span><br><span class="line"></span><br><span class="line">svc=make_pipeline(StandardScaler(),SVC(random_state=<span class="number">1</span>))</span><br><span class="line">r=[<span class="number">0.0001</span>,<span class="number">0.001</span>,<span class="number">0.1</span>,<span class="number">1</span>,<span class="number">10</span>,<span class="number">50</span>,<span class="number">100</span>]</span><br><span class="line">PSVM=[{<span class="string">'svc__C'</span>:r, <span class="string">'svc__kernel'</span>:[<span class="string">'linear'</span>]},</span><br><span class="line">      {<span class="string">'svc__C'</span>:r, <span class="string">'svc__gamma'</span>:r, <span class="string">'svc__kernel'</span>:[<span class="string">'rbf'</span>]}]</span><br><span class="line">GSSVM=GridSearchCV(estimator=svc, param_grid=PSVM, scoring=<span class="string">'accuracy'</span>, cv=<span class="number">2</span>)</span><br><span class="line">scores_svm=cross_val_score(GSSVM, xtrain.astype(<span class="built_in">float</span>), ytrain,scoring=<span class="string">'accuracy'</span>, cv=<span class="number">5</span>)</span><br><span class="line">np.mean(scores_svm)</span><br><span class="line"></span><br><span class="line">model=GSSVM.fit(xtrain, ytrain)</span><br><span class="line">pred=model.predict(xtest)</span><br><span class="line">output=pd.DataFrame({<span class="string">'PassengerId'</span>:test2[<span class="string">'PassengerId'</span>],<span class="string">'Survived'</span>:pred})</span><br><span class="line">output.to_csv(<span class="string">'submission.csv'</span>, index=<span class="literal">False</span>)</span><br></pre></td></tr></tbody></table></figure>
-
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>python kaggle 机器学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Pycharm汉化之后无法打开setting设置</title>
-    <url>/posts/d098.html</url>
-    <content><![CDATA[<p>我在安装了pycharm汉化包之后，发现pycharm点击设置setting没反应，不能打开。网上找了解决方案：</p>
-<p>一般的问题都是装了中文汉化包resources_cn.jar造成的，解决办法：</p>
-<a id="more"></a>
-
-<ol>
-<li><p>更换一个汉化包<br>把这里的两个jar包放到PyCharm安装目录里的lib目录里面即可。同时删掉之前的汉化包。<br>链接：<a href="https://pan.baidu.com/s/1khtnNGAkMkwkGsDjzw0_zA">https://pan.baidu.com/s/1khtnNGAkMkwkGsDjzw0_zA</a><br>提取码：u1zb</p>
-</li>
-<li><p>将汉化包都删除，只留下原版的resources_en.jar   </p>
-</li>
-</ol>
-<p><img src="https://img-blog.csdnimg.cn/20200402103206811.png" alt="在这里插入图片描述"></p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SSD学习小结(一)</title>
-    <url>/posts/a03.html</url>
-    <content><![CDATA[<h3 id="SSDvsHDD"><a href="#SSDvsHDD" class="headerlink" title="SSDvsHDD"></a>SSDvsHDD</h3><p>传统的HDD是“马达+磁头+磁盘”的机械结构</p>
-<p>SSD则是“闪存截止+主控”的半导体存储芯片结构</p>
-<a id="more"></a>
-
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207085126089.png" alt="image-20201207085126089"></p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207085134371.png" alt="image-20201207085134371"></p>
-<h3 id="SSD基本工作原理"><a href="#SSD基本工作原理" class="headerlink" title="SSD基本工作原理"></a>SSD基本工作原理</h3><p>​     从主机PC端开始，用户从操作系统应用层面对SSD发出请求，文件系统将读写请求经驱动转化为相应的符合协议的读写和其他命令，SSD收到命令执行相应操作，然后输出结果。</p>
-<p>SSD的输入是命令（Command）</p>
-<p>输出是数据（Data）和命令状态（Command Status）</p>
-<p>SSD前端接收用户命令请求，经过内部计算和处理逻辑，输出用户所需要的数据或状态。</p>
-<p><font color="orange"> SSD主要由三大功能模块组成：</font></p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207092242358.png" alt="image-20201207092242358"></p>
-<p>①前端接口和相关的协议模块</p>
-<p>②中间的FTL层（闪存翻译层）模块</p>
-<p>③后端和闪存通信模块</p>
-<p>SSD前端负责和主机直接通信，接收主机发来的命令和相关数据，命令经SSD处理后，最终交由前端返回命令状态或数据给主机。SSD通过诸如SATA、SAS和PCIe等接口与主机相连，实现对应的ATA、SCSI和NVMe等协议。</p>
-<p>垃圾回收:</p>
-<p>在Block x和Block y上有很多垃圾数据，其中Block x上的A、B、C为有效数据，Block y上的D、E、F、G为有效数据。垃圾回收就是把一个或者几个Block上的有效数据搬出来集中写到某个空闲Block上（比如Block z）。当这些Block上的有效数据都搬走后，FTL便能擦除这些Block，然后又能把这些Block拿出来供SSD写入新的数据了。</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207100753098.png" alt="image-20201207100753098"></p>
-<p>磨损均衡（wear leveling）：FTL必须尽量让每个闪存块均衡写入，延长闪存颗粒寿命。</p>
-<p>地址映射：将文件系统的逻辑地址映射到flash的物理地址上</p>
-<h3 id="闪存的物理结构"><a href="#闪存的物理结构" class="headerlink" title="闪存的物理结构"></a>闪存的物理结构</h3><p>闪存是一种非易失性存储器，掉电数据不会丢失。闪存的即本存储单元（cell）是一种类NMOS的双层浮栅（floating gate）MOS管。</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207105703387.png" alt="image-20201207105703387"></p>
-<p>​                                             浮栅晶体管结构</p>
-<blockquote>
-<p>在源极（Source）和漏极（Drain）之间电流单向传导的半导体上形成存储电子的浮栅，浮栅上下被绝缘层包围，存储在里面的电子不会因为掉电而消失</p>
-</blockquote>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207105757608.png" alt="image-20201207105757608"></p>
-<p>写操作是在控制极加正电压，使电子通过绝缘层进入浮栅极。</p>
-<p>擦除操作则正好相反，是在衬底加正电压，把电子从浮栅极中吸出来。</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>]]></content>
-      <categories>
-        <category>SSD</category>
-      </categories>
-      <tags>
-        <tag>SSD</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>NLP入门-情感分析|paddle</title>
     <url>/posts/a21b.html</url>
     <content><![CDATA[<a id="more"></a>
@@ -895,28 +796,126 @@ save models to /home/aistudio/work/emotionclassify.inference.model
       </tags>
   </entry>
   <entry>
-    <title>SSD学习小结(二)</title>
-    <url>/posts/caa7.html</url>
-    <content><![CDATA[<h3 id="SLC、MLC、TLC、QLC"><a href="#SLC、MLC、TLC、QLC" class="headerlink" title="SLC、MLC、TLC、QLC"></a>SLC、MLC、TLC、QLC</h3><p>SLC：一个存储单元存储1bit数据</p>
-<p>MLC：存储2bit数据</p>
-<p>TLC：存储3bit数据</p>
-<p>QLC: 存储4bit数据</p>
+    <title>PID控制的理解与参数整定</title>
+    <url>/posts/20ab.html</url>
+    <content><![CDATA[<a id="more"></a>
+
+<h3 id="PID控制器的一般结构"><a href="#PID控制器的一般结构" class="headerlink" title="PID控制器的一般结构"></a>PID控制器的一般结构</h3><!--more-->
+
+<blockquote>
+<p>当控制器为比例控制器（P）时，可以减少因扰动而引起的稳态误差，但不能将稳态误差减少到0，增加一项正比于误差的积分项（I）时，可以消除系统的稳态误差，但会影响系统的动态性能，可再加入一个微分项（D）来提高系统的动态性能。由比例，积分，微分三项构成的控制器就是经典的PID控制器。<br><img src="https://img-blog.csdnimg.cn/20200311112849195.png" alt="  "><br>由于理论上的控制器有的时候产生的信号过大，可能破坏硬件系统，所以在控制器的输出端通常要加一个驱动饱和来保护这样一个信号，使得它不至于过大。<br>PID控制器的一般形式<br><img src="https://img-blog.csdnimg.cn/20200311113052968.png" alt="  "><br>PID控制器是由e信号驱动的，而e信号是跟踪误差，由e信号的当前时刻的值，e信号的积分以及e信号的导数，由这样三个信号的加权和共同构造出来一个控制信号u(t)。<br>e信号的积分的物理含义：表示e信号以往值的和，利用这一项可以表示e信号过去的信息。e信号的导数可以认为其预测着e信号的将来信息。<br><img src="https://img-blog.csdnimg.cn/2020031111524454.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="  "></p>
+</blockquote>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20200311115800499.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="  "></p>
+<hr>
+<p>==PID控制的原理可以用人对炉温的手动控制来理解==</p>
+<h3 id="1．比例控制"><a href="#1．比例控制" class="headerlink" title="1．比例控制"></a>1．比例控制</h3><p>   有经验的操作人员手动控制电加热炉的炉温，可以获得非常好的控制品质，PID控制与人工控制的控制策略有很多相似的地方。<br>   下面介绍操作人员怎样用比例控制的思想来手动控制电加热炉的炉温。假设用热电偶检测炉温，用数字仪表显示温度值。在控制过程中，操作人员用眼睛读取炉温，并与炉温给定值比较，得到温度的误差值。然后用手操作电位器，调节加热的电流，使炉温保持在给定值附近。<br>   操作人员知道炉温稳定在给定值时电位器的大致位置（我们将它称为位置L），并根据当时的温度误差值调整控制加热电流的电位器的转角。炉温小于给定值时，误差为正，在位置L的基础上顺时针增大电位器的转角，以增大加热的电流。炉温大于给定值时，误差为负，在位置L的基础上反时针减小电位器的转角，并令转角与位置L的差值与误差成正比。上述控制策略就是比例控制，即PID控制器输出中的比例部分与误差成正比。<br>   闭环中存在着各种各样的延迟作用。例如调节电位器转角后，到温度上升到新的转角对应的稳态值时有较大的时间延迟。由于延迟因素的存在，调节电位器转角后不能马上看到调节的效果，因此闭环控制系统调节困难的主要原因是系统中的延迟作用。<br>   比例控制的比例系数如果太小，即调节后的电位器转角与位置L的差值太小，调节的力度不够，使系统输出量变化缓慢，调节所需的总时间过长。比例系数如果过大，即调节后电位器转角与位置L的差值过大，调节力度太强，将造成调节过头，甚至使温度忽高忽低，来回震荡。<br>   增大比例系数使系统反应灵敏，调节速度加快，并且可以减小稳态误差。但是比例系数过大会使超调量增大，振荡次数增加，调节时间加长，动态性能变坏，比例系数太大甚至会使闭环系统不稳定。<br>   单纯的比例控制很难保证调节得恰到好处，完全消除误差。</p>
+<h3 id="2．积分控制"><a href="#2．积分控制" class="headerlink" title="2．积分控制"></a>2．积分控制</h3><p>   PID控制器中的积分对应于图1中误差曲线 与坐标轴包围的面积（图中的灰色部分）。PID控制程序是周期性执行的，执行的周期称为采样周期。计算机的程序用图1中各矩形面积之和来近似精确的积分，图中的TS就是采样周期。<br><img src="https://img-blog.csdnimg.cn/20200311115641859.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="  "><br> 　　　　　图1  积分运算示意图<br>　　每次PID运算时，在原来的积分值的基础上，增加一个与当前的误差值ev（n）成正比的微小部分。误差为负值时，积分的增量为负。<br>   　　手动调节温度时，积分控制相当于根据当时的误差值，周期性地微调电位器的角度，每次调节的角度增量值与当时的误差值成正比。温度低于设定值时误差为正，积分项增大，使加热电流逐渐增大，反之积分项减小。因此只要误差不为零，控制器的输出就会因为积分作用而不断变化。积分调节的“大方向”是正确的，积分项有减小误差的作用。一直要到系统处于稳定状态，这时误差恒为零，比例部分和微分部分均为零，积分部分才不再变化，并且刚好等于稳态时需要的控制器的输出值，对应于上述温度控制系统中电位器转角的位置L。因此积分部分的作用是消除稳态误差，提高控制精度，积分作用一般是必须的。<br> 　　PID控制器输出中的积分部分与误差的积分成正比。因为积分时间TI在积分项的分母中，TI越小，积分项变化的速度越快，积分作用越强。</p>
+<h3 id="3．PI控制"><a href="#3．PI控制" class="headerlink" title="3．PI控制"></a>3．PI控制</h3><p>   控制器输出中的积分项与当前的误差值和过去历次误差值的累加值成正比，因此积分作用本身具有严重的滞后特性，对系统的稳定性不利。如果积分项的系数设置得不好，其负面作用很难通过积分作用本身迅速地修正。而比例项没有延迟，只要误差一出现，比例部分就会立即起作用。因此积分作用很少单独使用，它一般与比例和微分联合使用，组成PI或PID控制器。<br>   PI和PID控制器既克服了单纯的比例调节有稳态误差的缺点，又避免了单纯的积分调节响应慢、动态性能不好的缺点，因此被广泛使用。<br>   如果控制器有积分作用（例如采用PI或PID控制），积分能消除阶跃输入的稳态误差，这时可以将比例系数调得小一些。<br>   如果积分作用太强（即积分时间太小），相当于每次微调电位器的角度值过大，其累积的作用会使系统输出的动态性能变差，超调量增大，甚至使系统不稳定。积分作用太弱（即积分时间太大），则消除稳态误差的速度太慢，积分时间的值应取得适中。</p>
+<h3 id="4．微分作用"><a href="#4．微分作用" class="headerlink" title="4．微分作用"></a>4．微分作用</h3><p>   误差的微分就是误差的变化速率，误差变化越快，其微分绝对值越大。误差增大时，其微分为正；误差减小时，其微分为负。控制器输出量的微分部分与误差的微分成正比，反映了被控量变化的趋势。<br>   有经验的操作人员在温度上升过快，但是尚未达到设定值时，根据温度变化的趋势，预感到温度将会超过设定值，出现超调。于是调节电位器的转角，提前减小加热的电流。这相当于士兵射击远方的移动目标时，考虑到子弹运动的时间，需要一定的提前量一样。</p>
+<p>图2   阶跃响应曲线</p>
+<p>   图2中的c (∞)为被控量c (t)的稳态值或被控量的期望值，误差e(t) = c (∞) - c (t)。在图2中启动过程的上升阶段，当 时，被控量尚未超过其稳态值。但是因为误差e(t)不断减小，误差的微分和控制器输出的微分部分为负值，减小了控制器的输出量，相当于提前给出了制动作用，以阻碍被控量的上升，所以可以减少超调量。因此微分控制具有超前和预测的特性，在超调尚未出现之前，就能提前给出控制作用。<br>   闭环控制系统的振荡甚至不稳定的根本原因在于有较大的滞后因素。因为微分项能预测误差变化的趋势，这种“超前”的作用可以抵消滞后因素的影响。适当的微分控制作用可以使超调量减小，增加系统的稳定性。<br>   对于有较大的滞后特性的被控对象，如果PI控制的效果不理想，可以考虑增加微分控制，以改善系统在调节过程中的动态特性。如果将微分时间设置为0，微分部分将不起作用。<br>   微分时间与微分作用的强弱成正比，微分时间越大，微分作用越强。如果微分时间太大，在误差快速变化时，响应曲线上可能会出现“毛刺”。<br>   微分控制的缺点是对干扰噪声敏感，使系统抑制干扰的能力降低。为此可在微分部分增加惯性滤波环节。</p>
+<h3 id="5．采样周期"><a href="#5．采样周期" class="headerlink" title="5．采样周期"></a>5．采样周期</h3><p>   PID控制程序是周期性执行的，执行的周期称为采样周期。采样周期越小，采样值越能反映模拟量的变化情况。但是太小会增加CPU的运算工作量，相邻两次采样的差值几乎没有什么变化，将使PID控制器输出的微分部分接近为零，所以也不宜将采样周期取得过小。<br>   应保证在被控量迅速变化时（例如启动过程中的上升阶段），能有足够多的采样点数，不致因为采样点数过少而丢失被采集的模拟量中的重要信息。</p>
+<h3 id="6．PID参数的调整方法"><a href="#6．PID参数的调整方法" class="headerlink" title="6．PID参数的调整方法"></a>6．PID参数的调整方法</h3><p>   在整定PID控制器参数时，可以根据控制器的参数与系统动态性能和稳态性能之间的定性关系，用实验的方法来调节控制器的参数。有经验的调试人员一般可以较快地得到较为满意的调试结果。在调试中最重要的问题是在系统性能不能令人满意时，知道应该调节哪一个参数，该参数应该增大还是减小。<br>   为了减少需要整定的参数，首先可以采用PI控制器。为了保证系统的安全，在调试开始时应设置比较保守的参数，例如比例系数不要太大，积分时间不要太小，以避免出现系统不稳定或超调量过大的异常情况。给出一个阶跃给定信号，根据被控量的输出波形可以获得系统性能的信息，例如超调量和调节时间。应根据PID参数与系统性能的关系，反复调节PID的参数。<br>   如果阶跃响应的超调量太大，经过多次振荡才能稳定或者根本不稳定，应减小比例系数、增大积分时间。如果阶跃响应没有超调量，但是被控量上升过于缓慢，过渡过程时间太长，应按相反的方向调整参数。<br>   如果消除误差的速度较慢，可以适当减小积分时间，增强积分作用。<br>   反复调节比例系数和积分时间，如果超调量仍然较大，可以加入微分控制，微分时间从0逐渐增大，反复调节控制器的比例、积分和微分部分的参数。<br>   总之，PID参数的调试是一个综合的、各参数互相影响的过程，实际调试过程中的多次尝试是非常重要的，也是必须的。</p>
+<hr>
+<h2 id="一种通俗易懂的讲解"><a href="#一种通俗易懂的讲解" class="headerlink" title="一种通俗易懂的讲解"></a>一种通俗易懂的讲解</h2><p>控制模型：你控制一个人让他以PID控制的方式走110步后停下。<br>（1）P比例控制，就是让他走110步，他按照一定的步伐走到一百零几步（如108步）或100多步（如112步）就停了。<br>说明：<br>P比例控制是一种最简单的控制方式。其控制器的输出与输入误差信号成比例关系。当仅有比例控制时系统输出存在稳态误差（Steady-state error）。<br>（2）PI积分控制，就是他按照一定的步伐走到112步然后回头接着走，走到108步位置时，然后又回头向110步位置走。在110步位置处来回晃几次，最后停在110步的位置。<br>说明：<br>在积分I控制中，控制器的输出与输入误差信号的积分成正比关系。对一个自动控制系统，如果在进入稳态后存在稳态误差，则称这个控制系统是有稳态误差的或简称有差系统（System with Steady-state Error）。为了消除稳态误差，在控制器中必须引入“积分项”。积分项对误差取决于时间的积分，随着时间的增加，积分项会增大。这样，即便误差很小，积分项也会随着时间的增加而加大，它推动控制器的输出增大使稳态误差进一步减小，直到等于零。因此，比例+积分（PI）控制器，可以使系统在进入稳态后无稳态误差。<br>（3）PD微分控制，就是他按照一定的步伐走到一百零几步后，再慢慢地向110步的位置靠近，如果最后能精确停在110步的位置，就是无静差控制；如果停在110步附近（如109步或111步位置），就是有静差控制。<br>说明：<br>在微分控制D中，控制器的输出与输入误差信号的微分（即误差的变化率）成正比关系。<br>自动控制系统在克服误差的调节过程中可能会出现振荡甚至失稳，其原因是由于存在有较大惯性组件（环节）或有滞后（delay）组件，具有抑制误差的作用，其变化总是落后于误差的变化。解决的办法是使抑制误差作用的变化“超前”，即在误差接近零时，抑制误差的作用就应该是零。这就是说，在控制器中仅引入“比例P”项往往是不够的，比例项的作用仅是放大误差的幅值，而目前需要增加的是“微分项”，它能预测误差变化的趋势。这样，具有比例+微分的控制器，就能够提前使抑制误差的控制作用等于零，甚至为负值，从而避免了被控量的严重超调。所以对有较大惯性或滞后的被控对象，比例P+微分D（PD）控制器能改善系统在调节过程中的动态特性。</p>
+<p>PID常用口诀:<br>参数整定找最佳，从小到大顺序查，<br>先是比例后积分，最后再把微分加，<br>曲线振荡很频繁，比例度盘要放大，<br>曲线漂浮绕大湾，比例度盘往小扳，<br>曲线偏离回复慢，积分时间往下降，<br>曲线波动周期长，积分时间再加长，<br>曲线振荡频率快，先把微分降下来，<br>动差大来波动慢，微分时间应加长，<br>理想曲线两个波，前高后低四比一，<br>一看二调多分析，调节质量不会低</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>]]></content>
+      <categories>
+        <category>控制</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Pycharm汉化之后无法打开setting设置</title>
+    <url>/posts/d098.html</url>
+    <content><![CDATA[<p>我在安装了pycharm汉化包之后，发现pycharm点击设置setting没反应，不能打开。网上找了解决方案：</p>
+<p>一般的问题都是装了中文汉化包resources_cn.jar造成的，解决办法：</p>
 <a id="more"></a>
 
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207110416671.png" alt="image-20201207110416671"></p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207112003659.png" alt="image-20201207112003659"></p>
-<p>上图是一个闪存块（Block）的组织架构。一个Wordline对应着一个或若干个Page，具体是多少取决于是SLC、MLC或者TLC。对SLC来说，一个Wordline对应一个Page; MLC则对应2个Page，这两个Page是一对（Lower Page和UpperPage）; TLC对应3个Page（Lower Page、Upper Page和Extra Page）</p>
-<hr>
-<p>一个闪存芯片有若干个DIE（或者叫LUN），每个DIE有若干个Plane，每个Plane有若干个Block，每个Block有若干个Page，每个Page对应着一个Wordline, Wordline由成千上万个存储单元构成。</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207112055793.png" alt="image-20201207112055793"></p>
-<p>LUN、Plane、Block、Page</p>
-<h4 id="闪存存在的问题"><a href="#闪存存在的问题" class="headerlink" title="闪存存在的问题"></a>闪存存在的问题</h4><p>1、闪存坏块</p>
-<p>2、读干扰：当在读取一个闪存页（page）的时候，闪存块当中未被选取的闪存页的控制极都会加一个正电压，以保证未被选中的MOS管是导通的。但是频繁地在一个MOS管控制极加正电压，就可能导致电子被吸进浮栅极，形成轻微写，从而导致比特翻转，如图3-44所示。但是，这不是永久性损伤，重新擦除闪存块还能正常使用。<font color="orange"> 读干扰影响的是同一个闪存块中的其他闪存页，而非读取的闪存页本身。</font></p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207162433285.png" alt="image-20201207162433285"></p>
-<p>3、写干扰：</p>
-<p>写干扰也会导致比特反转，<font color="orange"> 与读干扰不同的是，写干扰影响的不仅是同一个闪存块当中的其他闪存页，自身闪存页也会受到影响。相同的是，都会因不期望的轻微写导致比特翻转，都会产生非永久性损伤，经擦除后，闪存块还能再次使用。</font></p>
-<p>4、存储单元的耦合：存储单元之间存在耦合电容，这会使存储单元内的电荷发生意外变化，最终导致数据读取错误。</p>
-<p>5、电荷泄漏问题：存储在闪存存储单元的电荷，如果长期不使用，会发生电荷泄漏。这同样会导致非永久性损伤，擦除后闪存块还能使用</p>
+<ol>
+<li><p>更换一个汉化包<br>把这里的两个jar包放到PyCharm安装目录里的lib目录里面即可。同时删掉之前的汉化包。<br>链接：<a href="https://pan.baidu.com/s/1khtnNGAkMkwkGsDjzw0_zA">https://pan.baidu.com/s/1khtnNGAkMkwkGsDjzw0_zA</a><br>提取码：u1zb</p>
+</li>
+<li><p>将汉化包都删除，只留下原版的resources_en.jar   </p>
+</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20200402103206811.png" alt="在这里插入图片描述"></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SSD学习小结(一)</title>
+    <url>/posts/a03.html</url>
+    <content><![CDATA[<h3 id="SSDvsHDD"><a href="#SSDvsHDD" class="headerlink" title="SSDvsHDD"></a>SSDvsHDD</h3><p>传统的HDD是“马达+磁头+磁盘”的机械结构</p>
+<p>SSD则是“闪存截止+主控”的半导体存储芯片结构</p>
+<a id="more"></a>
+
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207085126089.png" alt="image-20201207085126089"></p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207085134371.png" alt="image-20201207085134371"></p>
+<h3 id="SSD基本工作原理"><a href="#SSD基本工作原理" class="headerlink" title="SSD基本工作原理"></a>SSD基本工作原理</h3><p>​     从主机PC端开始，用户从操作系统应用层面对SSD发出请求，文件系统将读写请求经驱动转化为相应的符合协议的读写和其他命令，SSD收到命令执行相应操作，然后输出结果。</p>
+<p>SSD的输入是命令（Command）</p>
+<p>输出是数据（Data）和命令状态（Command Status）</p>
+<p>SSD前端接收用户命令请求，经过内部计算和处理逻辑，输出用户所需要的数据或状态。</p>
+<p><font color="orange"> SSD主要由三大功能模块组成：</font></p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207092242358.png" alt="image-20201207092242358"></p>
+<p>①前端接口和相关的协议模块</p>
+<p>②中间的FTL层（闪存翻译层）模块</p>
+<p>③后端和闪存通信模块</p>
+<p>SSD前端负责和主机直接通信，接收主机发来的命令和相关数据，命令经SSD处理后，最终交由前端返回命令状态或数据给主机。SSD通过诸如SATA、SAS和PCIe等接口与主机相连，实现对应的ATA、SCSI和NVMe等协议。</p>
+<p>垃圾回收:</p>
+<p>在Block x和Block y上有很多垃圾数据，其中Block x上的A、B、C为有效数据，Block y上的D、E、F、G为有效数据。垃圾回收就是把一个或者几个Block上的有效数据搬出来集中写到某个空闲Block上（比如Block z）。当这些Block上的有效数据都搬走后，FTL便能擦除这些Block，然后又能把这些Block拿出来供SSD写入新的数据了。</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207100753098.png" alt="image-20201207100753098"></p>
+<p>磨损均衡（wear leveling）：FTL必须尽量让每个闪存块均衡写入，延长闪存颗粒寿命。</p>
+<p>地址映射：将文件系统的逻辑地址映射到flash的物理地址上</p>
+<h3 id="闪存的物理结构"><a href="#闪存的物理结构" class="headerlink" title="闪存的物理结构"></a>闪存的物理结构</h3><p>闪存是一种非易失性存储器，掉电数据不会丢失。闪存的即本存储单元（cell）是一种类NMOS的双层浮栅（floating gate）MOS管。</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207105703387.png" alt="image-20201207105703387"></p>
+<p>​                                             浮栅晶体管结构</p>
+<blockquote>
+<p>在源极（Source）和漏极（Drain）之间电流单向传导的半导体上形成存储电子的浮栅，浮栅上下被绝缘层包围，存储在里面的电子不会因为掉电而消失</p>
+</blockquote>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207105757608.png" alt="image-20201207105757608"></p>
+<p>写操作是在控制极加正电压，使电子通过绝缘层进入浮栅极。</p>
+<p>擦除操作则正好相反，是在衬底加正电压，把电子从浮栅极中吸出来。</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1004,6 +1003,137 @@ save models to /home/aistudio/work/emotionclassify.inference.model
       </categories>
       <tags>
         <tag>SSD</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SSD学习小结(二)</title>
+    <url>/posts/caa7.html</url>
+    <content><![CDATA[<h3 id="SLC、MLC、TLC、QLC"><a href="#SLC、MLC、TLC、QLC" class="headerlink" title="SLC、MLC、TLC、QLC"></a>SLC、MLC、TLC、QLC</h3><p>SLC：一个存储单元存储1bit数据</p>
+<p>MLC：存储2bit数据</p>
+<p>TLC：存储3bit数据</p>
+<p>QLC: 存储4bit数据</p>
+<a id="more"></a>
+
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207110416671.png" alt="image-20201207110416671"></p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207112003659.png" alt="image-20201207112003659"></p>
+<p>上图是一个闪存块（Block）的组织架构。一个Wordline对应着一个或若干个Page，具体是多少取决于是SLC、MLC或者TLC。对SLC来说，一个Wordline对应一个Page; MLC则对应2个Page，这两个Page是一对（Lower Page和UpperPage）; TLC对应3个Page（Lower Page、Upper Page和Extra Page）</p>
+<hr>
+<p>一个闪存芯片有若干个DIE（或者叫LUN），每个DIE有若干个Plane，每个Plane有若干个Block，每个Block有若干个Page，每个Page对应着一个Wordline, Wordline由成千上万个存储单元构成。</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207112055793.png" alt="image-20201207112055793"></p>
+<p>LUN、Plane、Block、Page</p>
+<h4 id="闪存存在的问题"><a href="#闪存存在的问题" class="headerlink" title="闪存存在的问题"></a>闪存存在的问题</h4><p>1、闪存坏块</p>
+<p>2、读干扰：当在读取一个闪存页（page）的时候，闪存块当中未被选取的闪存页的控制极都会加一个正电压，以保证未被选中的MOS管是导通的。但是频繁地在一个MOS管控制极加正电压，就可能导致电子被吸进浮栅极，形成轻微写，从而导致比特翻转，如图3-44所示。但是，这不是永久性损伤，重新擦除闪存块还能正常使用。<font color="orange"> 读干扰影响的是同一个闪存块中的其他闪存页，而非读取的闪存页本身。</font></p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201207162433285.png" alt="image-20201207162433285"></p>
+<p>3、写干扰：</p>
+<p>写干扰也会导致比特反转，<font color="orange"> 与读干扰不同的是，写干扰影响的不仅是同一个闪存块当中的其他闪存页，自身闪存页也会受到影响。相同的是，都会因不期望的轻微写导致比特翻转，都会产生非永久性损伤，经擦除后，闪存块还能再次使用。</font></p>
+<p>4、存储单元的耦合：存储单元之间存在耦合电容，这会使存储单元内的电荷发生意外变化，最终导致数据读取错误。</p>
+<p>5、电荷泄漏问题：存储在闪存存储单元的电荷，如果长期不使用，会发生电荷泄漏。这同样会导致非永久性损伤，擦除后闪存块还能使用</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>]]></content>
+      <categories>
+        <category>SSD</category>
+      </categories>
+      <tags>
+        <tag>SSD</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SYN flood攻击及SYN cookie原理分析</title>
+    <url>/posts/77c3.html</url>
+    <content><![CDATA[<h2 id="1-实验简介"><a href="#1-实验简介" class="headerlink" title="1.实验简介"></a>1.实验简介</h2><p>　　最近在学习《计算机网络》，课程布置了一个网络攻击的作业 SYN Flooding Attack ，本篇博客就本次实验做一个完整的实验报告及总结。</p>
+<a id="more"></a>
+
+<h2 id="所用平台seed简介"><a href="#所用平台seed简介" class="headerlink" title="所用平台seed简介"></a>所用平台seed简介</h2><ol>
+<li>SEED：计算机安全教育的教学实验平台</li>
+<li><a href="http://www.cis.syr.edu/~wedu/seed/">http://www.cis.syr.edu/~wedu/seed/</a></li>
+<li>纽约雪城大学 杜文亮 (Du, Wenliang)教授设计和实现，从2002年开始得到NSF 1.2M$的资助</li>
+</ol>
+<!-- more -->
+<h2 id="一-实验环境（详细说明实验运行的操作系统，网络平台，机器的配置）"><a href="#一-实验环境（详细说明实验运行的操作系统，网络平台，机器的配置）" class="headerlink" title="一.实验环境（详细说明实验运行的操作系统，网络平台，机器的配置）"></a>一.实验环境（详细说明实验运行的操作系统，网络平台，机器的配置）</h2><p>操作系统：Windows10<br>虚拟机操作系统：SEEDUbuntu 12.04<br>虚拟机工具：VirtualBox 5.2.16<br>网络虚拟软件：GNS3 2.0.3</p>
+<h2 id="二-实验目的"><a href="#二-实验目的" class="headerlink" title="二.实验目的"></a>二.实验目的</h2><ol>
+<li>掌握基础ip网络配置；</li>
+<li>掌握GNS3和使用WireShark对流量进行抓包分析；</li>
+<li>实现SYN flood攻击，理解其表现形式和产生的影响；</li>
+<li>深入观察理解linux内核tcp SYN cookie机制，理解其在SYN flood攻击中的作用。</li>
+</ol>
+<h2 id="三-实验步骤"><a href="#三-实验步骤" class="headerlink" title="三.实验步骤"></a>三.实验步骤</h2><ol>
+<li>导入SEED虚拟机镜像文件，命名为SEED ubuntu，复制一个，命名为SEED ubuntu target（注意勾选重新初始化网卡的MAC地址）。<br><img src="https://i.loli.net/2020/02/10/o9mBiqw6ElF3b81.png" alt="01.png"><br><img src="https://i.loli.net/2020/02/10/RK6YpAUMm5XtTbn.png" alt="02.png"><br><img src="https://i.loli.net/2020/02/10/DPbZmHJYWUvT9fn.png" alt="03.png"><br><img src="https://i.loli.net/2020/02/10/cVIMzFqChb9SkoZ.png" alt="04.png"></li>
+</ol>
+<ol start="2">
+<li><p>利用GNS3配置如图所示网络<br><img src="https://i.loli.net/2020/02/10/F51tw4KbjaiXe8P.png" alt="01.png"></p>
+</li>
+<li><p>配置两台主机的ip地址和路由，一个为192.168.1.1，另一个为192.168.1.2.默认的路由为192.168.1.0<br><img src="https://i.loli.net/2020/02/10/K45RJ9dq3bizWCk.png" alt="02.png"><br><img src="https://i.loli.net/2020/02/10/EJKW9D8gPFOQdHZ.png" alt="03.png"></p>
+</li>
+<li><p>测试连通性<br><img src="https://i.loli.net/2020/02/10/3ifuPty94hvkweM.png" alt="04.png"><br><img src="https://i.loli.net/2020/02/10/MxYHlJRseKuWLVm.png" alt="05.png"></p>
+</li>
+<li><p>在SEED Ubuntu target上启动telnet服务<br><img src="https://i.loli.net/2020/02/10/Bl7wKHhRAsLgEcz.png" alt="06.png"></p>
+</li>
+<li><p>在SEED Ubuntu主机上输入攻击命令<br><img src="https://i.loli.net/2020/02/10/9R5nGNSlUiQd6Tu.png" alt="07.png"></p>
+</li>
+<li><p>在seed Ubuntu target上用wireshark观察攻击报文<br><img src="https://i.loli.net/2020/02/10/chOIQatpP7qYSg3.png" alt="08.png"></p>
+</li>
+<li><p>用netstat –n –tcp命令观察建立的连接，显示的状态为established<br><img src="https://i.loli.net/2020/02/10/qfnNbBGc1kPp7TZ.png" alt="09.png"></p>
+</li>
+<li><p>此时seed ubuntu可以通过telnet登录seed Ubuntu target<br><img src="https://i.loli.net/2020/02/10/cLSAQYJipUw8szO.png" alt="10.png"></p>
+</li>
+<li><p>进一步观察linux内核tcp syn cookie机制<br>通过echo 0 &gt; /proc/sys/net/ipv4/tcp_syncookies命令关闭syn cookies<br>通过sysctl -w net.ipv4.tcp_max_syn_backlog = 5指定所能接受SYN同步包的最大客户端数量为5<br><img src="https://i.loli.net/2020/02/10/R3IEKrmyftcobM9.png" alt="11.png"></p>
+</li>
+<li><p>再次从SEED Ubuntu 上用netwox的syn flood攻击SEED Ubuntu target<br><img src="https://i.loli.net/2020/02/10/embRT7JGZnAvrSO.png" alt="12.png"></p>
+</li>
+<li><p>此时发现不能用telnet登录seed ubuntu target<br><img src="https://i.loli.net/2020/02/10/6JCzFa8oDY5OgGZ.png" alt="13.png"></p>
+</li>
+<li><p>再次打开SEED Ubuntu target内核tcp syn cookie参数(将tcp_syncookies设置为1)，同时从SEED Ubuntu 上用telnet连接主机 SEED Ubuntu target<br><img src="https://i.loli.net/2020/02/10/1EuwVbAZGXHiYSj.png" alt="14.png"></p>
+</li>
+</ol>
+<p>发现可以通过telnet建立连接<br><img src="https://i.loli.net/2020/02/10/ZmfCsdTySpWU298.png" alt="15.png"></p>
+<ol start="14">
+<li>用netstat –n –tcp查看tcp网络的连接情况。<br><img src="https://i.loli.net/2020/02/10/VNpCqYZdyztFT7o.png" alt="16.png"></li>
+</ol>
+<p>　　在seed ubuntu target查看连接情况<br><img src="https://i.loli.net/2020/02/10/BUdzThlMxGbpZQD.png" alt="17.png"></p>
+<h2 id="四-实验结果分析"><a href="#四-实验结果分析" class="headerlink" title="四.实验结果分析"></a>四.实验结果分析</h2><h3 id="1-SYN-Flood攻击原理"><a href="#1-SYN-Flood攻击原理" class="headerlink" title="1. SYN Flood攻击原理"></a>1. SYN Flood攻击原理</h3><p>　　SYN Flood 攻击是一种典型的拒绝服务型(Denial of Service,DoS)攻击。所谓拒绝服务型攻击就是通过对网络带宽进行消耗性攻击，使受害主机或网络不能够良好的提供服务，从而间接达到攻击的目的。SYN Flood攻击就是利用了“三次握手”的漏洞。假设一个用户向服务器发送了SYN报文后突然死机或掉线，那么服务器在发出 SYN+ACK 应答报文后是无法收到客户端的 ACK 报文的(第三次握手无法完成)，一般把服务器收到 SYN 包而还未收到 ACK 包时的连接状态成为半开连接。这时服务器端一般会重试(再次发送 SYN+ACK 给客户端)并等待一段时间后丢弃这个未完成的连接，这段时间的长度我们称为 SYN Timeout，一般来说这个时间是分钟的数量级(大约为30秒-2分钟)。如果有一个恶意的攻击者大量模拟这种情况，服务器端将为了维护一个非常大的半连接列表而消耗非常多的资源—-数以万计的半连接，即使是简单的保存并遍历也会消耗非常多的 CPU 时间和内存，何况还要不断对这个列表中的 IP 进行 SYN+ACK 的重试。服务器端将忙于处理攻击者伪造的 TCP 连接请求而无暇理睬客户的正常请求，此时从正常客户的角度看来，服务器失去响应，这种情况就称作服务器端受到了SYN Flood攻击(SYN 洪范攻击)。</p>
+<h3 id="2-SYN-Cookies原理"><a href="#2-SYN-Cookies原理" class="headerlink" title="2. SYN Cookies原理"></a>2. SYN Cookies原理</h3><p>　　SYN cookie就是用一个cookie来响应 TCP SYN请求的TCP实现，根据上面的描述，在正常的TCP实现中，当服务器接收到一个SYN数据包，它返回一个SYN+ACK包来应答，然后进入TCP_SYN_RECV(半开放连接)状态来等待最后返回的ACK包。服务器用一个数据空间来描述所有未决的连接，然而这个数据空间的大小是有限的，所以攻击者将塞满这个空间。SYN Cookie是对TCP服务器端的三次握手协议作一些修改，专门用来防范SYN Flood 攻击的一种手段。它的原理是，在TCP服务器收到 TCP SYN包并返回 TCP SYN+ACK 包时，不分配一个专门的数据区，而是根据这个SYN包计算出一个cookie值,并将这个cookie作为将要返回的 SYN+ACK 包的初始序列号。在收到 TCP ACK包时，TCP服务器再根据报头信息获取cookie值，并通过这个cookie值检查这个TCP ACK包的合法性。如果合法，再分配专门的数据区进行处理未来的TCP连接。 由此可见，cookie的实现要求cookie 必须与每次TCP连接紧密对应，攻击者无法伪造cookie，同时cookie中包含连接的状态信息。</p>
+<h3 id="3-实验结果"><a href="#3-实验结果" class="headerlink" title="3. 实验结果"></a>3. 实验结果</h3><p>　　当打开SEED Ubuntu target内核的tcp syn cookie参数时，在target机器遭受syn flood 攻击后，源主机(SEED Ubuntu)可以用telnet登录target主机，即可以建立正常的TCP连接。<br>当内核关闭tcp syn cookie参数时，target主机在遭受flood攻击后，源主机(SEED Ubuntu)telnet不能正常登录target主机，无法建立正常的TCP连接。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>实验</tag>
       </tags>
   </entry>
   <entry>
@@ -1738,54 +1868,6 @@ save models to /home/aistudio/work/emotionclassify.inference.model
       </categories>
   </entry>
   <entry>
-    <title>PID控制的理解与参数整定</title>
-    <url>/posts/20ab.html</url>
-    <content><![CDATA[<a id="more"></a>
-
-<h3 id="PID控制器的一般结构"><a href="#PID控制器的一般结构" class="headerlink" title="PID控制器的一般结构"></a>PID控制器的一般结构</h3><!--more-->
-
-<blockquote>
-<p>当控制器为比例控制器（P）时，可以减少因扰动而引起的稳态误差，但不能将稳态误差减少到0，增加一项正比于误差的积分项（I）时，可以消除系统的稳态误差，但会影响系统的动态性能，可再加入一个微分项（D）来提高系统的动态性能。由比例，积分，微分三项构成的控制器就是经典的PID控制器。<br><img src="https://img-blog.csdnimg.cn/20200311112849195.png" alt="  "><br>由于理论上的控制器有的时候产生的信号过大，可能破坏硬件系统，所以在控制器的输出端通常要加一个驱动饱和来保护这样一个信号，使得它不至于过大。<br>PID控制器的一般形式<br><img src="https://img-blog.csdnimg.cn/20200311113052968.png" alt="  "><br>PID控制器是由e信号驱动的，而e信号是跟踪误差，由e信号的当前时刻的值，e信号的积分以及e信号的导数，由这样三个信号的加权和共同构造出来一个控制信号u(t)。<br>e信号的积分的物理含义：表示e信号以往值的和，利用这一项可以表示e信号过去的信息。e信号的导数可以认为其预测着e信号的将来信息。<br><img src="https://img-blog.csdnimg.cn/2020031111524454.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="  "></p>
-</blockquote>
-<hr>
-<p><img src="https://img-blog.csdnimg.cn/20200311115800499.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="  "></p>
-<hr>
-<p>==PID控制的原理可以用人对炉温的手动控制来理解==</p>
-<h3 id="1．比例控制"><a href="#1．比例控制" class="headerlink" title="1．比例控制"></a>1．比例控制</h3><p>   有经验的操作人员手动控制电加热炉的炉温，可以获得非常好的控制品质，PID控制与人工控制的控制策略有很多相似的地方。<br>   下面介绍操作人员怎样用比例控制的思想来手动控制电加热炉的炉温。假设用热电偶检测炉温，用数字仪表显示温度值。在控制过程中，操作人员用眼睛读取炉温，并与炉温给定值比较，得到温度的误差值。然后用手操作电位器，调节加热的电流，使炉温保持在给定值附近。<br>   操作人员知道炉温稳定在给定值时电位器的大致位置（我们将它称为位置L），并根据当时的温度误差值调整控制加热电流的电位器的转角。炉温小于给定值时，误差为正，在位置L的基础上顺时针增大电位器的转角，以增大加热的电流。炉温大于给定值时，误差为负，在位置L的基础上反时针减小电位器的转角，并令转角与位置L的差值与误差成正比。上述控制策略就是比例控制，即PID控制器输出中的比例部分与误差成正比。<br>   闭环中存在着各种各样的延迟作用。例如调节电位器转角后，到温度上升到新的转角对应的稳态值时有较大的时间延迟。由于延迟因素的存在，调节电位器转角后不能马上看到调节的效果，因此闭环控制系统调节困难的主要原因是系统中的延迟作用。<br>   比例控制的比例系数如果太小，即调节后的电位器转角与位置L的差值太小，调节的力度不够，使系统输出量变化缓慢，调节所需的总时间过长。比例系数如果过大，即调节后电位器转角与位置L的差值过大，调节力度太强，将造成调节过头，甚至使温度忽高忽低，来回震荡。<br>   增大比例系数使系统反应灵敏，调节速度加快，并且可以减小稳态误差。但是比例系数过大会使超调量增大，振荡次数增加，调节时间加长，动态性能变坏，比例系数太大甚至会使闭环系统不稳定。<br>   单纯的比例控制很难保证调节得恰到好处，完全消除误差。</p>
-<h3 id="2．积分控制"><a href="#2．积分控制" class="headerlink" title="2．积分控制"></a>2．积分控制</h3><p>   PID控制器中的积分对应于图1中误差曲线 与坐标轴包围的面积（图中的灰色部分）。PID控制程序是周期性执行的，执行的周期称为采样周期。计算机的程序用图1中各矩形面积之和来近似精确的积分，图中的TS就是采样周期。<br><img src="https://img-blog.csdnimg.cn/20200311115641859.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="  "><br> 　　　　　图1  积分运算示意图<br>　　每次PID运算时，在原来的积分值的基础上，增加一个与当前的误差值ev（n）成正比的微小部分。误差为负值时，积分的增量为负。<br>   　　手动调节温度时，积分控制相当于根据当时的误差值，周期性地微调电位器的角度，每次调节的角度增量值与当时的误差值成正比。温度低于设定值时误差为正，积分项增大，使加热电流逐渐增大，反之积分项减小。因此只要误差不为零，控制器的输出就会因为积分作用而不断变化。积分调节的“大方向”是正确的，积分项有减小误差的作用。一直要到系统处于稳定状态，这时误差恒为零，比例部分和微分部分均为零，积分部分才不再变化，并且刚好等于稳态时需要的控制器的输出值，对应于上述温度控制系统中电位器转角的位置L。因此积分部分的作用是消除稳态误差，提高控制精度，积分作用一般是必须的。<br> 　　PID控制器输出中的积分部分与误差的积分成正比。因为积分时间TI在积分项的分母中，TI越小，积分项变化的速度越快，积分作用越强。</p>
-<h3 id="3．PI控制"><a href="#3．PI控制" class="headerlink" title="3．PI控制"></a>3．PI控制</h3><p>   控制器输出中的积分项与当前的误差值和过去历次误差值的累加值成正比，因此积分作用本身具有严重的滞后特性，对系统的稳定性不利。如果积分项的系数设置得不好，其负面作用很难通过积分作用本身迅速地修正。而比例项没有延迟，只要误差一出现，比例部分就会立即起作用。因此积分作用很少单独使用，它一般与比例和微分联合使用，组成PI或PID控制器。<br>   PI和PID控制器既克服了单纯的比例调节有稳态误差的缺点，又避免了单纯的积分调节响应慢、动态性能不好的缺点，因此被广泛使用。<br>   如果控制器有积分作用（例如采用PI或PID控制），积分能消除阶跃输入的稳态误差，这时可以将比例系数调得小一些。<br>   如果积分作用太强（即积分时间太小），相当于每次微调电位器的角度值过大，其累积的作用会使系统输出的动态性能变差，超调量增大，甚至使系统不稳定。积分作用太弱（即积分时间太大），则消除稳态误差的速度太慢，积分时间的值应取得适中。</p>
-<h3 id="4．微分作用"><a href="#4．微分作用" class="headerlink" title="4．微分作用"></a>4．微分作用</h3><p>   误差的微分就是误差的变化速率，误差变化越快，其微分绝对值越大。误差增大时，其微分为正；误差减小时，其微分为负。控制器输出量的微分部分与误差的微分成正比，反映了被控量变化的趋势。<br>   有经验的操作人员在温度上升过快，但是尚未达到设定值时，根据温度变化的趋势，预感到温度将会超过设定值，出现超调。于是调节电位器的转角，提前减小加热的电流。这相当于士兵射击远方的移动目标时，考虑到子弹运动的时间，需要一定的提前量一样。</p>
-<p>图2   阶跃响应曲线</p>
-<p>   图2中的c (∞)为被控量c (t)的稳态值或被控量的期望值，误差e(t) = c (∞) - c (t)。在图2中启动过程的上升阶段，当 时，被控量尚未超过其稳态值。但是因为误差e(t)不断减小，误差的微分和控制器输出的微分部分为负值，减小了控制器的输出量，相当于提前给出了制动作用，以阻碍被控量的上升，所以可以减少超调量。因此微分控制具有超前和预测的特性，在超调尚未出现之前，就能提前给出控制作用。<br>   闭环控制系统的振荡甚至不稳定的根本原因在于有较大的滞后因素。因为微分项能预测误差变化的趋势，这种“超前”的作用可以抵消滞后因素的影响。适当的微分控制作用可以使超调量减小，增加系统的稳定性。<br>   对于有较大的滞后特性的被控对象，如果PI控制的效果不理想，可以考虑增加微分控制，以改善系统在调节过程中的动态特性。如果将微分时间设置为0，微分部分将不起作用。<br>   微分时间与微分作用的强弱成正比，微分时间越大，微分作用越强。如果微分时间太大，在误差快速变化时，响应曲线上可能会出现“毛刺”。<br>   微分控制的缺点是对干扰噪声敏感，使系统抑制干扰的能力降低。为此可在微分部分增加惯性滤波环节。</p>
-<h3 id="5．采样周期"><a href="#5．采样周期" class="headerlink" title="5．采样周期"></a>5．采样周期</h3><p>   PID控制程序是周期性执行的，执行的周期称为采样周期。采样周期越小，采样值越能反映模拟量的变化情况。但是太小会增加CPU的运算工作量，相邻两次采样的差值几乎没有什么变化，将使PID控制器输出的微分部分接近为零，所以也不宜将采样周期取得过小。<br>   应保证在被控量迅速变化时（例如启动过程中的上升阶段），能有足够多的采样点数，不致因为采样点数过少而丢失被采集的模拟量中的重要信息。</p>
-<h3 id="6．PID参数的调整方法"><a href="#6．PID参数的调整方法" class="headerlink" title="6．PID参数的调整方法"></a>6．PID参数的调整方法</h3><p>   在整定PID控制器参数时，可以根据控制器的参数与系统动态性能和稳态性能之间的定性关系，用实验的方法来调节控制器的参数。有经验的调试人员一般可以较快地得到较为满意的调试结果。在调试中最重要的问题是在系统性能不能令人满意时，知道应该调节哪一个参数，该参数应该增大还是减小。<br>   为了减少需要整定的参数，首先可以采用PI控制器。为了保证系统的安全，在调试开始时应设置比较保守的参数，例如比例系数不要太大，积分时间不要太小，以避免出现系统不稳定或超调量过大的异常情况。给出一个阶跃给定信号，根据被控量的输出波形可以获得系统性能的信息，例如超调量和调节时间。应根据PID参数与系统性能的关系，反复调节PID的参数。<br>   如果阶跃响应的超调量太大，经过多次振荡才能稳定或者根本不稳定，应减小比例系数、增大积分时间。如果阶跃响应没有超调量，但是被控量上升过于缓慢，过渡过程时间太长，应按相反的方向调整参数。<br>   如果消除误差的速度较慢，可以适当减小积分时间，增强积分作用。<br>   反复调节比例系数和积分时间，如果超调量仍然较大，可以加入微分控制，微分时间从0逐渐增大，反复调节控制器的比例、积分和微分部分的参数。<br>   总之，PID参数的调试是一个综合的、各参数互相影响的过程，实际调试过程中的多次尝试是非常重要的，也是必须的。</p>
-<hr>
-<h2 id="一种通俗易懂的讲解"><a href="#一种通俗易懂的讲解" class="headerlink" title="一种通俗易懂的讲解"></a>一种通俗易懂的讲解</h2><p>控制模型：你控制一个人让他以PID控制的方式走110步后停下。<br>（1）P比例控制，就是让他走110步，他按照一定的步伐走到一百零几步（如108步）或100多步（如112步）就停了。<br>说明：<br>P比例控制是一种最简单的控制方式。其控制器的输出与输入误差信号成比例关系。当仅有比例控制时系统输出存在稳态误差（Steady-state error）。<br>（2）PI积分控制，就是他按照一定的步伐走到112步然后回头接着走，走到108步位置时，然后又回头向110步位置走。在110步位置处来回晃几次，最后停在110步的位置。<br>说明：<br>在积分I控制中，控制器的输出与输入误差信号的积分成正比关系。对一个自动控制系统，如果在进入稳态后存在稳态误差，则称这个控制系统是有稳态误差的或简称有差系统（System with Steady-state Error）。为了消除稳态误差，在控制器中必须引入“积分项”。积分项对误差取决于时间的积分，随着时间的增加，积分项会增大。这样，即便误差很小，积分项也会随着时间的增加而加大，它推动控制器的输出增大使稳态误差进一步减小，直到等于零。因此，比例+积分（PI）控制器，可以使系统在进入稳态后无稳态误差。<br>（3）PD微分控制，就是他按照一定的步伐走到一百零几步后，再慢慢地向110步的位置靠近，如果最后能精确停在110步的位置，就是无静差控制；如果停在110步附近（如109步或111步位置），就是有静差控制。<br>说明：<br>在微分控制D中，控制器的输出与输入误差信号的微分（即误差的变化率）成正比关系。<br>自动控制系统在克服误差的调节过程中可能会出现振荡甚至失稳，其原因是由于存在有较大惯性组件（环节）或有滞后（delay）组件，具有抑制误差的作用，其变化总是落后于误差的变化。解决的办法是使抑制误差作用的变化“超前”，即在误差接近零时，抑制误差的作用就应该是零。这就是说，在控制器中仅引入“比例P”项往往是不够的，比例项的作用仅是放大误差的幅值，而目前需要增加的是“微分项”，它能预测误差变化的趋势。这样，具有比例+微分的控制器，就能够提前使抑制误差的控制作用等于零，甚至为负值，从而避免了被控量的严重超调。所以对有较大惯性或滞后的被控对象，比例P+微分D（PD）控制器能改善系统在调节过程中的动态特性。</p>
-<p>PID常用口诀:<br>参数整定找最佳，从小到大顺序查，<br>先是比例后积分，最后再把微分加，<br>曲线振荡很频繁，比例度盘要放大，<br>曲线漂浮绕大湾，比例度盘往小扳，<br>曲线偏离回复慢，积分时间往下降，<br>曲线波动周期长，积分时间再加长，<br>曲线振荡频率快，先把微分降下来，<br>动差大来波动慢，微分时间应加长，<br>理想曲线两个波，前高后低四比一，<br>一看二调多分析，调节质量不会低</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>]]></content>
-      <categories>
-        <category>控制</category>
-      </categories>
-  </entry>
-  <entry>
     <title>python+opencv实现人脸识别|采用现成训练好的模型</title>
     <url>/posts/63ec.html</url>
     <content><![CDATA[<h3 id="一、图片人脸检测（opencv）"><a href="#一、图片人脸检测（opencv）" class="headerlink" title="一、图片人脸检测（opencv）"></a>一、图片人脸检测（opencv）</h3><h4 id="1、安装opencv环境"><a href="#1、安装opencv环境" class="headerlink" title="1、安装opencv环境"></a>1、安装opencv环境</h4><p>介绍windows中opencv在python3上的实现，我的系统环境win10+python3.6+opcv3.4.1</p>
@@ -1835,6 +1917,36 @@ save models to /home/aistudio/work/emotionclassify.inference.model
       </categories>
       <tags>
         <tag>opencv 人脸识别 python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python安装dlib遇到的错误:AttributeError:module ‘dlib’ has no attribute ‘get_frontal_face_detector’问题解决</title>
+    <url>/posts/3826.html</url>
+    <content><![CDATA[<p>dlib是一个非常好用的跨平台的通用库，但是在安装过程中遇到了许多问题，我在使用Anaconda安装dlib过程中，用pip install 安装，安装成功后，import没有问题</p>
+<a id="more"></a>
+
+<p>如下图，import cv2没有报错。<br><img src="https://img-blog.csdnimg.cn/20200616220032833.png" alt="在这里插入图片描述"><br>但是在pycharm使用里面的函数时出现错误AttributeError: module ‘dlib’ has no attribute ‘get_frontal_face_detecetor’<br><img src="https://img-blog.csdnimg.cn/20200616220141763.png" alt="在这里插入图片描述"><br>找了好久都没找到原因，后来才发现是因为文件名的问题。自己建立的文件名和使用的模块重名了。<br><img src="https://img-blog.csdnimg.cn/20200616220444449.png" alt="在这里插入图片描述"><br>以后得注意，不能犯这种低级错误了。<br>将文件名dlib.py更改为learn.py，再次运行，就不会报错啦。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>]]></content>
+      <tags>
+        <tag>python opencv</tag>
       </tags>
   </entry>
   <entry>
@@ -1900,6 +2012,40 @@ save models to /home/aistudio/work/emotionclassify.inference.model
       </script>]]></content>
       <tags>
         <tag>嵌入式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ubuntu16.04安装tensorflow教程</title>
+    <url>/posts/6efa.html</url>
+    <content><![CDATA[<p>教程链接：<a href="https://www.tensorflow.org/install/pip">https://www.tensorflow.org/install/pip</a></p>
+<ol>
+<li>在系统上安装python开发环境</li>
+<li>安装python、pip软件包管理器和Virtualenv<br>sudo apt update<br>sudo apt install python3-dev python3-pip<br>sudo pip3 install -U virtualenv  # system-wide install</li>
+</ol>
+<a id="more"></a>
+<p>通过系统安装的方式安装TensorFlow<br>pip3 install –user –upgrade tensorflow</p>
+<p>gnome-system-monitor</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>]]></content>
+      <tags>
+        <tag>机器学习</tag>
       </tags>
   </entry>
   <entry>
@@ -1980,70 +2126,6 @@ save models to /home/aistudio/work/emotionclassify.inference.model
       </script>]]></content>
       <tags>
         <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python安装dlib遇到的错误:AttributeError:module ‘dlib’ has no attribute ‘get_frontal_face_detector’问题解决</title>
-    <url>/posts/3826.html</url>
-    <content><![CDATA[<p>dlib是一个非常好用的跨平台的通用库，但是在安装过程中遇到了许多问题，我在使用Anaconda安装dlib过程中，用pip install 安装，安装成功后，import没有问题</p>
-<a id="more"></a>
-
-<p>如下图，import cv2没有报错。<br><img src="https://img-blog.csdnimg.cn/20200616220032833.png" alt="在这里插入图片描述"><br>但是在pycharm使用里面的函数时出现错误AttributeError: module ‘dlib’ has no attribute ‘get_frontal_face_detecetor’<br><img src="https://img-blog.csdnimg.cn/20200616220141763.png" alt="在这里插入图片描述"><br>找了好久都没找到原因，后来才发现是因为文件名的问题。自己建立的文件名和使用的模块重名了。<br><img src="https://img-blog.csdnimg.cn/20200616220444449.png" alt="在这里插入图片描述"><br>以后得注意，不能犯这种低级错误了。<br>将文件名dlib.py更改为learn.py，再次运行，就不会报错啦。</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>]]></content>
-      <tags>
-        <tag>python opencv</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ubuntu16.04安装tensorflow教程</title>
-    <url>/posts/6efa.html</url>
-    <content><![CDATA[<p>教程链接：<a href="https://www.tensorflow.org/install/pip">https://www.tensorflow.org/install/pip</a></p>
-<ol>
-<li>在系统上安装python开发环境</li>
-<li>安装python、pip软件包管理器和Virtualenv<br>sudo apt update<br>sudo apt install python3-dev python3-pip<br>sudo pip3 install -U virtualenv  # system-wide install</li>
-</ol>
-<a id="more"></a>
-<p>通过系统安装的方式安装TensorFlow<br>pip3 install –user –upgrade tensorflow</p>
-<p>gnome-system-monitor</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>]]></content>
-      <tags>
-        <tag>机器学习</tag>
       </tags>
   </entry>
   <entry>
@@ -3379,6 +3461,53 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"]='2' # 只显示 warning 和 Error</code></pre
       </tags>
   </entry>
   <entry>
+    <title>生成对抗样本的方法|攻击方法</title>
+    <url>/posts/8a27.html</url>
+    <content><![CDATA[<a id="more"></a>
+
+<h2 id="对抗样本"><a href="#对抗样本" class="headerlink" title="对抗样本"></a>对抗样本</h2><h3 id="1-Biggio′s-attack"><a href="#1-Biggio′s-attack" class="headerlink" title="1.Biggio′s attack"></a>1.Biggio′s attack</h3><p>Biggio[22]等人首先针对传统机器学习分类器（如SVM和三层全连接神经网络）的MNIST手写数字识别数据集生成对抗样本。<br>它通过优化判别函数来误导分类器。</p>
+<!--more-->
+
+<h3 id="2-Szegedy′s-limited-memory-BFGS-L-BFGS-attack"><a href="#2-Szegedy′s-limited-memory-BFGS-L-BFGS-attack" class="headerlink" title="2. Szegedy′s limited-memory BFGS (L-BFGS) attack"></a>2. Szegedy′s limited-memory BFGS (L-BFGS) attack</h3><p>Szegedy[8]等人首次证明了可以通过对图像添加小量的人类察觉不到的扰动误导深度神经网络图像分类器做出错误的分类。他们首先尝试求解让神经网络做出误分类的最小扰动的方程。作者认为，深度神经网络所具有的强大的非线性表达能力和模型的过拟合是可能产生对抗性样本原因之一。<br><img src="https://img-blog.csdnimg.cn/20200703112535194.png" alt="在这里插入图片描述"><br>其中，x表示原始图像，x’表示添加微小扰动后的图片，x-x’则表示扰动大小，$\left|x-x^{\prime}\right|_{2}^{2}$表示扰动的L2范数，C()是深度神经网络的分类器。<br>Szegedy等人引入损失函数，即寻找最小的损失函数添加项，使得神经网络做出误分类，这就将此问题转化成了凸优化过程。</p>
+<p>$\min c\left|x-x^{\prime}\right|_{2}^{2}+\mathcal{L}\left(\theta, x^{\prime}, t\right), \quad$ s.t. $\quad x^{\prime} \in[0,1]^{m}$<br>L( , , )计算分类器的loss</p>
+<h3 id="3-Fast-gradient-sign-method-FGSM"><a href="#3-Fast-gradient-sign-method-FGSM" class="headerlink" title="3.Fast gradient sign method (FGSM)"></a>3.Fast gradient sign method (FGSM)</h3><p>Goodfellow等人[9]认为高维空间下深度神经网络的线性线性行为是导致该问题（存在对抗样本）的根本原因。提出了一种一步生成法来快速生成对抗样本，可以有效计算对抗扰动。<br><img src="https://img-blog.csdnimg.cn/20200703141115231.png" alt="在这里插入图片描述"><br>$\eta=\varepsilon \operatorname{sgn}\left(\nabla_{x} \mathcal{L}(\theta, x, t)\right)$<br>$x$：原始图像<br>$\eta$：扰动<br>$\varepsilon$：表示控制扰动大小的自定义参数<br>$\mathcal{L}$：损失函数<br>$\operatorname{sgn}$：符号函数<br>FGSM的核心思想是：通过让扰动方向与梯度方向一致，使损失函数值变化最大，进而使分类器分类结果变化最大。sign函数保证了扰动方向与梯度方向一致；对损失函数求偏导。<br>FGSM 算法优点是只需一步迭代就能生成对抗样本，并且可以通过控制参数$\varepsilon$生成任意$L_{\infty}$范数距离的对抗样本；缺点是扰动自身抗干扰能力不强，容易受到其他噪声的影响； 另外，模型损失函数与模型输入并不是完全线性的，这说明该算法生成的对抗样本扰动不是最优扰动。</p>
+<h3 id="4-DeepFool"><a href="#4-DeepFool" class="headerlink" title="4.DeepFool"></a>4.DeepFool</h3><p>Moosavi-Dezfooli 等人 [32] 通过迭代计算的方法生成能够使分类器模型产生误识别的最小规范对抗扰动，将位于分类边界内的图像逐步推到边界外，直到出现错误分类。作者证明他们生成的扰动比 FGSM 更小，同时有相似的欺骗率。<br>Deepfool 算法生成对抗样本过程与使用 L-BFGS 生成对抗样本过程类似，主要区别是： Deepfool 算法每次迭代都计算当前样本和各决策边界的距离，然后选择向最近的决策边界迭代生成扰动。</p>
+<h3 id="5-Jacobian-based-saliency-map-attack（JSMA）"><a href="#5-Jacobian-based-saliency-map-attack（JSMA）" class="headerlink" title="5.Jacobian-based saliency map attack（JSMA）"></a>5.Jacobian-based saliency map attack（JSMA）</h3><p>基于雅可比矩阵的显着性图攻击（JSMA）[33]介绍了一种基于计分函数F的雅可比矩阵的方法。 通过迭代操纵对模型输出影响最大的像素，可以将其视为贪婪攻击算法。<br>对抗攻击文献中通常使用的方法是限制扰动的 L∞或 L2 范数的值以使对抗样本中的扰动无法被人察觉。但 JSMA[33] 提出了限制 L0 范数的方法，即仅改变几个像素的值，而不是扰动整张图像。</p>
+<h3 id="6-Basic-iterative-method-BIM-Projected-gradient-descent-PGD-attack"><a href="#6-Basic-iterative-method-BIM-Projected-gradient-descent-PGD-attack" class="headerlink" title="6.Basic iterative method (BIM)/Projected gradient descent (PGD) attack"></a>6.Basic iterative method (BIM)/Projected gradient descent (PGD) attack</h3><p>针对 FGSM 算法存在的问题， Kurakin 等人[15,31]在 FGSM 算法基础上提出了一种以多步迭代的方式生成对抗样本的方法 BIM。<br>one-step 方法通过一大步运算增大分类器的损失函数而进行图像扰动，因而可以直接将其扩展为通过多个小步增大损失函数的变体，从而我们得到 Basic Iterative Methods（BIM）</p>
+<h3 id="7-Carlini-amp-Wagner′s-attack（CW）"><a href="#7-Carlini-amp-Wagner′s-attack（CW）" class="headerlink" title="7.Carlini &amp; Wagner′s attack（CW）"></a>7.Carlini &amp; Wagner′s attack（CW）</h3><p>Carlini 和 Wagner[36] 提出了三种对抗攻击方法，通过限制 L∞、L2 和 L0 范数使得扰动无法被察觉。实验证明 defensive distillation （防御性蒸馏）完全无法防御这三种攻击。该算法生成的对抗扰动可以从 unsecured 的网络迁移到 secured 的网络上，从而实现黑盒攻击。<br>C&amp;W是一种基于目标函数优化的对抗样本攻击算法，其核心思想是：假设对抗样本是一个变量，那么要使其成功攻击分类器模型，必须满足两个条件， 一是其与原始样本的距离要尽可能的小，二是其能够误导分类器模型对其进行错误分类。</p>
+<h3 id="8-Ground-truth-attack"><a href="#8-Ground-truth-attack" class="headerlink" title="8.Ground truth attack"></a>8.Ground truth attack</h3><p>Carlini等人[35]试图找到可证明的最强攻击，即找到理论上最小失真的对抗样本的方法。<br>该攻击基于Reluplex [36]，Reluplex是一种用于验证神经网络属性的算法。 它将模型参数F和数据（x,y）编码为线性编程系统的主体，然后求解该系统以检查在x’的邻居中是否存在可以欺骗模型的合格样本x’。 如果我们一直减小搜索区域的半径，直到系统确定不存在一个x’会欺骗模型，那么最后发现的对抗样本被称为标注的真实数据的对抗样本，因为事实证明它与x的相似性最小。<br>Ground truth攻击是计算分类器精确鲁棒性（最小扰动）的第一项工作。但是，该方法涉及使用可满足性模理论（SMT）求解器，（一种复杂算法， 用于检验一系列理论的可满足性），这将使其效率变慢并且无法扩展到大型网络。近期的研究工作[37,38]提高了    Ground truth攻击的效率。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200703104729496.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="附录（上述提到算法的论文）"><a href="#附录（上述提到算法的论文）" class="headerlink" title="附录（上述提到算法的论文）"></a>附录（上述提到算法的论文）</h3><ul>
+<li>[22]B. Biggio, I. Corona, D. Maiorca, B. Nelson, N. Šrndić, P. Laskov, G. Giacinto, F. Roli. Evasion attacks against machine learning at test time. In Proceedings of European Conference on Machine Learning and Knowledge Discovery in Databases, Springer, Prague, Czech Republic, pp.387–402, 2013. DOI: 10.1007/978-3-642-40994-3_25</li>
+<li>[8]C. Szegedy, W. Zaremba, I. Sutskever, J. Bruna, D. Erhan, I. Goodfellow, R. Fergus. Intriguing properties of neural networks. ArXiv: 1312.6199, 2013.</li>
+<li>[9]I. J. Goodfellow, J. Shlens, C. Szegedy. Explaining and harnessing adversarial examples. ArXiv: 1412.6572, 2014.</li>
+<li>[32]S. M. Moosavi-Dezfooli, A. Fawzi, P. Frossard. DeepFool:A simple and accurate method to fool deep neural networks. In Proceedings of IEEE Conference on Computer Vision and Pattern Recognition, IEEE, Las Vegas, USA, pp.2574–2582, 2016. DOI: 10.1109/CVPR.2016.282.</li>
+<li>[33]N. Papernot, P. McDaniel, S. Jha, M. Fredrikson, Z. B.Celik, A. Swami. The limitations of deep learning in adversarial settings. In Proceedings of IEEE European Symposium on Security and Privacy, IEEE, Saarbrucken, Germany, pp.372−387, 2016. DOI: 10.1109/EuroSP. 2016.36.</li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+  </entry>
+  <entry>
     <title>端到端的机器学习项目，预测房价</title>
     <url>/posts/7b80.html</url>
     <content><![CDATA[<h3 id="端到端的机器学习项目"><a href="#端到端的机器学习项目" class="headerlink" title="端到端的机器学习项目"></a>端到端的机器学习项目</h3><p>主要步骤：<br>1.观察大局。<br>2.获得数据。<br>3.从数据探索和可视化中获得洞见。<br>4.机器学习算法的数据准备。<br>5.选择和训练模型。<br>6.微调模型。<br>7.展示解决方案。<br>8.启动、监控和维护系统。</p>
@@ -3476,169 +3605,6 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"]='2' # 只显示 warning 和 Error</code></pre
       </tags>
   </entry>
   <entry>
-    <title>生成对抗样本的方法|攻击方法</title>
-    <url>/posts/8a27.html</url>
-    <content><![CDATA[<a id="more"></a>
-
-<h2 id="对抗样本"><a href="#对抗样本" class="headerlink" title="对抗样本"></a>对抗样本</h2><h3 id="1-Biggio′s-attack"><a href="#1-Biggio′s-attack" class="headerlink" title="1.Biggio′s attack"></a>1.Biggio′s attack</h3><p>Biggio[22]等人首先针对传统机器学习分类器（如SVM和三层全连接神经网络）的MNIST手写数字识别数据集生成对抗样本。<br>它通过优化判别函数来误导分类器。</p>
-<!--more-->
-
-<h3 id="2-Szegedy′s-limited-memory-BFGS-L-BFGS-attack"><a href="#2-Szegedy′s-limited-memory-BFGS-L-BFGS-attack" class="headerlink" title="2. Szegedy′s limited-memory BFGS (L-BFGS) attack"></a>2. Szegedy′s limited-memory BFGS (L-BFGS) attack</h3><p>Szegedy[8]等人首次证明了可以通过对图像添加小量的人类察觉不到的扰动误导深度神经网络图像分类器做出错误的分类。他们首先尝试求解让神经网络做出误分类的最小扰动的方程。作者认为，深度神经网络所具有的强大的非线性表达能力和模型的过拟合是可能产生对抗性样本原因之一。<br><img src="https://img-blog.csdnimg.cn/20200703112535194.png" alt="在这里插入图片描述"><br>其中，x表示原始图像，x’表示添加微小扰动后的图片，x-x’则表示扰动大小，$\left|x-x^{\prime}\right|_{2}^{2}$表示扰动的L2范数，C()是深度神经网络的分类器。<br>Szegedy等人引入损失函数，即寻找最小的损失函数添加项，使得神经网络做出误分类，这就将此问题转化成了凸优化过程。</p>
-<p>$\min c\left|x-x^{\prime}\right|_{2}^{2}+\mathcal{L}\left(\theta, x^{\prime}, t\right), \quad$ s.t. $\quad x^{\prime} \in[0,1]^{m}$<br>L( , , )计算分类器的loss</p>
-<h3 id="3-Fast-gradient-sign-method-FGSM"><a href="#3-Fast-gradient-sign-method-FGSM" class="headerlink" title="3.Fast gradient sign method (FGSM)"></a>3.Fast gradient sign method (FGSM)</h3><p>Goodfellow等人[9]认为高维空间下深度神经网络的线性线性行为是导致该问题（存在对抗样本）的根本原因。提出了一种一步生成法来快速生成对抗样本，可以有效计算对抗扰动。<br><img src="https://img-blog.csdnimg.cn/20200703141115231.png" alt="在这里插入图片描述"><br>$\eta=\varepsilon \operatorname{sgn}\left(\nabla_{x} \mathcal{L}(\theta, x, t)\right)$<br>$x$：原始图像<br>$\eta$：扰动<br>$\varepsilon$：表示控制扰动大小的自定义参数<br>$\mathcal{L}$：损失函数<br>$\operatorname{sgn}$：符号函数<br>FGSM的核心思想是：通过让扰动方向与梯度方向一致，使损失函数值变化最大，进而使分类器分类结果变化最大。sign函数保证了扰动方向与梯度方向一致；对损失函数求偏导。<br>FGSM 算法优点是只需一步迭代就能生成对抗样本，并且可以通过控制参数$\varepsilon$生成任意$L_{\infty}$范数距离的对抗样本；缺点是扰动自身抗干扰能力不强，容易受到其他噪声的影响； 另外，模型损失函数与模型输入并不是完全线性的，这说明该算法生成的对抗样本扰动不是最优扰动。</p>
-<h3 id="4-DeepFool"><a href="#4-DeepFool" class="headerlink" title="4.DeepFool"></a>4.DeepFool</h3><p>Moosavi-Dezfooli 等人 [32] 通过迭代计算的方法生成能够使分类器模型产生误识别的最小规范对抗扰动，将位于分类边界内的图像逐步推到边界外，直到出现错误分类。作者证明他们生成的扰动比 FGSM 更小，同时有相似的欺骗率。<br>Deepfool 算法生成对抗样本过程与使用 L-BFGS 生成对抗样本过程类似，主要区别是： Deepfool 算法每次迭代都计算当前样本和各决策边界的距离，然后选择向最近的决策边界迭代生成扰动。</p>
-<h3 id="5-Jacobian-based-saliency-map-attack（JSMA）"><a href="#5-Jacobian-based-saliency-map-attack（JSMA）" class="headerlink" title="5.Jacobian-based saliency map attack（JSMA）"></a>5.Jacobian-based saliency map attack（JSMA）</h3><p>基于雅可比矩阵的显着性图攻击（JSMA）[33]介绍了一种基于计分函数F的雅可比矩阵的方法。 通过迭代操纵对模型输出影响最大的像素，可以将其视为贪婪攻击算法。<br>对抗攻击文献中通常使用的方法是限制扰动的 L∞或 L2 范数的值以使对抗样本中的扰动无法被人察觉。但 JSMA[33] 提出了限制 L0 范数的方法，即仅改变几个像素的值，而不是扰动整张图像。</p>
-<h3 id="6-Basic-iterative-method-BIM-Projected-gradient-descent-PGD-attack"><a href="#6-Basic-iterative-method-BIM-Projected-gradient-descent-PGD-attack" class="headerlink" title="6.Basic iterative method (BIM)/Projected gradient descent (PGD) attack"></a>6.Basic iterative method (BIM)/Projected gradient descent (PGD) attack</h3><p>针对 FGSM 算法存在的问题， Kurakin 等人[15,31]在 FGSM 算法基础上提出了一种以多步迭代的方式生成对抗样本的方法 BIM。<br>one-step 方法通过一大步运算增大分类器的损失函数而进行图像扰动，因而可以直接将其扩展为通过多个小步增大损失函数的变体，从而我们得到 Basic Iterative Methods（BIM）</p>
-<h3 id="7-Carlini-amp-Wagner′s-attack（CW）"><a href="#7-Carlini-amp-Wagner′s-attack（CW）" class="headerlink" title="7.Carlini &amp; Wagner′s attack（CW）"></a>7.Carlini &amp; Wagner′s attack（CW）</h3><p>Carlini 和 Wagner[36] 提出了三种对抗攻击方法，通过限制 L∞、L2 和 L0 范数使得扰动无法被察觉。实验证明 defensive distillation （防御性蒸馏）完全无法防御这三种攻击。该算法生成的对抗扰动可以从 unsecured 的网络迁移到 secured 的网络上，从而实现黑盒攻击。<br>C&amp;W是一种基于目标函数优化的对抗样本攻击算法，其核心思想是：假设对抗样本是一个变量，那么要使其成功攻击分类器模型，必须满足两个条件， 一是其与原始样本的距离要尽可能的小，二是其能够误导分类器模型对其进行错误分类。</p>
-<h3 id="8-Ground-truth-attack"><a href="#8-Ground-truth-attack" class="headerlink" title="8.Ground truth attack"></a>8.Ground truth attack</h3><p>Carlini等人[35]试图找到可证明的最强攻击，即找到理论上最小失真的对抗样本的方法。<br>该攻击基于Reluplex [36]，Reluplex是一种用于验证神经网络属性的算法。 它将模型参数F和数据（x,y）编码为线性编程系统的主体，然后求解该系统以检查在x’的邻居中是否存在可以欺骗模型的合格样本x’。 如果我们一直减小搜索区域的半径，直到系统确定不存在一个x’会欺骗模型，那么最后发现的对抗样本被称为标注的真实数据的对抗样本，因为事实证明它与x的相似性最小。<br>Ground truth攻击是计算分类器精确鲁棒性（最小扰动）的第一项工作。但是，该方法涉及使用可满足性模理论（SMT）求解器，（一种复杂算法， 用于检验一系列理论的可满足性），这将使其效率变慢并且无法扩展到大型网络。近期的研究工作[37,38]提高了    Ground truth攻击的效率。</p>
-<p><img src="https://img-blog.csdnimg.cn/20200703104729496.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="附录（上述提到算法的论文）"><a href="#附录（上述提到算法的论文）" class="headerlink" title="附录（上述提到算法的论文）"></a>附录（上述提到算法的论文）</h3><ul>
-<li>[22]B. Biggio, I. Corona, D. Maiorca, B. Nelson, N. Šrndić, P. Laskov, G. Giacinto, F. Roli. Evasion attacks against machine learning at test time. In Proceedings of European Conference on Machine Learning and Knowledge Discovery in Databases, Springer, Prague, Czech Republic, pp.387–402, 2013. DOI: 10.1007/978-3-642-40994-3_25</li>
-<li>[8]C. Szegedy, W. Zaremba, I. Sutskever, J. Bruna, D. Erhan, I. Goodfellow, R. Fergus. Intriguing properties of neural networks. ArXiv: 1312.6199, 2013.</li>
-<li>[9]I. J. Goodfellow, J. Shlens, C. Szegedy. Explaining and harnessing adversarial examples. ArXiv: 1412.6572, 2014.</li>
-<li>[32]S. M. Moosavi-Dezfooli, A. Fawzi, P. Frossard. DeepFool:A simple and accurate method to fool deep neural networks. In Proceedings of IEEE Conference on Computer Vision and Pattern Recognition, IEEE, Las Vegas, USA, pp.2574–2582, 2016. DOI: 10.1109/CVPR.2016.282.</li>
-<li>[33]N. Papernot, P. McDaniel, S. Jha, M. Fredrikson, Z. B.Celik, A. Swami. The limitations of deep learning in adversarial settings. In Proceedings of IEEE European Symposium on Security and Privacy, IEEE, Saarbrucken, Germany, pp.372−387, 2016. DOI: 10.1109/EuroSP. 2016.36.</li>
-</ul>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>SYN flood攻击及SYN cookie原理分析</title>
-    <url>/posts/77c3.html</url>
-    <content><![CDATA[<h2 id="1-实验简介"><a href="#1-实验简介" class="headerlink" title="1.实验简介"></a>1.实验简介</h2><p>　　最近在学习《计算机网络》，课程布置了一个网络攻击的作业 SYN Flooding Attack ，本篇博客就本次实验做一个完整的实验报告及总结。</p>
-<a id="more"></a>
-
-<h2 id="所用平台seed简介"><a href="#所用平台seed简介" class="headerlink" title="所用平台seed简介"></a>所用平台seed简介</h2><ol>
-<li>SEED：计算机安全教育的教学实验平台</li>
-<li><a href="http://www.cis.syr.edu/~wedu/seed/">http://www.cis.syr.edu/~wedu/seed/</a></li>
-<li>纽约雪城大学 杜文亮 (Du, Wenliang)教授设计和实现，从2002年开始得到NSF 1.2M$的资助</li>
-</ol>
-<!-- more -->
-<h2 id="一-实验环境（详细说明实验运行的操作系统，网络平台，机器的配置）"><a href="#一-实验环境（详细说明实验运行的操作系统，网络平台，机器的配置）" class="headerlink" title="一.实验环境（详细说明实验运行的操作系统，网络平台，机器的配置）"></a>一.实验环境（详细说明实验运行的操作系统，网络平台，机器的配置）</h2><p>操作系统：Windows10<br>虚拟机操作系统：SEEDUbuntu 12.04<br>虚拟机工具：VirtualBox 5.2.16<br>网络虚拟软件：GNS3 2.0.3</p>
-<h2 id="二-实验目的"><a href="#二-实验目的" class="headerlink" title="二.实验目的"></a>二.实验目的</h2><ol>
-<li>掌握基础ip网络配置；</li>
-<li>掌握GNS3和使用WireShark对流量进行抓包分析；</li>
-<li>实现SYN flood攻击，理解其表现形式和产生的影响；</li>
-<li>深入观察理解linux内核tcp SYN cookie机制，理解其在SYN flood攻击中的作用。</li>
-</ol>
-<h2 id="三-实验步骤"><a href="#三-实验步骤" class="headerlink" title="三.实验步骤"></a>三.实验步骤</h2><ol>
-<li>导入SEED虚拟机镜像文件，命名为SEED ubuntu，复制一个，命名为SEED ubuntu target（注意勾选重新初始化网卡的MAC地址）。<br><img src="https://i.loli.net/2020/02/10/o9mBiqw6ElF3b81.png" alt="01.png"><br><img src="https://i.loli.net/2020/02/10/RK6YpAUMm5XtTbn.png" alt="02.png"><br><img src="https://i.loli.net/2020/02/10/DPbZmHJYWUvT9fn.png" alt="03.png"><br><img src="https://i.loli.net/2020/02/10/cVIMzFqChb9SkoZ.png" alt="04.png"></li>
-</ol>
-<ol start="2">
-<li><p>利用GNS3配置如图所示网络<br><img src="https://i.loli.net/2020/02/10/F51tw4KbjaiXe8P.png" alt="01.png"></p>
-</li>
-<li><p>配置两台主机的ip地址和路由，一个为192.168.1.1，另一个为192.168.1.2.默认的路由为192.168.1.0<br><img src="https://i.loli.net/2020/02/10/K45RJ9dq3bizWCk.png" alt="02.png"><br><img src="https://i.loli.net/2020/02/10/EJKW9D8gPFOQdHZ.png" alt="03.png"></p>
-</li>
-<li><p>测试连通性<br><img src="https://i.loli.net/2020/02/10/3ifuPty94hvkweM.png" alt="04.png"><br><img src="https://i.loli.net/2020/02/10/MxYHlJRseKuWLVm.png" alt="05.png"></p>
-</li>
-<li><p>在SEED Ubuntu target上启动telnet服务<br><img src="https://i.loli.net/2020/02/10/Bl7wKHhRAsLgEcz.png" alt="06.png"></p>
-</li>
-<li><p>在SEED Ubuntu主机上输入攻击命令<br><img src="https://i.loli.net/2020/02/10/9R5nGNSlUiQd6Tu.png" alt="07.png"></p>
-</li>
-<li><p>在seed Ubuntu target上用wireshark观察攻击报文<br><img src="https://i.loli.net/2020/02/10/chOIQatpP7qYSg3.png" alt="08.png"></p>
-</li>
-<li><p>用netstat –n –tcp命令观察建立的连接，显示的状态为established<br><img src="https://i.loli.net/2020/02/10/qfnNbBGc1kPp7TZ.png" alt="09.png"></p>
-</li>
-<li><p>此时seed ubuntu可以通过telnet登录seed Ubuntu target<br><img src="https://i.loli.net/2020/02/10/cLSAQYJipUw8szO.png" alt="10.png"></p>
-</li>
-<li><p>进一步观察linux内核tcp syn cookie机制<br>通过echo 0 &gt; /proc/sys/net/ipv4/tcp_syncookies命令关闭syn cookies<br>通过sysctl -w net.ipv4.tcp_max_syn_backlog = 5指定所能接受SYN同步包的最大客户端数量为5<br><img src="https://i.loli.net/2020/02/10/R3IEKrmyftcobM9.png" alt="11.png"></p>
-</li>
-<li><p>再次从SEED Ubuntu 上用netwox的syn flood攻击SEED Ubuntu target<br><img src="https://i.loli.net/2020/02/10/embRT7JGZnAvrSO.png" alt="12.png"></p>
-</li>
-<li><p>此时发现不能用telnet登录seed ubuntu target<br><img src="https://i.loli.net/2020/02/10/6JCzFa8oDY5OgGZ.png" alt="13.png"></p>
-</li>
-<li><p>再次打开SEED Ubuntu target内核tcp syn cookie参数(将tcp_syncookies设置为1)，同时从SEED Ubuntu 上用telnet连接主机 SEED Ubuntu target<br><img src="https://i.loli.net/2020/02/10/1EuwVbAZGXHiYSj.png" alt="14.png"></p>
-</li>
-</ol>
-<p>发现可以通过telnet建立连接<br><img src="https://i.loli.net/2020/02/10/ZmfCsdTySpWU298.png" alt="15.png"></p>
-<ol start="14">
-<li>用netstat –n –tcp查看tcp网络的连接情况。<br><img src="https://i.loli.net/2020/02/10/VNpCqYZdyztFT7o.png" alt="16.png"></li>
-</ol>
-<p>　　在seed ubuntu target查看连接情况<br><img src="https://i.loli.net/2020/02/10/BUdzThlMxGbpZQD.png" alt="17.png"></p>
-<h2 id="四-实验结果分析"><a href="#四-实验结果分析" class="headerlink" title="四.实验结果分析"></a>四.实验结果分析</h2><h3 id="1-SYN-Flood攻击原理"><a href="#1-SYN-Flood攻击原理" class="headerlink" title="1. SYN Flood攻击原理"></a>1. SYN Flood攻击原理</h3><p>　　SYN Flood 攻击是一种典型的拒绝服务型(Denial of Service,DoS)攻击。所谓拒绝服务型攻击就是通过对网络带宽进行消耗性攻击，使受害主机或网络不能够良好的提供服务，从而间接达到攻击的目的。SYN Flood攻击就是利用了“三次握手”的漏洞。假设一个用户向服务器发送了SYN报文后突然死机或掉线，那么服务器在发出 SYN+ACK 应答报文后是无法收到客户端的 ACK 报文的(第三次握手无法完成)，一般把服务器收到 SYN 包而还未收到 ACK 包时的连接状态成为半开连接。这时服务器端一般会重试(再次发送 SYN+ACK 给客户端)并等待一段时间后丢弃这个未完成的连接，这段时间的长度我们称为 SYN Timeout，一般来说这个时间是分钟的数量级(大约为30秒-2分钟)。如果有一个恶意的攻击者大量模拟这种情况，服务器端将为了维护一个非常大的半连接列表而消耗非常多的资源—-数以万计的半连接，即使是简单的保存并遍历也会消耗非常多的 CPU 时间和内存，何况还要不断对这个列表中的 IP 进行 SYN+ACK 的重试。服务器端将忙于处理攻击者伪造的 TCP 连接请求而无暇理睬客户的正常请求，此时从正常客户的角度看来，服务器失去响应，这种情况就称作服务器端受到了SYN Flood攻击(SYN 洪范攻击)。</p>
-<h3 id="2-SYN-Cookies原理"><a href="#2-SYN-Cookies原理" class="headerlink" title="2. SYN Cookies原理"></a>2. SYN Cookies原理</h3><p>　　SYN cookie就是用一个cookie来响应 TCP SYN请求的TCP实现，根据上面的描述，在正常的TCP实现中，当服务器接收到一个SYN数据包，它返回一个SYN+ACK包来应答，然后进入TCP_SYN_RECV(半开放连接)状态来等待最后返回的ACK包。服务器用一个数据空间来描述所有未决的连接，然而这个数据空间的大小是有限的，所以攻击者将塞满这个空间。SYN Cookie是对TCP服务器端的三次握手协议作一些修改，专门用来防范SYN Flood 攻击的一种手段。它的原理是，在TCP服务器收到 TCP SYN包并返回 TCP SYN+ACK 包时，不分配一个专门的数据区，而是根据这个SYN包计算出一个cookie值,并将这个cookie作为将要返回的 SYN+ACK 包的初始序列号。在收到 TCP ACK包时，TCP服务器再根据报头信息获取cookie值，并通过这个cookie值检查这个TCP ACK包的合法性。如果合法，再分配专门的数据区进行处理未来的TCP连接。 由此可见，cookie的实现要求cookie 必须与每次TCP连接紧密对应，攻击者无法伪造cookie，同时cookie中包含连接的状态信息。</p>
-<h3 id="3-实验结果"><a href="#3-实验结果" class="headerlink" title="3. 实验结果"></a>3. 实验结果</h3><p>　　当打开SEED Ubuntu target内核的tcp syn cookie参数时，在target机器遭受syn flood 攻击后，源主机(SEED Ubuntu)可以用telnet登录target主机，即可以建立正常的TCP连接。<br>当内核关闭tcp syn cookie参数时，target主机在遭受flood攻击后，源主机(SEED Ubuntu)telnet不能正常登录target主机，无法建立正常的TCP连接。</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>]]></content>
-      <categories>
-        <category>计算机网络</category>
-      </categories>
-      <tags>
-        <tag>实验</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>解决Anaconda在开始菜单找不到navigator和prompt的问题</title>
-    <url>/posts/7f55.html</url>
-    <content><![CDATA[<a id="more"></a>
-
-<p>找到Anaconda的安装目录<br><img src="https://img-blog.csdnimg.cn/20200319150507509.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<!--more-->
-
-<p>使用cmd命令打开终端<br>然后输入</p>
-<figure class="highlight reasonml"><table><tbody><tr><td class="code"><pre><span class="line">python .\<span class="module-access"><span class="module"><span class="identifier">Lib_nsis</span>.</span></span>py mkmenus</span><br></pre></td></tr></tbody></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20200319150549275.png" alt="在这里插入图片描述"><br><strong>完美解决问题。</strong><br><img src="https://img-blog.csdnimg.cn/20200319150821586.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200319150842391.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>]]></content>
-      <tags>
-        <tag>anaconda</tag>
-      </tags>
-  </entry>
-  <entry>
     <title></title>
     <url>/posts/9a95.html</url>
     <content><![CDATA[<h3 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h3><blockquote>
@@ -3732,6 +3698,40 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"]='2' # 只显示 warning 和 Error</code></pre
       <categories>
         <category>数据结构与算法</category>
       </categories>
+  </entry>
+  <entry>
+    <title>解决Anaconda在开始菜单找不到navigator和prompt的问题</title>
+    <url>/posts/7f55.html</url>
+    <content><![CDATA[<a id="more"></a>
+
+<p>找到Anaconda的安装目录<br><img src="https://img-blog.csdnimg.cn/20200319150507509.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<!--more-->
+
+<p>使用cmd命令打开终端<br>然后输入</p>
+<figure class="highlight reasonml"><table><tbody><tr><td class="code"><pre><span class="line">python .\<span class="module-access"><span class="module"><span class="identifier">Lib_nsis</span>.</span></span>py mkmenus</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200319150549275.png" alt="在这里插入图片描述"><br><strong>完美解决问题。</strong><br><img src="https://img-blog.csdnimg.cn/20200319150821586.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200319150842391.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>]]></content>
+      <tags>
+        <tag>anaconda</tag>
+      </tags>
   </entry>
   <entry>
     <title>CSDN-markdown编辑器语法——字体、字号与颜色设置</title>
@@ -4267,133 +4267,6 @@ Test:19, Cost:0.72887, ACC:0.76690
       </tags>
   </entry>
   <entry>
-    <title>leveldb源码学习记录-整体架构</title>
-    <url>/posts/41b.html</url>
-    <content><![CDATA[<h2 id="0-开篇"><a href="#0-开篇" class="headerlink" title="0.开篇"></a>0.开篇</h2><p>leveldb是一个高性能、可靠的单机KV数据库。</p>
-<p>一个高性能的单机数据库，往往是如何平衡读性能、写性能、存储大小的问题，思考这个问题，才能够理解 leveldb 的<code>write-ahead logging</code> <code>MemTable</code> <code>SSTable</code>等设计。leveldb 正是通过这一系列架构设计和代码技巧，提供了一个优秀的存储引擎解决这个问题。</p>
-<p>本系列文章是自己阅读leveldb源码过程中记录的一些笔记，方便日后查看。</p>
-<a id="more"></a>
-
-<p>这篇文章转载自：<a href="https://www.cnblogs.com/haippy/archive/2011/12/04/2276064.html">https://www.cnblogs.com/haippy/archive/2011/12/04/2276064.html</a></p>
-<h2 id="1-整体架构"><a href="#1-整体架构" class="headerlink" title="1.整体架构"></a>1.整体架构</h2><p> LevelDb作为存储系统，数据记录的存储介质包括内存以及磁盘文件，如果像上面说的，当LevelDb运行了一段时间，此时我们给LevelDb进行透视拍照，那么您会看到如下一番景象：</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/2011121116344075.png" alt="leveldb结构"></p>
-<p>从图中可以看出，构成 LevelDB 静态结构的包括六个主要部分：内存中的 <strong>MemTable</strong> 和 <strong>Immutable MemTable</strong> 以及磁盘上的几种主要文件：<strong>Current文件</strong>，<strong>Manifest文件</strong>，<strong>log文件</strong>以及 <strong>SSTable 文件</strong>。当然，LevelDB 除了这六个主要部分还有一些辅助的文件，但是以上六个文件和数据结构是 LevelDB 的主体构成元素。</p>
-<p>当应用写入一条Key:Value记录的时候，LevelDb会先往log文件里写入，成功后将记录插进Memtable中，这样基本就算完成了写入操作，因为一次写入操作只涉及一次磁盘顺序写和一次内存写入，所以这是为何说LevelDb写入速度极快的主要原因。</p>
-<p>SSTable 就是由内存中的数据不断导出并进行 Compaction 操作后形成的，而且 SSTable 的所有文件是一种层级结构，第一层为Level 0，第二层为Level 1，依次类推，层级逐渐增高。</p>
-<p>SSTable 中的文件(后缀为.sst)是 key 有序的，就是说在文件中小 key 记录排在大 key 记录之前，除了 level 0，各个 level 的 SSTable 都是如此。</p>
-<h2 id="2-mainfest文件"><a href="#2-mainfest文件" class="headerlink" title="2.mainfest文件"></a>2.mainfest文件</h2><p>SSTable 中的某个文件属于特定层级，而且其存储的记录是 key 有序的，那么必然有文件中的最小 key 和最大 key，这是非常重要的信息，LevelDB 应该记下这些信息。<strong>manifest</strong> 就是干这个的，它记载了 SSTable 各个文件的管理信息，比如属于哪个 level，文件名称叫啥，最小 key 和最大 key 各自是多少。下图是 manifest 所存储内容的示意：</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-02.png" alt="Manifest存储示意图"></p>
-<p>图中只显示了两个文件（manifest 会记载所有 SSTable 文件的这些信息），即 level 0 的 Test1.sst 和 Test2.sst 文件，同时记载了这些文件各自对应的 key 范围，比如 Test1.sst 的 key 范围是 “abc” 到 “hello”，而文件 Test2.sst 的 key 范围是 “bbc” 到 “world”，可以看出两者的 key 范围是有重叠的。</p>
-<h2 id="3-current文件"><a href="#3-current文件" class="headerlink" title="3.current文件"></a>3.current文件</h2><p>这个文件的内容只有一个信息，就是记载当前的 manifest 文件名。因为在 LevleDB 的运行过程中，随着 compaction 的进行，SSTable 文件会发生变化，会有新的文件产生，老的文件被废弃，manifest 也会跟着反映这种变化，此时往往会新生成 manifest 文件来记载这种变化，而 current 则用来指出哪个 manifest 文件才是我们关心的那个 manifest文件。</p>
-<h2 id="4-log文件"><a href="#4-log文件" class="headerlink" title="4.log文件"></a>4.log文件</h2><p>log 文件在 LevelDB 中的主要作用是系统故障恢复时，能够保证不会丢失数据。因为在将记录写入内存的 memtable 之前，会先写入 log 文件，这样即使系统发生故障，memtable 中的数据没有来得及 dump 到磁盘的 SSTable 文件，LevelDB 也可以根据 log 文件恢复内存的 Memtable 数据结构内容，不会造成系统丢失数据。</p>
-<p>LevelDB 对于一个 log 文件，会把它切割成以 32K 为单位的物理 Block，每次读取以一个 Block 作为基本读取单位，下图展示的 log 文件由3个 Block 构成，所以从物理布局来讲，一个 log 文件就是由连续的 32K 大小 Block 构成的。</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-03.png" alt="log文件布局"></p>
-<p>log 文件中的数据是以 block 为单位组织，写日志时，处于一致性考虑并没有按 block 单位写，每次更新均对 log 文件进行 IO，每次更新写入作为一个 record，每条 record 的结构如下图所示：</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-04.png" alt="记录结构"></p>
-<p><code>checksum</code> 记录的是 “type” 和 “data” 字段的CRC校验，为了避免处理不完整或者是被破坏的数据，当 LevelDB 读取记录数据时候会对数据进行校验，如果发现和存储的 checksum 相同，说明数据完整无破坏，可以继续后续流程。</p>
-<p><code>length</code> 记录的是 record 内保存的 data 长度(小端对齐)。</p>
-<p><code>data</code> 记录的是 Key:Value 数值对.</p>
-<p><code>type</code> 字段则指出了每条记录的逻辑结构和 log 文件物理分块结构之间的关系，具体而言，主要有以下四种类型：<code>FULL</code>, <code>FIRST</code>, <code>MIDDLE</code>, <code>LAST</code>。如果记录类型是FULL，代表了当前记录内容完整地存储在一个物理Block里，没有被不同的物理Block切割开；如果记录被相邻的物理Block切割开，则类型会是其他三种类型中的一种。我们以log文件布局所示的例子来具体说明。</p>
-<p><font color="orange">&gt;假设目前存在三条记录，Record A，Record B 和 Record C，其中 Record A 大小为10K，Record B 大小为80K，Record C大小为12K</font>那么其在 log 文件中的逻辑布局会如上面的图所示。Record A是图中蓝色区域所示，因为大小为10K&lt;32K，能够放在一个物理Block中，所以其类型为FULL；Record B 大小为80K，而Block 1因为放入了Record A，所以还剩下22K，不足以放下Record B，所以在Block 1的剩余部分放入Record B的开头一部分，类型标识为FIRST，代表了是一个记录的起始部分；Record B还有58K没有存储，这些只能依次放在后续的物理Block里面，因为Block 2大小只有32K，仍然放不下Record B的剩余部分，所以Block 2全部用来放Record B，且标识类型为MIDDLE，意思是这是Record B中间一段数据；Record B剩下的部分可以完全放在Block 3中，类型标识为LAST，代表了这是Record B的末尾数据；图中黄色的Record C因为大小为12K，Block 3剩下的空间足以全部放下它，所以其类型标识为FULL。</p>
-<p>   从这个小例子可以看出逻辑记录和物理Block之间的关系，LevelDB一次物理读取为一个Block，然后根据类型情况拼接出逻辑记录，供后续流程处理。</p>
-<h2 id="5-sstable文件"><a href="#5-sstable文件" class="headerlink" title="5.sstable文件"></a>5.sstable文件</h2><p>    LevelDB 不同层级有很多 SSTable 文件（以后缀.sst为特征），所有 .sst 文件内部布局都是一样的。上节介绍 log 文件是物理分块的，SSTable也一样会将文件划分为固定大小的物理存储块，但是两者逻辑布局大不相同，根本原因是：log文件中的记录是 Key 无序的，即先后记录的 key 大小没有明确大小关系，而 .sst 文件内部则是根据记录的 Key 由小到大排列的。</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-05.png" alt=".sst文件的分块结构"></p>
-<p><font color="orange">上图展示了一个 .sst 文件的物理划分结构，同 log 文件一样，也是划分为固定大小的存储块，每个 Block 分为三个部分：<strong>数据存储区</strong>，<strong>Type 区</strong>用于标识数据存储区是否采用了数据压缩算法（Snappy压缩或者无压缩），<strong>CRC校验</strong>则是数据校验码，用于判别数据在生成和传输中是否出错。</font></p>
-<p>以上是.sst的物理布局，下面介绍.sst文件的逻辑布局，所谓逻辑布局，就是说尽管大家都是物理块，但是每一块存储什么内容，内部又有什么结构等。下图展示了.sst文件的内部逻辑解释。</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-06.png" alt="逻辑布局"></p>
-<p>​         从上图可以看出，从大的方面，可以将 .sst文 件划分为<strong>数据存储区</strong>和<strong>数据管理区</strong>，数据存储区存放实际的 key-value 数据，数据管理区则提供一些索引指针等管理数据，目的是更快速便捷的查找相应的记录。两个区域都是在上述的分块基础上的，就是说文件的前面若干块实际存储 KV 数据，后面数据管理区存储管理数据。管理数据又分为四种不同类型：<strong>Meta Block</strong>，<strong>MetaBlock 索引</strong>和<strong>数据索引块</strong>以及一个<strong>文件尾部块</strong>。</p>
-<p><code>data_block</code>：实际存储的 KV 数据。<br><code>meta_block</code>：每个 data_block 对应一个 meta_block，保存 data_block 中的 key size/value size/kv counts 之类的统计信息，当前版本未实现。<br><code>metaindex_block</code>：保存 meta_block 的索引信息，当前版本未实现。<br><code>index_block</code>：保存每个 data_block 的 last_key 及其在 SSTable 文件中的索引。block 中 entry 的 key 即是 last_key(依赖于FindShortestSeparator()/FindShortSuccessor()的实现)，value即是该data_block的BlockHandler（offset/size）。<br><code>footer</code>：文件末尾固定长度的数据。保存着 metaindex_block 和 index_block 的索引信息(BlockHandler)，为达到固定的长度，添加 padding_bytes。最后有8个字节的 magic 校验。</p>
-<hr>
-<p>footer 的结构如下图所示：</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-07.png" alt="Footer"></p>
-<p><code>metaindex_block_handle</code> 指出了 metaindex block 的起始位置和大小；<code>index_block_handle</code> 指出了 index Block 的起始地址和大小；这两个字段可以理解为索引的索引，是为了正确读出索引值而设立的；为达到固定的长度，添加 <code>padding_bytes</code>。最后有8个字节的 <code>magic</code> 校验。</p>
-<p>下图是数据索引块的内部结构示意图：</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-08.png" alt="数据索引"></p>
-<p>Data Block 内的 KV 记录是按照 key 由小到大排列的，数据索引区的每条记录是对某个 Data Block 建立的索引信息，每条索引信息包含三个内容。以上图所示的数据块 i 的索引 index i 来说：</p>
-<p><strong>第一个字段</strong>：记录大于等于数据块i中最大的 key 值的那个 key。在索引里保存的这个 key 值未必一定是某条记录的 key，以上的例子来说，假设数据块i的最小key=“samecity”，最大key=“the best”；数据块i+1的最小key=“the fox”，最大key=“zoo”，那么对于数据块i的索引 index i 来说，其第一个字段记载大于等于数据块i的最大Key(“the best”) 同时要小于数据块i+1的最小Key(“the fox”)，所以例子中 index i 的第一个字段是 “the c”，这个是满足要求的；而 index i+1 的第一个字段则是 “zoo”，即数据块i+1的最大 key。</p>
-<p><strong>第二个字段</strong>：指出数据块 i 在 .sst 文件中的起始位置。</p>
-<p><strong>第三个字段</strong>：指出 Data Block i 的大小（有时候是有数据压缩的）。</p>
-<p>上面主要介绍的是数据管理区的内部结构，下图是数据区的一个 Block 的数据部分布局。</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-09.png" alt="img"></p>
-<p>从图中可以看出，其内部也分为两个部分，前面是一个个 KV 记录，其顺序是根据 key 值由小到大排列的，在Block尾部则是一些“重启点”（Restart Point），其实是一些指针，指出 Block 内容中的一些记录位置。</p>
-<p>“重启点”是干什么的呢？Block内容里的KV记录是按照 key 大小有序的，这样的话，相邻的两条记录很可能 key 部分存在重叠，比如 key i=“the Car”，Key i+1=“the color”，那么两者存在重叠部分 “the c”，为了减少 key 的存储量，Key i+1 可以只存储和上一条 key 不同的部分 “olor”，两者的共同部分从 key i 中可以获得。记录的 key 在 Block 内容部分就是这么存储的，主要目的是减少存储开销。“重启点”的意思是：在这条记录开始，不再采取只记载不同的 key 部分，而是重新记录所有的 key 值，假设 key i+1 是一个重启点，那么 key 里面会完整存储 “the color”，而不是采用简略的“olor”方式。Block尾部就是指出哪些记录是这些重启点的。</p>
-<p>其中记录的格式如下所示：</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-10.png" alt="记录格式"></p>
-<p>每个记录包含5个字段：</p>
-<p><strong>key共享长度</strong>：比如上面的 “olor” 记录， 其 key 和上一条记录共享的 key 部分长度是 “the c” 的长度，即5；</p>
-<p><strong>key非共享长度</strong>：对于“olor”来说，是4；</p>
-<p><strong>value长度</strong>：指出 key-value 中 value 的长度，在后面的 value 内容字段中存储实际的 value 值；</p>
-<p><strong>key非共享内容</strong>：指实际存储 “olor” 这个 key 字符串；</p>
-<p><strong>value内容</strong>：存储实际的 value 值。</p>
-<h2 id="6-memtable"><a href="#6-memtable" class="headerlink" title="6.memtable"></a>6.memtable</h2><p>所有 KV 数据都是存储在 Memtable，Immutable Memtable 和 SSTable 中的，Immutable Memtable从结构上讲和 Memtable 是完全一样的，区别仅仅在于其是只读的，不允许写入操作，而 Memtable 则是允许写入和读取的。当 Memtable 写入的数据占用内存到达指定数量，则自动转换为 Immutable Memtable，等待 Dump 到磁盘中，系统会自动生成新的 Memtable 供写操作写入新数据，理解了 Memtable，那么 Immutable Memtable 自然不在话下。</p>
-<p>LevelDB 的 MemTable 提供了将 KV 数据写入，删除以及读取 KV 记录的操作接口，但是事实上 Memtable 并不存在真正的删除操作,删除某个Key的Value在 Memtable 内是作为插入一条记录实施的，但是会打上一个 Key 的删除标记，真正的删除操作是Lazy的，会在以后的 Compaction 过程中去掉这个KV。</p>
-<p>需要注意的是，LevelDB 的 Memtable 中KV对是根据key大小有序存储的，在系统插入新的KV时，LevelDB 要把这个KV插到合适的位置上以保持这种 Key 有序性。其实，LevelDB 的 Memtable 类只是一个接口类，真正的操作是通过背后的 SkipList 来做的，包括插入操作和读取操作等，所以 Memtable 的核心数据结构是一个 SkipList。</p>
-<p>SkipList是由 William Pugh 发明。他在 Communications of the ACM June 1990, 33(6) 668-676 发表了 Skip lists: a probabilistic alternative to balanced trees，在该论文中详细解释了SkipList的数据结构和插入删除操作。关于SkipList的详细介绍可以参考这篇文章：<a href="http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html。">http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html。</a></p>
-<h2 id="7-读操作"><a href="#7-读操作" class="headerlink" title="7.读操作"></a>7.读操作</h2><p>LevelDB 的读取流程如下所示：</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-11.png" alt="LevelDB读取记录流程"></p>
-<p>LevelDB 首先会去查看内存中的 Memtable，如果 Memtable 中包含 key 及其对应的value，则返回 value 值即可；</p>
-<p>如果在 Memtable 没有读到key，则接下来到同样处于内存中的 Immutable Memtable 中去读取，类似地，如果读到就返回，若是没有读到,那么只能万般无奈下从磁盘中的大量SSTable文件中查找。</p>
-<p>因为SSTable数量较多，而且分成多个level，所以在SSTable中读数据是相当蜿蜒曲折的一段旅程。总的读取原则是这样的：首先从属于 level 0 的文件中查找，如果找到则返回对应的value值，如果没有找到那么到 level 1 中的文件中去找，如此循环往复，直到在某层 SSTable 文件中找到这个 key 对应的 value 为止（或者查到最高level，查找失败，说明整个系统中不存在这个Key)。</p>
-<p>如果给定一个要查询的 key 和某个 key range 包含这个key的 SSTable 文件，那么 LevelDB 是如何进行具体查找过程的呢？LevelDB 一般会先在内存中的Cache中查找是否包含这个文件的缓存记录，如果包含，则从缓存中读取；如果不包含，则打开SSTable文件，同时将这个文件的索引部分加载到内存中并放入Cache中。 这样Cache里面就有了这个SSTable的缓存项，但是只有索引部分在内存中，之后 LevelDB 根据索引可以定位到哪个内容Block会包含这条key，从文件中读出这个Block的内容，在根据记录一一比较，如果找到则返回结果，如果没有找到，那么说明这个level的 SSTable 文件并不包含这个key，所以到下一级别的 SSTable 中去查找。</p>
-<h2 id="8-Compaction"><a href="#8-Compaction" class="headerlink" title="8.Compaction"></a>8.Compaction</h2><p>LevelDB 包含其中两种 compaction 模式：minor 和 major。所谓 <strong>minor Compaction</strong>，就是把 memtable 中的数据导出到 SSTable 文件中；<strong>major compaction</strong> 就是合并不同层级的 SSTable 文件。</p>
-<p><strong>minor Compaction</strong></p>
-<p>Minor compaction 的目的是当内存中的 memtable 大小到了一定值时，将内容保存到磁盘文件中。其机理如下图所示：</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-12.png" alt="Minor compaction"></p>
-<p>当 memtable 数量到了一定程度会转换为 immutable memtable，此时不能往其中写入记录，只能从中读取KV内容。之前介绍过，immutable memtable 其实是一个多层级队列SkipList，其中的记录是根据 key 有序排列的。所以这个 minor compaction 实现起来也很简单，就是按照 immutable memtable 中记录由小到大遍历，并依次写入一个 level 0 的新建 SSTable 文件中，写完后建立文件的 index 数据，这样就完成了一次minor compaction。</p>
-<p>从上图中也可以看出，对于被删除的记录，在 minor compaction 过程中并不真正删除这个记录，原因也很简单，这里只知道要删掉 key 记录，但是这个 KV 数据在哪里？那需要复杂的查找，所以在 minor compaction 的时候并不做删除，只是将这个 key 作为一个记录写入文件中，至于真正的删除操作，在以后更高层级的 compaction 中会去做。</p>
-<p><strong>major compaction</strong></p>
-<p>当某个 level 下的 SSTable 文件数目超过一定设置值后，levelDB 会从这个 level 的 SSTable 中选择一个文件（level&gt;0），将其和高一层级的 level+1 的 SSTable 文件合并，这就是 major compaction。</p>
-<p>在大于 0 的层级中，每个 SSTable 文件内的key都是由小到大有序存储的，而且不同文件之间的key范围（文件内最小key和最大key之间）不会有任何重叠。level 0 的 SSTable 文件有些特殊，尽管每个文件也是根据Key由小到大排列，但是因为 level 0 的文件是通过 minor compaction 直接生成的，所以任意两个 level 0下的两个 SSTable 文件可能再key范围上有重叠。所以在做 major compaction 的时候，对于大于 level 0 的层级，选择其中一个文件就行，但是对于 level 0 来说，指定某个文件后，本 level 中很可能有其他 SSTable 文件的 key 范围和这个文件有重叠，这种情况下，要找出所有有重叠的文件和 level 1 的文件进行合并，即 level 0 在进行文件选择的时候，可能会有多个文件参与 major compaction。</p>
-<p>LevelDB 在选定某个 level 进行 compaction 后，还要选择是具体哪个文件要进行 compaction，LevelDB 在这里有个小技巧， 就是说轮流来，比如这次是文件A进行 compaction，那么下次就是在 key range 上紧挨着文件A的文件B进行 compaction，这样每个文件都会有机会轮流和高层的 level 文件进行合并。</p>
-<p>如果选好了 level i 的文件A和 level i+1 层的文件进行合并，那么问题又来了，应该选择 level i+1 哪些文件进行合并？LevelDB 选择 i+1 层中和文件A在 key range 上有重叠的所有文件来和文件A进行合并。</p>
-<p>也就是说，选定了 level i 的文件A，之后在 level i+1 中找到了所有需要合并的文件B,C,D… 等等。剩下的问题就是具体是如何进行 major 合并的？就是说给定了一系列文件，每个文件内部是key有序的，如何对这些文件进行合并，使得新生成的文件仍然Key有序，同时抛掉哪些不再有价值的 KV 数据。</p>
-<p>下图所示的是合并过程：</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-13.png" alt="SSTable compaction"></p>
-<p>major compaction 的过程如下：对多个文件采用多路归并排序的方式，依次找出其中最小的key记录，也就是对多个文件中的所有记录重新进行排序。之后采取一定的标准判断这个key是否还需要保存，如果判断没有保存价值，那么直接抛掉，如果觉得还需要继续保存，那么就将其写入 level i+1 层中新生成的一个 SSTable 文件中。就这样对KV数据一一处理，形成了一系列新的 i+1 层数据文件，之前的 i 层文件和 i+1 层参与 compaction 的文件数据此时已经没有意义了，所以全部删除。这样就完成了 i 层和 i+1 层文件记录的合并过程。</p>
-<p>那么在 major compaction 过程中，判断一个KV记录是否抛弃的标准是什么呢？其中一个标准是:对于某个key来说，如果在小于 i 层中存在这个key，那么这个KV在major compaction 过程中可以抛掉。因为，对于层级低于 i 的文件中如果存在同一 key 的记录，那么说明对于 key 来说，有更新鲜的 value 存在，那么过去的 value 就等于没有意义了，所以可以删除。</p>
-<h2 id="9-cache"><a href="#9-cache" class="headerlink" title="9.cache"></a>9.cache</h2><p>读取操作如果没有在内存的 memtable 中找到记录，要多次进行磁盘访问操作。假设最优情况，即第一次就在 level 0 中最新的文件中找到了这个 key，那么也需要读取2次磁盘，一次是将 SSTable 的文件中的 index 部分读入内存，这样根据这个 index 可以确定 key 是在哪个 block 中存储；第二次是读入这个 block 的内容，然后在内存中查找 key 对应的 value。</p>
-<p>LevelDB 中引入了两个不同的 Cache:Table Cache 和 Block Cache。其中 Block Cache 是配置可选的，即在配置文件中指定是否打开这个功能。</p>
-<p>下图是 table cache 的结构：</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-14.png" alt="SSTable compaction">!</p>
-<p>在 Cache 中，key值是 SSTable 的文件名称，value 部分包含两部分，一个是指向磁盘打开的 SSTable 文件的文件指针，这是为了方便读取内容；另外一个是指向内存中这个 SSTable 文件对应的 Table 结构指针，table结构在内存中，保存了 SSTable 的 index 内容以及用来指示 block cache 用的 cache_id ，当然除此外还有其它一些内容。</p>
-<p>比如在 get(key) 读取操作中，如果 LevelDB 确定了key在某个level下某个文件A的key range范围内，那么需要判断是不是文件A真的包含这个KV。此时，LevelDB 会首先查找 Table Cache，看这个文件是否在缓存里，如果找到了，那么根据 index 部分就可以查找是哪个 block 包含这个 key。如果没有在缓存中找到文件，那么打开 SSTable 文件，将其 index 部分读入内存，然后插入 Cache 里面，去 index 里面定位哪个 block 包含这个 key 。如果确定了文件哪个 block 包含这个 key，那么需要读入 block 内容，这是第二次读取。</p>
-<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-15.png" alt="SSTable compaction"></p>
-<p>Block Cache是为了加快这个过程的。上图是block cache 的结构。其中的key是文件的cache_id加上这个block在文件中的起始位置block_offset。而value则是这个Block的内容。</p>
-<p>如果 LevelDB发现这个 block 在 block cache 中，那么可以避免读取数据，直接在 cache 里的 block 内容里面查找key的value就行，如果没找到呢？那么读入 block 内容并把它插入 block cache 中。LevelDB 就是这样通过两个 cache 来加快读取速度的。从这里可以看出，如果读取的数据局部性比较好，也就是说要读的数据大部分在cache里面都能读到，那么读取效率应该还是很高的，而如果是对key进行顺序读取效率也应该不错，因为一次读入后可以多次被复用。但是如果是随机读取，您可以推断下其效率如何。</p>
-<h2 id="10-Version"><a href="#10-Version" class="headerlink" title="10.Version"></a>10.Version</h2><p><strong>Version</strong> 保存了当前磁盘以及内存中所有的文件信息，一般只有一个 Version 叫做 “current” version（当前版本）。LevelDB还保存了一系列的历史版本，这些历史版本有什么作用呢？</p>
-<p>当一个 Iterator 创建后，Iterator 就引用到了 current version(当前版本)，只要这个 Iterator 不被 delete 那么被 Iterator 引用的版本就会一直存活。这就意味着当你用完一个 Iterator 后，需要及时删除它。</p>
-<p>当一次 Compaction 结束后（会生成新的文件，合并前的文件需要删除），LevelDB 会创建一个新的版本作为当前版本，原先的当前版本就会变为历史版本。</p>
-<p><strong>VersionSet</strong> 是所有 Version的集合，管理着所有存活的 Version。</p>
-<p><strong>VersionEdit</strong> 表示 Version 之间的变化，相当于 delta 增量，表示有增加了多少文件，删除了文件。他们之间的关系如下：</p>
-<p><code>Version0 +VersionEdit--&gt;Version1</code></p>
-<p>VersionEdit 会保存到 manifest 文件中，当做数据恢复时就会从 manifest 文件中读出来重建数据。</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>]]></content>
-      <categories>
-        <category>leveldb</category>
-      </categories>
-      <tags>
-        <tag>leveldb</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>TCP Congestion性能测试分析</title>
     <url>/posts/ab61.html</url>
     <content><![CDATA[<h2 id="1-实验简介"><a href="#1-实验简介" class="headerlink" title="1.实验简介"></a>1.实验简介</h2><p>  最近在学习《现代计算机网络》，课程布置了一个对tcp拥塞控制性能进行测试的实验，本篇博客就本次实验做一个完整的实验报告及总结。</p>
@@ -4720,6 +4593,133 @@ Test:19, Cost:0.72887, ACC:0.76690
       </categories>
       <tags>
         <tag>实验</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leveldb源码学习记录-整体架构</title>
+    <url>/posts/41b.html</url>
+    <content><![CDATA[<h2 id="0-开篇"><a href="#0-开篇" class="headerlink" title="0.开篇"></a>0.开篇</h2><p>leveldb是一个高性能、可靠的单机KV数据库。</p>
+<p>一个高性能的单机数据库，往往是如何平衡读性能、写性能、存储大小的问题，思考这个问题，才能够理解 leveldb 的<code>write-ahead logging</code> <code>MemTable</code> <code>SSTable</code>等设计。leveldb 正是通过这一系列架构设计和代码技巧，提供了一个优秀的存储引擎解决这个问题。</p>
+<p>本系列文章是自己阅读leveldb源码过程中记录的一些笔记，方便日后查看。</p>
+<a id="more"></a>
+
+<p>这篇文章转载自：<a href="https://www.cnblogs.com/haippy/archive/2011/12/04/2276064.html">https://www.cnblogs.com/haippy/archive/2011/12/04/2276064.html</a></p>
+<h2 id="1-整体架构"><a href="#1-整体架构" class="headerlink" title="1.整体架构"></a>1.整体架构</h2><p> LevelDb作为存储系统，数据记录的存储介质包括内存以及磁盘文件，如果像上面说的，当LevelDb运行了一段时间，此时我们给LevelDb进行透视拍照，那么您会看到如下一番景象：</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/2011121116344075.png" alt="leveldb结构"></p>
+<p>从图中可以看出，构成 LevelDB 静态结构的包括六个主要部分：内存中的 <strong>MemTable</strong> 和 <strong>Immutable MemTable</strong> 以及磁盘上的几种主要文件：<strong>Current文件</strong>，<strong>Manifest文件</strong>，<strong>log文件</strong>以及 <strong>SSTable 文件</strong>。当然，LevelDB 除了这六个主要部分还有一些辅助的文件，但是以上六个文件和数据结构是 LevelDB 的主体构成元素。</p>
+<p>当应用写入一条Key:Value记录的时候，LevelDb会先往log文件里写入，成功后将记录插进Memtable中，这样基本就算完成了写入操作，因为一次写入操作只涉及一次磁盘顺序写和一次内存写入，所以这是为何说LevelDb写入速度极快的主要原因。</p>
+<p>SSTable 就是由内存中的数据不断导出并进行 Compaction 操作后形成的，而且 SSTable 的所有文件是一种层级结构，第一层为Level 0，第二层为Level 1，依次类推，层级逐渐增高。</p>
+<p>SSTable 中的文件(后缀为.sst)是 key 有序的，就是说在文件中小 key 记录排在大 key 记录之前，除了 level 0，各个 level 的 SSTable 都是如此。</p>
+<h2 id="2-mainfest文件"><a href="#2-mainfest文件" class="headerlink" title="2.mainfest文件"></a>2.mainfest文件</h2><p>SSTable 中的某个文件属于特定层级，而且其存储的记录是 key 有序的，那么必然有文件中的最小 key 和最大 key，这是非常重要的信息，LevelDB 应该记下这些信息。<strong>manifest</strong> 就是干这个的，它记载了 SSTable 各个文件的管理信息，比如属于哪个 level，文件名称叫啥，最小 key 和最大 key 各自是多少。下图是 manifest 所存储内容的示意：</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-02.png" alt="Manifest存储示意图"></p>
+<p>图中只显示了两个文件（manifest 会记载所有 SSTable 文件的这些信息），即 level 0 的 Test1.sst 和 Test2.sst 文件，同时记载了这些文件各自对应的 key 范围，比如 Test1.sst 的 key 范围是 “abc” 到 “hello”，而文件 Test2.sst 的 key 范围是 “bbc” 到 “world”，可以看出两者的 key 范围是有重叠的。</p>
+<h2 id="3-current文件"><a href="#3-current文件" class="headerlink" title="3.current文件"></a>3.current文件</h2><p>这个文件的内容只有一个信息，就是记载当前的 manifest 文件名。因为在 LevleDB 的运行过程中，随着 compaction 的进行，SSTable 文件会发生变化，会有新的文件产生，老的文件被废弃，manifest 也会跟着反映这种变化，此时往往会新生成 manifest 文件来记载这种变化，而 current 则用来指出哪个 manifest 文件才是我们关心的那个 manifest文件。</p>
+<h2 id="4-log文件"><a href="#4-log文件" class="headerlink" title="4.log文件"></a>4.log文件</h2><p>log 文件在 LevelDB 中的主要作用是系统故障恢复时，能够保证不会丢失数据。因为在将记录写入内存的 memtable 之前，会先写入 log 文件，这样即使系统发生故障，memtable 中的数据没有来得及 dump 到磁盘的 SSTable 文件，LevelDB 也可以根据 log 文件恢复内存的 Memtable 数据结构内容，不会造成系统丢失数据。</p>
+<p>LevelDB 对于一个 log 文件，会把它切割成以 32K 为单位的物理 Block，每次读取以一个 Block 作为基本读取单位，下图展示的 log 文件由3个 Block 构成，所以从物理布局来讲，一个 log 文件就是由连续的 32K 大小 Block 构成的。</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-03.png" alt="log文件布局"></p>
+<p>log 文件中的数据是以 block 为单位组织，写日志时，处于一致性考虑并没有按 block 单位写，每次更新均对 log 文件进行 IO，每次更新写入作为一个 record，每条 record 的结构如下图所示：</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-04.png" alt="记录结构"></p>
+<p><code>checksum</code> 记录的是 “type” 和 “data” 字段的CRC校验，为了避免处理不完整或者是被破坏的数据，当 LevelDB 读取记录数据时候会对数据进行校验，如果发现和存储的 checksum 相同，说明数据完整无破坏，可以继续后续流程。</p>
+<p><code>length</code> 记录的是 record 内保存的 data 长度(小端对齐)。</p>
+<p><code>data</code> 记录的是 Key:Value 数值对.</p>
+<p><code>type</code> 字段则指出了每条记录的逻辑结构和 log 文件物理分块结构之间的关系，具体而言，主要有以下四种类型：<code>FULL</code>, <code>FIRST</code>, <code>MIDDLE</code>, <code>LAST</code>。如果记录类型是FULL，代表了当前记录内容完整地存储在一个物理Block里，没有被不同的物理Block切割开；如果记录被相邻的物理Block切割开，则类型会是其他三种类型中的一种。我们以log文件布局所示的例子来具体说明。</p>
+<p><font color="orange">&gt;假设目前存在三条记录，Record A，Record B 和 Record C，其中 Record A 大小为10K，Record B 大小为80K，Record C大小为12K</font>那么其在 log 文件中的逻辑布局会如上面的图所示。Record A是图中蓝色区域所示，因为大小为10K&lt;32K，能够放在一个物理Block中，所以其类型为FULL；Record B 大小为80K，而Block 1因为放入了Record A，所以还剩下22K，不足以放下Record B，所以在Block 1的剩余部分放入Record B的开头一部分，类型标识为FIRST，代表了是一个记录的起始部分；Record B还有58K没有存储，这些只能依次放在后续的物理Block里面，因为Block 2大小只有32K，仍然放不下Record B的剩余部分，所以Block 2全部用来放Record B，且标识类型为MIDDLE，意思是这是Record B中间一段数据；Record B剩下的部分可以完全放在Block 3中，类型标识为LAST，代表了这是Record B的末尾数据；图中黄色的Record C因为大小为12K，Block 3剩下的空间足以全部放下它，所以其类型标识为FULL。</p>
+<p>   从这个小例子可以看出逻辑记录和物理Block之间的关系，LevelDB一次物理读取为一个Block，然后根据类型情况拼接出逻辑记录，供后续流程处理。</p>
+<h2 id="5-sstable文件"><a href="#5-sstable文件" class="headerlink" title="5.sstable文件"></a>5.sstable文件</h2><p>    LevelDB 不同层级有很多 SSTable 文件（以后缀.sst为特征），所有 .sst 文件内部布局都是一样的。上节介绍 log 文件是物理分块的，SSTable也一样会将文件划分为固定大小的物理存储块，但是两者逻辑布局大不相同，根本原因是：log文件中的记录是 Key 无序的，即先后记录的 key 大小没有明确大小关系，而 .sst 文件内部则是根据记录的 Key 由小到大排列的。</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-05.png" alt=".sst文件的分块结构"></p>
+<p><font color="orange">上图展示了一个 .sst 文件的物理划分结构，同 log 文件一样，也是划分为固定大小的存储块，每个 Block 分为三个部分：<strong>数据存储区</strong>，<strong>Type 区</strong>用于标识数据存储区是否采用了数据压缩算法（Snappy压缩或者无压缩），<strong>CRC校验</strong>则是数据校验码，用于判别数据在生成和传输中是否出错。</font></p>
+<p>以上是.sst的物理布局，下面介绍.sst文件的逻辑布局，所谓逻辑布局，就是说尽管大家都是物理块，但是每一块存储什么内容，内部又有什么结构等。下图展示了.sst文件的内部逻辑解释。</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-06.png" alt="逻辑布局"></p>
+<p>​         从上图可以看出，从大的方面，可以将 .sst文 件划分为<strong>数据存储区</strong>和<strong>数据管理区</strong>，数据存储区存放实际的 key-value 数据，数据管理区则提供一些索引指针等管理数据，目的是更快速便捷的查找相应的记录。两个区域都是在上述的分块基础上的，就是说文件的前面若干块实际存储 KV 数据，后面数据管理区存储管理数据。管理数据又分为四种不同类型：<strong>Meta Block</strong>，<strong>MetaBlock 索引</strong>和<strong>数据索引块</strong>以及一个<strong>文件尾部块</strong>。</p>
+<p><code>data_block</code>：实际存储的 KV 数据。<br><code>meta_block</code>：每个 data_block 对应一个 meta_block，保存 data_block 中的 key size/value size/kv counts 之类的统计信息，当前版本未实现。<br><code>metaindex_block</code>：保存 meta_block 的索引信息，当前版本未实现。<br><code>index_block</code>：保存每个 data_block 的 last_key 及其在 SSTable 文件中的索引。block 中 entry 的 key 即是 last_key(依赖于FindShortestSeparator()/FindShortSuccessor()的实现)，value即是该data_block的BlockHandler（offset/size）。<br><code>footer</code>：文件末尾固定长度的数据。保存着 metaindex_block 和 index_block 的索引信息(BlockHandler)，为达到固定的长度，添加 padding_bytes。最后有8个字节的 magic 校验。</p>
+<hr>
+<p>footer 的结构如下图所示：</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-07.png" alt="Footer"></p>
+<p><code>metaindex_block_handle</code> 指出了 metaindex block 的起始位置和大小；<code>index_block_handle</code> 指出了 index Block 的起始地址和大小；这两个字段可以理解为索引的索引，是为了正确读出索引值而设立的；为达到固定的长度，添加 <code>padding_bytes</code>。最后有8个字节的 <code>magic</code> 校验。</p>
+<p>下图是数据索引块的内部结构示意图：</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-08.png" alt="数据索引"></p>
+<p>Data Block 内的 KV 记录是按照 key 由小到大排列的，数据索引区的每条记录是对某个 Data Block 建立的索引信息，每条索引信息包含三个内容。以上图所示的数据块 i 的索引 index i 来说：</p>
+<p><strong>第一个字段</strong>：记录大于等于数据块i中最大的 key 值的那个 key。在索引里保存的这个 key 值未必一定是某条记录的 key，以上的例子来说，假设数据块i的最小key=“samecity”，最大key=“the best”；数据块i+1的最小key=“the fox”，最大key=“zoo”，那么对于数据块i的索引 index i 来说，其第一个字段记载大于等于数据块i的最大Key(“the best”) 同时要小于数据块i+1的最小Key(“the fox”)，所以例子中 index i 的第一个字段是 “the c”，这个是满足要求的；而 index i+1 的第一个字段则是 “zoo”，即数据块i+1的最大 key。</p>
+<p><strong>第二个字段</strong>：指出数据块 i 在 .sst 文件中的起始位置。</p>
+<p><strong>第三个字段</strong>：指出 Data Block i 的大小（有时候是有数据压缩的）。</p>
+<p>上面主要介绍的是数据管理区的内部结构，下图是数据区的一个 Block 的数据部分布局。</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-09.png" alt="img"></p>
+<p>从图中可以看出，其内部也分为两个部分，前面是一个个 KV 记录，其顺序是根据 key 值由小到大排列的，在Block尾部则是一些“重启点”（Restart Point），其实是一些指针，指出 Block 内容中的一些记录位置。</p>
+<p>“重启点”是干什么的呢？Block内容里的KV记录是按照 key 大小有序的，这样的话，相邻的两条记录很可能 key 部分存在重叠，比如 key i=“the Car”，Key i+1=“the color”，那么两者存在重叠部分 “the c”，为了减少 key 的存储量，Key i+1 可以只存储和上一条 key 不同的部分 “olor”，两者的共同部分从 key i 中可以获得。记录的 key 在 Block 内容部分就是这么存储的，主要目的是减少存储开销。“重启点”的意思是：在这条记录开始，不再采取只记载不同的 key 部分，而是重新记录所有的 key 值，假设 key i+1 是一个重启点，那么 key 里面会完整存储 “the color”，而不是采用简略的“olor”方式。Block尾部就是指出哪些记录是这些重启点的。</p>
+<p>其中记录的格式如下所示：</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-10.png" alt="记录格式"></p>
+<p>每个记录包含5个字段：</p>
+<p><strong>key共享长度</strong>：比如上面的 “olor” 记录， 其 key 和上一条记录共享的 key 部分长度是 “the c” 的长度，即5；</p>
+<p><strong>key非共享长度</strong>：对于“olor”来说，是4；</p>
+<p><strong>value长度</strong>：指出 key-value 中 value 的长度，在后面的 value 内容字段中存储实际的 value 值；</p>
+<p><strong>key非共享内容</strong>：指实际存储 “olor” 这个 key 字符串；</p>
+<p><strong>value内容</strong>：存储实际的 value 值。</p>
+<h2 id="6-memtable"><a href="#6-memtable" class="headerlink" title="6.memtable"></a>6.memtable</h2><p>所有 KV 数据都是存储在 Memtable，Immutable Memtable 和 SSTable 中的，Immutable Memtable从结构上讲和 Memtable 是完全一样的，区别仅仅在于其是只读的，不允许写入操作，而 Memtable 则是允许写入和读取的。当 Memtable 写入的数据占用内存到达指定数量，则自动转换为 Immutable Memtable，等待 Dump 到磁盘中，系统会自动生成新的 Memtable 供写操作写入新数据，理解了 Memtable，那么 Immutable Memtable 自然不在话下。</p>
+<p>LevelDB 的 MemTable 提供了将 KV 数据写入，删除以及读取 KV 记录的操作接口，但是事实上 Memtable 并不存在真正的删除操作,删除某个Key的Value在 Memtable 内是作为插入一条记录实施的，但是会打上一个 Key 的删除标记，真正的删除操作是Lazy的，会在以后的 Compaction 过程中去掉这个KV。</p>
+<p>需要注意的是，LevelDB 的 Memtable 中KV对是根据key大小有序存储的，在系统插入新的KV时，LevelDB 要把这个KV插到合适的位置上以保持这种 Key 有序性。其实，LevelDB 的 Memtable 类只是一个接口类，真正的操作是通过背后的 SkipList 来做的，包括插入操作和读取操作等，所以 Memtable 的核心数据结构是一个 SkipList。</p>
+<p>SkipList是由 William Pugh 发明。他在 Communications of the ACM June 1990, 33(6) 668-676 发表了 Skip lists: a probabilistic alternative to balanced trees，在该论文中详细解释了SkipList的数据结构和插入删除操作。关于SkipList的详细介绍可以参考这篇文章：<a href="http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html。">http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html。</a></p>
+<h2 id="7-读操作"><a href="#7-读操作" class="headerlink" title="7.读操作"></a>7.读操作</h2><p>LevelDB 的读取流程如下所示：</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-11.png" alt="LevelDB读取记录流程"></p>
+<p>LevelDB 首先会去查看内存中的 Memtable，如果 Memtable 中包含 key 及其对应的value，则返回 value 值即可；</p>
+<p>如果在 Memtable 没有读到key，则接下来到同样处于内存中的 Immutable Memtable 中去读取，类似地，如果读到就返回，若是没有读到,那么只能万般无奈下从磁盘中的大量SSTable文件中查找。</p>
+<p>因为SSTable数量较多，而且分成多个level，所以在SSTable中读数据是相当蜿蜒曲折的一段旅程。总的读取原则是这样的：首先从属于 level 0 的文件中查找，如果找到则返回对应的value值，如果没有找到那么到 level 1 中的文件中去找，如此循环往复，直到在某层 SSTable 文件中找到这个 key 对应的 value 为止（或者查到最高level，查找失败，说明整个系统中不存在这个Key)。</p>
+<p>如果给定一个要查询的 key 和某个 key range 包含这个key的 SSTable 文件，那么 LevelDB 是如何进行具体查找过程的呢？LevelDB 一般会先在内存中的Cache中查找是否包含这个文件的缓存记录，如果包含，则从缓存中读取；如果不包含，则打开SSTable文件，同时将这个文件的索引部分加载到内存中并放入Cache中。 这样Cache里面就有了这个SSTable的缓存项，但是只有索引部分在内存中，之后 LevelDB 根据索引可以定位到哪个内容Block会包含这条key，从文件中读出这个Block的内容，在根据记录一一比较，如果找到则返回结果，如果没有找到，那么说明这个level的 SSTable 文件并不包含这个key，所以到下一级别的 SSTable 中去查找。</p>
+<h2 id="8-Compaction"><a href="#8-Compaction" class="headerlink" title="8.Compaction"></a>8.Compaction</h2><p>LevelDB 包含其中两种 compaction 模式：minor 和 major。所谓 <strong>minor Compaction</strong>，就是把 memtable 中的数据导出到 SSTable 文件中；<strong>major compaction</strong> 就是合并不同层级的 SSTable 文件。</p>
+<p><strong>minor Compaction</strong></p>
+<p>Minor compaction 的目的是当内存中的 memtable 大小到了一定值时，将内容保存到磁盘文件中。其机理如下图所示：</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-12.png" alt="Minor compaction"></p>
+<p>当 memtable 数量到了一定程度会转换为 immutable memtable，此时不能往其中写入记录，只能从中读取KV内容。之前介绍过，immutable memtable 其实是一个多层级队列SkipList，其中的记录是根据 key 有序排列的。所以这个 minor compaction 实现起来也很简单，就是按照 immutable memtable 中记录由小到大遍历，并依次写入一个 level 0 的新建 SSTable 文件中，写完后建立文件的 index 数据，这样就完成了一次minor compaction。</p>
+<p>从上图中也可以看出，对于被删除的记录，在 minor compaction 过程中并不真正删除这个记录，原因也很简单，这里只知道要删掉 key 记录，但是这个 KV 数据在哪里？那需要复杂的查找，所以在 minor compaction 的时候并不做删除，只是将这个 key 作为一个记录写入文件中，至于真正的删除操作，在以后更高层级的 compaction 中会去做。</p>
+<p><strong>major compaction</strong></p>
+<p>当某个 level 下的 SSTable 文件数目超过一定设置值后，levelDB 会从这个 level 的 SSTable 中选择一个文件（level&gt;0），将其和高一层级的 level+1 的 SSTable 文件合并，这就是 major compaction。</p>
+<p>在大于 0 的层级中，每个 SSTable 文件内的key都是由小到大有序存储的，而且不同文件之间的key范围（文件内最小key和最大key之间）不会有任何重叠。level 0 的 SSTable 文件有些特殊，尽管每个文件也是根据Key由小到大排列，但是因为 level 0 的文件是通过 minor compaction 直接生成的，所以任意两个 level 0下的两个 SSTable 文件可能再key范围上有重叠。所以在做 major compaction 的时候，对于大于 level 0 的层级，选择其中一个文件就行，但是对于 level 0 来说，指定某个文件后，本 level 中很可能有其他 SSTable 文件的 key 范围和这个文件有重叠，这种情况下，要找出所有有重叠的文件和 level 1 的文件进行合并，即 level 0 在进行文件选择的时候，可能会有多个文件参与 major compaction。</p>
+<p>LevelDB 在选定某个 level 进行 compaction 后，还要选择是具体哪个文件要进行 compaction，LevelDB 在这里有个小技巧， 就是说轮流来，比如这次是文件A进行 compaction，那么下次就是在 key range 上紧挨着文件A的文件B进行 compaction，这样每个文件都会有机会轮流和高层的 level 文件进行合并。</p>
+<p>如果选好了 level i 的文件A和 level i+1 层的文件进行合并，那么问题又来了，应该选择 level i+1 哪些文件进行合并？LevelDB 选择 i+1 层中和文件A在 key range 上有重叠的所有文件来和文件A进行合并。</p>
+<p>也就是说，选定了 level i 的文件A，之后在 level i+1 中找到了所有需要合并的文件B,C,D… 等等。剩下的问题就是具体是如何进行 major 合并的？就是说给定了一系列文件，每个文件内部是key有序的，如何对这些文件进行合并，使得新生成的文件仍然Key有序，同时抛掉哪些不再有价值的 KV 数据。</p>
+<p>下图所示的是合并过程：</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-13.png" alt="SSTable compaction"></p>
+<p>major compaction 的过程如下：对多个文件采用多路归并排序的方式，依次找出其中最小的key记录，也就是对多个文件中的所有记录重新进行排序。之后采取一定的标准判断这个key是否还需要保存，如果判断没有保存价值，那么直接抛掉，如果觉得还需要继续保存，那么就将其写入 level i+1 层中新生成的一个 SSTable 文件中。就这样对KV数据一一处理，形成了一系列新的 i+1 层数据文件，之前的 i 层文件和 i+1 层参与 compaction 的文件数据此时已经没有意义了，所以全部删除。这样就完成了 i 层和 i+1 层文件记录的合并过程。</p>
+<p>那么在 major compaction 过程中，判断一个KV记录是否抛弃的标准是什么呢？其中一个标准是:对于某个key来说，如果在小于 i 层中存在这个key，那么这个KV在major compaction 过程中可以抛掉。因为，对于层级低于 i 的文件中如果存在同一 key 的记录，那么说明对于 key 来说，有更新鲜的 value 存在，那么过去的 value 就等于没有意义了，所以可以删除。</p>
+<h2 id="9-cache"><a href="#9-cache" class="headerlink" title="9.cache"></a>9.cache</h2><p>读取操作如果没有在内存的 memtable 中找到记录，要多次进行磁盘访问操作。假设最优情况，即第一次就在 level 0 中最新的文件中找到了这个 key，那么也需要读取2次磁盘，一次是将 SSTable 的文件中的 index 部分读入内存，这样根据这个 index 可以确定 key 是在哪个 block 中存储；第二次是读入这个 block 的内容，然后在内存中查找 key 对应的 value。</p>
+<p>LevelDB 中引入了两个不同的 Cache:Table Cache 和 Block Cache。其中 Block Cache 是配置可选的，即在配置文件中指定是否打开这个功能。</p>
+<p>下图是 table cache 的结构：</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-14.png" alt="SSTable compaction">!</p>
+<p>在 Cache 中，key值是 SSTable 的文件名称，value 部分包含两部分，一个是指向磁盘打开的 SSTable 文件的文件指针，这是为了方便读取内容；另外一个是指向内存中这个 SSTable 文件对应的 Table 结构指针，table结构在内存中，保存了 SSTable 的 index 内容以及用来指示 block cache 用的 cache_id ，当然除此外还有其它一些内容。</p>
+<p>比如在 get(key) 读取操作中，如果 LevelDB 确定了key在某个level下某个文件A的key range范围内，那么需要判断是不是文件A真的包含这个KV。此时，LevelDB 会首先查找 Table Cache，看这个文件是否在缓存里，如果找到了，那么根据 index 部分就可以查找是哪个 block 包含这个 key。如果没有在缓存中找到文件，那么打开 SSTable 文件，将其 index 部分读入内存，然后插入 Cache 里面，去 index 里面定位哪个 block 包含这个 key 。如果确定了文件哪个 block 包含这个 key，那么需要读入 block 内容，这是第二次读取。</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-15.png" alt="SSTable compaction"></p>
+<p>Block Cache是为了加快这个过程的。上图是block cache 的结构。其中的key是文件的cache_id加上这个block在文件中的起始位置block_offset。而value则是这个Block的内容。</p>
+<p>如果 LevelDB发现这个 block 在 block cache 中，那么可以避免读取数据，直接在 cache 里的 block 内容里面查找key的value就行，如果没找到呢？那么读入 block 内容并把它插入 block cache 中。LevelDB 就是这样通过两个 cache 来加快读取速度的。从这里可以看出，如果读取的数据局部性比较好，也就是说要读的数据大部分在cache里面都能读到，那么读取效率应该还是很高的，而如果是对key进行顺序读取效率也应该不错，因为一次读入后可以多次被复用。但是如果是随机读取，您可以推断下其效率如何。</p>
+<h2 id="10-Version"><a href="#10-Version" class="headerlink" title="10.Version"></a>10.Version</h2><p><strong>Version</strong> 保存了当前磁盘以及内存中所有的文件信息，一般只有一个 Version 叫做 “current” version（当前版本）。LevelDB还保存了一系列的历史版本，这些历史版本有什么作用呢？</p>
+<p>当一个 Iterator 创建后，Iterator 就引用到了 current version(当前版本)，只要这个 Iterator 不被 delete 那么被 Iterator 引用的版本就会一直存活。这就意味着当你用完一个 Iterator 后，需要及时删除它。</p>
+<p>当一次 Compaction 结束后（会生成新的文件，合并前的文件需要删除），LevelDB 会创建一个新的版本作为当前版本，原先的当前版本就会变为历史版本。</p>
+<p><strong>VersionSet</strong> 是所有 Version的集合，管理着所有存活的 Version。</p>
+<p><strong>VersionEdit</strong> 表示 Version 之间的变化，相当于 delta 增量，表示有增加了多少文件，删除了文件。他们之间的关系如下：</p>
+<p><code>Version0 +VersionEdit--&gt;Version1</code></p>
+<p>VersionEdit 会保存到 manifest 文件中，当做数据恢复时就会从 manifest 文件中读出来重建数据。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>]]></content>
+      <categories>
+        <category>leveldb</category>
+      </categories>
+      <tags>
+        <tag>leveldb</tag>
       </tags>
   </entry>
 </search>
