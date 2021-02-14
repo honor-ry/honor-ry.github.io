@@ -1920,6 +1920,86 @@ save models to /home/aistudio/work/emotionclassify.inference.model
       </tags>
   </entry>
   <entry>
+    <title>python基础学习</title>
+    <url>/posts/fb35.html</url>
+    <content><![CDATA[<h3 id="python基础"><a href="#python基础" class="headerlink" title="python基础"></a>python基础</h3><h6 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h6><p>python中单行注释以<code>#</code>开头，多行注释可以用多个<code>#</code>号，或者采用<code>'''</code>和<code>"""</code></p>
+<a id="more"></a>
+
+<h6 id="行与缩进"><a href="#行与缩进" class="headerlink" title="行与缩进"></a>行与缩进</h6><p>python最具特色的就是使用缩进来表示代码块，不需要使用大括号 <code>{ }</code></p>
+<h6 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h6><p>python中单引号和双引号使用完全相同。<br>使用三引号(‘’’或”””)可以指定一个多行字符串。<br>转义符 ‘'<br>反斜杠可以用来转义，使用r可以让反斜杠不发生转义。。 如 r”this is a line with \n” 则\n会显示，并不是换行。这里的r指raw，即raw string原始字符串<br>按字面意义级联字符串，如”this “ “is “ “string”会被自动转换为this is string。<br>字符串可以用 + 运算符连接在一起，用 * 运算符重复。<br>Python 中的字符串有两种索引方式，从左往右以 0 开始，从右往左以 -1 开始。<br><img src="https://img-blog.csdnimg.cn/2020061716105559.png" alt="在这里插入图片描述"><br>Python中的字符串不能改变。<br>Python 没有单独的字符类型，都为字符串，一个字符就是长度为 1 的字符串。<br>字符串的截取的语法格式如下：<code>变量[头下标:尾下标:步长]</code></p>
+<h6 id="等待用户输入"><a href="#等待用户输入" class="headerlink" title="等待用户输入"></a>等待用户输入</h6><p><img src="https://img-blog.csdnimg.cn/20200617161333659.png" alt="在这里插入图片描述"></p>
+<h6 id="print输出"><a href="#print输出" class="headerlink" title="print输出"></a>print输出</h6><p>print默认输出是换行的，如果想要不换行需要在变量末尾加上end=” “</p>
+<h6 id="import与from…import"><a href="#import与from…import" class="headerlink" title="import与from…import"></a>import与from…import</h6><p>在 python 用<code>import</code>或者<code>from...import</code>来导入相应的模块。</p>
+<p>将整个模块(somemodule)导入，格式为：<code>import somemodule</code></p>
+<p>从某个模块中导入某个函数,格式为： <code>from somemodule import somefunction</code></p>
+<p>从某个模块中导入多个函数,格式为：<code>from somemodule import firstfunc, secondfunc, thirdfunc</code></p>
+<p>将某个模块中的全部函数导入，格式为： <code>from somemodule import *</code></p>
+<h4 id="python基本数据类型"><a href="#python基本数据类型" class="headerlink" title="python基本数据类型"></a>python基本数据类型</h4><p>Python 中的变量不需要声明。每个变量在使用前都必须赋值，变量赋值以后该变量才会被创建。</p>
+<p>在 Python 中，变量就是变量，它没有类型，我们所说的”类型”是变量所指的内存中对象的类型。</p>
+<h5 id="标准数据类型"><a href="#标准数据类型" class="headerlink" title="标准数据类型"></a>标准数据类型</h5><p>python3中有6个标准的数据类型</p>
+<ul>
+<li>Number（数字）</li>
+<li>String（字符串）</li>
+<li>List（列表）</li>
+<li>Tuple（元组）</li>
+<li>Set（集合）</li>
+<li>Dictionary（字典）<h6 id="Number（数字）"><a href="#Number（数字）" class="headerlink" title="Number（数字）"></a>Number（数字）</h6>支持int，float，bool，complex（复数）<br>其中内置的type()函数可以用来查询变量所指的对象类型。<br><img src="https://img-blog.csdnimg.cn/20200617173243637.png" alt="在这里插入图片描述"><br>数值运算：</li>
+</ul>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">5</span> + <span class="number">4</span>  <span class="comment"># 加法</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">4.3</span> - <span class="number">2</span> <span class="comment"># 减法</span></span><br><span class="line"><span class="number">2.3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">3</span> * <span class="number">7</span>  <span class="comment"># 乘法</span></span><br><span class="line"><span class="number">21</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">2</span> / <span class="number">4</span>  <span class="comment"># 除法，得到一个浮点数</span></span><br><span class="line"><span class="number">0.5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">2</span> // <span class="number">4</span> <span class="comment"># 除法，得到一个整数</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">17</span> % <span class="number">3</span> <span class="comment"># 取余</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">2</span> ** <span class="number">5</span> <span class="comment"># 乘方</span></span><br><span class="line"><span class="number">32</span></span><br></pre></td></tr></tbody></table></figure>
+<p>需要注意：一个变量可以通过赋值指向不同类型的对象，数值的除法包含两个运算符：<code>/</code>返回一个浮点数，<code>//</code>返回一个整数。</p>
+<h6 id="String-字符串"><a href="#String-字符串" class="headerlink" title="String(字符串)"></a>String(字符串)</h6><p>字符串或串(String)是由数字、字母、下划线组成的一串字符。<br>Python中的字符串用单引号<code>'</code>或双引号<code>"</code>括起来，同时使用反斜杠<code>\</code>转义特殊字符。<br>python的字串列表有2种取值顺序:</p>
+<ul>
+<li>从左到右索引默认0开始的，最大范围是字符串长度少1</li>
+<li>从右到左索引默认-1开始的，最大范围是字符串开头</li>
+</ul>
+<p>逆序输出字符串：<br><img src="https://img-blog.csdnimg.cn/20200617173956563.png" alt="在这里插入图片描述"><br>从字符串中截取一串字符：使用 <code>[头下标:尾下标]</code> 来截取相应的字符串<br><img src="https://img-blog.csdnimg.cn/20200709114150810.png" alt="在这里插入图片描述"><br><code>[头下标:尾下标]</code>获取的子字符串包含头下标的字符，但不包含尾下标的字符。</p>
+<h6 id="List列表"><a href="#List列表" class="headerlink" title="List列表"></a>List列表</h6><p>List（列表） 是 Python 中使用最频繁的数据类型。<br>list是一种有序的集合，可以随时添加和删除其中的元素。<br>列表中值的切割也可以用到变量 [头下标:尾下标] ，就可以截取相应的列表，从左到右索引默认 0 开始，从右到左索引默认 -1 开始，下标可以为空表示取到头或尾。<br><img src="https://img-blog.csdnimg.cn/2020070911494114.png" alt="在这里插入图片描述"><br>list是一个可变的有序表，所以，可以往list中追加元素到末尾：<br><img src="https://img-blog.csdnimg.cn/20200709160154717.png" alt="在这里插入图片描述"><br>也可以把元素插入到指定的位置，比如索引号为1的位置：<br><img src="https://img-blog.csdnimg.cn/20200709160843260.png" alt="在这里插入图片描述"><br>要删除list末尾的元素，用pop()方法：<br><img src="https://img-blog.csdnimg.cn/20200709161001775.png" alt="在这里插入图片描述"><br>要删除指定位置的元素，用<code>pop(i)</code>方法，其中<code>i</code>是索引位置：<br><img src="https://img-blog.csdnimg.cn/20200709161112490.png" alt="在这里插入图片描述"></p>
+<h6 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h6><p>元组类似于列表（list，不同之处在于元组的元素不能修改。<br>元组用 () 标识。内部元素用逗号隔开。但是元组不能二次赋值，相当于只读列表。<br>当元组中只包含一个元素时，需要在元素后面添加逗号，否则括号会被当作运算符使用：<img src="https://img-blog.csdnimg.cn/20200709123915509.png" alt="在这里插入图片描述">)<img src="https://img-blog.csdnimg.cn/20200709123942486.png" alt="在这里插入图片描述"><br>元组内置函数：</p>
+<ul>
+<li>len(tuple)：计算元组元素个数。<br><img src="https://img-blog.csdnimg.cn/20200709142004375.png" alt="在这里插入图片描述"></li>
+<li>max(tuple)：返回元组中元素最大值。<br><img src="https://img-blog.csdnimg.cn/20200709142057162.png" alt="在这里插入图片描述"></li>
+<li>min(tuple)：返回元组中元素最小值。<br><img src="https://img-blog.csdnimg.cn/20200709142124386.png" alt="在这里插入图片描述"></li>
+<li>tuple(iterable) 将可迭代系列转换为元组。<br><img src="https://img-blog.csdnimg.cn/20200709142158426.png" alt="在这里插入图片描述"></li>
+</ul>
+<h6 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h6><p>字典是另一种可变容器模型，且可存储任意类型对象。<br>Python内置了字典：dict的支持，dict全称dictionary，在其他语言中也称为map，使用键-值（key-value）存储，具有极快的查找速度。<br>字典的每个键值(key=&gt;value)对用冒号(:)分割，每个对之间用逗号(,)分割，整个字典包括在花括号({})中 ,格式如下所示：</p>
+<blockquote>
+<p>d = {key1 : value1, key2 : value2 }</p>
+</blockquote>
+<p>给定一个名字，要查找对应的成绩。用dict实现，只需要一个“名字”-“成绩”的对照表，直接根据名字查找成绩，无论这个表有多大，查找速度都不会变慢。用Python写一个dict如下<br><img src="https://img-blog.csdnimg.cn/20200709193930995.png" alt="在这里插入图片描述"><br>注意，dict内部存放的顺序和key放入的顺序是没有关系的。<br>和list比较，dict有以下几个特点：</p>
+<ul>
+<li>1、查找和插入的速度极快，不会随着key的增加而变慢；</li>
+<li>2、需要占用大量的内存，内存浪费多。<br>所以，dict是用空间来换取时间的一种方法。dict可以用在需要高速查找的很多地方，在Python代码中几乎无处不在，正确使用dict非常重要，需要牢记的第一条就是dict的key必须是<strong>不可变对象</strong>。<br>　　这是因为dict根据key来计算value的存储位置，如果每次计算相同的key得出的结果不同，那dict内部就完全混乱了。这个通过key计算位置的算法称为哈希算法（Hash）。<br>　　要保证hash的正确性，作为key的对象就不能变。在Python中，字符串、整数等都是不可变的，因此，可以放心地作为key。而list是可变的，就不能作为key：</li>
+</ul>
+<h6 id="set"><a href="#set" class="headerlink" title="set"></a>set</h6><p>set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。<br>重复的元素在set中会被自动过滤：<br><img src="https://img-blog.csdnimg.cn/20200709194518825.png" alt="在这里插入图片描述"><br>通过<code>add(key)</code>方法可以添加元素到set中，通过<code>remove(key)</code>方法可以删除元素：<br><img src="https://img-blog.csdnimg.cn/20200709194857284.png" alt="在这里插入图片描述">)<img src="https://img-blog.csdnimg.cn/20200709194929443.png" alt="在这里插入图片描述"><br>set和dict的唯一区别仅在于没有存储对应的value，但是，set的原理和dict一样，所以，同样不可以放入可变对象，因为无法判断两个可变对象是否相等，也就无法保证set内部“不会有重复元素”。</p>
+<h5 id="计算机系统通用的字符编码工作方式："><a href="#计算机系统通用的字符编码工作方式：" class="headerlink" title="计算机系统通用的字符编码工作方式："></a>计算机系统通用的字符编码工作方式：</h5><p>在计算机内存中，统一使用Unicode编码，当需要保存到硬盘或者需要传输的时候，就转换为UTF-8编码。<br>用记事本编辑的时候，从文件读取的UTF-8字符被转换为Unicode字符到内存里，编辑完成后，保存的时候再把Unicode转换为UTF-8保存到文件：<br><img src="https://img-blog.csdnimg.cn/20200709152320730.png" alt="在这里插入图片描述"><br>浏览网页的时候，服务器会把动态生成的Unicode内容转换为UTF-8再传输到浏览器：<img src="https://img-blog.csdnimg.cn/20200709152340373.png" alt="在这里插入图片描述"><br>所以当看到很多网页的源码上会有类似<meta charset="UTF-8">的信息，表示该网页正是用的UTF-8编码。</p>
+<p>Python 3的字符串使用<code>Unicode</code>，直接支持多语言。</p>
+<p>当<code>str</code>和<code>bytes</code>互相转换时，需要指定编码。最常用的编码是<code>UTF-8</code><br>要注意区分’ABC’和b’ABC’，前者是str，后者虽然内容显示得和前者一样，但bytes的每个字符都只占用一个字节。</p>
+<p>以Unicode表示的<code>str</code>通过<code>encode()</code>方法可以编码为指定的<code>bytes</code>，例如：<br><img src="https://img-blog.csdnimg.cn/20200709153108903.png" alt="在这里插入图片描述"><br>如果我们从网络或磁盘上读取了字节流，那么读到的数据就是<code>bytes</code>。要把<code>bytes</code>变为<code>str</code>，就需要用<code>decode()</code>方法：<br><img src="https://img-blog.csdnimg.cn/20200709153321117.png" alt="在这里插入图片描述"></p>
+<h5 id="谈谈input"><a href="#谈谈input" class="headerlink" title="谈谈input"></a>谈谈input</h5><p>很多时候我们会用<code>input()</code>读取用户的输入，<br><img src="https://img-blog.csdnimg.cn/20200709163056119.png" alt="在这里插入图片描述"><br>结果报错，这是因为input()返回的数据类型是str，str不能直接和整数比较，必须先把str转换成整数。Python提供了int()函数来完成这件事情：<br><img src="https://img-blog.csdnimg.cn/20200709163145237.png" alt="在这里插入图片描述"></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>]]></content>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python安装dlib遇到的错误:AttributeError:module ‘dlib’ has no attribute ‘get_frontal_face_detector’问题解决</title>
     <url>/posts/3826.html</url>
     <content><![CDATA[<p>dlib是一个非常好用的跨平台的通用库，但是在安装过程中遇到了许多问题，我在使用Anaconda安装dlib过程中，用pip install 安装，安装成功后，import没有问题</p>
@@ -2046,86 +2126,6 @@ save models to /home/aistudio/work/emotionclassify.inference.model
       </script>]]></content>
       <tags>
         <tag>机器学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python基础学习</title>
-    <url>/posts/fb35.html</url>
-    <content><![CDATA[<h3 id="python基础"><a href="#python基础" class="headerlink" title="python基础"></a>python基础</h3><h6 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h6><p>python中单行注释以<code>#</code>开头，多行注释可以用多个<code>#</code>号，或者采用<code>'''</code>和<code>"""</code></p>
-<a id="more"></a>
-
-<h6 id="行与缩进"><a href="#行与缩进" class="headerlink" title="行与缩进"></a>行与缩进</h6><p>python最具特色的就是使用缩进来表示代码块，不需要使用大括号 <code>{ }</code></p>
-<h6 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h6><p>python中单引号和双引号使用完全相同。<br>使用三引号(‘’’或”””)可以指定一个多行字符串。<br>转义符 ‘'<br>反斜杠可以用来转义，使用r可以让反斜杠不发生转义。。 如 r”this is a line with \n” 则\n会显示，并不是换行。这里的r指raw，即raw string原始字符串<br>按字面意义级联字符串，如”this “ “is “ “string”会被自动转换为this is string。<br>字符串可以用 + 运算符连接在一起，用 * 运算符重复。<br>Python 中的字符串有两种索引方式，从左往右以 0 开始，从右往左以 -1 开始。<br><img src="https://img-blog.csdnimg.cn/2020061716105559.png" alt="在这里插入图片描述"><br>Python中的字符串不能改变。<br>Python 没有单独的字符类型，都为字符串，一个字符就是长度为 1 的字符串。<br>字符串的截取的语法格式如下：<code>变量[头下标:尾下标:步长]</code></p>
-<h6 id="等待用户输入"><a href="#等待用户输入" class="headerlink" title="等待用户输入"></a>等待用户输入</h6><p><img src="https://img-blog.csdnimg.cn/20200617161333659.png" alt="在这里插入图片描述"></p>
-<h6 id="print输出"><a href="#print输出" class="headerlink" title="print输出"></a>print输出</h6><p>print默认输出是换行的，如果想要不换行需要在变量末尾加上end=” “</p>
-<h6 id="import与from…import"><a href="#import与from…import" class="headerlink" title="import与from…import"></a>import与from…import</h6><p>在 python 用<code>import</code>或者<code>from...import</code>来导入相应的模块。</p>
-<p>将整个模块(somemodule)导入，格式为：<code>import somemodule</code></p>
-<p>从某个模块中导入某个函数,格式为： <code>from somemodule import somefunction</code></p>
-<p>从某个模块中导入多个函数,格式为：<code>from somemodule import firstfunc, secondfunc, thirdfunc</code></p>
-<p>将某个模块中的全部函数导入，格式为： <code>from somemodule import *</code></p>
-<h4 id="python基本数据类型"><a href="#python基本数据类型" class="headerlink" title="python基本数据类型"></a>python基本数据类型</h4><p>Python 中的变量不需要声明。每个变量在使用前都必须赋值，变量赋值以后该变量才会被创建。</p>
-<p>在 Python 中，变量就是变量，它没有类型，我们所说的”类型”是变量所指的内存中对象的类型。</p>
-<h5 id="标准数据类型"><a href="#标准数据类型" class="headerlink" title="标准数据类型"></a>标准数据类型</h5><p>python3中有6个标准的数据类型</p>
-<ul>
-<li>Number（数字）</li>
-<li>String（字符串）</li>
-<li>List（列表）</li>
-<li>Tuple（元组）</li>
-<li>Set（集合）</li>
-<li>Dictionary（字典）<h6 id="Number（数字）"><a href="#Number（数字）" class="headerlink" title="Number（数字）"></a>Number（数字）</h6>支持int，float，bool，complex（复数）<br>其中内置的type()函数可以用来查询变量所指的对象类型。<br><img src="https://img-blog.csdnimg.cn/20200617173243637.png" alt="在这里插入图片描述"><br>数值运算：</li>
-</ul>
-<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">5</span> + <span class="number">4</span>  <span class="comment"># 加法</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">4.3</span> - <span class="number">2</span> <span class="comment"># 减法</span></span><br><span class="line"><span class="number">2.3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">3</span> * <span class="number">7</span>  <span class="comment"># 乘法</span></span><br><span class="line"><span class="number">21</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">2</span> / <span class="number">4</span>  <span class="comment"># 除法，得到一个浮点数</span></span><br><span class="line"><span class="number">0.5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">2</span> // <span class="number">4</span> <span class="comment"># 除法，得到一个整数</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">17</span> % <span class="number">3</span> <span class="comment"># 取余</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">2</span> ** <span class="number">5</span> <span class="comment"># 乘方</span></span><br><span class="line"><span class="number">32</span></span><br></pre></td></tr></tbody></table></figure>
-<p>需要注意：一个变量可以通过赋值指向不同类型的对象，数值的除法包含两个运算符：<code>/</code>返回一个浮点数，<code>//</code>返回一个整数。</p>
-<h6 id="String-字符串"><a href="#String-字符串" class="headerlink" title="String(字符串)"></a>String(字符串)</h6><p>字符串或串(String)是由数字、字母、下划线组成的一串字符。<br>Python中的字符串用单引号<code>'</code>或双引号<code>"</code>括起来，同时使用反斜杠<code>\</code>转义特殊字符。<br>python的字串列表有2种取值顺序:</p>
-<ul>
-<li>从左到右索引默认0开始的，最大范围是字符串长度少1</li>
-<li>从右到左索引默认-1开始的，最大范围是字符串开头</li>
-</ul>
-<p>逆序输出字符串：<br><img src="https://img-blog.csdnimg.cn/20200617173956563.png" alt="在这里插入图片描述"><br>从字符串中截取一串字符：使用 <code>[头下标:尾下标]</code> 来截取相应的字符串<br><img src="https://img-blog.csdnimg.cn/20200709114150810.png" alt="在这里插入图片描述"><br><code>[头下标:尾下标]</code>获取的子字符串包含头下标的字符，但不包含尾下标的字符。</p>
-<h6 id="List列表"><a href="#List列表" class="headerlink" title="List列表"></a>List列表</h6><p>List（列表） 是 Python 中使用最频繁的数据类型。<br>list是一种有序的集合，可以随时添加和删除其中的元素。<br>列表中值的切割也可以用到变量 [头下标:尾下标] ，就可以截取相应的列表，从左到右索引默认 0 开始，从右到左索引默认 -1 开始，下标可以为空表示取到头或尾。<br><img src="https://img-blog.csdnimg.cn/2020070911494114.png" alt="在这里插入图片描述"><br>list是一个可变的有序表，所以，可以往list中追加元素到末尾：<br><img src="https://img-blog.csdnimg.cn/20200709160154717.png" alt="在这里插入图片描述"><br>也可以把元素插入到指定的位置，比如索引号为1的位置：<br><img src="https://img-blog.csdnimg.cn/20200709160843260.png" alt="在这里插入图片描述"><br>要删除list末尾的元素，用pop()方法：<br><img src="https://img-blog.csdnimg.cn/20200709161001775.png" alt="在这里插入图片描述"><br>要删除指定位置的元素，用<code>pop(i)</code>方法，其中<code>i</code>是索引位置：<br><img src="https://img-blog.csdnimg.cn/20200709161112490.png" alt="在这里插入图片描述"></p>
-<h6 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h6><p>元组类似于列表（list，不同之处在于元组的元素不能修改。<br>元组用 () 标识。内部元素用逗号隔开。但是元组不能二次赋值，相当于只读列表。<br>当元组中只包含一个元素时，需要在元素后面添加逗号，否则括号会被当作运算符使用：<img src="https://img-blog.csdnimg.cn/20200709123915509.png" alt="在这里插入图片描述">)<img src="https://img-blog.csdnimg.cn/20200709123942486.png" alt="在这里插入图片描述"><br>元组内置函数：</p>
-<ul>
-<li>len(tuple)：计算元组元素个数。<br><img src="https://img-blog.csdnimg.cn/20200709142004375.png" alt="在这里插入图片描述"></li>
-<li>max(tuple)：返回元组中元素最大值。<br><img src="https://img-blog.csdnimg.cn/20200709142057162.png" alt="在这里插入图片描述"></li>
-<li>min(tuple)：返回元组中元素最小值。<br><img src="https://img-blog.csdnimg.cn/20200709142124386.png" alt="在这里插入图片描述"></li>
-<li>tuple(iterable) 将可迭代系列转换为元组。<br><img src="https://img-blog.csdnimg.cn/20200709142158426.png" alt="在这里插入图片描述"></li>
-</ul>
-<h6 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h6><p>字典是另一种可变容器模型，且可存储任意类型对象。<br>Python内置了字典：dict的支持，dict全称dictionary，在其他语言中也称为map，使用键-值（key-value）存储，具有极快的查找速度。<br>字典的每个键值(key=&gt;value)对用冒号(:)分割，每个对之间用逗号(,)分割，整个字典包括在花括号({})中 ,格式如下所示：</p>
-<blockquote>
-<p>d = {key1 : value1, key2 : value2 }</p>
-</blockquote>
-<p>给定一个名字，要查找对应的成绩。用dict实现，只需要一个“名字”-“成绩”的对照表，直接根据名字查找成绩，无论这个表有多大，查找速度都不会变慢。用Python写一个dict如下<br><img src="https://img-blog.csdnimg.cn/20200709193930995.png" alt="在这里插入图片描述"><br>注意，dict内部存放的顺序和key放入的顺序是没有关系的。<br>和list比较，dict有以下几个特点：</p>
-<ul>
-<li>1、查找和插入的速度极快，不会随着key的增加而变慢；</li>
-<li>2、需要占用大量的内存，内存浪费多。<br>所以，dict是用空间来换取时间的一种方法。dict可以用在需要高速查找的很多地方，在Python代码中几乎无处不在，正确使用dict非常重要，需要牢记的第一条就是dict的key必须是<strong>不可变对象</strong>。<br>　　这是因为dict根据key来计算value的存储位置，如果每次计算相同的key得出的结果不同，那dict内部就完全混乱了。这个通过key计算位置的算法称为哈希算法（Hash）。<br>　　要保证hash的正确性，作为key的对象就不能变。在Python中，字符串、整数等都是不可变的，因此，可以放心地作为key。而list是可变的，就不能作为key：</li>
-</ul>
-<h6 id="set"><a href="#set" class="headerlink" title="set"></a>set</h6><p>set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。<br>重复的元素在set中会被自动过滤：<br><img src="https://img-blog.csdnimg.cn/20200709194518825.png" alt="在这里插入图片描述"><br>通过<code>add(key)</code>方法可以添加元素到set中，通过<code>remove(key)</code>方法可以删除元素：<br><img src="https://img-blog.csdnimg.cn/20200709194857284.png" alt="在这里插入图片描述">)<img src="https://img-blog.csdnimg.cn/20200709194929443.png" alt="在这里插入图片描述"><br>set和dict的唯一区别仅在于没有存储对应的value，但是，set的原理和dict一样，所以，同样不可以放入可变对象，因为无法判断两个可变对象是否相等，也就无法保证set内部“不会有重复元素”。</p>
-<h5 id="计算机系统通用的字符编码工作方式："><a href="#计算机系统通用的字符编码工作方式：" class="headerlink" title="计算机系统通用的字符编码工作方式："></a>计算机系统通用的字符编码工作方式：</h5><p>在计算机内存中，统一使用Unicode编码，当需要保存到硬盘或者需要传输的时候，就转换为UTF-8编码。<br>用记事本编辑的时候，从文件读取的UTF-8字符被转换为Unicode字符到内存里，编辑完成后，保存的时候再把Unicode转换为UTF-8保存到文件：<br><img src="https://img-blog.csdnimg.cn/20200709152320730.png" alt="在这里插入图片描述"><br>浏览网页的时候，服务器会把动态生成的Unicode内容转换为UTF-8再传输到浏览器：<img src="https://img-blog.csdnimg.cn/20200709152340373.png" alt="在这里插入图片描述"><br>所以当看到很多网页的源码上会有类似<meta charset="UTF-8">的信息，表示该网页正是用的UTF-8编码。</p>
-<p>Python 3的字符串使用<code>Unicode</code>，直接支持多语言。</p>
-<p>当<code>str</code>和<code>bytes</code>互相转换时，需要指定编码。最常用的编码是<code>UTF-8</code><br>要注意区分’ABC’和b’ABC’，前者是str，后者虽然内容显示得和前者一样，但bytes的每个字符都只占用一个字节。</p>
-<p>以Unicode表示的<code>str</code>通过<code>encode()</code>方法可以编码为指定的<code>bytes</code>，例如：<br><img src="https://img-blog.csdnimg.cn/20200709153108903.png" alt="在这里插入图片描述"><br>如果我们从网络或磁盘上读取了字节流，那么读到的数据就是<code>bytes</code>。要把<code>bytes</code>变为<code>str</code>，就需要用<code>decode()</code>方法：<br><img src="https://img-blog.csdnimg.cn/20200709153321117.png" alt="在这里插入图片描述"></p>
-<h5 id="谈谈input"><a href="#谈谈input" class="headerlink" title="谈谈input"></a>谈谈input</h5><p>很多时候我们会用<code>input()</code>读取用户的输入，<br><img src="https://img-blog.csdnimg.cn/20200709163056119.png" alt="在这里插入图片描述"><br>结果报错，这是因为input()返回的数据类型是str，str不能直接和整数比较，必须先把str转换成整数。Python提供了int()函数来完成这件事情：<br><img src="https://img-blog.csdnimg.cn/20200709163145237.png" alt="在这里插入图片描述"></p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>]]></content>
-      <tags>
-        <tag>python</tag>
       </tags>
   </entry>
   <entry>
