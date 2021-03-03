@@ -146,7 +146,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">50</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">56</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -235,7 +235,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -290,6 +290,842 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/76e1b77c.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logol1.png">
+      <meta itemprop="name" content="honor">
+      <meta itemprop="description" content="记录学习、科研、生活的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="honor">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/76e1b77c.html" class="post-title-link" itemprop="url">实验室服务器RTX2080Ti安装nvidia驱动</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-03-03 09:35:31 / 修改时间：09:40:06" itemprop="dateCreated datePublished" datetime="2021-03-03T09:35:31+08:00">2021-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/leveldb/" itemprop="url" rel="index"><span itemprop="name">leveldb</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>ubuntu16.04 RTX2080Ti</p>
+<h2 id="一、安装NVIDIA驱动"><a href="#一、安装NVIDIA驱动" class="headerlink" title="一、安装NVIDIA驱动"></a>一、安装NVIDIA驱动</h2><p>1.下载驱动文件<br>去官网下载和自己的显卡适配的驱动文件，是个.run文件。贴个下载地址：<a target="_blank" rel="noopener" href="https://www.nvidia.cn/Download/index.aspx">https://www.nvidia.cn/Download/index.aspx</a></p>
+<p>search之后下载就行，记住它下载到了哪个文件夹里，以后会用的到<br>2.文件已经下载好了，但是在安装之前我我们需要做一些准备。<br>（1）、删除原有驱动（可选）：$ sudo apt-get remove –purge nvidia*<br>我在删除的时候就提示我没有原有的驱动。<br>（2）、禁用nouveau，安装NVIDIA需要把系统自带的驱动禁用<br>打开文件：<code>sudo gedit /etc/modprobe.d/blacklist.conf</code><br>在文本最后添加以下内容：</p>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">blacklist</span> nouveau</span><br><span class="line"><span class="attribute"><span class="nomarkup">options</span></span> nouveau modeset=<span class="number">0</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>然后保存退出<br>执行：<code>sudo update-initramfs -u</code><br>重启，命令行输入：<code>lsmod | grep nouveau</code><br>没有任何输出的话就代表禁用成功。</p>
+<h3 id="3-安装NVIDIA驱动程序（准备另一台电脑，用来看教程或者是查找需要输入的命令）"><a href="#3-安装NVIDIA驱动程序（准备另一台电脑，用来看教程或者是查找需要输入的命令）" class="headerlink" title="3.安装NVIDIA驱动程序（准备另一台电脑，用来看教程或者是查找需要输入的命令）"></a>3.安装NVIDIA驱动程序（准备另一台电脑，用来看教程或者是查找需要输入的命令）</h3><p>用图形界面服务：<code>sudo service lightdm stop</code><br>按Ctrl+Alt+F1进入命令行，输入用户名密码登录（通过Ctrl+Alt+F7可返回界面）<br>下载的是.run文件，首先给文件赋予执行权限，首先cd到下载目录：（重要的事情说三遍：注意参数、注意参数、注意参数）<br>打开所在的文件夹：<code>cd ～/download/</code> （这里应该写你当时把.run文件下载到的文件夹的路径，一般默认是下载文件夹，如果你在这里出现错误，比如找不到文件，或者路径是中文的，可以尝试把.run文件移动到一个home下，这样可以直接打：cd /home/你的用户名/ 这样就可以打开了。）<br>然后输入：<code>sudo chmod a+x NVIDIA-Linux-x86_64-410.78.run</code> （敲自己下载的文件名字）<br>这是不会有什么输出。<br>接着安装：<code>sudo ./NVIDIA-Linux-x86_64-410.78.run –no-opengl-files</code></p>
+<p>no-opengl-files 只安装驱动文件，不安装opengl文件。这个参数最重要<br>–no-x-check 安装驱动时不检查X服务<br>–no-nouveau-check 安装驱动时不检查nouveau<br>后面两个参数可不加。<br>接着就是一直选择它默认的那个选项就好。<br>然后挂载驱动： <code>modprobe nvidia</code><br>最后查看是否已经安装好了：<code>nvidia-smi</code></p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201223141432219.png" alt="image-20201223141432219"></p>
+<p>出现这种界面，说明已经安装成功。可以打开图形界面了：<code>sudo service lightdm start</code>。后面的安装直接在终端即可。</p>
+<h2 id="二、安装cuda-10-0"><a href="#二、安装cuda-10-0" class="headerlink" title="二、安装cuda 10.0"></a>二、安装cuda 10.0</h2><p>安装和自己显卡的适配版本，我选择的是cuda 10.0。</p>
+<h4 id="1-下载文件"><a href="#1-下载文件" class="headerlink" title="1.下载文件"></a>1.下载文件</h4><p>官网地址：<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-zone">https://developer.nvidia.com/cuda-zone</a> 选择适合自己的版本</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201223145849652.png" alt="image-20201223145849652"></p>
+<h4 id="2-安装"><a href="#2-安装" class="headerlink" title="2.安装"></a>2.安装</h4><figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">sudo</span> chmod a+x cuda_<span class="number">10</span>.<span class="number">0</span>.<span class="number">130</span>_<span class="number">410</span>.<span class="number">48</span>_linux.run // 获取权限</span><br><span class="line"><span class="attribute">sudo</span> sh cuda_<span class="number">10</span>.<span class="number">0</span>.<span class="number">130</span>_<span class="number">410</span>.<span class="number">48</span>_linux.run</span><br></pre></td></tr></tbody></table></figure>
+
+<p>这时会出现很长的声明，一直按enter键，把声明读完，然后就可以进行选择了。</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201223145653513.png" alt="image-20201223145653513"></p>
+<p>因为是独立安装的NVIDIA 程序，所以进行上面的选择，安装完成后会出现个提醒，这是因为我在安装CUDA的时候没有选择安装驱动，提示需要安装驱动，忽略就行。</p>
+<h4 id="3-加入环境变量"><a href="#3-加入环境变量" class="headerlink" title="3.加入环境变量"></a>3.加入环境变量</h4><p>打开.bashrc 文件：<code>sudo gedit ~/.bashrc</code><br>打开文件后将下面两句话加入进去：</p>
+<figure class="highlight elixir"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=<span class="variable">$LDLIBRARY_PATH</span><span class="symbol">:/usr/local/cuda-</span><span class="number">10.0</span>/lib64</span><br><span class="line">export PATH=<span class="variable">$PATH</span><span class="symbol">:/usr/local/cuda-</span><span class="number">10.0</span>/bin</span><br><span class="line">export CUDA_HOME=<span class="variable">$CUDA_HOME</span><span class="symbol">:/usr/local/cuda-</span><span class="number">10.0</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>保存 关闭，命令行输入：</p>
+<figure class="highlight gams"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">$source</span> ~/.bashrc</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="4-终端输入"><a href="#4-终端输入" class="headerlink" title="4.终端输入"></a>4.终端输入</h4><figure class="highlight gams"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">$nvcc</span> --version </span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>会输出CUDA的版本信息</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20210117135412688.png" alt="安装成功截图"></p>
+<h4 id="5-测试CUDA的samples"><a href="#5-测试CUDA的samples" class="headerlink" title="5.测试CUDA的samples"></a>5.测试CUDA的samples</h4><p>为什么需要安装cuda samples？一方面为了后面学习cuda使用，另一方面，可以检验cuda是否真的安装成功。如果cuda samples全部编译通过，没有一个Error信息（Warning忽略），那么就说明成功地安装了cuda。如果最后一行虽然显示PASS，但是编译过程中有ERROR，请自行网上搜索相关错误信息解决之后。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 切换到cuda-samples所在目录</span><br><span class="line">cd /usr/local/cuda<span class="number">-10.0</span>/samples 或者 cd ~/NVIDIA_CUDA<span class="number">-10.0</span>_Samples </span><br><span class="line"># 没有make，先安装命令 sudo apt-get install cmake，-j是最大限度的使用cpu编译，加快编译的速度</span><br><span class="line">make –j</span><br><span class="line"># 编译完毕，切换release目录（/usr/local/cuda<span class="number">-8.0</span>/samples/bin/x86_64/linux/release完整目录）</span><br><span class="line">cd ./bin/x86_64/linux/release</span><br><span class="line"> </span><br><span class="line"># 检验是否成功，运行实例</span><br><span class="line">./deviceQuery </span><br><span class="line"> </span><br><span class="line"># 可以认真看看自行结果，它显示了你的NVIDIA显卡的相关信息，最后能看到Result = PASS就算成功。</span><br></pre></td></tr></tbody></table></figure>
+
+<p>注意:最终能看到Result=PASS就成功了！！！</p>
+<p>如下图：</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20210117142854433.png" alt="测试结果"></p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">./deviceQuery Starting...</span><br><span class="line"></span><br><span class="line"> CUDA Device Query (Runtime API) version (CUDART static linking)</span><br><span class="line"></span><br><span class="line">Detected 2 CUDA Capable device(s)</span><br><span class="line"></span><br><span class="line">Device 0: "GeForce RTX 2080 Ti"</span><br><span class="line">  CUDA Driver Version / Runtime Version          11.0 / 10.0</span><br><span class="line">  CUDA Capability Major/Minor version number:    7.5</span><br><span class="line">  Total amount of global memory:                 11019 MBytes (11554717696 bytes)</span><br><span class="line">  (68) Multiprocessors, ( 64) CUDA Cores/MP:     4352 CUDA Cores</span><br><span class="line">  GPU Max Clock rate:                            1545 MHz (1.54 GHz)</span><br><span class="line">  Memory Clock rate:                             7000 Mhz</span><br><span class="line">  Memory Bus Width:                              352-bit</span><br><span class="line">  L2 <span class="keyword">Cache</span> <span class="keyword">Size</span>:                                 <span class="number">5767168</span> <span class="keyword">bytes</span></span><br><span class="line">  Maximum Texture <span class="keyword">Dimension</span> <span class="keyword">Size</span> (x,y,z)         <span class="number">1</span>D=(<span class="number">131072</span>), <span class="number">2</span>D=(<span class="number">131072</span>, <span class="number">65536</span>), <span class="number">3</span>D=(<span class="number">16384</span>, <span class="number">16384</span>, <span class="number">16384</span>)</span><br><span class="line">  Maximum Layered <span class="number">1</span>D Texture <span class="keyword">Size</span>, (<span class="keyword">num</span>) layers  <span class="number">1</span>D=(<span class="number">32768</span>), <span class="number">2048</span> layers</span><br><span class="line">  Maximum Layered <span class="number">2</span>D Texture <span class="keyword">Size</span>, (<span class="keyword">num</span>) layers  <span class="number">2</span>D=(<span class="number">32768</span>, <span class="number">32768</span>), <span class="number">2048</span> layers</span><br><span class="line">  Total amount <span class="keyword">of</span> <span class="keyword">constant</span> <span class="keyword">memory</span>:               <span class="number">65536</span> <span class="keyword">bytes</span></span><br><span class="line">  Total amount <span class="keyword">of</span> <span class="keyword">shared</span> <span class="keyword">memory</span> per <span class="keyword">block</span>:       <span class="number">49152</span> <span class="keyword">bytes</span></span><br><span class="line">  Total <span class="built_in">number</span> <span class="keyword">of</span> registers available per <span class="keyword">block</span>: <span class="number">65536</span></span><br><span class="line">  Warp <span class="keyword">size</span>:                                     <span class="number">32</span></span><br><span class="line">  Maximum <span class="built_in">number</span> <span class="keyword">of</span> threads per multiprocessor:  <span class="number">1024</span></span><br><span class="line">  Maximum <span class="built_in">number</span> <span class="keyword">of</span> threads per <span class="keyword">block</span>:           <span class="number">1024</span></span><br><span class="line">  <span class="keyword">Max</span> <span class="keyword">dimension</span> <span class="keyword">size</span> <span class="keyword">of</span> a <span class="keyword">thread</span> <span class="keyword">block</span> (x,y,z): (<span class="number">1024</span>, <span class="number">1024</span>, <span class="number">64</span>)</span><br><span class="line">  <span class="keyword">Max</span> <span class="keyword">dimension</span> <span class="keyword">size</span> <span class="keyword">of</span> a grid <span class="keyword">size</span>    (x,y,z): (<span class="number">2147483647</span>, <span class="number">65535</span>, <span class="number">65535</span>)</span><br><span class="line">  Maximum <span class="keyword">memory</span> pitch:                          <span class="number">2147483647</span> <span class="keyword">bytes</span></span><br><span class="line">  Texture alignment:                             <span class="number">512</span> <span class="keyword">bytes</span></span><br><span class="line">  <span class="keyword">Concurrent</span> copy <span class="keyword">and</span> kernel execution:          Yes <span class="keyword">with</span> <span class="number">3</span> copy <span class="keyword">engine</span>(s)</span><br><span class="line">  Run <span class="built_in">time</span> <span class="keyword">limit</span> <span class="keyword">on</span> kernels:                     <span class="keyword">No</span></span><br><span class="line">  Integrated GPU sharing Host <span class="keyword">Memory</span>:            <span class="keyword">No</span></span><br><span class="line">  Support host page-<span class="keyword">locked</span> <span class="keyword">memory</span> <span class="keyword">mapping</span>:       Yes</span><br><span class="line">  Alignment requirement <span class="keyword">for</span> Surfaces:            Yes</span><br><span class="line">  Device has ECC support:                        Disabled</span><br><span class="line">  Device supports Unified Addressing (UVA):      Yes</span><br><span class="line">  Device supports <span class="keyword">Compute</span> Preemption:            Yes</span><br><span class="line">  Supports Cooperative Kernel Launch:            Yes</span><br><span class="line">  Supports MultiDevice Co-op Kernel Launch:      Yes</span><br><span class="line">  Device PCI <span class="keyword">Domain</span> <span class="keyword">ID</span> / Bus <span class="keyword">ID</span> / location <span class="keyword">ID</span>:   <span class="number">0</span> / <span class="number">26</span> / <span class="number">0</span></span><br><span class="line">  <span class="keyword">Compute</span> <span class="keyword">Mode</span>:</span><br><span class="line">     &lt; <span class="keyword">Default</span> (multiple host threads can <span class="keyword">use</span> ::cudaSetDevice() <span class="keyword">with</span> device simultaneously) &gt;</span><br><span class="line"></span><br><span class="line">Device <span class="number">1</span>: <span class="string">"GeForce RTX 2080 Ti"</span></span><br><span class="line">  CUDA Driver <span class="keyword">Version</span> / Runtime <span class="keyword">Version</span>          <span class="number">11.0</span> / <span class="number">10.0</span></span><br><span class="line">  CUDA Capability Major/Minor <span class="keyword">version</span> <span class="built_in">number</span>:    <span class="number">7.5</span></span><br><span class="line">  Total amount <span class="keyword">of</span> <span class="keyword">global</span> <span class="keyword">memory</span>:                 <span class="number">11016</span> MBytes (<span class="number">11551440896</span> <span class="keyword">bytes</span>)</span><br><span class="line">  (<span class="number">68</span>) Multiprocessors, ( <span class="number">64</span>) CUDA Cores/MP:     <span class="number">4352</span> CUDA Cores</span><br><span class="line">  GPU <span class="keyword">Max</span> Clock rate:                            <span class="number">1545</span> MHz (<span class="number">1.54</span> GHz)</span><br><span class="line">  <span class="keyword">Memory</span> Clock rate:                             <span class="number">7000</span> Mhz</span><br><span class="line">  <span class="keyword">Memory</span> Bus Width:                              <span class="number">352</span>-<span class="built_in">bit</span></span><br><span class="line">  L2 <span class="keyword">Cache</span> <span class="keyword">Size</span>:                                 <span class="number">5767168</span> <span class="keyword">bytes</span></span><br><span class="line">  Maximum Texture <span class="keyword">Dimension</span> <span class="keyword">Size</span> (x,y,z)         <span class="number">1</span>D=(<span class="number">131072</span>), <span class="number">2</span>D=(<span class="number">131072</span>, <span class="number">65536</span>), <span class="number">3</span>D=(<span class="number">16384</span>, <span class="number">16384</span>, <span class="number">16384</span>)</span><br><span class="line">  Maximum Layered <span class="number">1</span>D Texture <span class="keyword">Size</span>, (<span class="keyword">num</span>) layers  <span class="number">1</span>D=(<span class="number">32768</span>), <span class="number">2048</span> layers</span><br><span class="line">  Maximum Layered <span class="number">2</span>D Texture <span class="keyword">Size</span>, (<span class="keyword">num</span>) layers  <span class="number">2</span>D=(<span class="number">32768</span>, <span class="number">32768</span>), <span class="number">2048</span> layers</span><br><span class="line">  Total amount <span class="keyword">of</span> <span class="keyword">constant</span> <span class="keyword">memory</span>:               <span class="number">65536</span> <span class="keyword">bytes</span></span><br><span class="line">  Total amount <span class="keyword">of</span> <span class="keyword">shared</span> <span class="keyword">memory</span> per <span class="keyword">block</span>:       <span class="number">49152</span> <span class="keyword">bytes</span></span><br><span class="line">  Total <span class="built_in">number</span> <span class="keyword">of</span> registers available per <span class="keyword">block</span>: <span class="number">65536</span></span><br><span class="line">  Warp <span class="keyword">size</span>:                                     <span class="number">32</span></span><br><span class="line">  Maximum <span class="built_in">number</span> <span class="keyword">of</span> threads per multiprocessor:  <span class="number">1024</span></span><br><span class="line">  Maximum <span class="built_in">number</span> <span class="keyword">of</span> threads per <span class="keyword">block</span>:           <span class="number">1024</span></span><br><span class="line">  <span class="keyword">Max</span> <span class="keyword">dimension</span> <span class="keyword">size</span> <span class="keyword">of</span> a <span class="keyword">thread</span> <span class="keyword">block</span> (x,y,z): (<span class="number">1024</span>, <span class="number">1024</span>, <span class="number">64</span>)</span><br><span class="line">  <span class="keyword">Max</span> <span class="keyword">dimension</span> <span class="keyword">size</span> <span class="keyword">of</span> a grid <span class="keyword">size</span>    (x,y,z): (<span class="number">2147483647</span>, <span class="number">65535</span>, <span class="number">65535</span>)</span><br><span class="line">  Maximum <span class="keyword">memory</span> pitch:                          <span class="number">2147483647</span> <span class="keyword">bytes</span></span><br><span class="line">  Texture alignment:                             <span class="number">512</span> <span class="keyword">bytes</span></span><br><span class="line">  <span class="keyword">Concurrent</span> copy <span class="keyword">and</span> kernel execution:          Yes <span class="keyword">with</span> <span class="number">3</span> copy <span class="keyword">engine</span>(s)</span><br><span class="line">  Run <span class="built_in">time</span> <span class="keyword">limit</span> <span class="keyword">on</span> kernels:                     Yes</span><br><span class="line">  Integrated GPU sharing Host <span class="keyword">Memory</span>:            <span class="keyword">No</span></span><br><span class="line">  Support host page-<span class="keyword">locked</span> <span class="keyword">memory</span> <span class="keyword">mapping</span>:       Yes</span><br><span class="line">  Alignment requirement <span class="keyword">for</span> Surfaces:            Yes</span><br><span class="line">  Device has ECC support:                        Disabled</span><br><span class="line">  Device supports Unified Addressing (UVA):      Yes</span><br><span class="line">  Device supports <span class="keyword">Compute</span> Preemption:            Yes</span><br><span class="line">  Supports Cooperative Kernel Launch:            Yes</span><br><span class="line">  Supports MultiDevice Co-op Kernel Launch:      Yes</span><br><span class="line">  Device PCI <span class="keyword">Domain</span> <span class="keyword">ID</span> / Bus <span class="keyword">ID</span> / location <span class="keyword">ID</span>:   <span class="number">0</span> / <span class="number">104</span> / <span class="number">0</span></span><br><span class="line">  <span class="keyword">Compute</span> <span class="keyword">Mode</span>:</span><br><span class="line">     &lt; <span class="keyword">Default</span> (multiple host threads can <span class="keyword">use</span> ::cudaSetDevice() <span class="keyword">with</span> device simultaneously) &gt;</span><br><span class="line">&gt; Peer <span class="keyword">access</span> <span class="keyword">from</span> GeForce RTX <span class="number">2080</span> Ti (GPU0) -&gt; GeForce RTX <span class="number">2080</span> Ti (GPU1) : <span class="keyword">No</span></span><br><span class="line">&gt; Peer <span class="keyword">access</span> <span class="keyword">from</span> GeForce RTX <span class="number">2080</span> Ti (GPU1) -&gt; GeForce RTX <span class="number">2080</span> Ti (GPU0) : <span class="keyword">No</span></span><br><span class="line"></span><br><span class="line">deviceQuery, CUDA Driver = CUDART, CUDA Driver <span class="keyword">Version</span> = <span class="number">11.0</span>, CUDA Runtime <span class="keyword">Version</span> = <span class="number">10.0</span>, NumDevs = <span class="number">2</span></span><br><span class="line"><span class="keyword">Result</span> = PASS</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="三、安装cudnn"><a href="#三、安装cudnn" class="headerlink" title="三、安装cudnn"></a>三、安装cudnn</h2><p>查阅cuda10.0对应的cudnn版本</p>
+<p>这里给出下载地址：</p>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1ns8KBQFFfO4yJTt_XnEreA">https://pan.baidu.com/s/1ns8KBQFFfO4yJTt_XnEreA</a></p>
+<p>cuda10.0的下载地址：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1zhd2RT8g827H0vVjR3OnSg">https://pan.baidu.com/s/1zhd2RT8g827H0vVjR3OnSg</a></p>
+<p>参考博客</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/bmwlwg/article/details/100795413！">https://blog.csdn.net/bmwlwg/article/details/100795413！</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+	
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/21d4485b.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logol1.png">
+      <meta itemprop="name" content="honor">
+      <meta itemprop="description" content="记录学习、科研、生活的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="honor">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/21d4485b.html" class="post-title-link" itemprop="url">leveldb学习记录-Version</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-03-03 09:33:53 / 修改时间：09:38:11" itemprop="dateCreated datePublished" datetime="2021-03-03T09:33:53+08:00">2021-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/leveldb/" itemprop="url" rel="index"><span itemprop="name">leveldb</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本篇博客主要讲解阅读leveldb源码的version版本管理相关内容，个人的一些笔记。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/21d4485b.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/de979122.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logol1.png">
+      <meta itemprop="name" content="honor">
+      <meta itemprop="description" content="记录学习、科研、生活的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="honor">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/de979122.html" class="post-title-link" itemprop="url">leveldb学习记录-YCSB测试</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-03-03 09:33:46 / 修改时间：09:37:41" itemprop="dateCreated datePublished" datetime="2021-03-03T09:33:46+08:00">2021-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/leveldb/" itemprop="url" rel="index"><span itemprop="name">leveldb</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="YCSB环境安装"><a href="#YCSB环境安装" class="headerlink" title="YCSB环境安装"></a>YCSB环境安装</h2><p>昨天在服务器上安装YCSB的测试环境，用来测试leveldb的性能，跑一下实验。本篇博客主要做一个记录，方便日后查看。</p>
+<blockquote>
+<p>ycsb英文全称为Yahoo! Cloud Serving Benchmark (YCSB) 。是Yahoo公司的一个用来对云服务进行基础测试的工具,leveldb的论文中实验测试评估这一章节，主要是采用提供的db_bench作为microbenchmark微基准测试工具，和YCSB作为macrobenchmarks宏基准测试工具，模仿实际的工作load。在运行YCSB的时候，可以配置不同的workload和DB，也可以指定线程数&amp;并发数等其他参数。</p>
+</blockquote>
+<p>主要参考博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/NikoKVCS/article/details/88422307">YCSB 测试 LevelDB 数据库</a></p>
+<h3 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h3><p>YCSB 是一种测试数据库的benchmark<br>它的使用原理是：</p>
+<p>==A.== 目标数据库（待测试的数据库像Leveldb、Hbase等）作为服务端运行起来，并提供数据库操作相关的restful api，比如</p>
+<figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/put    </span><br><span class="line">http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/get</span><br><span class="line">http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/del</span><br></pre></td></tr></tbody></table></figure>
+
+<p>==B.== YCSB Client 作为客户端，通过restful api调用数据库，从而测试数据库的性能。</p>
+<h3 id="将leveldb数据库作为服务端运行起来"><a href="#将leveldb数据库作为服务端运行起来" class="headerlink" title="将leveldb数据库作为服务端运行起来"></a>将leveldb数据库作为服务端运行起来</h3><p>由于leveldb是不具有服务端的功能的，也就是无法提供数据库操作相关的restful api的。</p>
+<p>因此，我们需要借助一个工具，<code>simplehttp</code>和<code>simpleleveldb</code></p>
+<blockquote>
+<p>由于leveldb不提供restful api，此处借用的simpleleveldb却可以提供一套restful api与leveldb数据库连接起来。所以ycsb调用restful api就会首先调用simpleleveldb提供的相关操作，然后simpleleveldb再调用leveldb的put、get等操作。所以simpleleveldb就起到一个中间件的作用，将ycsb和leveldb连接起来。</p>
+</blockquote>
+<h4 id="先用git命令获得simplehttp"><a href="#先用git命令获得simplehttp" class="headerlink" title="先用git命令获得simplehttp"></a>先用git命令获得simplehttp</h4><figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/bitly/</span>simplehttp.git</span><br><span class="line">cd simplehttp</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="接着安装simpleleveldb"><a href="#接着安装simpleleveldb" class="headerlink" title="接着安装simpleleveldb"></a>接着安装simpleleveldb</h4><p>首先进入你的leveldb数据库的源码文件夹，编译并拷贝至shared libraries folder</p>
+<figure class="highlight crystal"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd leveldb</span><br><span class="line">make</span><br><span class="line">sudo cp libleveldb.a /usr/local/<span class="class"><span class="keyword">lib</span>/</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>其次安装依赖库 JSON ：</p>
+<figure class="highlight cmake"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt <span class="keyword">install</span> libjson-c-dev</span><br></pre></td></tr></tbody></table></figure>
+
+<p>由于simplehttp/simpleleveldb源码中，include的路径有错误，需要稍微改动一下源码，把<code>json</code>改为<code>json-c</code></p>
+<figure class="highlight dts"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">打开 simplehttp<span class="meta-keyword">/simpleleveldb/</span>str_list_set.c修改 </span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;json/json.h&gt;</span> 为 #<span class="meta-keyword">include</span> <span class="meta-string">&lt;json-c/json.h&gt;</span></span></span><br><span class="line">打开 simplehttp<span class="meta-keyword">/simpleleveldb/</span>simpleleveldb.c修改 </span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;json/json.h&gt;</span> 为 #<span class="meta-keyword">include</span> <span class="meta-string">&lt;json-c/json.h&gt;</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>同时makefile文件中，对json库的引用也是错误的，-ljson应改为-ljson-c。</p>
+<p>打开 makefile，将</p>
+<p><code>LIBS = -L. -L$(LIBSIMPLEHTTP_LIB) -L$(LIBEVENT)/lib -L/usr/local/lib -L$(LIBLEVELDB)/lib -levent -ljson -lsimplehttp -lleveldb -lm -lstdc++ -lsnappy -lpthread</code></p>
+<p>更改为</p>
+<p><code>LIBS = -L. -L$(LIBSIMPLEHTTP_LIB) -L$(LIBEVENT)/lib -L/usr/local/lib -L$(LIBLEVELDB)/lib -levent -ljson-c -lsimplehttp -lleveldb -lm -lstdc++ -lsnappy -lpthread</code></p>
+<h5 id="其次安装依赖库Snappy"><a href="#其次安装依赖库Snappy" class="headerlink" title="其次安装依赖库Snappy"></a>其次安装依赖库<code>Snappy</code></h5><figure class="highlight cmake"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt <span class="keyword">install</span> libsnappy-dev</span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="安装依赖库Event"><a href="#安装依赖库Event" class="headerlink" title="安装依赖库Event"></a>安装依赖库<code>Event</code></h5><p>根据github的issure ： <a target="_blank" rel="noopener" href="https://github.com/bitly/simplehttp/issues/14">https://github.com/bitly/simplehttp/issues/14</a></p>
+<p>里面提到simplehttp目前仅与libevent 1.4兼容</p>
+<p>所以libevent的版本必须是1.4版本！！！注意</p>
+<p>进入网页下载 <a target="_blank" rel="noopener" href="http://libevent.org/">http://libevent.org/</a>  选择libevent 1.4.14b版本下载</p>
+<p>tar解压之后输入以下命令</p>
+<figure class="highlight crystal"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd libevent-<span class="number">1.4</span>.<span class="number">14</span>b-stable</span><br><span class="line">./configure &amp;&amp; make</span><br><span class="line">sudo make install</span><br><span class="line">sudo ln -s /usr/local/<span class="class"><span class="keyword">lib</span>/<span class="title">libevent</span>-1.4.<span class="title">so</span>.2 /<span class="title">usr</span>/<span class="title">lib</span>/<span class="title">libevent</span>-1.4.<span class="title">so</span>.2 (非必须，若出错可加)之前我没加此条软连接命令报错了，做好还是加上</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="安装依赖库simplehttp-（进入到-simplehttp-simplehttp）："><a href="#安装依赖库simplehttp-（进入到-simplehttp-simplehttp）：" class="headerlink" title="安装依赖库simplehttp （进入到 simplehttp/simplehttp）："></a>安装依赖库simplehttp （进入到 simplehttp/simplehttp）：</h5><figure class="highlight vim"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> simplehttp</span><br><span class="line"><span class="keyword">make</span></span><br><span class="line">sudo <span class="keyword">make</span> install</span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="安装-simpleleveldb"><a href="#安装-simpleleveldb" class="headerlink" title="安装 simpleleveldb"></a>安装 simpleleveldb</h5><figure class="highlight gauss"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd simpleleveldb</span><br><span class="line">env LIBLEVELDB=/usr/<span class="keyword">local</span> <span class="built_in">make</span></span><br><span class="line">sudo <span class="built_in">make</span> install</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="simpleleveldb-试运行"><a href="#simpleleveldb-试运行" class="headerlink" title="simpleleveldb 试运行"></a>simpleleveldb 试运行</h4><p>打开终端，输入</p>
+<p><code>simpleleveldb --address=localhost --port=8080 --db-file=test</code></p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20210107113625347.png" alt="image-20210107113625347"></p>
+<p>打开浏览器，地址栏输入<br><a target="_blank" rel="noopener" href="http://localhost:8080/put?key=name&amp;value=Niko">http://localhost:8080/put?key=name&amp;value=Niko</a><br>然后会显示一段json，状态码是200</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20210107113722258.png" alt="image-20210107113722258"></p>
+<p>再输入<br><a target="_blank" rel="noopener" href="http://localhost:8080/get?key=name">http://localhost:8080/get?key=name</a><br>会显示一个json，状态码是200，并且返回 Niko</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20210107145124950.png" alt="image-20210107145124950"></p>
+<p>至此，LevelDB的服务端就运行成功了!</p>
+<p>后面就可以下载编译YCSB客户端，运行./ycsb做测试了</p>
+<h3 id="运行YCSB客户端"><a href="#运行YCSB客户端" class="headerlink" title="运行YCSB客户端"></a>运行YCSB客户端</h3><p>下载并编译YCSB客户端：</p>
+<figure class="highlight vim"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone http<span class="variable">s:</span>//github.<span class="keyword">com</span>/jtsui/ycsb-leveldb.git</span><br><span class="line"><span class="keyword">cd</span> ycsb-leveldb</span><br><span class="line">mvn -pl <span class="keyword">com</span>.yahoo.ycs<span class="variable">b:leveldb</span>-binding -<span class="keyword">am</span> clean package</span><br></pre></td></tr></tbody></table></figure>
+
+<p>在输入<code>mvn -pl com.yahoo.ycsb:leveldb-binding -am clean package</code>命令，由于需要使用jdk环境，而由于ubuntu16.04自带了开源版本openjdk8，不知道为什么还是会报错，找不到java的compiler。故我又重新安装了jdk8.</p>
+<h4 id="安装java开发环境jdk8"><a href="#安装java开发环境jdk8" class="headerlink" title="安装java开发环境jdk8"></a>安装java开发环境jdk8</h4><p>下载完安装包后解压得到jdk1.8.0_271文件夹，将其放在/opt目录下</p>
+<h5 id="在-bin目录下创建java软链接"><a href="#在-bin目录下创建java软链接" class="headerlink" title="在/bin目录下创建java软链接"></a>在/bin目录下创建java软链接</h5><figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">cd</span> /bin</span><br><span class="line"><span class="attribute">sudo</span> ln -s /opt/jdk<span class="number">1</span>.<span class="number">8</span>.<span class="number">0</span>_<span class="number">271</span>/bin/java java</span><br></pre></td></tr></tbody></table></figure>
+
+<p>验证软链接的正确性。</p>
+<h5 id="修改环境变量"><a href="#修改环境变量" class="headerlink" title="修改环境变量"></a>修改环境变量</h5><p>输入下面的命令打开环境变量配置文件：</p>
+<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">sudo</span> <span class="selector-tag">vi</span> ~/<span class="selector-class">.bashrc</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>在最末尾添加如下内容（其中的jdk1.8.0_271是我安装的版本，如果你的版本不是jdk1.8.0_271，则需要修改一下）：</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">JAVA_HOME</span>=/opt/jdk1.8.0_271</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">JRE_HOME</span>=<span class="variable">${JAVA_HOME}</span>/jre</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">CLASSPATH</span>=.:${JAVA_HOME}/lib:<span class="variable">${JRE_HOME}</span>/lib</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">${JAVA_HOME}</span>/bin:$PATH</span><br></pre></td></tr></tbody></table></figure>
+
+<p>保存并退出，使用source命令使之生效：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="最后输入java-version查看是否安装成功"><a href="#最后输入java-version查看是否安装成功" class="headerlink" title="最后输入java -version查看是否安装成功"></a>最后输入java -version查看是否安装成功</h5><p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20210107150826458.png" alt="image-20210107150826458"></p>
+<p>至此，安装成功！</p>
+<p>之后再输入<code>mvn -pl com.yahoo.ycsb:leveldb-binding -am clean package</code>就不会再报错啦！！！</p>
+<p>现在就可以正式运行YCSB客户端测试数据库了，请注意，应该先启动LevelDB的服务端。</p>
+<figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.<span class="regexp">/ycsb load leveldb -P workloads/</span>workloada</span><br><span class="line">.<span class="regexp">/ycsb run leveldb -P workloads/</span>workloada</span><br></pre></td></tr></tbody></table></figure>
+
+<p>上面的实例是采用wordload a。ycsb还提供了workload a、b、c、d、e。</p>
+<p>Running the <code>ycsb</code> command without any argument will print the usage.运行不带任何参数的ycsb命令可以打印用法。</p>
+<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Usage</span>: ./ycsb command database [options]</span><br><span class="line"></span><br><span class="line"><span class="attribute">Commands:</span></span><br><span class="line">    load          Execute the load phase</span><br><span class="line">    run           Execute the transaction phase</span><br><span class="line">    shell         Interactive mode</span><br><span class="line"></span><br><span class="line"><span class="attribute">Databases:</span></span><br><span class="line">    basic         https://github.com/brianfrankcooper/YCSB/tree/master/basic</span><br><span class="line">    cassandra-10  https://github.com/brianfrankcooper/YCSB/tree/master/cassandra</span><br><span class="line">    cassandra-7   https://github.com/brianfrankcooper/YCSB/tree/master/cassandra</span><br><span class="line">    cassandra-8   https://github.com/brianfrankcooper/YCSB/tree/master/cassandra</span><br><span class="line">    dynamodb      https://github.com/brianfrankcooper/YCSB/tree/master/dynamodb</span><br><span class="line">    elasticsearch https://github.com/brianfrankcooper/YCSB/tree/master/elasticsearch</span><br><span class="line">    gemfire       https://github.com/brianfrankcooper/YCSB/tree/master/gemfire</span><br><span class="line">    hbase         https://github.com/brianfrankcooper/YCSB/tree/master/hbase</span><br><span class="line">    hypertable    https://github.com/brianfrankcooper/YCSB/tree/master/hypertable</span><br><span class="line">    infinispan    https://github.com/brianfrankcooper/YCSB/tree/master/infinispan</span><br><span class="line">    jdbc          https://github.com/brianfrankcooper/YCSB/tree/master/jdbc</span><br><span class="line">    leveldb       https://github.com/brianfrankcooper/YCSB/tree/master/leveldb</span><br><span class="line">    leveldbjni    https://github.com/brianfrankcooper/YCSB/tree/master/leveldbjni</span><br><span class="line">    mapkeeper     https://github.com/brianfrankcooper/YCSB/tree/master/mapkeeper</span><br><span class="line">    mongodb       https://github.com/brianfrankcooper/YCSB/tree/master/mongodb</span><br><span class="line">    nosqldb       https://github.com/brianfrankcooper/YCSB/tree/master/nosqldb</span><br><span class="line">    orientdb      https://github.com/brianfrankcooper/YCSB/tree/master/orientdb</span><br><span class="line">    redis         https://github.com/brianfrankcooper/YCSB/tree/master/redis</span><br><span class="line">    voldemort     https://github.com/brianfrankcooper/YCSB/tree/master/voldemort</span><br><span class="line"></span><br><span class="line"><span class="attribute">Options:</span></span><br><span class="line">    -P file       Specify workload file     指定工作负载文件</span><br><span class="line">    -p key=value  Override workload property  工作负载特征</span><br><span class="line">    -s            Print status to stderr 打印状态到stderr</span><br><span class="line">    -target n     Target ops/sec (default: unthrottled)   目标ops/sec,(默认值：无限制)</span><br><span class="line">    -threads n    Number of client threads (default: 1)   客户端线程数(默认：单线程) 写入过程是单线程的</span><br><span class="line"></span><br><span class="line">Workload Files:</span><br><span class="line">    There are various predefined workloads under workloads/ directory.</span><br><span class="line">    See https://github.com/brianfrankcooper/YCSB/wiki/Core-Properties</span><br><span class="line">    for the list of workload properties.</span><br></pre></td></tr></tbody></table></figure>
+
+<p>有关如何运行工作负载的详细文档，请参阅<a target="_blank" rel="noopener" href="https://github.com/brianfrankcooper/YCSB/wiki/Running-a-Workload。">https://github.com/brianfrankcooper/YCSB/wiki/Running-a-Workload。</a></p>
+<p><strong>运行工作负载有6个步骤:</strong></p>
+<p>1、设置要测试的数据库</p>
+<p>2、选择合适的DB接口层</p>
+<p>3、选择合适的工作负载</p>
+<p>4、选择合适的运行时参数（客户机线程数、目标吞吐量等）</p>
+<p>5、load 数据</p>
+<p>6、执行工作负载</p>
+<p>这里描述的步骤假设您运行的是单个客户机服务器。这对于小型到中型集群(例如10台左右的机器)应该足够了。</p>
+<h4 id="step1、设置要测试的数据库"><a href="#step1、设置要测试的数据库" class="headerlink" title="step1、设置要测试的数据库"></a>step1、设置要测试的数据库</h4><p>我们采用的就是LevelDB</p>
+<h4 id="step2、选择合适的DB接口层"><a href="#step2、选择合适的DB接口层" class="headerlink" title="step2、选择合适的DB接口层"></a>step2、选择合适的DB接口层</h4><blockquote>
+<p>DB接口层是一个java类，它将YCSB客户机生成的读、插入、更新、删除和扫描调用执行到针对数据库API的调用中。这个类是com.yahoo中的抽象DB类的子类。ycsb包。您将在运行YCSB客户机时在命令行上指定层的类名，客户机将动态加载您的接口类。命令行上或命令行上指定的参数文件中指定的任何属性都将传递给DB接口实例，并可用于配置层(例如，告诉它您正在进行基准测试的数据库的主机名)。</p>
+<p>YCSB客户端带有一个简单的虚拟接口层com.yahoo.ycsb.BasicDB。这一层只是将它将要执行的操作打印到System.out。它对于确保客户机正常运行和调试工作负载非常有用。</p>
+<p>您可以使用<code>ycsb</code>命令直接对数据库运行命令。这个客户端使用DB接口层向数据库发送命令。您可以使用这个客户机来确保DB层正常工作，数据库设置正确，DB层可以连接到数据库，等等。它还为各种数据库提供了一个公共接口，并可用于检查数据库中的数据。</p>
+</blockquote>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20210107161336539.png" alt="image-20210107161336539"></p>
+<figure class="highlight sas"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ ./bin/ycsb shell basic</span><br><span class="line">&gt; help</span><br><span class="line">Commands:</span><br><span class="line">  read <span class="meta">key</span> [field1 field2 ...] - Read a record</span><br><span class="line">  scan <span class="meta">key</span> recordcount [field1 field2 ...] - Scan starting at <span class="meta">key</span></span><br><span class="line">  <span class="meta">insert</span> <span class="meta">key</span> name1=value1 [name2=value2 ...] - <span class="meta">Insert</span> a new record</span><br><span class="line">  <span class="meta">update</span> <span class="meta">key</span> name1=value1 [name2=value2 ...] - <span class="meta">Update</span> a record</span><br><span class="line">  <span class="meta">delete</span> <span class="meta">key</span> - <span class="meta">Delete</span> a record</span><br><span class="line">  <span class="meta">table</span> [tablename] - Get <span class="meta">or</span> [<span class="meta">set</span>] the name of the <span class="meta">table</span></span><br><span class="line"><span class="keyword">  quit </span>- Quit</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="step3、选择合适的工作负载"><a href="#step3、选择合适的工作负载" class="headerlink" title="step3、选择合适的工作负载"></a>step3、选择合适的工作负载</h4><p>工作负载定义在load阶段将load到数据库中的数据，以及在事务<code>transaction</code>阶段将对数据集执行的操作。</p>
+<p>a workload is a combination of:</p>
+<ul>
+<li>Workload java类(com.yahoo.ycsb.Workload的子类)</li>
+<li>参数文件(Java属性格式)</li>
+</ul>
+<p>在运行ycsb命令时指定的参数 是load还是run，确定是load阶段还是run阶段</p>
+<h4 id="step4、选择合适的运行时参数（客户机线程数、目标吞吐量等）"><a href="#step4、选择合适的运行时参数（客户机线程数、目标吞吐量等）" class="headerlink" title="step4、选择合适的运行时参数（客户机线程数、目标吞吐量等）"></a>step4、选择合适的运行时参数（客户机线程数、目标吞吐量等）</h4><p>尽管workload类和参数文件定义了特定的工作负载，但是您可能希望为基准测试的特定运行指定其他设置。当您运行YCSB客户端时，这些设置在命令行中提供。包括以下选项：</p>
+<ul>
+<li><code>-threads</code>：客户端线程数，ycsb客户端默认是使用单个工作线程。</li>
+<li><code>-target</code>：每秒的目标操作数。默认情况下，YCSB客户端将尝试执行尽可能多的操作。例如，如果每个操作平均花费100毫秒，客户端将在每个工作线程上每秒执行10个操作。但是，您可以限制每秒操作的目标数量。例如，要生成延迟与吞吐量曲线，您可以尝试不同的目标吞吐量，并测量每个目标吞吐量的结果延迟。</li>
+<li><code>-s</code>：status，对于长期运行的工作负载，让客户机报告状态可能是有用的，这只是为了确保它没有崩溃，并让您了解它的进度。通过在命令行中指定“-s”，客户端将每10秒向stderr报告一次状态。</li>
+</ul>
+<h4 id="step5、load数据"><a href="#step5、load数据" class="headerlink" title="step5、load数据"></a>step5、load数据</h4><p>工作负载有两个可执行阶段:load阶段(定义要插入的数据)和事务阶段(定义要对数据集执行的操作)。要加载数据，您需要运行YCSB客户机并告诉它执行加载部分。</p>
+<p>输入以下命令<code>./ycsb load leveldb -P workloads/workloada</code></p>
+<p>-p参数是用来load属性文件的，此处使用它来加载workload参数文件</p>
+<h4 id="step6、执行工作负载"><a href="#step6、执行工作负载" class="headerlink" title="step6、执行工作负载"></a>step6、执行工作负载</h4><p><code>./ycsb run leveldb -P workloads/workloada</code></p>
+<p>运行结束时，客户机将报告stdout上的性能统计数据。默认情况下，为每个操作类型(读取、更新等)生成平均、最小、最大、第95和99百分位延迟，每个操作的返回代码计数，以及每个操作的延迟柱状图。返回代码由数据库接口层定义，允许您查看工作负载期间是否有任何错误。</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20210107165412376.png" alt="运行图"></p>
+<p>这个输出显示：</p>
+<ul>
+<li>总的执行时间是3.799s</li>
+<li>平均吞吐为263.2ops/s</li>
+<li>有491个update操作，以及相关的平均、最小、最大、95和99百分位延迟</li>
+<li>所有491次update操作的返回码都为0（在本例中是成功的）</li>
+<li>xxx个操作在不到1毫秒内完成，xx个操作在1至2毫秒内完成。</li>
+</ul>
+<h3 id="YCSB的核心属性"><a href="#YCSB的核心属性" class="headerlink" title="YCSB的核心属性"></a>YCSB的核心属性</h3><p>所有工作负载文件都可以指定以下属性:</p>
+<ul>
+<li><strong>workload</strong>: 要使用的工作负载类别(例如com.yahoo.ycsb.workloads.CoreWorkload)</li>
+<li><strong>recordcount</strong>: 工作负载开始时数据集 中的record数量。默认1000</li>
+<li><strong>operationcount</strong>: 工作负载中要执行的操作数量 (default: 1000)</li>
+<li><strong>db</strong>: 使用的数据库，也可以在命令行上指定 (default: com.yahoo.ycsb.BasicDB)</li>
+<li><strong>exporter</strong>: measurements exporter class to use要使用的测量结果的输出类 (default: com.yahoo.ycsb.measurements.exporter.TextMeasurementsExporter)</li>
+<li><strong>exportfile</strong>: path to a file where output should be written instead of to stdout 用于替代stdout的输出文件路径(default: undefined/write to stdout)</li>
+<li><strong>threadcount</strong>: YCSB客户端线程数. Alternatively this may be specified on the command line. (default: 1)</li>
+<li><strong>measurementtype</strong>: supported measurement types are hdrhistogram, 支持的测量结果类型有直方图和时间序列 (default: hdrhistogram)</li>
+</ul>
+<h3 id="核心工作负载包属性"><a href="#核心工作负载包属性" class="headerlink" title="核心工作负载包属性"></a>核心工作负载包属性</h3><ul>
+<li><strong>fieldcount</strong>: the number of fields in a record (default: 10)</li>
+<li><strong>fieldlength</strong>: the size of each field (default: 100)</li>
+<li><strong>minfieldlength</strong>: the minimum size of each field (default: 1)</li>
+<li><strong>readallfields</strong>: should reads read all fields (true) or just one (false) (default: true)</li>
+<li><strong>writeallfields</strong>: should updates and read/modify/writes update all fields (true) or just one (false) (default: false)</li>
+<li><strong>readproportion</strong>: 读操作的比例 (default: 0.95)</li>
+<li><strong>updateproportion</strong>: 更新操作的比例 (default: 0.05)</li>
+<li><strong>insertproportion</strong>: 插入操作的比例 (default: 0)</li>
+<li><strong>scanproportion</strong>: scan操作的比例(default: 0)</li>
+<li><strong>readmodifywriteproportion</strong>: 读-修改-写一条记录的操作比例 (default: 0)</li>
+<li><strong>requestdistribution</strong>: 选择要操作的记录的分布– uniform(均匀), zipfian, hotspot, sequential, exponential or latest (default: uniform)</li>
+<li><strong>minscanlength</strong>: for scans, what is the minimum number of records to scan (default: 1)</li>
+<li><strong>maxscanlength</strong>: scan操作遍历的最大记录数，for scans, what is the maximum number of records to scan (default: 1000)</li>
+<li><strong>scanlengthdistribution</strong>: 对于scan，应该使用哪个分布来选择要scan的记录数量, for each scan, between 1 and maxscanlength (default: uniform)</li>
+<li><strong>insertstart</strong>: for parallel loads and runs, defines the starting record for this YCSB instance (default: 0)</li>
+<li><strong>insertcount</strong>: for parallel loads and runs, defines the number of records for this YCSB instance (default: recordcount)</li>
+<li><strong>zeropadding</strong>: for generating a record sequence compatible with string sort order by 0 padding the record number. Controls the number of 0s to use for padding. (default: 1)<br>For example for row 5, with zeropadding=1 you get ‘user5’ key and with zeropading=8 you get ‘user00000005’ key. In order to see its impact, zeropadding needs to be bigger than number of digits in the record number.</li>
+<li><strong>insertorder</strong>: 记录是否应该有序插入（ordered），或者是哈希顺序（hashed) (default: hashed)</li>
+<li><strong>fieldnameprefix</strong>: what should be a prefix for field names, the shorter may decrease the required storage size (default: “field”)</li>
+</ul>
+<h3 id="测量结果属性"><a href="#测量结果属性" class="headerlink" title="测量结果属性"></a>测量结果属性</h3><p>这些属性被应用于每一个测量结果类型：</p>
+<p><strong>直方图</strong></p>
+<ul>
+<li>histogram.buckets：直方图输出的区间数（默认：1000）</li>
+</ul>
+<p><strong>时间序列</strong></p>
+<ul>
+<li>timeseries.granularity：时间序列输出的粒度（默认：1000）</li>
+</ul>
+<h3 id="YCSB六个核心工作负载"><a href="#YCSB六个核心工作负载" class="headerlink" title="YCSB六个核心工作负载"></a>YCSB六个核心工作负载</h3><table>
+<thead>
+<tr>
+<th>Workload</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>YCSB A</td>
+<td>write-intensive: 50% updates, 50% reads</td>
+</tr>
+<tr>
+<td>YCSB B</td>
+<td>read-intensive: 5% updates, 95% reads</td>
+</tr>
+<tr>
+<td>YCSB C</td>
+<td>read-only: 100% reads</td>
+</tr>
+<tr>
+<td>YCSB D</td>
+<td>read-latest: 5% updates, 95% reads</td>
+</tr>
+<tr>
+<td>YCSB E</td>
+<td>scan-intensive: 5% updates, 95% scans; average scan length 50 elements</td>
+</tr>
+<tr>
+<td>YCSB F</td>
+<td>50% read-modify-write, 50% reads</td>
+</tr>
+</tbody></table>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+	
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/6bd6ce2a.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logol1.png">
+      <meta itemprop="name" content="honor">
+      <meta itemprop="description" content="记录学习、科研、生活的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="honor">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/6bd6ce2a.html" class="post-title-link" itemprop="url">leveldb学习记录-compaction从memtable到sstable</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-03-03 09:33:31 / 修改时间：09:37:08" itemprop="dateCreated datePublished" datetime="2021-03-03T09:33:31+08:00">2021-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/leveldb/" itemprop="url" rel="index"><span itemprop="name">leveldb</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>前面讲了SSTable文件，这种文件是leveldb的最终形态、落盘文件，在该文件中，key－value是有序的，它位于磁盘上。很明显客户输入的key-value对的顺序是不可预知的，是无序，因此SSTable肯定不是直接对应用户的put key－value操作。</p>
+<p>直接应对客户put操作的数据结构是MemTable，它是一个存在在内存中的数据结构，内部也是有序的，使用SkipList来组织用户输入的key－value对。（为了防范异常掉电，所以引入了log文件）。</p>
+<p>这里面就存在一个问题了，用户的输入的数据暂时记录在MemTable，而最终落在磁盘上的是SSTable文件。那问题就来了：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/6bd6ce2a.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/0.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logol1.png">
+      <meta itemprop="name" content="honor">
+      <meta itemprop="description" content="记录学习、科研、生活的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="honor">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/0.html" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-03 09:33:26" itemprop="dateCreated datePublished" datetime="2021-03-03T09:33:26+08:00">2021-03-03</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-21 17:27:31" itemprop="dateModified" datetime="2020-12-21T17:27:31+08:00">2020-12-21</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>leveldb笔记之log文件</p>
+<hr>
+<p>title: leveldb学习记录-log文件<br>tags: leveldb<br>categories: leveldb</p>
+<hr>
+<p>log文件在leveldb的主要作用是防止系统宕机的时候，数据丢失。所以在将键值对写入位于内存的memtable之前，会先写入Log文件中，保证数据的持久化。这样即使系统发生故障，memtable中的数据没有及时Dump到磁盘上，LevelDB仍然可以根据log文件恢复数据。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/0.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/86b8d360.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logol1.png">
+      <meta itemprop="name" content="honor">
+      <meta itemprop="description" content="记录学习、科研、生活的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="honor">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/86b8d360.html" class="post-title-link" itemprop="url">leveldb学习记录-各组件的默认大小</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-29 16:05:37" itemprop="dateCreated datePublished" datetime="2021-01-29T16:05:37+08:00">2021-01-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-03-03 09:38:37" itemprop="dateModified" datetime="2021-03-03T09:38:37+08:00">2021-03-03</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/leveldb/" itemprop="url" rel="index"><span itemprop="name">leveldb</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="memtable的大小"><a href="#memtable的大小" class="headerlink" title="memtable的大小"></a>memtable的大小</h2><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Amount of data to build up in memory (backed by an unsorted log</span></span><br><span class="line"><span class="comment">// on disk) before converting to a sorted on-disk file.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Larger values increase performance, especially during bulk loads.</span></span><br><span class="line"><span class="comment">// Up to two write buffers may be held in memory at the same time,</span></span><br><span class="line"><span class="comment">// so you may wish to adjust this parameter to control memory usage.</span></span><br><span class="line"><span class="comment">// Also, a larger write buffer will result in a longer recovery time</span></span><br><span class="line"><span class="comment">// the next time the database is opened.</span></span><br><span class="line"><span class="keyword">size_t</span> write_buffer_size = <span class="number">4</span> * <span class="number">1024</span> * <span class="number">1024</span>;<span class="comment">//memtable的最大size</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>表示一个memtable的最大大小，默认为==4MB==</p>
+<h2 id="sstable的大小"><a href="#sstable的大小" class="headerlink" title="sstable的大小"></a>sstable的大小</h2><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Leveldb will write up to this amount of bytes to a file before</span></span><br><span class="line"><span class="comment">// switching to a new one.</span></span><br><span class="line"><span class="comment">// Most clients should leave this parameter alone.  However if your</span></span><br><span class="line"><span class="comment">// filesystem is more efficient with larger files, you could</span></span><br><span class="line"><span class="comment">// consider increasing the value.  The downside will be longer</span></span><br><span class="line"><span class="comment">// compactions and hence longer latency/performance hiccups.</span></span><br><span class="line"><span class="comment">// Another reason to increase this parameter might be when you are</span></span><br><span class="line"><span class="comment">// initially populating a large database.</span></span><br><span class="line"><span class="keyword">size_t</span> max_file_size = <span class="number">2</span> * <span class="number">1024</span> * <span class="number">1024</span>;<span class="comment">//最大文件尺寸</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>sstable默认为2MB</p>
+<h2 id="level0的文件大小"><a href="#level0的文件大小" class="headerlink" title="level0的文件大小"></a>level0的文件大小</h2><p>level 0 的文件是无序的，每次查找 level 0都需要查找所有文件，因此需要严格控制个数。</p>
+<p>当文件数目 &gt;= <code>config::kL0_SlowdownWritesTrigger</code> 时，通过 sleep 延缓写入，当文件数目 &gt;= <code>config::kL0_StopWritesTrigger</code>时，则完全停止写入，等待后台 compaction.这两个数字分别是 8 和 12.</p>
+<p>由于 memtable 是通过 <code>BuildTable</code> 一次性生成一个文件，因此文件大小 ~ 4M左右.</p>
+<p>compact 会有一个 score 的筛选，其中 level 0 的计算公式为：</p>
+<figure class="highlight arduino"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">score = v-&gt;files_[level].<span class="built_in">size</span>() /</span><br><span class="line">    <span class="keyword">static_cast</span>&lt;<span class="keyword">double</span>&gt;(<span class="built_in">config</span>::kL0_CompactionTrigger);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>当 <code>score &gt;= 1.0</code> 时，就会触发往下层的文件归并操作，因此可以认为 level 0 比较理想的个数应当 &lt; <code>config::kL0_CompactionTrigger</code>，该值为 4.</p>
+<h2 id="level-1-的文件大小及个数"><a href="#level-1-的文件大小及个数" class="headerlink" title="level 1+ 的文件大小及个数"></a>level 1+ 的文件大小及个数</h2><p>level 最大一共是 7层，范围是<code>[0, kNumLevels = 7)</code>.</p>
+<p>各 level 的文件都是归并生成的，在<code>DoCompactionWork</code>生成文件，当文件大小超过<code>MaxOutputFileSize</code>时，则重新打开新文件写入。这个大小对所有 level 都是一样的，默认值是<code>options-&gt;max_file_size = 2M</code>.</p>
+<p>每次的文件总大小是<code>MaxBytesForLevel</code>，随着 level 增大，从<code>10M</code>到<code>1T</code>.</p>
+<table>
+<thead>
+<tr>
+<th>level</th>
+<th>single file size</th>
+<th>totla file size</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>4M</td>
+<td>4M*(4 or 8 or 12)</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2M</td>
+<td>10M</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2M</td>
+<td>100M</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2M</td>
+<td>1G</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2M</td>
+<td>10G</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2M</td>
+<td>100G</td>
+</tr>
+<tr>
+<td>6</td>
+<td>2M</td>
+<td>1T</td>
+</tr>
+</tbody></table>
+<p>sstable data block的默认大小为4K</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Approximate size of user data packed per block.  Note that the</span></span><br><span class="line"><span class="comment">// block size specified here corresponds to uncompressed data.  The</span></span><br><span class="line"><span class="comment">// actual size of the unit read from disk may be smaller if</span></span><br><span class="line"><span class="comment">// compression is enabled.  This parameter can be changed dynamically.</span></span><br><span class="line"><span class="keyword">size_t</span> block_size = <span class="number">4</span> * <span class="number">1024</span>;<span class="comment">//sstable中block的size</span></span><br></pre></td></tr></tbody></table></figure>
+
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+	
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -782,517 +1618,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/223d4dcc.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/65b3.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logol1.png">
-      <meta itemprop="name" content="honor">
-      <meta itemprop="description" content="记录学习、科研、生活的点滴">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="honor">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/65b3.html" class="post-title-link" itemprop="url">leveldb性能测试</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-12-09 09:52:54" itemprop="dateCreated datePublished" datetime="2020-12-09T09:52:54+08:00">2020-12-09</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-26 16:58:18" itemprop="dateModified" datetime="2020-12-26T16:58:18+08:00">2020-12-26</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/leveldb/" itemprop="url" rel="index"><span itemprop="name">leveldb</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h3><p>CPU:   48 * Intel(R) Xeon(R) CPU E5-2678 v3 @ 2.50GHz</p>
-<p>memory：64G</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/65b3.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/41b.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logol1.png">
-      <meta itemprop="name" content="honor">
-      <meta itemprop="description" content="记录学习、科研、生活的点滴">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="honor">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/41b.html" class="post-title-link" itemprop="url">leveldb源码学习记录-整体架构</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-12-09 09:52:50" itemprop="dateCreated datePublished" datetime="2020-12-09T09:52:50+08:00">2020-12-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/leveldb/" itemprop="url" rel="index"><span itemprop="name">leveldb</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="0-开篇"><a href="#0-开篇" class="headerlink" title="0.开篇"></a>0.开篇</h2><p>leveldb是一个高性能、可靠的单机KV数据库。</p>
-<p>一个高性能的单机数据库，往往是如何平衡读性能、写性能、存储大小的问题，思考这个问题，才能够理解 leveldb 的<code>write-ahead logging</code> <code>MemTable</code> <code>SSTable</code>等设计。leveldb 正是通过这一系列架构设计和代码技巧，提供了一个优秀的存储引擎解决这个问题。</p>
-<p>本系列文章是自己阅读leveldb源码过程中记录的一些笔记，方便日后查看。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/41b.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/41f4.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logol1.png">
-      <meta itemprop="name" content="honor">
-      <meta itemprop="description" content="记录学习、科研、生活的点滴">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="honor">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/41f4.html" class="post-title-link" itemprop="url">SSD学习小结(三)FTL</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-12-07 19:24:50 / 修改时间：19:29:49" itemprop="dateCreated datePublished" datetime="2020-12-07T19:24:50+08:00">2020-12-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/SSD/" itemprop="url" rel="index"><span itemprop="name">SSD</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>FTL是SSD固件的核心组成。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/41f4.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/caa7.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logol1.png">
-      <meta itemprop="name" content="honor">
-      <meta itemprop="description" content="记录学习、科研、生活的点滴">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="honor">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/caa7.html" class="post-title-link" itemprop="url">SSD学习小结(二)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-12-07 19:24:50 / 修改时间：19:29:49" itemprop="dateCreated datePublished" datetime="2020-12-07T19:24:50+08:00">2020-12-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/SSD/" itemprop="url" rel="index"><span itemprop="name">SSD</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="SLC、MLC、TLC、QLC"><a href="#SLC、MLC、TLC、QLC" class="headerlink" title="SLC、MLC、TLC、QLC"></a>SLC、MLC、TLC、QLC</h3><p>SLC：一个存储单元存储1bit数据</p>
-<p>MLC：存储2bit数据</p>
-<p>TLC：存储3bit数据</p>
-<p>QLC: 存储4bit数据</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/caa7.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/a03.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logol1.png">
-      <meta itemprop="name" content="honor">
-      <meta itemprop="description" content="记录学习、科研、生活的点滴">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="honor">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/a03.html" class="post-title-link" itemprop="url">SSD学习小结(一)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-12-07 19:24:50" itemprop="dateCreated datePublished" datetime="2020-12-07T19:24:50+08:00">2020-12-07</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-26 16:40:56" itemprop="dateModified" datetime="2020-12-26T16:40:56+08:00">2020-12-26</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/SSD/" itemprop="url" rel="index"><span itemprop="name">SSD</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="SSDvsHDD"><a href="#SSDvsHDD" class="headerlink" title="SSDvsHDD"></a>SSDvsHDD</h3><p>传统的HDD是“马达+磁头+磁盘”的机械结构</p>
-<p>SSD则是“闪存截止+主控”的半导体存储芯片结构</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/a03.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/6efa.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logol1.png">
-      <meta itemprop="name" content="honor">
-      <meta itemprop="description" content="记录学习、科研、生活的点滴">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="honor">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/6efa.html" class="post-title-link" itemprop="url">ubuntu16.04安装tensorflow教程</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-12-04 10:00:21" itemprop="dateCreated datePublished" datetime="2020-12-04T10:00:21+08:00">2020-12-04</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-07 19:29:21" itemprop="dateModified" datetime="2020-12-07T19:29:21+08:00">2020-12-07</time>
-      </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>教程链接：<a target="_blank" rel="noopener" href="https://www.tensorflow.org/install/pip">https://www.tensorflow.org/install/pip</a></p>
-<ol>
-<li>在系统上安装python开发环境</li>
-<li>安装python、pip软件包管理器和Virtualenv<br>sudo apt update<br>sudo apt install python3-dev python3-pip<br>sudo pip3 install -U virtualenv  # system-wide install</li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/6efa.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

@@ -146,7 +146,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">50</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">56</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -235,7 +235,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -290,6 +290,517 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/65b3.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logol1.png">
+      <meta itemprop="name" content="honor">
+      <meta itemprop="description" content="记录学习、科研、生活的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="honor">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/65b3.html" class="post-title-link" itemprop="url">leveldb性能测试</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-09 09:52:54" itemprop="dateCreated datePublished" datetime="2020-12-09T09:52:54+08:00">2020-12-09</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-26 16:58:18" itemprop="dateModified" datetime="2020-12-26T16:58:18+08:00">2020-12-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/leveldb/" itemprop="url" rel="index"><span itemprop="name">leveldb</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h3><p>CPU:   48 * Intel(R) Xeon(R) CPU E5-2678 v3 @ 2.50GHz</p>
+<p>memory：64G</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/65b3.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/41b.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logol1.png">
+      <meta itemprop="name" content="honor">
+      <meta itemprop="description" content="记录学习、科研、生活的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="honor">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/41b.html" class="post-title-link" itemprop="url">leveldb源码学习记录-整体架构</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-09 09:52:50" itemprop="dateCreated datePublished" datetime="2020-12-09T09:52:50+08:00">2020-12-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/leveldb/" itemprop="url" rel="index"><span itemprop="name">leveldb</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="0-开篇"><a href="#0-开篇" class="headerlink" title="0.开篇"></a>0.开篇</h2><p>leveldb是一个高性能、可靠的单机KV数据库。</p>
+<p>一个高性能的单机数据库，往往是如何平衡读性能、写性能、存储大小的问题，思考这个问题，才能够理解 leveldb 的<code>write-ahead logging</code> <code>MemTable</code> <code>SSTable</code>等设计。leveldb 正是通过这一系列架构设计和代码技巧，提供了一个优秀的存储引擎解决这个问题。</p>
+<p>本系列文章是自己阅读leveldb源码过程中记录的一些笔记，方便日后查看。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/41b.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/41f4.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logol1.png">
+      <meta itemprop="name" content="honor">
+      <meta itemprop="description" content="记录学习、科研、生活的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="honor">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/41f4.html" class="post-title-link" itemprop="url">SSD学习小结(三)FTL</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-12-07 19:24:50 / 修改时间：19:29:49" itemprop="dateCreated datePublished" datetime="2020-12-07T19:24:50+08:00">2020-12-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SSD/" itemprop="url" rel="index"><span itemprop="name">SSD</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>FTL是SSD固件的核心组成。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/41f4.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/caa7.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logol1.png">
+      <meta itemprop="name" content="honor">
+      <meta itemprop="description" content="记录学习、科研、生活的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="honor">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/caa7.html" class="post-title-link" itemprop="url">SSD学习小结(二)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-12-07 19:24:50 / 修改时间：19:29:49" itemprop="dateCreated datePublished" datetime="2020-12-07T19:24:50+08:00">2020-12-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SSD/" itemprop="url" rel="index"><span itemprop="name">SSD</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="SLC、MLC、TLC、QLC"><a href="#SLC、MLC、TLC、QLC" class="headerlink" title="SLC、MLC、TLC、QLC"></a>SLC、MLC、TLC、QLC</h3><p>SLC：一个存储单元存储1bit数据</p>
+<p>MLC：存储2bit数据</p>
+<p>TLC：存储3bit数据</p>
+<p>QLC: 存储4bit数据</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/caa7.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/a03.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logol1.png">
+      <meta itemprop="name" content="honor">
+      <meta itemprop="description" content="记录学习、科研、生活的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="honor">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/a03.html" class="post-title-link" itemprop="url">SSD学习小结(一)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-07 19:24:50" itemprop="dateCreated datePublished" datetime="2020-12-07T19:24:50+08:00">2020-12-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-26 16:40:56" itemprop="dateModified" datetime="2020-12-26T16:40:56+08:00">2020-12-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SSD/" itemprop="url" rel="index"><span itemprop="name">SSD</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="SSDvsHDD"><a href="#SSDvsHDD" class="headerlink" title="SSDvsHDD"></a>SSDvsHDD</h3><p>传统的HDD是“马达+磁头+磁盘”的机械结构</p>
+<p>SSD则是“闪存截止+主控”的半导体存储芯片结构</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/a03.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/6efa.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logol1.png">
+      <meta itemprop="name" content="honor">
+      <meta itemprop="description" content="记录学习、科研、生活的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="honor">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/6efa.html" class="post-title-link" itemprop="url">ubuntu16.04安装tensorflow教程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-04 10:00:21" itemprop="dateCreated datePublished" datetime="2020-12-04T10:00:21+08:00">2020-12-04</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-07 19:29:21" itemprop="dateModified" datetime="2020-12-07T19:29:21+08:00">2020-12-07</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>教程链接：<a target="_blank" rel="noopener" href="https://www.tensorflow.org/install/pip">https://www.tensorflow.org/install/pip</a></p>
+<ol>
+<li>在系统上安装python开发环境</li>
+<li>安装python、pip软件包管理器和Virtualenv<br>sudo apt update<br>sudo apt install python3-dev python3-pip<br>sudo pip3 install -U virtualenv  # system-wide install</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/6efa.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -740,726 +1251,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/f8eb.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/fb35.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logol1.png">
-      <meta itemprop="name" content="honor">
-      <meta itemprop="description" content="记录学习、科研、生活的点滴">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="honor">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/fb35.html" class="post-title-link" itemprop="url">python基础学习</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-07-10 21:26:06" itemprop="dateCreated datePublished" datetime="2020-07-10T21:26:06+08:00">2020-07-10</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-07 19:31:41" itemprop="dateModified" datetime="2020-12-07T19:31:41+08:00">2020-12-07</time>
-      </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="python基础"><a href="#python基础" class="headerlink" title="python基础"></a>python基础</h3><h6 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h6><p>python中单行注释以<code>#</code>开头，多行注释可以用多个<code>#</code>号，或者采用<code>'''</code>和<code>"""</code></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/fb35.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/9a95.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logol1.png">
-      <meta itemprop="name" content="honor">
-      <meta itemprop="description" content="记录学习、科研、生活的点滴">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="honor">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/9a95.html" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-07-10 11:16:04" itemprop="dateCreated datePublished" datetime="2020-07-10T11:16:04+08:00">2020-07-10</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-08 20:37:48" itemprop="dateModified" datetime="2020-12-08T20:37:48+08:00">2020-12-08</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h3><blockquote>
-<p>常说的十大排序算法为：冒泡、选择、插入、希尔、归并、快速、堆、计数、桶、基数</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/9a95.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/f5c7.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logol1.png">
-      <meta itemprop="name" content="honor">
-      <meta itemprop="description" content="记录学习、科研、生活的点滴">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="honor">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/f5c7.html" class="post-title-link" itemprop="url">常用的向量与矩阵的范数总结[L0、L1、L2范数]</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-07-09 11:16:04" itemprop="dateCreated datePublished" datetime="2020-07-09T11:16:04+08:00">2020-07-09</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-05 21:55:58" itemprop="dateModified" datetime="2020-12-05T21:55:58+08:00">2020-12-05</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <a id="more"></a>
-
-<h3 id="向量的范数"><a href="#向量的范数" class="headerlink" title="向量的范数"></a>向量的范数</h3><p>首先定义一个向量为：x=[-5，6，8, -10]<br>1-范数： </p>
-<p><img src="https://img-blog.csdnimg.cn/20200709103835497.png" alt="在这里插入图片描述">，即向量的各个元素的绝对值之和，matlab调用函数norm(x, 1) 。则上述x的1-范数结果是29</p>
-<!--more-->
-
-<p>2-范数：</p>
-<p><img src="https://img-blog.csdnimg.cn/2020070910384724.png" alt="在这里插入图片描述">，Euclid范数（欧几里得范数，常用计算向量长度），即向量元素绝对值的平方和再开方，matlab调用函数norm(x, 2)。</p>
-<p><img src="https://img-blog.csdnimg.cn/20200709103901379.png" alt="在这里插入图片描述">-范数：</p>
-<p><img src="https://img-blog.csdnimg.cn/20200709104135615.png" alt="在这里插入图片描述">，即所有向量元素绝对值中的最大值，matlab调用函数norm(x, inf)。</p>
-<p><img src="https://img-blog.csdnimg.cn/20200709104145984.png" alt="在这里插入图片描述">-范数：</p>
-<p><img src="https://img-blog.csdnimg.cn/20200709104150937.png" alt="在这里插入图片描述">，即所有向量元素绝对值中的最小值，matlab调用函数norm(x, -inf)。</p>
-<p>p-范数：</p>
-<p><img src="https://img-blog.csdnimg.cn/20200709104154540.png" alt="在这里插入图片描述">，即向量元素绝对值的p次方和的1/p次幂，matlab调用函数norm(x, p)。</p>
-<h3 id="矩阵范数"><a href="#矩阵范数" class="headerlink" title="矩阵范数"></a>矩阵范数</h3><p>矩阵的1范数<br><img src="https://img-blog.csdnimg.cn/20200709104912722.png" alt="在这里插入图片描述">列和范数，即所有矩阵列向量绝对值之和的最大值，矩阵的每一列上的元素绝对值先求和，再从中取个最大的（列和最大）。matlab调用函数norm(A, 1)。</p>
-<p>矩阵的2范数：<br>矩阵的2范数即：矩阵$A^{T} A$的最大特征值开平方根。</p>
-<p>矩阵的无穷范数：<br>矩阵的每一行上的元素绝对值先求和，再从中取个最大的（行和最大）</p>
-<h4 id="L0范数和L1范数"><a href="#L0范数和L1范数" class="headerlink" title="L0范数和L1范数"></a>L0范数和L1范数</h4><p>L0范数是指向量中非零元素的个数。如果用L0规则化一个参数矩阵W，就是希望W中大部分元素是零，实现稀疏。</p>
-<p>L1范数是指向量中各个元素的绝对值之和，也叫”系数规则算子（Lasso regularization）“。L1范数也可以实现稀疏，通过将无用特征对应的参数W置为零实现。</p>
-<p>L0和L1都可以实现稀疏化，不过一般选用L1而不用L0，原因包括：1）L0范数很难优化求解（NP难）；2）L1是L0的最优凸近似，比L0更容易优化求解。（这一段解释过于数学化，姑且当做结论记住）<br>稀疏化的好处是是什么？<br>1）特征选择<br>​实现特征的自动选择，去除无用特征。稀疏化可以去掉这些无用特征，将特征对应的权重置为零。<br>2）可解释性（interpretability）​<br>例如判断某种病的患病率时，最初有1000个特征，建模后参数经过稀疏化，最终只有5个特征的参数是非零的，那么就可以说影响患病率的主要就是这5个特征。</p>
-<h4 id="L2范数"><a href="#L2范数" class="headerlink" title="L2范数"></a>L2范数</h4><p>L2范数​​是指向量各元素的平方和然后开方，用在回归模型中也称为岭回归（Ridge regression）。<br>L2避免过拟合的原理是：让L2范数的规则项||W||2 尽可能小，可以使得W每个元素都很小，接近于零，但是与L1不同的是，不会等于0；这样得到的模型抗干扰能力强，参数很小时，即使样本数据x发生很大的变化，模型预测值y的变化也会很有限。</p>
-<p>参考链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/MengYan-LongYou/p/4050862.html">https://www.cnblogs.com/MengYan-LongYou/p/4050862.html</a></p>
-<p>  　　　　 <a target="_blank" rel="noopener" href="https://blog.csdn.net/Michael__Corleone/article/details/75213123">https://blog.csdn.net/Michael__Corleone/article/details/75213123</a></p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-	
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/7b80.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logol1.png">
-      <meta itemprop="name" content="honor">
-      <meta itemprop="description" content="记录学习、科研、生活的点滴">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="honor">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/7b80.html" class="post-title-link" itemprop="url">端到端的机器学习项目，预测房价</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-07-05 21:33:28" itemprop="dateCreated datePublished" datetime="2020-07-05T21:33:28+08:00">2020-07-05</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-07 19:44:31" itemprop="dateModified" datetime="2020-12-07T19:44:31+08:00">2020-12-07</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="端到端的机器学习项目"><a href="#端到端的机器学习项目" class="headerlink" title="端到端的机器学习项目"></a>端到端的机器学习项目</h3><p>主要步骤：<br>1.观察大局。<br>2.获得数据。<br>3.从数据探索和可视化中获得洞见。<br>4.机器学习算法的数据准备。<br>5.选择和训练模型。<br>6.微调模型。<br>7.展示解决方案。<br>8.启动、监控和维护系统。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/7b80.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/a21b.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logol1.png">
-      <meta itemprop="name" content="honor">
-      <meta itemprop="description" content="记录学习、科研、生活的点滴">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="honor">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/a21b.html" class="post-title-link" itemprop="url">NLP入门-情感分析|paddle</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-07-04 13:13:03" itemprop="dateCreated datePublished" datetime="2020-07-04T13:13:03+08:00">2020-07-04</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-05 21:52:30" itemprop="dateModified" datetime="2020-12-05T21:52:30+08:00">2020-12-05</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/NLP-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">NLP 机器学习</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <a id="more"></a>
-
-<pre><code>### 任务介绍：
-
-在自然语言处理中，情感分析一般指判断一段文本所表达的情绪状态，属于文本分类问题。
-
-情绪：正面/负面</code></pre><!--more-->
-
-<h4 id="数据集介绍："><a href="#数据集介绍：" class="headerlink" title="数据集介绍："></a>数据集介绍：</h4><pre><code>IMDB数据集包含来自互联网的50000条严重两极分化的评论，该数据被分为用于训练的25000条评论和用于测试的25000条评论，训练集和测试集都包含50%的正面评价和50%的负面评价。该数据集已经经过预处理：评论（单词序列）已经被转换为整数序列，其中每个整数代表字典中的某个单词。</code></pre><h1 id="1、准备数据"><a href="#1、准备数据" class="headerlink" title="1、准备数据:"></a><strong>1、准备数据:</strong></h1><p>创建数据读取器train_reader 和test_reader</p>
-<h1 id="2、配置网络"><a href="#2、配置网络" class="headerlink" title="2、配置网络"></a><strong>2、配置网络</strong></h1><p>定义网络</p>
-<p>定义损失函数</p>
-<p>定义优化算法</p>
-<h1 id="3、训练网络"><a href="#3、训练网络" class="headerlink" title="3、训练网络"></a><strong>3、训练网络</strong></h1><h1 id="4、模型评估"><a href="#4、模型评估" class="headerlink" title="4、模型评估"></a><strong>4、模型评估</strong></h1><h1 id="5、模型预测"><a href="#5、模型预测" class="headerlink" title="5、模型预测"></a><strong>5、模型预测</strong></h1><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入必要的包</span></span><br><span class="line"><span class="keyword">import</span> paddle</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> paddle.dataset.imdb <span class="keyword">as</span> imdb</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> paddle.fluid <span class="keyword">as</span> fluid</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br></pre></td></tr></tbody></table></figure>
-
-
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">!mkdir -p /home/aistudio/.cache/paddle/dataset/imdb/</span><br><span class="line"></span><br><span class="line">!cp /home/aistudio/data/data69/aclImdb_v1.tar.gz /home/aistudio/.cache/paddle/dataset/imdb/</span><br></pre></td></tr></tbody></table></figure>
-
-
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取数据字典</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"加载数据字典中..."</span>)</span><br><span class="line"></span><br><span class="line">word_dict = imdb.word_dict()<span class="comment">#这个数据集是一个常用的数据集，已经被paddle封装到底层代码里面了</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取数据字典长度</span></span><br><span class="line"></span><br><span class="line">dict_dim = <span class="built_in">len</span>(word_dict)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'完成'</span>)</span><br></pre></td></tr></tbody></table></figure>
-
-<pre><code>加载数据字典中...</code></pre><p>​    </p>
-<pre><code>完成</code></pre><p>数据是以数据标签的方式表示一个句子。</p>
-<p>所以每个句子都是以一串整数来表示的，每个数字都是对应一个单词。</p>
-<p>数据集就会有一个数据集字典，这个字典是训练数据中出现单词对应的数字标签。</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取训练和预测数据</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"加载训练数据中..."</span>)</span><br><span class="line"></span><br><span class="line">train_reader = paddle.batch(paddle.reader.shuffle(imdb.train(word_dict),</span><br><span class="line"></span><br><span class="line">                                                  <span class="number">512</span>),</span><br><span class="line"></span><br><span class="line">                            batch_size=<span class="number">128</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"加载测试数据中..."</span>)</span><br><span class="line"></span><br><span class="line">test_reader = paddle.batch(imdb.test(word_dict), </span><br><span class="line"></span><br><span class="line">                           batch_size=<span class="number">128</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'完成'</span>)</span><br></pre></td></tr></tbody></table></figure>
-
-<pre><code>加载训练数据中...</code></pre><p>​<br>​    </p>
-<pre><code>加载测试数据中...</code></pre><p>​<br>​    </p>
-<pre><code>完成</code></pre><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9haS1zdHVkaW8tc3RhdGljLW9ubGluZS5jZG4uYmNlYm9zLmNvbS84NTEyYTVjZjkzN2M0YzkxOTM0ZGNhYzcwYzkzYzg3YTdkY2Y0ZDJhNTJhNzRjZTM5ZDdmYTc3Y2E1MDQ3NzFj?x-oss-process=image/format,png" alt=""></p>
-<ul>
-<li>遗忘门：用来控制记忆消失程度。 </li>
-<li>输入门：决定了当前时刻的输入信息，有多少信息将添加到记忆信息流中，与遗忘门计算公式几乎一致，输入门同样通过一个激活函数来实现。</li>
-<li>记忆状态：计算当前输入与过去的记忆所具有的信息总量。</li>
-<li>输出门：控制着有多少记忆信息将被用于下一阶段的更新中。<br>在防止梯度消失的问题上，LSTM效果比RNN要好，<br>随着任务难度的加深，文本序列长度的增加，模型后面一部分可能会丢失原始的信息，就出现了RNN的变体LSTM和GRU。</li>
-</ul>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义长短期记忆网络</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lstm_net</span>(<span class="params">ipt, input_dim</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 以数据的IDs作为输入</span></span><br><span class="line"></span><br><span class="line">    emb = fluid.layers.embedding(<span class="built_in">input</span>=ipt, size=[input_dim, <span class="number">128</span>], is_sparse=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 第一个全连接层</span></span><br><span class="line"></span><br><span class="line">    fc1 = fluid.layers.fc(<span class="built_in">input</span>=emb, size=<span class="number">128</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 进行一个长短期记忆操作</span></span><br><span class="line"></span><br><span class="line">    lstm1, _ = fluid.layers.dynamic_lstm(<span class="built_in">input</span>=fc1, <span class="comment">#返回：隐藏状态（hidden state），LSTM的神经元状态</span></span><br><span class="line"></span><br><span class="line">                                         size=<span class="number">128</span>) <span class="comment">#size=4*hidden_size</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 第一个最大序列池操作</span></span><br><span class="line"></span><br><span class="line">    fc2 = fluid.layers.sequence_pool(<span class="built_in">input</span>=fc1, pool_type=<span class="string">'max'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 第二个最大序列池操作</span></span><br><span class="line"></span><br><span class="line">    lstm2 = fluid.layers.sequence_pool(<span class="built_in">input</span>=lstm1, pool_type=<span class="string">'max'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 以softmax作为全连接的输出层，大小为2,也就是正负面</span></span><br><span class="line"></span><br><span class="line">    out = fluid.layers.fc(<span class="built_in">input</span>=[fc2, lstm2], size=<span class="number">2</span>, act=<span class="string">'softmax'</span>)<span class="comment">#二分类，1x2的概率分布</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> out</span><br></pre></td></tr></tbody></table></figure>
-
-<p>这里可以先定义一个输入层，这样要注意的是我们使用的数据属于序列数据，所以我们可以设置lod_level为1，当该参数不为0时，表示输入的数据为序列数据，默认lod_level的值是0.</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义输入数据， lod_level不为0指定输入数据为序列数据</span></span><br><span class="line"></span><br><span class="line">words = fluid.layers.data(name=<span class="string">'words'</span>, shape=[<span class="number">1</span>], dtype=<span class="string">'int64'</span>, lod_level=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">label = fluid.layers.data(name=<span class="string">'label'</span>, shape=[<span class="number">1</span>], dtype=<span class="string">'int64'</span>)<span class="comment">#label：正向或者负向</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取长短期记忆网络</span></span><br><span class="line"></span><br><span class="line">model = lstm_net(words, dict_dim)</span><br></pre></td></tr></tbody></table></figure>
-
-<p>接着定义损失函数，这里同样是一个分类任务，所以使用的损失函数也是交叉熵损失函数。这里也可以使用fluid.layers.accuracy()接口定义一个输出分类准确率的函数，可以方便在训练的时候，输出测试时的分类准确率，观察模型收敛的情况。</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取损失函数和准确率</span></span><br><span class="line"></span><br><span class="line">cost = fluid.layers.cross_entropy(<span class="built_in">input</span>=model, label=label)</span><br><span class="line"></span><br><span class="line">avg_cost = fluid.layers.mean(cost)</span><br><span class="line"></span><br><span class="line">acc = fluid.layers.accuracy(<span class="built_in">input</span>=model, label=label)</span><br></pre></td></tr></tbody></table></figure>
-
-
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取预测程序</span></span><br><span class="line"></span><br><span class="line">test_program = fluid.default_main_program().clone(for_test=<span class="literal">True</span>)</span><br></pre></td></tr></tbody></table></figure>
-
-<p>然后是定义优化方法，这里使用的时Adagrad优化方法，Adagrad优化方法多用于处理稀疏数据，设置学习率为0.002。</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义优化方法</span></span><br><span class="line"></span><br><span class="line">optimizer = fluid.optimizer.AdagradOptimizer(learning_rate=<span class="number">0.002</span>)</span><br><span class="line"></span><br><span class="line">opt = optimizer.minimize(avg_cost)</span><br></pre></td></tr></tbody></table></figure>
-
-<p>如果读取有GPU环境，可以尝试使用GPU来训练，使用方式是使用fluid.CUDAPlace(0)来创建。</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义使用CPU还是GPU，使用CPU时use_cuda = False,使用GPU时use_cuda = True</span></span><br><span class="line">use_cuda = <span class="literal">True</span></span><br><span class="line">place = fluid.CUDAPlace(<span class="number">0</span>) <span class="keyword">if</span> use_cuda <span class="keyword">else</span> fluid.CPUPlace()</span><br><span class="line">exe = fluid.Executor(place)</span><br><span class="line"><span class="comment"># 进行参数初始化</span></span><br><span class="line">exe.run(fluid.default_startup_program())</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-
-
-
-
-<pre><code>[]</code></pre><p>定义数据数据的维度，数据的顺序是一条句子数据对应一个标签。</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义输入数据的维度</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义数据数据的维度，数据的顺序是一条句子数据对应一个标签</span></span><br><span class="line"></span><br><span class="line">feeder = fluid.DataFeeder(place=place, feed_list=[words, label])</span><br></pre></td></tr></tbody></table></figure>
-
-<p>现在就可以开始训练了，这里设置训练的循环是2次，大家可以根据情况设置更多的训练轮数。我们在训练中，每40个Batch打印一层训练信息和进行一次测试，测试是使用测试集进行预测并输出损失值和准确率，测试完成之后，对之前预测的结果进行求平均值。</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开始训练</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> pass_id <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 进行训练</span></span><br><span class="line"></span><br><span class="line">    train_cost = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> batch_id, data <span class="keyword">in</span> <span class="built_in">enumerate</span>(train_reader()):              <span class="comment">#遍历train_reader迭代器</span></span><br><span class="line"></span><br><span class="line">        train_cost = exe.run(program=fluid.default_main_program(),<span class="comment">#运行主程序</span></span><br><span class="line"></span><br><span class="line">                             feed=feeder.feed(data),              <span class="comment">#喂入一个batch的数据</span></span><br><span class="line"></span><br><span class="line">                             fetch_list=[avg_cost])               <span class="comment">#fetch均方误差</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> batch_id % <span class="number">40</span> == <span class="number">0</span>:                 <span class="comment">#每40次batch打印一次训练、进行一次测试</span></span><br><span class="line"></span><br><span class="line">            print(<span class="string">'Pass:%d, Batch:%d, Cost:%0.5f'</span> % (pass_id, batch_id, train_cost[<span class="number">0</span>]))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 进行测试</span></span><br><span class="line"></span><br><span class="line">    test_costs = []   <span class="comment">#测试的损失值</span></span><br><span class="line"></span><br><span class="line">    test_accs = []    <span class="comment">#测试的准确率</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> batch_id, data <span class="keyword">in</span> <span class="built_in">enumerate</span>(test_reader()):</span><br><span class="line"></span><br><span class="line">        test_cost, test_acc = exe.run(program=test_program,</span><br><span class="line"></span><br><span class="line">                                            feed=feeder.feed(data),</span><br><span class="line"></span><br><span class="line">                                             fetch_list=[avg_cost, acc])</span><br><span class="line"></span><br><span class="line">        test_costs.append(test_cost[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">        test_accs.append(test_acc[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 计算平均预测损失在和准确率</span></span><br><span class="line"></span><br><span class="line">    test_cost = (<span class="built_in">sum</span>(test_costs) / <span class="built_in">len</span>(test_costs))</span><br><span class="line"></span><br><span class="line">    test_acc = (<span class="built_in">sum</span>(test_accs) / <span class="built_in">len</span>(test_accs))</span><br><span class="line"></span><br><span class="line">    print(<span class="string">'Test:%d, Cost:%0.5f, ACC:%0.5f'</span> % (pass_id, test_cost, test_acc))</span><br><span class="line"></span><br><span class="line"><span class="comment">#保存模型</span></span><br><span class="line"></span><br><span class="line">model_save_dir = <span class="string">"/home/aistudio/work/emotionclassify.inference.model"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果保存路径不存在就创建</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(model_save_dir):</span><br><span class="line"></span><br><span class="line">    os.makedirs(model_save_dir)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> (<span class="string">'save models to %s'</span> % (model_save_dir))</span><br><span class="line"></span><br><span class="line">fluid.io.save_inference_model(model_save_dir, <span class="comment">#保存推理model的路径</span></span><br><span class="line"></span><br><span class="line">                                  [<span class="string">'words'</span>],      <span class="comment">#推理（inference）需要 feed 的数据</span></span><br><span class="line"></span><br><span class="line">                                  [model],         <span class="comment">#保存推理（inference）结果的 Variables</span></span><br><span class="line"></span><br><span class="line">                                  exe)            <span class="comment">#exe 保存 inference model</span></span><br></pre></td></tr></tbody></table></figure>
-
-<pre><code>Pass:0, Batch:0, Cost:0.73125
-Pass:0, Batch:40, Cost:0.06795
-Pass:0, Batch:80, Cost:0.00722
-Pass:0, Batch:120, Cost:0.80844
-Pass:0, Batch:160, Cost:0.22205
-Test:0, Cost:1.12195, ACC:0.50171
-Pass:1, Batch:0, Cost:2.13347
-Pass:1, Batch:40, Cost:0.48804
-Pass:1, Batch:80, Cost:0.21535
-Pass:1, Batch:120, Cost:0.81571
-Pass:1, Batch:160, Cost:0.33186
-Test:1, Cost:0.83362, ACC:0.50191
-Pass:2, Batch:0, Cost:1.40742
-Pass:2, Batch:40, Cost:0.55047
-Pass:2, Batch:80, Cost:0.27269
-Pass:2, Batch:120, Cost:0.74456
-Pass:2, Batch:160, Cost:0.35957
-Test:2, Cost:0.71608, ACC:0.50769
-Pass:3, Batch:0, Cost:1.12344
-Pass:3, Batch:40, Cost:0.55675
-Pass:3, Batch:80, Cost:0.30137
-Pass:3, Batch:120, Cost:0.67230
-Pass:3, Batch:160, Cost:0.35690
-Test:3, Cost:0.63739, ACC:0.54560
-Pass:4, Batch:0, Cost:0.98897
-Pass:4, Batch:40, Cost:0.55052
-Pass:4, Batch:80, Cost:0.29672
-Pass:4, Batch:120, Cost:0.59823
-Pass:4, Batch:160, Cost:0.35738
-Test:4, Cost:0.57975, ACC:0.61902
-Pass:5, Batch:0, Cost:0.80312
-Pass:5, Batch:40, Cost:0.50581
-Pass:5, Batch:80, Cost:0.27092
-Pass:5, Batch:120, Cost:0.55160
-Pass:5, Batch:160, Cost:0.32211
-Test:5, Cost:0.53265, ACC:0.69416
-Pass:6, Batch:0, Cost:0.70552
-Pass:6, Batch:40, Cost:0.49984
-Pass:6, Batch:80, Cost:0.27171
-Pass:6, Batch:120, Cost:0.52073
-Pass:6, Batch:160, Cost:0.31178
-Test:6, Cost:0.49651, ACC:0.74736
-Pass:7, Batch:0, Cost:0.69794
-Pass:7, Batch:40, Cost:0.50185
-Pass:7, Batch:80, Cost:0.27300
-Pass:7, Batch:120, Cost:0.46273
-Pass:7, Batch:160, Cost:0.35845
-Test:7, Cost:0.46813, ACC:0.78116
-Pass:8, Batch:0, Cost:0.61882
-Pass:8, Batch:40, Cost:0.45831
-Pass:8, Batch:80, Cost:0.27965
-Pass:8, Batch:120, Cost:0.44373
-Pass:8, Batch:160, Cost:0.30215
-Test:8, Cost:0.44874, ACC:0.80029
-Pass:9, Batch:0, Cost:0.60523
-Pass:9, Batch:40, Cost:0.47129
-Pass:9, Batch:80, Cost:0.22142
-Pass:9, Batch:120, Cost:0.39324
-Pass:9, Batch:160, Cost:0.26854
-Test:9, Cost:0.43634, ACC:0.80823
-save models to /home/aistudio/work/emotionclassify.inference.model
-
-
-
-
-
-['save_infer_model/scale_0']</code></pre><p>我们先定义三个句子，第一句是中性的，第二句偏向正面，第三句偏向负面。然后把这些句子读取到一个列表中。</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义预测数据</span></span><br><span class="line"></span><br><span class="line">reviews_str = [<span class="string">'read the book forget the movie'</span>, <span class="string">'this is a great movie'</span>, <span class="string">'this is very bad'</span>]<span class="comment">#第一句是中性，第二句是正向，第三局是负向</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 把每个句子拆成一个个单词</span></span><br><span class="line"></span><br><span class="line">reviews = [c.split() <span class="keyword">for</span> c <span class="keyword">in</span> reviews_str]</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-
-<p>然后把句子转换成编码，根据数据集的字典，把句子中的单词转换成对应标签。</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取结束符号的标签</span></span><br><span class="line"></span><br><span class="line">UNK = word_dict[<span class="string">'&lt;unk&gt;'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取每句话对应的标签</span></span><br><span class="line"></span><br><span class="line">lod = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> reviews:</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 需要把单词进行字符串编码转换</span></span><br><span class="line"></span><br><span class="line">    lod.append([word_dict.get(words.encode(<span class="string">'utf-8'</span>), UNK) <span class="keyword">for</span> words <span class="keyword">in</span> c])</span><br></pre></td></tr></tbody></table></figure>
-
-<p>获取输入数据的维度和大小。</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取每句话的单词数量</span></span><br><span class="line"></span><br><span class="line">base_shape = [[<span class="built_in">len</span>(c) <span class="keyword">for</span> c <span class="keyword">in</span> lod]]</span><br></pre></td></tr></tbody></table></figure>
-
-<p>将要预测的数据转换成张量，准备开始预测。</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成预测数据</span></span><br><span class="line"></span><br><span class="line">tensor_words = fluid.create_lod_tensor(lod, base_shape, place)</span><br></pre></td></tr></tbody></table></figure>
-
-
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">infer_exe = fluid.Executor(place)    <span class="comment">#创建推测用的executor</span></span><br><span class="line"></span><br><span class="line">inference_scope = fluid.core.Scope() <span class="comment">#Scope指定作用域</span></span><br></pre></td></tr></tbody></table></figure>
-
-
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> fluid.scope_guard(inference_scope):<span class="comment">#修改全局/默认作用域（scope）, 运行时中的所有变量都将分配给新的scope。</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#从指定目录中加载 推理model(inference model)</span></span><br><span class="line"></span><br><span class="line">    [inference_program,                                            <span class="comment">#推理的program</span></span><br><span class="line"></span><br><span class="line">     feed_target_names,                                            <span class="comment">#str列表，包含需要在推理program中提供数据的变量名称</span></span><br><span class="line"></span><br><span class="line">     fetch_targets] = fluid.io.load_inference_model(model_save_dir,<span class="comment">#fetch_targets: 推断结果，model_save_dir:模型训练路径 </span></span><br><span class="line"></span><br><span class="line">                                                        infer_exe) <span class="comment">#infer_exe: 运行 inference model的 executor</span></span><br><span class="line"></span><br><span class="line">    results = infer_exe.run(inference_program,                                 <span class="comment">#运行预测程序</span></span><br><span class="line"></span><br><span class="line">                            feed={feed_target_names[<span class="number">0</span>]: tensor_words},<span class="comment">#喂入要预测的x值</span></span><br><span class="line"></span><br><span class="line">                            fetch_list=fetch_targets)                           <span class="comment">#得到推测结果 </span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打印每句话的正负面概率</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i, r <span class="keyword">in</span> <span class="built_in">enumerate</span>(results[<span class="number">0</span>]):</span><br><span class="line"></span><br><span class="line">        print(<span class="string">"\'%s\'的预测结果为：正面概率为：%0.5f，负面概率为：%0.5f"</span> % (reviews_str[i], r[<span class="number">0</span>], r[<span class="number">1</span>]))</span><br></pre></td></tr></tbody></table></figure>
-
-<pre><code>'read the book forget the movie'的预测结果为：正面概率为：0.54671，负面概率为：0.45329
-'this is a great movie'的预测结果为：正面概率为：0.62144，负面概率为：0.37856
-'this is very bad'的预测结果为：正面概率为：0.37344，负面概率为：0.62656</code></pre><p>预测结果显示这个模型的预测较为准确，输出结果符合人类观察的预期；可以继续调整网络参数、结构，使其能够更好的对文本进行情感分类。</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-	
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/ac4f.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logol1.png">
-      <meta itemprop="name" content="honor">
-      <meta itemprop="description" content="记录学习、科研、生活的点滴">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="honor">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/ac4f.html" class="post-title-link" itemprop="url">NLP入门-文本分类|paddle</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-07-04 10:54:58" itemprop="dateCreated datePublished" datetime="2020-07-04T10:54:58+08:00">2020-07-04</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-07 19:28:27" itemprop="dateModified" datetime="2020-12-07T19:28:27+08:00">2020-12-07</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/NLP-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">NLP 机器学习</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。"><a href="#文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。" class="headerlink" title="文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。"></a>文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。</h4><blockquote>
-<ul>
-<li>数据来源：从网站上爬取56821条数据中文新闻摘要<ul>
-<li>数据内容：包含10种类别，国际、文化、娱乐、体育、财经、汽车、教育、科技、房产、证券</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9haS1zdHVkaW8tc3RhdGljLW9ubGluZS5jZG4uYmNlYm9zLmNvbS8xNzg5ZWQ1OTM5ZDI0MTM0YjljZTRkNDVjYTE1ZTBmZGYyMWYyNWFhNDAwYzRmNjg5OGNjNGUwMmFlYTVjNzRl?x-oss-process=image/format,png" alt=""><br>严格意义上来说这个新闻的数据集不是太好，每个类目的新闻数目不是一致的，一个好的数据集对于各个类别分布是比较均匀的。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/ac4f.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
