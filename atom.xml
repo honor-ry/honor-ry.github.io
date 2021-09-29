@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>honor</title>
+  <title>Honor&#39;s Blog</title>
   <icon>https://www.gravatar.com/avatar/8c43a382c70e58f623d741de658d1a97</icon>
   <subtitle>爱笑的小土豆~</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://www.rongyao-blog.top/"/>
-  <updated>2020-11-28T03:08:41.400Z</updated>
-  <id>https://www.rongyao-blog.top/</id>
+  <link href="https://honor-ry.github.io/"/>
+  <updated>2020-12-07T11:29:49.626Z</updated>
+  <id>https://honor-ry.github.io/</id>
   
   <author>
     <name>honor</name>
@@ -17,548 +17,460 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>leveldb-study</title>
-    <link href="https://www.rongyao-blog.top/posts/a6e0.html"/>
-    <id>https://www.rongyao-blog.top/posts/a6e0.html</id>
-    <published>2020-11-28T03:07:28.000Z</published>
-    <updated>2020-11-28T03:08:41.400Z</updated>
+    <title>SSD学习小结(二)</title>
+    <link href="https://honor-ry.github.io/posts/caa7.html"/>
+    <id>https://honor-ry.github.io/posts/caa7.html</id>
+    <published>2021-09-29T12:00:25.601Z</published>
+    <updated>2020-12-07T11:29:49.626Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;2020年11月我学习了leveldb，google开发的一个高效KV数据库&lt;/p&gt;
+      &lt;h3 id=&quot;SLC、MLC、TLC、QLC&quot;&gt;&lt;a href=&quot;#SLC、MLC、TLC、QLC&quot; class=&quot;headerlink&quot; title=&quot;SLC、MLC、TLC、QLC&quot;&gt;&lt;/a&gt;SLC、MLC、TLC、QLC&lt;/h3&gt;&lt;p&gt;SLC：一个存储单元存储1bit数据&lt;/p&gt;
+&lt;p&gt;MLC：存储2bit数据&lt;/p&gt;
+&lt;p&gt;TLC：存储3bit数据&lt;/p&gt;
+&lt;p&gt;QLC: 存储4bit数据&lt;/p&gt;
     
     </summary>
     
     
+      <category term="SSD" scheme="https://honor-ry.github.io/categories/SSD/"/>
+    
+    
+      <category term="SSD" scheme="https://honor-ry.github.io/tags/SSD/"/>
     
   </entry>
   
   <entry>
-    <title>C++-example</title>
-    <link href="https://www.rongyao-blog.top/posts/9071.html"/>
-    <id>https://www.rongyao-blog.top/posts/9071.html</id>
-    <published>2020-08-26T12:07:47.000Z</published>
-    <updated>2020-11-28T02:17:33.104Z</updated>
+    <title>SSD学习小结(三)FTL</title>
+    <link href="https://honor-ry.github.io/posts/41f4.html"/>
+    <id>https://honor-ry.github.io/posts/41f4.html</id>
+    <published>2021-09-29T12:00:25.597Z</published>
+    <updated>2020-12-07T11:29:49.625Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;script&gt;
-        document.querySelectorAll(&#39;.github-emoji&#39;)
-          .forEach(el =&gt; {
-            if (!el.dataset.src) {
-        
-      
+      &lt;p&gt;FTL是SSD固件的核心组成。&lt;/p&gt;
     
     </summary>
     
     
+      <category term="SSD" scheme="https://honor-ry.github.io/categories/SSD/"/>
+    
+    
+      <category term="SSD" scheme="https://honor-ry.github.io/tags/SSD/"/>
     
   </entry>
   
   <entry>
-    <title>C++-study</title>
-    <link href="https://www.rongyao-blog.top/posts/241f.html"/>
-    <id>https://www.rongyao-blog.top/posts/241f.html</id>
-    <published>2020-08-26T07:33:23.000Z</published>
-    <updated>2020-11-28T02:17:24.975Z</updated>
+    <title>SSD学习小结(一)</title>
+    <link href="https://honor-ry.github.io/posts/a03.html"/>
+    <id>https://honor-ry.github.io/posts/a03.html</id>
+    <published>2021-09-29T12:00:25.593Z</published>
+    <updated>2020-12-26T08:40:56.675Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;script&gt;
-        document.querySelectorAll(&#39;.github-emoji&#39;)
-          .forEach(el =&gt; {
-            if (!el.dataset.src) {
-        
-      
+      &lt;h3 id=&quot;SSDvsHDD&quot;&gt;&lt;a href=&quot;#SSDvsHDD&quot; class=&quot;headerlink&quot; title=&quot;SSDvsHDD&quot;&gt;&lt;/a&gt;SSDvsHDD&lt;/h3&gt;&lt;p&gt;传统的HDD是“马达+磁头+磁盘”的机械结构&lt;/p&gt;
+&lt;p&gt;SSD则是“闪存截止+主控”的半导体存储芯片结构&lt;/p&gt;
     
     </summary>
     
     
+      <category term="SSD" scheme="https://honor-ry.github.io/categories/SSD/"/>
+    
+    
+      <category term="SSD" scheme="https://honor-ry.github.io/tags/SSD/"/>
     
   </entry>
   
   <entry>
-    <title>完美解决Tensorflow不支持AVX2指令集问题|指令集加速</title>
-    <link href="https://www.rongyao-blog.top/posts/6e6c.html"/>
-    <id>https://www.rongyao-blog.top/posts/6e6c.html</id>
-    <published>2020-07-12T15:10:35.000Z</published>
-    <updated>2020-11-28T02:50:09.824Z</updated>
+    <title>leveldb学习记录-log文件</title>
+    <link href="https://honor-ry.github.io/posts/223d4dcc.html"/>
+    <id>https://honor-ry.github.io/posts/223d4dcc.html</id>
+    <published>2021-09-29T12:00:25.523Z</published>
+    <updated>2021-04-10T07:31:42.958Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt; 在pycharm中安装tensorflow后&lt;br&gt;    &lt;img src=&quot;https://img-blog.csdnimg.cn/20200712190018795.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;运行如下测试代码：&lt;/p&gt;
+      &lt;p&gt;log文件在leveldb的主要作用是防止系统宕机的时候，数据丢失。所以在将键值对写入位于内存的memtable之前，会先写入Log文件中，保证数据的持久化。这样即使系统发生故障，memtable中的数据没有及时Dump到磁盘上，LevelDB仍然可以根据log文件恢复数据。&lt;/p&gt;
     
     </summary>
     
     
+      <category term="leveldb" scheme="https://honor-ry.github.io/categories/leveldb/"/>
     
-      <category term="tensorflow AVX2 pycharm 指令集加速" scheme="https://www.rongyao-blog.top/tags/tensorflow-AVX2-pycharm-%E6%8C%87%E4%BB%A4%E9%9B%86%E5%8A%A0%E9%80%9F/"/>
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/tags/leveldb/"/>
     
   </entry>
   
   <entry>
-    <title>Classification分类器|机器学习实战-基于Scikit-Learn和TensorFlow</title>
-    <link href="https://www.rongyao-blog.top/posts/f8eb.html"/>
-    <id>https://www.rongyao-blog.top/posts/f8eb.html</id>
-    <published>2020-07-12T08:23:44.000Z</published>
-    <updated>2020-08-30T13:32:19.903Z</updated>
+    <title>leveldb源码学习记录-整体架构</title>
+    <link href="https://honor-ry.github.io/posts/41b.html"/>
+    <id>https://honor-ry.github.io/posts/41b.html</id>
+    <published>2021-09-29T12:00:25.519Z</published>
+    <updated>2020-12-09T01:52:50.647Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+      &lt;h2 id=&quot;0-开篇&quot;&gt;&lt;a href=&quot;#0-开篇&quot; class=&quot;headerlink&quot; title=&quot;0.开篇&quot;&gt;&lt;/a&gt;0.开篇&lt;/h2&gt;&lt;p&gt;leveldb是一个高性能、可靠的单机KV数据库。&lt;/p&gt;
+&lt;p&gt;一个高性能的单机数据库，往往是如何平衡读性能、写性能、存储大小的问题，思考这个问题，才能够理解 leveldb 的&lt;code&gt;write-ahead logging&lt;/code&gt; &lt;code&gt;MemTable&lt;/code&gt; &lt;code&gt;SSTable&lt;/code&gt;等设计。leveldb 正是通过这一系列架构设计和代码技巧，提供了一个优秀的存储引擎解决这个问题。&lt;/p&gt;
+&lt;p&gt;本系列文章是自己阅读leveldb源码过程中记录的一些笔记，方便日后查看。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/categories/leveldb/"/>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/tags/leveldb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leveldb性能测试</title>
+    <link href="https://honor-ry.github.io/posts/65b3.html"/>
+    <id>https://honor-ry.github.io/posts/65b3.html</id>
+    <published>2021-09-29T12:00:25.515Z</published>
+    <updated>2020-12-26T08:58:18.422Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;测试环境&quot;&gt;&lt;a href=&quot;#测试环境&quot; class=&quot;headerlink&quot; title=&quot;测试环境&quot;&gt;&lt;/a&gt;测试环境&lt;/h3&gt;&lt;p&gt;CPU:   48 * Intel(R) Xeon(R) CPU E5-2678 v3 @ 2.50GHz&lt;/p&gt;
+&lt;p&gt;memory：64G&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/categories/leveldb/"/>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/tags/leveldb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leveldb学习记录-编码</title>
+    <link href="https://honor-ry.github.io/posts/c42826bf.html"/>
+    <id>https://honor-ry.github.io/posts/c42826bf.html</id>
+    <published>2021-09-29T12:00:25.510Z</published>
+    <updated>2020-12-26T08:57:36.221Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;计算机硬件有两种数据存储的方式：大端字节序和小端字节序&lt;/p&gt;
+&lt;p&gt;举例来说，数值&lt;code&gt;0x2211&lt;/code&gt;使用两个字节储存：高位字节是&lt;code&gt;0x22&lt;/code&gt;，低位字节是&lt;code&gt;0x11&lt;/code&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;大端字节序：高位字节在前，低位字节在后，这是人类读写数值的方法。&lt;/li&gt;
+&lt;li&gt;小端字节序：低位字节在前，高位字节在后，即以&lt;code&gt;0x1122&lt;/code&gt;形式储存。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;编码分为变长的VarInt和固定大小的FixedInt两种，每种分32位和64位。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/categories/leveldb/"/>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/tags/leveldb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leveldb学习记录-文件</title>
+    <link href="https://honor-ry.github.io/posts/7f6d2289.html"/>
+    <id>https://honor-ry.github.io/posts/7f6d2289.html</id>
+    <published>2021-09-29T12:00:25.507Z</published>
+    <updated>2021-04-10T07:29:53.681Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;leveldb的文件命名&quot;&gt;&lt;a href=&quot;#leveldb的文件命名&quot; class=&quot;headerlink&quot; title=&quot;leveldb的文件命名&quot;&gt;&lt;/a&gt;leveldb的文件命名&lt;/h3&gt;&lt;p&gt;当运行一次leveldb来写入数据时，leveldb可能会生成很多个log文件和SSTable文件，而这些文件的命名都是类似的，都是固定前缀+文件编号+固定后缀的。这些文件的名称是调用函数MakeFileName()来生成的。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/categories/leveldb/"/>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/tags/leveldb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leveldb学习记录-YCSB测试</title>
+    <link href="https://honor-ry.github.io/posts/de979122.html"/>
+    <id>https://honor-ry.github.io/posts/de979122.html</id>
+    <published>2021-09-29T12:00:25.503Z</published>
+    <updated>2021-04-10T07:28:52.548Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;YCSB环境安装&quot;&gt;&lt;a href=&quot;#YCSB环境安装&quot; class=&quot;headerlink&quot; title=&quot;YCSB环境安装&quot;&gt;&lt;/a&gt;YCSB环境安装&lt;/h2&gt;&lt;p&gt;昨天在服务器上安装YCSB的测试环境，用来测试leveldb的性能，跑一下实验。本篇博客主要做一个记录，方便日后查看。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ycsb英文全称为Yahoo! Cloud Serving Benchmark (YCSB) 。是Yahoo公司的一个用来对云服务进行基础测试的工具,leveldb的论文中实验测试评估这一章节，主要是采用提供的db_bench作为microbenchmark微基准测试工具，和YCSB作为macrobenchmarks宏基准测试工具，模仿实际的工作load。在运行YCSB的时候，可以配置不同的workload和DB，也可以指定线程数&amp;amp;并发数等其他参数。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;主要参考博客：&lt;a href=&quot;https://blog.csdn.net/NikoKVCS/article/details/88422307&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;YCSB 测试 LevelDB 数据库&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/categories/leveldb/"/>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/tags/leveldb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leveldb学习记录-Version</title>
+    <link href="https://honor-ry.github.io/posts/21d4485b.html"/>
+    <id>https://honor-ry.github.io/posts/21d4485b.html</id>
+    <published>2021-09-29T12:00:25.500Z</published>
+    <updated>2021-03-03T01:48:50.662Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本篇博客主要讲解阅读leveldb源码的version版本管理相关内容，个人的一些笔记。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/categories/leveldb/"/>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/tags/leveldb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leveldb学习记录-skiplist</title>
+    <link href="https://honor-ry.github.io/posts/7ad579e7.html"/>
+    <id>https://honor-ry.github.io/posts/7ad579e7.html</id>
+    <published>2021-09-29T12:00:25.496Z</published>
+    <updated>2020-12-26T08:58:06.973Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;leveldb中memtable的实现是采用skiplist跳表的，了解skiplist这种数据结构，便于我们分析理解memtable。&lt;/p&gt;
+&lt;h2 id=&quot;1-skiplist跳表的数据结构&quot;&gt;&lt;a href=&quot;#1-skiplist跳表的数据结构&quot; class=&quot;headerlink&quot; title=&quot;1.skiplist跳表的数据结构&quot;&gt;&lt;/a&gt;1.skiplist跳表的数据结构&lt;/h2&gt;&lt;p&gt;SkipList是一种用来代替平衡树的数据结构。&lt;br&gt;    虽然在最坏的情况下SkipList的效率要低于平衡树，但是大多数情况下效率仍然非常高，其插入、删除、查找的时间复杂度都是O(log(N))。&lt;br&gt;除了高效外，其实现和维护非常简单也是一大优势。SkipList的使用还是比较广泛的，比如在LevelDB中的MemTable就是使用SkipList实现的。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/categories/leveldb/"/>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/tags/leveldb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leveldb学习记录-memtable</title>
+    <link href="https://honor-ry.github.io/posts/741fdc25.html"/>
+    <id>https://honor-ry.github.io/posts/741fdc25.html</id>
+    <published>2021-09-29T12:00:25.493Z</published>
+    <updated>2020-12-21T10:35:23.119Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;上一篇博客文章介绍了skiplist，skiplist是leveldb中一个非常重要的数据结构，实现了高效的数据查找和插入，时间复杂度为O(log(n))&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/categories/leveldb/"/>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/tags/leveldb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leveldb学习记录-log文件</title>
+    <link href="https://honor-ry.github.io/posts/223d4dcc.html"/>
+    <id>https://honor-ry.github.io/posts/223d4dcc.html</id>
+    <published>2021-09-29T12:00:25.489Z</published>
+    <updated>2020-12-21T10:30:56.222Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;log文件在leveldb的主要作用是防止系统宕机的时候，数据丢失。所以在将键值对写入位于内存的memtable之前，会先写入Log文件中，保证数据的持久化。这样即使系统发生故障，memtable中的数据没有及时Dump到磁盘上，LevelDB仍然可以根据log文件恢复数据。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/categories/leveldb/"/>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/tags/leveldb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leveldb学习记录-compaction从memtable到sstable</title>
+    <link href="https://honor-ry.github.io/posts/6bd6ce2a.html"/>
+    <id>https://honor-ry.github.io/posts/6bd6ce2a.html</id>
+    <published>2021-09-29T12:00:25.486Z</published>
+    <updated>2021-03-03T01:48:50.666Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前面讲了SSTable文件，这种文件是leveldb的最终形态、落盘文件，在该文件中，key－value是有序的，它位于磁盘上。很明显客户输入的key-value对的顺序是不可预知的，是无序，因此SSTable肯定不是直接对应用户的put key－value操作。&lt;/p&gt;
+&lt;p&gt;直接应对客户put操作的数据结构是MemTable，它是一个存在在内存中的数据结构，内部也是有序的，使用SkipList来组织用户输入的key－value对。（为了防范异常掉电，所以引入了log文件）。&lt;/p&gt;
+&lt;p&gt;这里面就存在一个问题了，用户的输入的数据暂时记录在MemTable，而最终落在磁盘上的是SSTable文件。那问题就来了：&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/categories/leveldb/"/>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/tags/leveldb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leveldb学习-安装与编译测试</title>
+    <link href="https://honor-ry.github.io/posts/e867c52e.html"/>
+    <id>https://honor-ry.github.io/posts/e867c52e.html</id>
+    <published>2021-09-29T12:00:25.481Z</published>
+    <updated>2021-05-31T08:52:10.503Z</updated>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight vim&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git clone --recurse-submodules http&lt;span class=&quot;variable&quot;&gt;s:&lt;/span&gt;//github.&lt;span class=&quot;keyword&quot;&gt;com&lt;/span&gt;/google/leveldb.git&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo apt-&lt;span class=&quot;built_in&quot;&gt;get&lt;/span&gt; install cmake&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;cd&lt;/span&gt; leveldb&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cmake CMakeLists.txt&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;make&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/categories/leveldb/"/>
+    
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/tags/leveldb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leveldb学习记录-各组件的默认大小</title>
+    <link href="https://honor-ry.github.io/posts/86b8d360.html"/>
+    <id>https://honor-ry.github.io/posts/86b8d360.html</id>
+    <published>2021-09-29T12:00:25.478Z</published>
+    <updated>2021-05-29T04:11:31.054Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;memtable的大小&quot;&gt;&lt;a href=&quot;#memtable的大小&quot; class=&quot;headerlink&quot; title=&quot;memtable的大小&quot;&gt;&lt;/a&gt;memtable的大小&lt;/h2&gt;&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// Amount of data to build up in memory (backed by an unsorted log&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// on disk) before converting to a sorted on-disk file.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// Larger values increase performance, especially during bulk loads.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// Up to two write buffers may be held in memory at the same time,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// so you may wish to adjust this parameter to control memory usage.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// Also, a larger write buffer will result in a longer recovery time&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// the next time the database is opened.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;size_t&lt;/span&gt; write_buffer_size = &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt; * &lt;span class=&quot;number&quot;&gt;1024&lt;/span&gt; * &lt;span class=&quot;number&quot;&gt;1024&lt;/span&gt;;&lt;span class=&quot;comment&quot;&gt;//memtable的最大size&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
 
-&lt;p&gt;&lt;strong&gt;Classification&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&quot;监督学习任务（分类）&quot;&gt;&lt;a href=&quot;#监督学习任务（分类）&quot; class=&quot;headerlink&quot;
-        
-      
+&lt;p&gt;表示一个memtable的最大大小，默认为==4MB==&lt;/p&gt;
+&lt;h2 id=&quot;sstable的大小&quot;&gt;&lt;a href=&quot;#sstable的大小&quot; class=&quot;headerlink&quot; title=&quot;sstable的大小&quot;&gt;&lt;/a&gt;sstable的大小&lt;/h2&gt;&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// Leveldb will write up to this amount of bytes to a file before&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// switching to a new one.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// Most clients should leave this parameter alone.  However if your&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// filesystem is more efficient with larger files, you could&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// consider increasing the value.  The downside will be longer&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// compactions and hence longer latency/performance hiccups.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// Another reason to increase this parameter might be when you are&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// initially populating a large database.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;size_t&lt;/span&gt; max_file_size = &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt; * &lt;span class=&quot;number&quot;&gt;1024&lt;/span&gt; * &lt;span class=&quot;number&quot;&gt;1024&lt;/span&gt;;&lt;span class=&quot;comment&quot;&gt;//最大文件尺寸&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;sstable默认为2MB&lt;/p&gt;
     
     </summary>
     
     
-      <category term="机器学习" scheme="https://www.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="leveldb" scheme="https://honor-ry.github.io/categories/leveldb/"/>
     
     
-      <category term="python" scheme="https://www.rongyao-blog.top/tags/python/"/>
+      <category term="leveldb" scheme="https://honor-ry.github.io/tags/leveldb/"/>
     
   </entry>
   
   <entry>
-    <title>python基础学习</title>
-    <link href="https://www.rongyao-blog.top/posts/fb35.html"/>
-    <id>https://www.rongyao-blog.top/posts/fb35.html</id>
-    <published>2020-07-10T13:26:06.000Z</published>
-    <updated>2020-08-30T13:32:20.085Z</updated>
+    <title>leveldb之读过程</title>
+    <link href="https://honor-ry.github.io/posts/27a72563.html"/>
+    <id>https://honor-ry.github.io/posts/27a72563.html</id>
+    <published>2021-09-29T12:00:25.474Z</published>
+    <updated>2020-12-21T10:35:23.116Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h3 id=&quot;python基础&quot;&gt;&lt;a href=&quot;#python基础&quot; class=&quot;headerlink&quot; title=&quot;python基础&quot;&gt;&lt;/a&gt;python基础&lt;/h3&gt;&lt;h6 id=&quot;注释&quot;&gt;&lt;a href=&quot;#注释&quot;
-        
-      
+      &lt;p&gt;LevelDB 首先会去查看内存中的 Memtable，如果 Memtable 中包含 key 及其对应的value，则返回 value 值即可；&lt;/p&gt;
+&lt;p&gt;如果在 Memtable 没有读到key，则接下来到同样处于内存中的 Immutable Memtable 中去读取，类似地，如果读到就返回，若是没有读到,那么只能万般无奈下从磁盘中的大量SSTable文件中查找。&lt;/p&gt;
     
     </summary>
     
     
+      <category term="leveldb" scheme="https://honor-ry.github.io/categories/leveldb/"/>
     
-      <category term="python" scheme="https://www.rongyao-blog.top/tags/python/"/>
+    
+      <category term="leveldb" scheme="https://honor-ry.github.io/tags/leveldb/"/>
     
   </entry>
   
   <entry>
-    <title>常用的向量与矩阵的范数总结[L0、L1、L2范数]</title>
-    <link href="https://www.rongyao-blog.top/posts/f5c7.html"/>
-    <id>https://www.rongyao-blog.top/posts/f5c7.html</id>
-    <published>2020-07-09T03:16:04.000Z</published>
-    <updated>2020-08-30T13:32:20.110Z</updated>
+    <title>源码阅读工具-sourcetrail的使用</title>
+    <link href="https://honor-ry.github.io/posts/2516b88f.html"/>
+    <id>https://honor-ry.github.io/posts/2516b88f.html</id>
+    <published>2021-09-29T12:00:25.396Z</published>
+    <updated>2021-05-29T07:42:34.889Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+      &lt;p&gt;基本原理是通过生成 cmake生成&lt;code&gt;compile_commands.json&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这个文件记录了所有C++文件的编译指令&lt;/p&gt;
+&lt;p&gt;cmake项目采用如下指令：&lt;/p&gt;
+&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
 
-&lt;h3 id=&quot;向量的范数&quot;&gt;&lt;a href=&quot;#向量的范数&quot; class=&quot;headerlink&quot; title=&quot;向量的范数&quot;&gt;&lt;/a&gt;向量的范数&lt;/h3&gt;&lt;p&gt;首先定义一个向量为：x=[-5，6，8, -10]&lt;br&gt;1-范数：
-        
-      
+&lt;p&gt;非cmake项目，如 Visual Studio 有官方的插件，其它 IDE 也有相应的官方插件。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;根据 compile_commands.json 中的条目，逐一解析索引相关 C++ 源文件，收集所有信息存储在本地数据库中，并生成全文索引信息。&lt;/li&gt;
+&lt;li&gt;根据查询需求，展示所有相关信息。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;注意事项&quot;&gt;&lt;a href=&quot;#注意事项&quot; class=&quot;headerlink&quot; title=&quot;注意事项&quot;&gt;&lt;/a&gt;注意事项&lt;/h3&gt;&lt;p&gt;由于 compile_commands.json 中是没有头文件的编译指令的，因此所有需要索引的头文件（或者包含头文件的目录）都需要在项目设置中手动指定。&lt;br&gt;幸而它会递归搜索所有子目录，所以只要设置根目录就可以了。当然还可以根据需要，逐个添加部分自己感兴趣的目录。&lt;br&gt;毕竟文件越多，索引的越慢。&lt;br&gt;由于其索引器是静态链接 clang 的相关库，所以一些 Visual Studio 特有的编译参数（/ 开头）并不支持，这其实并不影响索引，手动移除即可。&lt;br&gt;对项目设置额外的编译器参数 -driver=cl 并不起作用。&lt;br&gt;如果项目启用了合并编译，则一些源文件会标记为 ExcludeFromBuild，这些文件就不会出现在 compile_commands.json，也就不会被索引。自己想办法替换成原始的文件吧。&lt;/p&gt;
     
     </summary>
     
     
-      <category term="机器学习" scheme="https://www.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="范数 矩阵算子范数 矩阵范数" scheme="https://www.rongyao-blog.top/tags/%E8%8C%83%E6%95%B0-%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E8%8C%83%E6%95%B0-%E7%9F%A9%E9%98%B5%E8%8C%83%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>端到端的机器学习项目，预测房价</title>
-    <link href="https://www.rongyao-blog.top/posts/7b80.html"/>
-    <id>https://www.rongyao-blog.top/posts/7b80.html</id>
-    <published>2020-07-05T13:33:28.000Z</published>
-    <updated>2020-08-30T13:32:20.193Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h3 id=&quot;端到端的机器学习项目&quot;&gt;&lt;a href=&quot;#端到端的机器学习项目&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://www.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="python 可视化" scheme="https://www.rongyao-blog.top/tags/python-%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NLP入门-情感分析|paddle</title>
-    <link href="https://www.rongyao-blog.top/posts/a21b.html"/>
-    <id>https://www.rongyao-blog.top/posts/a21b.html</id>
-    <published>2020-07-04T05:13:03.000Z</published>
-    <updated>2020-08-30T13:32:19.949Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;pre&gt;&lt;code&gt;### 任务介绍：
-
-在自然语言处理中，情感分析一般指判断一段文本所表达的情绪状态，属于文本分类问题。
-
-情绪：正面/负面&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;数据集介绍：&quot;&gt;&lt;a href=&quot;#数据集介绍：&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="NLP 机器学习" scheme="https://www.rongyao-blog.top/categories/NLP-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="python 机器学习 paddle" scheme="https://www.rongyao-blog.top/tags/python-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-paddle/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NLP入门-文本分类|paddle</title>
-    <link href="https://www.rongyao-blog.top/posts/ac4f.html"/>
-    <id>https://www.rongyao-blog.top/posts/ac4f.html</id>
-    <published>2020-07-04T02:54:58.000Z</published>
-    <updated>2020-08-30T13:32:19.959Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h4 id=&quot;文本分类：自然语言处理领域中的一个经典问题，文本分类是利用电脑对文本按照一定的分类体系进行自动分类标记。&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="NLP 机器学习" scheme="https://www.rongyao-blog.top/categories/NLP-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="python 机器学习" scheme="https://www.rongyao-blog.top/tags/python-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>生成对抗样本的方法|攻击方法</title>
-    <link href="https://www.rongyao-blog.top/posts/8a27.html"/>
-    <id>https://www.rongyao-blog.top/posts/8a27.html</id>
-    <published>2020-07-03T09:01:59.000Z</published>
-    <updated>2020-08-30T13:32:20.146Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h2 id=&quot;对抗样本&quot;&gt;&lt;a href=&quot;#对抗样本&quot; class=&quot;headerlink&quot; title=&quot;对抗样本&quot;&gt;&lt;/a&gt;对抗样本&lt;/h2&gt;&lt;h3 id=&quot;1-Biggio′s-attack&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://www.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="编程" scheme="https://honor-ry.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
     
     
   </entry>
   
   <entry>
-    <title>Kaggle-泰坦尼克号生存者预测比赛|初级入门</title>
-    <link href="https://www.rongyao-blog.top/posts/d25d.html"/>
-    <id>https://www.rongyao-blog.top/posts/d25d.html</id>
-    <published>2020-06-27T14:23:21.000Z</published>
-    <updated>2020-08-30T13:32:19.938Z</updated>
+    <title>leveldb学习记录-互斥锁、原子量</title>
+    <link href="https://honor-ry.github.io/posts/63a2cc78.html"/>
+    <id>https://honor-ry.github.io/posts/63a2cc78.html</id>
+    <published>2021-09-29T12:00:25.392Z</published>
+    <updated>2021-05-31T00:58:29.082Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h3 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;p&gt;leveldb使用的仍然是C++标准库中的互斥量和条件变量，做了简单的封装&lt;code&gt;port/port_stdcxx.h&lt;/code&gt;&lt;/p&gt;
     
     </summary>
     
     
-      <category term="机器学习" scheme="https://www.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="leveldb" scheme="https://honor-ry.github.io/categories/leveldb/"/>
     
     
-      <category term="python kaggle 机器学习" scheme="https://www.rongyao-blog.top/tags/python-kaggle-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="多线程" scheme="https://honor-ry.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
   </entry>
   
   <entry>
-    <title>python+opencv实现人脸识别|采用现成训练好的模型</title>
-    <link href="https://www.rongyao-blog.top/posts/63ec.html"/>
-    <id>https://www.rongyao-blog.top/posts/63ec.html</id>
-    <published>2020-06-23T11:23:33.000Z</published>
-    <updated>2020-08-30T13:32:20.028Z</updated>
+    <title>ubuntu16.04安装tensorflow教程</title>
+    <link href="https://honor-ry.github.io/posts/6efa.html"/>
+    <id>https://honor-ry.github.io/posts/6efa.html</id>
+    <published>2020-12-04T02:00:21.000Z</published>
+    <updated>2020-12-07T11:29:21.204Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h3 id=&quot;一、图片人脸检测（opencv）&quot;&gt;&lt;a href=&quot;#一、图片人脸检测（opencv）&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://www.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="opencv 人脸识别 python" scheme="https://www.rongyao-blog.top/tags/opencv-%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB-python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>强化学习课程|paddle|入门</title>
-    <link href="https://www.rongyao-blog.top/posts/7277.html"/>
-    <id>https://www.rongyao-blog.top/posts/7277.html</id>
-    <published>2020-06-20T11:28:58.000Z</published>
-    <updated>2020-08-30T13:32:20.098Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://www.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="python 人工智能 强化学习" scheme="https://www.rongyao-blog.top/tags/python-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD-%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python安装dlib遇到的错误:AttributeError:module ‘dlib’ has no attribute ‘get_frontal_face_detector’问题解决</title>
-    <link href="https://www.rongyao-blog.top/posts/3826.html"/>
-    <id>https://www.rongyao-blog.top/posts/3826.html</id>
-    <published>2020-06-16T14:17:01.000Z</published>
-    <updated>2020-08-30T13:32:20.042Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;p&gt;dlib是一个非常好用的跨平台的通用库，但是在安装过程中遇到了许多问题，我在使用Anaconda安装dlib过程中，用pip install 安装，安装成功后，import没有问题&lt;br&gt;如下图，import
-        
-      
+      &lt;p&gt;教程链接：&lt;a href=&quot;https://www.tensorflow.org/install/pip&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.tensorflow.org/install/pip&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在系统上安装python开发环境&lt;/li&gt;
+&lt;li&gt;安装python、pip软件包管理器和Virtualenv&lt;br&gt;sudo apt update&lt;br&gt;sudo apt install python3-dev python3-pip&lt;br&gt;sudo pip3 install -U virtualenv  # system-wide install&lt;/li&gt;
+&lt;/ol&gt;
     
     </summary>
     
     
     
-      <category term="python opencv" scheme="https://www.rongyao-blog.top/tags/python-opencv/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>matlab对控制系统进行时域和频域联合分析</title>
-    <link href="https://www.rongyao-blog.top/posts/4d65.html"/>
-    <id>https://www.rongyao-blog.top/posts/4d65.html</id>
-    <published>2020-06-09T12:20:16.000Z</published>
-    <updated>2020-08-30T13:32:20.070Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h2 id=&quot;时域频域联合分析&quot;&gt;&lt;a href=&quot;#时域频域联合分析&quot; class=&quot;headerlink&quot; title=&quot;时域频域联合分析&quot;&gt;&lt;/a&gt;时域频域联合分析&lt;/h2&gt;&lt;p&gt;  
-        
-      
-    
-    </summary>
-    
-    
-      <category term="控制" scheme="https://www.rongyao-blog.top/categories/%E6%8E%A7%E5%88%B6/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>C++ |标准模板库STL</title>
-    <link href="https://www.rongyao-blog.top/posts/988f.html"/>
-    <id>https://www.rongyao-blog.top/posts/988f.html</id>
-    <published>2020-04-20T10:21:53.000Z</published>
-    <updated>2020-08-30T13:32:19.929Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h3 id=&quot;Vector&quot;&gt;&lt;a href=&quot;#Vector&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="C++学习" scheme="https://www.rongyao-blog.top/categories/C-%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="c++" scheme="https://www.rongyao-blog.top/tags/c/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DNN|CNN|百度paddle学习</title>
-    <link href="https://www.rongyao-blog.top/posts/d902.html"/>
-    <id>https://www.rongyao-blog.top/posts/d902.html</id>
-    <published>2020-04-08T01:38:32.000Z</published>
-    <updated>2020-08-30T13:32:19.918Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h3 id=&quot;深度学习三个步骤：&quot;&gt;&lt;a href=&quot;#深度学习三个步骤：&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://www.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="python 卷积神经网络" scheme="https://www.rongyao-blog.top/tags/python-%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Pycharm汉化之后无法打开setting设置</title>
-    <link href="https://www.rongyao-blog.top/posts/d098.html"/>
-    <id>https://www.rongyao-blog.top/posts/d098.html</id>
-    <published>2020-04-02T02:59:35.000Z</published>
-    <updated>2020-08-30T13:32:19.971Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://www.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="python" scheme="https://www.rongyao-blog.top/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>机器学习|Andrew Ng|学习笔记</title>
-    <link href="https://www.rongyao-blog.top/posts/4f0c.html"/>
-    <id>https://www.rongyao-blog.top/posts/4f0c.html</id>
-    <published>2020-04-01T10:23:46.000Z</published>
-    <updated>2020-08-30T13:32:20.169Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;p&gt;&lt;font color=&quot;red&quot;&gt;Machine
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://www.rongyao-blog.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="神经网络" scheme="https://www.rongyao-blog.top/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+      <category term="机器学习" scheme="https://honor-ry.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   

@@ -5,27 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.1">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="CAYCJxXU2WjV_qTNztIDX4VM2VyX7pj_5y5w2jYtris" />
 
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
-<script id="hexo-configurations">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.rongyao-blog.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"honor-ry.github.io","root":"/","images":"/images","scheme":"Mist","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="端到端的机器学习项目主要步骤：1.观察大局。2.获得数据。3.从数据探索和可视化中获得洞见。4.机器学习算法的数据准备。5.选择和训练模型。6.微调模型。7.展示解决方案。8.启动、监控和维护系统。 使用的数据集选用StatLib库中选择了加州住房价格的数据集，该数据集基于1990年加州人口普查的数据。链接：https:&#x2F;&#x2F;pan.baidu.com&#x2F;s&#x2F;10N6CHN9yxMvG1HHPL6">
+<meta name="description" content="端到端的机器学习项目主要步骤：1.观察大局。2.获得数据。3.从数据探索和可视化中获得洞见。4.机器学习算法的数据准备。5.选择和训练模型。6.微调模型。7.展示解决方案。8.启动、监控和维护系统。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="端到端的机器学习项目，预测房价">
-<meta property="og:url" content="https://www.rongyao-blog.top/posts/7b80.html">
-<meta property="og:site_name" content="honor">
-<meta property="og:description" content="端到端的机器学习项目主要步骤：1.观察大局。2.获得数据。3.从数据探索和可视化中获得洞见。4.机器学习算法的数据准备。5.选择和训练模型。6.微调模型。7.展示解决方案。8.启动、监控和维护系统。 使用的数据集选用StatLib库中选择了加州住房价格的数据集，该数据集基于1990年加州人口普查的数据。链接：https:&#x2F;&#x2F;pan.baidu.com&#x2F;s&#x2F;10N6CHN9yxMvG1HHPL6">
+<meta property="og:url" content="https://honor-ry.github.io/posts/7b80.html">
+<meta property="og:site_name" content="Honor&#39;s Blog">
+<meta property="og:description" content="端到端的机器学习项目主要步骤：1.观察大局。2.获得数据。3.从数据探索和可视化中获得洞见。4.机器学习算法的数据准备。5.选择和训练模型。6.微调模型。7.展示解决方案。8.启动、监控和维护系统。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200705171239900.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200705171438778.png">
@@ -43,16 +50,17 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200711142653582.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200711141939362.png">
 <meta property="article:published_time" content="2020-07-05T13:33:28.000Z">
-<meta property="article:modified_time" content="2020-08-30T13:32:20.193Z">
+<meta property="article:modified_time" content="2020-12-07T11:44:31.001Z">
 <meta property="article:author" content="honor">
 <meta property="article:tag" content="python 可视化">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200705171239900.png">
 
-<link rel="canonical" href="https://www.rongyao-blog.top/posts/7b80.html">
+
+<link rel="canonical" href="https://honor-ry.github.io/posts/7b80.html">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -61,130 +69,257 @@
     lang   : 'zh-CN'
   };
 </script>
-
-  <title>端到端的机器学习项目，预测房价 | honor</title>
+<title>端到端的机器学习项目，预测房价 | Honor's Blog</title>
   
-
-
-
 
 
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
-<link rel="alternate" href="/atom.xml" title="honor" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="Honor's Blog" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">honor</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
+      <h1 class="site-title">Honor's Blog</h1>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">爱笑的小土豆~</p>
   </div>
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">29</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">58</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
+        <li class="menu-item menu-item-box">
+
+    <a href="/box/" rel="section"><i class="fa fa-th fa-fw"></i>百宝盒</a>
+
+  </li>
+        <li class="menu-item menu-item-photo">
+
+    <a href="https://wangrongyao.lofter.com/" rel="noopener" target="_blank"><i class="fa fa-th fa-fw"></i>摄影</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
-    </header>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
 
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#端到端的机器学习项目"><span class="nav-text">端到端的机器学习项目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用的数据集"><span class="nav-text">使用的数据集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#观察大局"><span class="nav-text">观察大局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获得数据"><span class="nav-text">获得数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建测试集"><span class="nav-text">创建测试集</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从数据探索和可视化中获得洞见"><span class="nav-text">从数据探索和可视化中获得洞见</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#寻找相关性"><span class="nav-text">寻找相关性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#机器学习算法的数据准备"><span class="nav-text">机器学习算法的数据准备</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据清理"><span class="nav-text">数据清理</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择和训练模型"><span class="nav-text">选择和训练模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#在训练集上训练和评估"><span class="nav-text">在训练集上训练和评估</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#微调模型"><span class="nav-text">微调模型</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#网格搜索"><span class="nav-text">网格搜索</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#随机搜索"><span class="nav-text">随机搜索</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="honor"
+      src="/images/logol1.png">
+  <p class="site-author-name" itemprop="name">honor</p>
+  <div class="site-description" itemprop="description">记录学习、科研、生活的点滴</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/honor-ry" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;honor-ry" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangrongyao2015@foxmail.com" title="E-Mail → mailto:wangrongyao2015@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
   </div>
 
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+        </section>
+      </div>
+        <div class="back-to-top animated">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
 
     
+
+  <a href="https://github.com/honor-ry" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.rongyao-blog.top/posts/7b80.html">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/7b80.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logol1.png">
@@ -193,47 +328,49 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="honor">
+      <meta itemprop="name" content="Honor's Blog">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           端到端的机器学习项目，预测房价
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-07-05 21:33:28" itemprop="dateCreated datePublished" datetime="2020-07-05T21:33:28+08:00">2020-07-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-30 21:32:20" itemprop="dateModified" datetime="2020-08-30T21:32:20+08:00">2020-08-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
-                </span>
-            </span>
+      <time title="创建时间：2020-07-05 21:33:28" itemprop="dateCreated datePublished" datetime="2020-07-05T21:33:28+08:00">2020-07-05</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-07 19:44:31" itemprop="dateModified" datetime="2020-12-07T19:44:31+08:00">2020-12-07</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+        </span>
+    </span>
 
-          
-            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span>
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -242,127 +379,62 @@
     
     
     <div class="post-body" itemprop="articleBody">
+        <h3 id="端到端的机器学习项目"><a href="#端到端的机器学习项目" class="headerlink" title="端到端的机器学习项目"></a>端到端的机器学习项目</h3><p>主要步骤：<br>1.观察大局。<br>2.获得数据。<br>3.从数据探索和可视化中获得洞见。<br>4.机器学习算法的数据准备。<br>5.选择和训练模型。<br>6.微调模型。<br>7.展示解决方案。<br>8.启动、监控和维护系统。</p>
+<a id="more"></a>
 
-      
-        <a id="more"></a>
-
-<h3 id="端到端的机器学习项目"><a href="#端到端的机器学习项目" class="headerlink" title="端到端的机器学习项目"></a>端到端的机器学习项目</h3><p>主要步骤：<br>1.观察大局。<br>2.获得数据。<br>3.从数据探索和可视化中获得洞见。<br>4.机器学习算法的数据准备。<br>5.选择和训练模型。<br>6.微调模型。<br>7.展示解决方案。<br>8.启动、监控和维护系统。</p>
 <h4 id="使用的数据集"><a href="#使用的数据集" class="headerlink" title="使用的数据集"></a>使用的数据集</h4><p>选用StatLib库中选择了加州住房价格的数据集，该数据集基于1990年加州人口普查的数据。<br>链接：<a href="https://pan.baidu.com/s/10N6CHN9yxMvG1HHPL6yX2g" target="_blank" rel="noopener">https://pan.baidu.com/s/10N6CHN9yxMvG1HHPL6yX2g</a><br>提取码：xpzs</p>
 <h4 id="观察大局"><a href="#观察大局" class="headerlink" title="观察大局"></a>观察大局</h4><p>首先要做的事是使用加州人口普查的数据建立起加州的房价模型。 数据中有许多指标， 诸如每个街区的人口数量、 收入中位数、 房价中位数等。 街区是美国人口普查局发布样本数据的最小地理单位（一个街区通常人口数为600～3000人） 。 这里， 我们将其简称为“区域”。</p>
 <h4 id="获得数据"><a href="#获得数据" class="headerlink" title="获得数据"></a>获得数据</h4><p>所有数据——一个以逗号来分割之的CSV文档housing.csv<br>首先使用pandas来加载数据</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
-HOUSING_PATH <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token string">"datasets"</span><span class="token punctuation">,</span> <span class="token string">"housing"</span><span class="token punctuation">)</span>
-<span class="token keyword">def</span> <span class="token function">load_housing_data</span><span class="token punctuation">(</span>housing_path<span class="token operator">=</span>HOUSING_PATH<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    csv_path <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>housing_path<span class="token punctuation">,</span> <span class="token string">"housing.csv"</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span>csv_path<span class="token punctuation">)</span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">HOUSING_PATH = os.path.join(<span class="string">"datasets"</span>, <span class="string">"housing"</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_housing_data</span><span class="params">(housing_path=HOUSING_PATH)</span>:</span></span><br><span class="line">    csv_path = os.path.join(housing_path, <span class="string">"housing.csv"</span>)</span><br><span class="line">    <span class="keyword">return</span> pd.read_csv(csv_path)</span><br></pre></td></tr></tbody></table></figure>
 <p>此函数会返回一个包含所有数据的Pandas DataFrame对象。<br>用DataFrame的head()方法查看数据集的前五行<br><img src="https://img-blog.csdnimg.cn/20200705171239900.png" alt="在这里插入图片描述"><br>每一行代表一个区， 总共有10个属性（上图中可以看到8个）longitude， latitude， housing_median_age， total_rooms，total_bed rooms， population， households， median_income，median_house_value以及ocean_proximity。<br>之后通过info()方法可以快速获取数据集的简单描述，比如总函数，每个属性的类型和非空值的数量。<br><img src="https://img-blog.csdnimg.cn/20200705171438778.png" alt="在这里插入图片描述"><br>数据集中包含20640个实例， total_bedrooms这个属性只有20433个非空值，这意味着有207个区域缺失这个特征。我们后面需要考虑到这一点。<br>所有属性的字段都是数字，除了ocean_proximity，其类型是object。之前通过head()方法查看前五行，发现该列中的值是重复的，表明它有可能是一个分类属性，采用value_counts()方法查看由多少种分类存在，每种类别下分别有多少个区域。<br><img src="https://img-blog.csdnimg.cn/20200705175541729.png" alt="在这里插入图片描述"><br>利用describe()方法可以显示数值属性的摘要。<br><img src="https://img-blog.csdnimg.cn/20200705180526902.png" alt="在这里插入图片描述"><br>count：非空值计数<br>mean：平均值<br>std：标准差<br>min：最小值<br>25%、50%、75%：表示一组观测值中给定百分比的观测值都低于该值。例如， 对于housing_median_age的值， 25%的区域低于18， 50%的区域低于29， 以及75%的区域低于<br>37。 </p>
 <p>另外一种快速了解数据类型的方法是绘制每个数值属性的直方图。直方图用来显示给定范围（横轴）的实例数量（纵轴）。</p>
-<pre class=" language-python"><code class="language-python"><span class="token operator">%</span>matplotlib inline <span class="token comment" spellcheck="true"># only in a Jupyter notebook</span>
-<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
-housing<span class="token punctuation">.</span>hist<span class="token punctuation">(</span>bins<span class="token operator">=</span><span class="token number">50</span><span class="token punctuation">,</span> figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline <span class="comment"># only in a Jupyter notebook</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">housing.hist(bins=<span class="number">50</span>, figsize=(<span class="number">20</span>,<span class="number">15</span>))</span><br><span class="line">plt.show()</span><br></pre></td></tr></tbody></table></figure>
 <h5 id="创建测试集"><a href="#创建测试集" class="headerlink" title="创建测试集"></a>创建测试集</h5><p>理论上创建测试机非常简单：只需要随机选择一些实例，通常是数据集的20%，然后将它们放在一边。</p>
-<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#np.random.seed(42)</span>
-<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
-<span class="token comment" spellcheck="true"># For illustration only. Sklearn has train_test_split()</span>
-<span class="token keyword">def</span> <span class="token function">split_train_test</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> test_ratio<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    shuffled_indices <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>permutation<span class="token punctuation">(</span>len<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    test_set_size <span class="token operator">=</span> int<span class="token punctuation">(</span>len<span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token operator">*</span> test_ratio<span class="token punctuation">)</span>
-    test_indices <span class="token operator">=</span> shuffled_indices<span class="token punctuation">[</span><span class="token punctuation">:</span>test_set_size<span class="token punctuation">]</span>
-    train_indices <span class="token operator">=</span> shuffled_indices<span class="token punctuation">[</span>test_set_size<span class="token punctuation">:</span><span class="token punctuation">]</span>
-    <span class="token keyword">return</span> data<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span>train_indices<span class="token punctuation">]</span><span class="token punctuation">,</span> data<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span>test_indices<span class="token punctuation">]</span>
-train_set<span class="token punctuation">,</span> test_set <span class="token operator">=</span> split_train_test<span class="token punctuation">(</span>housing<span class="token punctuation">,</span> <span class="token number">0.2</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>len<span class="token punctuation">(</span>train_set<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"train +"</span><span class="token punctuation">,</span> len<span class="token punctuation">(</span>test_set<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"test"</span><span class="token punctuation">)</span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#np.random.seed(42)</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment"># For illustration only. Sklearn has train_test_split()</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">split_train_test</span><span class="params">(data, test_ratio)</span>:</span></span><br><span class="line">    shuffled_indices = np.random.permutation(len(data))</span><br><span class="line">    test_set_size = int(len(data) * test_ratio)</span><br><span class="line">    test_indices = shuffled_indices[:test_set_size]</span><br><span class="line">    train_indices = shuffled_indices[test_set_size:]</span><br><span class="line">    <span class="keyword">return</span> data.iloc[train_indices], data.iloc[test_indices]</span><br><span class="line">train_set, test_set = split_train_test(housing, <span class="number">0.2</span>)</span><br><span class="line">print(len(train_set), <span class="string">"train +"</span>, len(test_set), <span class="string">"test"</span>)</span><br></pre></td></tr></tbody></table></figure>
 <p>如果这样，再运行一遍，又会产生一个不同的数据集。通常的解决方案是在第一次运行程序后随即保存测试机，之后只是加载它而已。另一种方法是在调用np.random.permutation()之前设置一个随机数生成器的种子np.random.seed(42)，从而让它始终生成相同的随机索引。<br>但是，这两种解决方案在下一次获取更新的数据时都会中断。常见的解决办法是每个实例都使用一个标识符（identifier）来决定是否进入测试集（假定每个实例都有一个唯一且不变的标识符）。举例来说，你可以计算每个实例标识符的hash值，只取hash的最后一个字节，如果该值小于等于51（约256的20%），则将该实例放入测试集。这样可以确保测试集在多个运行里都是一致的，即便更新数据集也仍然一致。新实例的20%将被放入新的测试集，而之前训练集中的实例也不会被放入新测试集。实现方式如下：</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> hashlib
-
-<span class="token keyword">def</span> <span class="token function">test_set_check</span><span class="token punctuation">(</span>identifier<span class="token punctuation">,</span> test_ratio<span class="token punctuation">,</span> hash<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">return</span> hash<span class="token punctuation">(</span>np<span class="token punctuation">.</span>int64<span class="token punctuation">(</span>identifier<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>digest<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">&lt;</span> <span class="token number">256</span> <span class="token operator">*</span> test_ratio
-
-<span class="token keyword">def</span> <span class="token function">split_train_test_by_id</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> test_ratio<span class="token punctuation">,</span> id_column<span class="token punctuation">,</span> hash<span class="token operator">=</span>hashlib<span class="token punctuation">.</span>md5<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    ids <span class="token operator">=</span> data<span class="token punctuation">[</span>id_column<span class="token punctuation">]</span>
-    in_test_set <span class="token operator">=</span> ids<span class="token punctuation">.</span>apply<span class="token punctuation">(</span><span class="token keyword">lambda</span> id_<span class="token punctuation">:</span> test_set_check<span class="token punctuation">(</span>id_<span class="token punctuation">,</span> test_ratio<span class="token punctuation">,</span> hash<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> data<span class="token punctuation">.</span>loc<span class="token punctuation">[</span><span class="token operator">~</span>in_test_set<span class="token punctuation">]</span><span class="token punctuation">,</span> data<span class="token punctuation">.</span>loc<span class="token punctuation">[</span>in_test_set<span class="token punctuation">]</span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_set_check</span><span class="params">(identifier, test_ratio, hash)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> hash(np.int64(identifier)).digest()[<span class="number">-1</span>] &lt; <span class="number">256</span> * test_ratio</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">split_train_test_by_id</span><span class="params">(data, test_ratio, id_column, hash=hashlib.md5)</span>:</span></span><br><span class="line">    ids = data[id_column]</span><br><span class="line">    in_test_set = ids.apply(<span class="keyword">lambda</span> id_: test_set_check(id_, test_ratio, hash))</span><br><span class="line">    <span class="keyword">return</span> data.loc[~in_test_set], data.loc[in_test_set]</span><br></pre></td></tr></tbody></table></figure>
 <p>这里housing数据集没有标识符列，最简单的办法是使用行索引作为ID：</p>
-<pre class=" language-python"><code class="language-python">housing_with_id <span class="token operator">=</span> housing<span class="token punctuation">.</span>reset_index<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># adds an `index` column</span>
-train_set<span class="token punctuation">,</span> test_set <span class="token operator">=</span> split_train_test_by_id<span class="token punctuation">(</span>housing_with_id<span class="token punctuation">,</span> <span class="token number">0.2</span><span class="token punctuation">,</span> <span class="token string">"index"</span><span class="token punctuation">)</span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">housing_with_id = housing.reset_index() <span class="comment"># adds an `index` column</span></span><br><span class="line">train_set, test_set = split_train_test_by_id(housing_with_id, <span class="number">0.2</span>, <span class="string">"index"</span>)</span><br></pre></td></tr></tbody></table></figure>
 <p>同时Scikit-Learn提供了一些函数， 可以通过多种方式将数据集分成多个子集。 最简单的函数是<code>train_test_split</code>， 它与前面定义的函数<code>split_train_test</code>几乎相同， 除了几个额外特征。 首先， 它也有<code>random_state</code>参数， 让你可以像之前提到过的那样设置随机生成器种子； 其次， 你可以把行数相同的多个数据集一次性发送给它， 它会根据相同的索引将其拆分（例如， 当你有一个单独的DataFrame用于标记时， 这就非常有用） ：</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>model_selection <span class="token keyword">import</span> train_test_split
-train_set<span class="token punctuation">,</span> test_set <span class="token operator">=</span> train_test_split<span class="token punctuation">(</span>housing<span class="token punctuation">,</span> test_size<span class="token operator">=</span><span class="token number">0.2</span><span class="token punctuation">,</span> random_state<span class="token operator">=</span><span class="token number">42</span><span class="token punctuation">)</span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">train_set, test_set = train_test_split(housing, test_size=<span class="number">0.2</span>, random_state=<span class="number">42</span>)</span><br></pre></td></tr></tbody></table></figure>
 <h4 id="从数据探索和可视化中获得洞见"><a href="#从数据探索和可视化中获得洞见" class="headerlink" title="从数据探索和可视化中获得洞见"></a>从数据探索和可视化中获得洞见</h4><p>在这个问题中，由于存在地理位置信息（经纬度），因此可建立一个各区域的分布图便于数据可视化。</p>
-<pre class=" language-python"><code class="language-python">housing <span class="token operator">=</span> strat_train_set<span class="token punctuation">.</span>copy<span class="token punctuation">(</span><span class="token punctuation">)</span>
-housing<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>kind<span class="token operator">=</span><span class="token string">"scatter"</span><span class="token punctuation">,</span> x<span class="token operator">=</span><span class="token string">"longitude"</span><span class="token punctuation">,</span> y<span class="token operator">=</span><span class="token string">"latitude"</span><span class="token punctuation">,</span> alpha<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">)</span>
-save_fig<span class="token punctuation">(</span><span class="token string">"better_visualization_plot"</span><span class="token punctuation">)</span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">housing = strat_train_set.copy()</span><br><span class="line">housing.plot(kind=<span class="string">"scatter"</span>, x=<span class="string">"longitude"</span>, y=<span class="string">"latitude"</span>, alpha=<span class="number">0.1</span>)</span><br><span class="line">save_fig(<span class="string">"better_visualization_plot"</span>)</span><br></pre></td></tr></tbody></table></figure>
 <p><img src="https://img-blog.csdnimg.cn/20200705212727930.png" alt="在这里插入图片描述"><br>现在，再来看看房价。每个圆的半径大小代表了每个地区的人口数量（选项s） ， 颜色代表价格（选项c） 。 我们使用一个名叫jet的预定义颜色表（选项cmap） 来进行可视化， 颜色范围从蓝（低） 到红（高） ： </p>
-<pre class=" language-python"><code class="language-python">housing<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>kind<span class="token operator">=</span><span class="token string">"scatter"</span><span class="token punctuation">,</span> x<span class="token operator">=</span><span class="token string">"longitude"</span><span class="token punctuation">,</span> y<span class="token operator">=</span><span class="token string">"latitude"</span><span class="token punctuation">,</span> alpha<span class="token operator">=</span><span class="token number">0.4</span><span class="token punctuation">,</span>
-s<span class="token operator">=</span>housing<span class="token punctuation">[</span><span class="token string">"population"</span><span class="token punctuation">]</span><span class="token operator">/</span><span class="token number">100</span><span class="token punctuation">,</span> label<span class="token operator">=</span><span class="token string">"population"</span><span class="token punctuation">,</span>
-c<span class="token operator">=</span><span class="token string">"median_house_value"</span><span class="token punctuation">,</span> cmap<span class="token operator">=</span>plt<span class="token punctuation">.</span>get_cmap<span class="token punctuation">(</span><span class="token string">"jet"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> colorbar<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
-<span class="token punctuation">)</span>p
-lt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">housing.plot(kind=<span class="string">"scatter"</span>, x=<span class="string">"longitude"</span>, y=<span class="string">"latitude"</span>, alpha=<span class="number">0.4</span>,</span><br><span class="line">s=housing[<span class="string">"population"</span>]/<span class="number">100</span>, label=<span class="string">"population"</span>,</span><br><span class="line">c=<span class="string">"median_house_value"</span>, cmap=plt.get_cmap(<span class="string">"jet"</span>), colorbar=<span class="literal">True</span>,</span><br><span class="line">)p</span><br><span class="line">lt.legend()</span><br></pre></td></tr></tbody></table></figure>
 <p><img src="https://img-blog.csdnimg.cn/20200705212957701.png" alt="在这里插入图片描述">　　这张图片告诉你房屋价格与地理位置（例如靠海）和人口密度息息相关，这点你可能早已知晓。一个通常很有用的方法是，使用聚类算法来检测主群体，然后再为各个聚类中心添加一个新的衡量邻近距离的特征。</p>
 <h5 id="寻找相关性"><a href="#寻找相关性" class="headerlink" title="寻找相关性"></a>寻找相关性</h5><p>由于数据集不大，你可以使用corr（）方法轻松计算出每对属性之间的标准相关系数<br>得到每个属性与房屋中位数的相关性分别是：<br><img src="https://img-blog.csdnimg.cn/20200710213325531.png" alt="在这里插入图片描述"><br>相关系数的范围从-1变化到1。 越接近1， 表示有越强的正相关； 当系数接近于-1， 则表示有强烈的负相关； 注意看纬度和房价中位数之间呈现出轻微的负相关（也就是说， 越往北走， 房价倾向于下降） 。 最后， 系数靠近0则说明二者之间没有线性相关性。</p>
 <h4 id="机器学习算法的数据准备"><a href="#机器学习算法的数据准备" class="headerlink" title="机器学习算法的数据准备"></a>机器学习算法的数据准备</h4><p>让我们先回到一个干净的数据集（再次复制strat_train_set），然后将预测器和标签分开，因为这里我们不一定对它们使用相同的转换方式（需要注意drop（）会创建一个数据副本，但是不影响strat_train_set）：</p>
-<pre class=" language-python"><code class="language-python">housing <span class="token operator">=</span> strat_train_set<span class="token punctuation">.</span>drop<span class="token punctuation">(</span><span class="token string">"median_house_value"</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#strip() 方法用于移除字符串头尾指定的字符（默认为空格或换行符）或字符序列。默认删除行，axis=1表示删除列</span>
-housing_labels <span class="token operator">=</span> strat_train_set<span class="token punctuation">[</span><span class="token string">"median_house_value"</span><span class="token punctuation">]</span><span class="token punctuation">.</span>copy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#拷贝median_house_value作为label</span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">housing = strat_train_set.drop(<span class="string">"median_house_value"</span>, axis=<span class="number">1</span>)<span class="comment">#strip() 方法用于移除字符串头尾指定的字符（默认为空格或换行符）或字符序列。默认删除行，axis=1表示删除列</span></span><br><span class="line">housing_labels = strat_train_set[<span class="string">"median_house_value"</span>].copy()<span class="comment">#拷贝median_house_value作为label</span></span><br></pre></td></tr></tbody></table></figure>
 <h5 id="数据清理"><a href="#数据清理" class="headerlink" title="数据清理"></a>数据清理</h5><p>针对前面提到的total_bedrooms属性有部分值缺失，可以采用以下选择：</p>
 <ul>
 <li>放弃这些响应的地区</li>
 <li>放弃这个属性</li>
 <li>将缺失的值设置为某个值（0、平均数或者中位数等都可以）</li>
 </ul>
-<pre class=" language-python"><code class="language-python">housing<span class="token punctuation">.</span>dropna<span class="token punctuation">(</span>subset<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"total_bedrooms"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># option 1 dropna删除指定列中包含缺失值的行</span>
-housing<span class="token punctuation">.</span>drop<span class="token punctuation">(</span><span class="token string">"total_bedrooms"</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># option 2</span>
-median <span class="token operator">=</span> housing<span class="token punctuation">[</span><span class="token string">"total_bedrooms"</span><span class="token punctuation">]</span><span class="token punctuation">.</span>median<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">#计算中位值</span>
-housing<span class="token punctuation">[</span><span class="token string">"total_bedrooms"</span><span class="token punctuation">]</span><span class="token punctuation">.</span>fillna<span class="token punctuation">(</span>median<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># option 3 </span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">housing.dropna(subset=[<span class="string">"total_bedrooms"</span>]) <span class="comment"># option 1 dropna删除指定列中包含缺失值的行</span></span><br><span class="line">housing.drop(<span class="string">"total_bedrooms"</span>, axis=<span class="number">1</span>) <span class="comment"># option 2</span></span><br><span class="line">median = housing[<span class="string">"total_bedrooms"</span>].median() <span class="comment">#计算中位值</span></span><br><span class="line">housing[<span class="string">"total_bedrooms"</span>].fillna(median) <span class="comment"># option 3</span></span><br></pre></td></tr></tbody></table></figure>
 <p>Scikit-Learn提供了一个非常容易上手的教程来处理缺失值：imputer。<br>下面是其使用方法：首先，需要创建一个Imputer实例，指定用该属性的中位数替换它的每个缺失值：</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>preprocessing <span class="token keyword">import</span> Imputer
-imputer <span class="token operator">=</span> Imputer<span class="token punctuation">(</span>strategy<span class="token operator">=</span><span class="token string">"median"</span><span class="token punctuation">)</span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> Imputer</span><br><span class="line">imputer = Imputer(strategy=<span class="string">"median"</span>)</span><br></pre></td></tr></tbody></table></figure>
 <p>由于中位数值只能在数值属性上计算， 所以我们需要创建一个没有文本属性的数据副本ocean_proximity：</p>
-<pre class=" language-python"><code class="language-python">housing_num <span class="token operator">=</span> housing<span class="token punctuation">.</span>drop<span class="token punctuation">(</span><span class="token string">"ocean_proximity"</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">housing_num = housing.drop(<span class="string">"ocean_proximity"</span>, axis=<span class="number">1</span>)</span><br></pre></td></tr></tbody></table></figure>
 <p>使用fit（） 方法将imputer实例适配到训练集:</p>
-<pre class=" language-python"><code class="language-python">imputer<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>housing_num<span class="token punctuation">)</span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imputer.fit(housing_num)</span><br></pre></td></tr></tbody></table></figure>
 <p><code>imputer</code>计算出了每个属性的中位数，并将结果保存在了实例变量<code>statistics_</code>中。只有属性<code>total_bedrooms</code>有缺失值，但是我们要确保一旦系统运行起来，新的数据中没有缺失值，所以安全的做法是将<code>imputer</code>应用到每个数值：<br><img src="https://img-blog.csdnimg.cn/20200711115357697.png" alt="在这里插入图片描述">)<img src="https://img-blog.csdnimg.cn/20200711115426798.png" alt="在这里插入图片描述"><br>现在，你就可以使用这个“训练过的”<code>imputer</code>来对训练集进行转换，通过将缺失值替换为中位数：</p>
-<pre class=" language-python"><code class="language-python">X <span class="token operator">=</span> imputer<span class="token punctuation">.</span>transform<span class="token punctuation">(</span>housing_num<span class="token punctuation">)</span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X = imputer.transform(housing_num)</span><br></pre></td></tr></tbody></table></figure>
 <p>结果是一个普通的Numpy数组，包含有转换后的特征。如果你想将其放回到Pandas DataFrame中，也很简单：<br><code>housing_tr = pd.DataFrame(X, columns=housing_num.columns)</code></p>
 <h4 id="选择和训练模型"><a href="#选择和训练模型" class="headerlink" title="选择和训练模型"></a>选择和训练模型</h4><pre><code>现在是时候选择机器学习模型并展开训练</code></pre><h5 id="在训练集上训练和评估"><a href="#在训练集上训练和评估" class="headerlink" title="在训练集上训练和评估"></a>在训练集上训练和评估</h5><p>先训练一个线性回归模型</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>linear_model <span class="token keyword">import</span> LinearRegression
-lin_reg <span class="token operator">=</span> LinearRegression<span class="token punctuation">(</span><span class="token punctuation">)</span>
-lin_reg<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>housing_prepared<span class="token punctuation">,</span> housing_labels<span class="token punctuation">)</span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line">lin_reg = LinearRegression()</span><br><span class="line">lin_reg.fit(housing_prepared, housing_labels)</span><br></pre></td></tr></tbody></table></figure>
 <p>完成后,现在就有了一个可用的线性回归模型。用一些训练集中的实例做以下验证：<br><img src="https://img-blog.csdnimg.cn/20200711124948118.png" alt="在这里插入图片描述"><br>比较预测值与标签值，看准确率如何。还可以使用Scikit-Learn的<code>mean_squared_error</code>函数，计算该线性回归模型的RMSE均方根误差。</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> mean_squared_error
-housing_predictions <span class="token operator">=</span> lin_reg<span class="token punctuation">.</span>predict<span class="token punctuation">(</span>housing_prepared<span class="token punctuation">)</span>
-lin_mse <span class="token operator">=</span> mean_squared_error<span class="token punctuation">(</span>housing_labels<span class="token punctuation">,</span> housing_predictions<span class="token punctuation">)</span>
-lin_rmse <span class="token operator">=</span> np<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span>lin_mse<span class="token punctuation">)</span>
-lin_rmse</code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line">housing_predictions = lin_reg.predict(housing_prepared)</span><br><span class="line">lin_mse = mean_squared_error(housing_labels, housing_predictions)</span><br><span class="line">lin_rmse = np.sqrt(lin_mse)</span><br><span class="line">lin_rmse</span><br></pre></td></tr></tbody></table></figure>
 <p><img src="https://img-blog.csdnimg.cn/20200711125130124.png" alt="在这里插入图片描述"><br>再来训练一个<code>DecisionTreeRegressor</code>决策树模型</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>tree <span class="token keyword">import</span> DecisionTreeRegressor
-tree_reg <span class="token operator">=</span> DecisionTreeRegressor<span class="token punctuation">(</span>random_state<span class="token operator">=</span><span class="token number">42</span><span class="token punctuation">)</span>
-tree_reg<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>housing_prepared<span class="token punctuation">,</span> housing_labels<span class="token punctuation">)</span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeRegressor</span><br><span class="line">tree_reg = DecisionTreeRegressor(random_state=<span class="number">42</span>)</span><br><span class="line">tree_reg.fit(housing_prepared, housing_labels)</span><br></pre></td></tr></tbody></table></figure>
 <p>训练完成后可以用训练集来评估一下</p>
-<pre class=" language-python"><code class="language-python">housing_predictions <span class="token operator">=</span> tree_reg<span class="token punctuation">.</span>predict<span class="token punctuation">(</span>housing_prepared<span class="token punctuation">)</span>
-tree_mse <span class="token operator">=</span> mean_squared_error<span class="token punctuation">(</span>housing_labels<span class="token punctuation">,</span> housing_predictions<span class="token punctuation">)</span>
-tree_rmse <span class="token operator">=</span> np<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span>tree_mse<span class="token punctuation">)</span>
-tree_rmse</code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">housing_predictions = tree_reg.predict(housing_prepared)</span><br><span class="line">tree_mse = mean_squared_error(housing_labels, housing_predictions)</span><br><span class="line">tree_rmse = np.sqrt(tree_mse)</span><br><span class="line">tree_rmse</span><br></pre></td></tr></tbody></table></figure>
 <p><img src="https://img-blog.csdnimg.cn/20200711130058345.png" alt="在这里插入图片描述"><br>均方误差为0，可能是由于模型对数据严重过拟合了。</p>
 <p>尝试最后一个模型：<code>RandomForestRegressor</code>      　　随机森林的工作原理是通过对特征的随机子集进行许多个决策树的训练，然后对其预测取平均。</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>ensemble <span class="token keyword">import</span> RandomForestRegressor
-forest_reg <span class="token operator">=</span> RandomForestRegressor<span class="token punctuation">(</span><span class="token punctuation">)</span>
-forest_reg<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>housing_prepared<span class="token punctuation">,</span> housing_labels<span class="token punctuation">)</span>
-housing_predictions <span class="token operator">=</span> forest_reg<span class="token punctuation">.</span>predict<span class="token punctuation">(</span>housing_prepared<span class="token punctuation">)</span>
-forest_mse <span class="token operator">=</span> mean_squared_error<span class="token punctuation">(</span>housing_labels<span class="token punctuation">,</span> housing_predictions<span class="token punctuation">)</span>
-forest_rmse <span class="token operator">=</span> np<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span>forest_mse<span class="token punctuation">)</span>
-forest_rmse</code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestRegressor</span><br><span class="line">forest_reg = RandomForestRegressor()</span><br><span class="line">forest_reg.fit(housing_prepared, housing_labels)</span><br><span class="line">housing_predictions = forest_reg.predict(housing_prepared)</span><br><span class="line">forest_mse = mean_squared_error(housing_labels, housing_predictions)</span><br><span class="line">forest_rmse = np.sqrt(forest_mse)</span><br><span class="line">forest_rmse</span><br></pre></td></tr></tbody></table></figure>
 <p><img src="https://img-blog.csdnimg.cn/20200711130901980.png" alt="在这里插入图片描述"></p>
 <h4 id="微调模型"><a href="#微调模型" class="headerlink" title="微调模型"></a>微调模型</h4><h6 id="网格搜索"><a href="#网格搜索" class="headerlink" title="网格搜索"></a>网格搜索</h6><p>一种微调的方法是手动调整超参数，找到一组很好的超参数值组合。<br>还可以可以用Scikit-Learn的<code>GridSearchCV</code>来替你进行探索。你所要做的只是告诉<code>GridSearchCV</code>你要进行实验的超参数是什么，以及需要尝试的值，<code>GridSearchCV</code>将会使用交叉验证来评估超参数值的所有可能的组合。例如，下面这段代码搜索<code>RandomForestRegressor</code>的超参数值的最佳组合：</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>model_selection <span class="token keyword">import</span> GridSearchCV
-param_grid <span class="token operator">=</span> <span class="token punctuation">[</span>
-    <span class="token punctuation">{</span><span class="token string">'n_estimators'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'max_features'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token punctuation">{</span><span class="token string">'bootstrap'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token boolean">False</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'n_estimators'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'max_features'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token punctuation">]</span>
-forest_reg <span class="token operator">=</span> RandomForestRegressor<span class="token punctuation">(</span><span class="token punctuation">)</span>
-grid_search <span class="token operator">=</span> GridSearchCV<span class="token punctuation">(</span>forest_reg<span class="token punctuation">,</span> param_grid<span class="token punctuation">,</span> cv<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">,</span>
-                           scoring<span class="token operator">=</span><span class="token string">'neg_mean_squared_error'</span><span class="token punctuation">)</span>
-grid_search<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>housing_prepared<span class="token punctuation">,</span> housing_labels<span class="token punctuation">)</span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line">param_grid = [</span><br><span class="line">    {<span class="string">'n_estimators'</span>: [<span class="number">3</span>, <span class="number">10</span>, <span class="number">30</span>], <span class="string">'max_features'</span>: [<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>]},</span><br><span class="line">    {<span class="string">'bootstrap'</span>: [<span class="literal">False</span>], <span class="string">'n_estimators'</span>: [<span class="number">3</span>, <span class="number">10</span>], <span class="string">'max_features'</span>: [<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]},</span><br><span class="line">  ]</span><br><span class="line">forest_reg = RandomForestRegressor()</span><br><span class="line">grid_search = GridSearchCV(forest_reg, param_grid, cv=<span class="number">5</span>,</span><br><span class="line">                           scoring=<span class="string">'neg_mean_squared_error'</span>)</span><br><span class="line">grid_search.fit(housing_prepared, housing_labels)</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
 <p>当你不能确定超参数该有什么值，一个简单的方法是尝试连续的10的次方（如果想要一个粒度更小的搜寻，可以用更小的数，就像在这个例子中对超参数n_estimators做的）。</p>
 </blockquote>
@@ -399,57 +471,71 @@ grid_search<span class="token punctuation">.</span>fit<span class="token punctua
     
     
     
-        <div class="reward-container">
-  <div>Donate comment here.</div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
+	
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/images/wechat.jpg" alt="honor 微信支付">
-        <p>微信支付</p>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechat.jpg" alt="honor 微信">
+        <span>微信</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="/images/alipay.jpg" alt="honor 支付宝">
-        <p>支付宝</p>
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/python-%E5%8F%AF%E8%A7%86%E5%8C%96/" rel="tag"># python 可视化</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/posts/a21b.html" rel="prev" title="NLP入门-情感分析|paddle">
-      <i class="fa fa-chevron-left"></i> NLP入门-情感分析|paddle
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/f5c7.html" rel="next" title="常用的向量与矩阵的范数总结[L0、L1、L2范数]">
-      常用的向量与矩阵的范数总结[L0、L1、L2范数] <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
           
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>honor
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://honor-ry.github.io/posts/7b80.html" title="端到端的机器学习项目，预测房价">https://honor-ry.github.io/posts/7b80.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/python-%E5%8F%AF%E8%A7%86%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> python 可视化</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/a21b.html" rel="prev" title="NLP入门-情感分析|paddle">
+                  <i class="fa fa-chevron-left"></i> NLP入门-情感分析|paddle
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/f5c7.html" rel="next" title="常用的向量与矩阵的范数总结[L0、L1、L2范数]">
+                  常用的向量与矩阵的范数总结[L0、L1、L2范数] <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -458,7 +544,7 @@ grid_search<span class="token punctuation">.</span>fit<span class="token punctua
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -467,120 +553,27 @@ grid_search<span class="token punctuation">.</span>fit<span class="token punctua
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#端到端的机器学习项目"><span class="nav-number">1.</span> <span class="nav-text">端到端的机器学习项目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用的数据集"><span class="nav-number">1.1.</span> <span class="nav-text">使用的数据集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#观察大局"><span class="nav-number">1.2.</span> <span class="nav-text">观察大局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获得数据"><span class="nav-number">1.3.</span> <span class="nav-text">获得数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建测试集"><span class="nav-number">1.3.1.</span> <span class="nav-text">创建测试集</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从数据探索和可视化中获得洞见"><span class="nav-number">1.4.</span> <span class="nav-text">从数据探索和可视化中获得洞见</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#寻找相关性"><span class="nav-number">1.4.1.</span> <span class="nav-text">寻找相关性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#机器学习算法的数据准备"><span class="nav-number">1.5.</span> <span class="nav-text">机器学习算法的数据准备</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据清理"><span class="nav-number">1.5.1.</span> <span class="nav-text">数据清理</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择和训练模型"><span class="nav-number">1.6.</span> <span class="nav-text">选择和训练模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#在训练集上训练和评估"><span class="nav-number">1.6.1.</span> <span class="nav-text">在训练集上训练和评估</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#微调模型"><span class="nav-number">1.7.</span> <span class="nav-text">微调模型</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#网格搜索"><span class="nav-number">1.7.0.1.</span> <span class="nav-text">网格搜索</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#随机搜索"><span class="nav-number">1.8.</span> <span class="nav-text">随机搜索</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="honor"
-      src="/images/logol1.png">
-  <p class="site-author-name" itemprop="name">honor</p>
-  <div class="site-description" itemprop="description">记录学习、科研、生活的点滴</div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">36</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">9</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">23</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/honor-ry" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;honor-ry" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:yourname@gmail.com" title="E-Mail → mailto:yourname@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-      </span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">honor</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
-  </div>
-<div class="powered-by">
-<i class="fa fa-user-md"></i>
-<span id="busuanzi_container_site_uv">
-  本站总访客数:<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;| 
-</span>
-<span id="busuanzi_container_site_pv">
-    &nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
-</span>
-</div>
-</div>
-        
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
@@ -589,7 +582,6 @@ grid_search<span class="token punctuation">.</span>fit<span class="token punctua
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-divider">|</span>
     <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="fa fa-eye"></i>
@@ -599,46 +591,30 @@ grid_search<span class="token punctuation">.</span>fit<span class="token punctua
       </span>
     </span>
 </div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
 
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
+    </div>
+  </footer>
 
   
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
 
-
-
-
-
-
-
-
+<script src="/js/local-search.js"></script>
 
 
 
@@ -646,8 +622,12 @@ grid_search<span class="token punctuation">.</span>fit<span class="token punctua
 
 
   
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-  
+
+
+
+
 
 </body>
 </html>

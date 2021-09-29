@@ -5,27 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.1">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="CAYCJxXU2WjV_qTNztIDX4VM2VyX7pj_5y5w2jYtris" />
 
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
-<script id="hexo-configurations">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.rongyao-blog.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"honor-ry.github.io","root":"/","images":"/images","scheme":"Mist","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="深度学习三个步骤： 建立模型 选择什么样的网络结构 选择多少层，每层选择多少神经元   损失函数 选择常用损失函数，平方误差，交叉熵…..   参数学习 梯度下降 反向传播算法     全连接神经网络DNN由于模型结构不够灵活，模型参数太多，通过模型改进，就出现了卷积神经网络CNN。CNN在结构上有三大特性:  局部连接，在我们进行图像识别的时候，不需要对整个图像进行处理，只需要关注图像中某些">
+<meta name="description" content="深度学习三个步骤： 建立模型 选择什么样的网络结构 选择多少层，每层选择多少神经元   损失函数 选择常用损失函数，平方误差，交叉熵…..   参数学习 梯度下降 反向传播算法       全连接神经网络DNN由于模型结构不够灵活，模型参数太多，通过模型改进，就出现了卷积神经网络CNN。CNN在结构上有三大特性:  局部连接，在我们进行图像识别的时候，不需要对整个图像进行处理，只需要关注图像中">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DNN|CNN|百度paddle学习">
-<meta property="og:url" content="https://www.rongyao-blog.top/posts/d902.html">
-<meta property="og:site_name" content="honor">
-<meta property="og:description" content="深度学习三个步骤： 建立模型 选择什么样的网络结构 选择多少层，每层选择多少神经元   损失函数 选择常用损失函数，平方误差，交叉熵…..   参数学习 梯度下降 反向传播算法     全连接神经网络DNN由于模型结构不够灵活，模型参数太多，通过模型改进，就出现了卷积神经网络CNN。CNN在结构上有三大特性:  局部连接，在我们进行图像识别的时候，不需要对整个图像进行处理，只需要关注图像中某些">
+<meta property="og:url" content="https://honor-ry.github.io/posts/d902.html">
+<meta property="og:site_name" content="Honor&#39;s Blog">
+<meta property="og:description" content="深度学习三个步骤： 建立模型 选择什么样的网络结构 选择多少层，每层选择多少神经元   损失函数 选择常用损失函数，平方误差，交叉熵…..   参数学习 梯度下降 反向传播算法       全连接神经网络DNN由于模型结构不够灵活，模型参数太多，通过模型改进，就出现了卷积神经网络CNN。CNN在结构上有三大特性:  局部连接，在我们进行图像识别的时候，不需要对整个图像进行处理，只需要关注图像中">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200407200955527.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200407220711655.png">
@@ -39,16 +46,17 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200408090753891.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2020040809293612.png">
 <meta property="article:published_time" content="2020-04-08T01:38:32.000Z">
-<meta property="article:modified_time" content="2020-08-30T13:32:19.918Z">
+<meta property="article:modified_time" content="2020-12-05T13:51:39.341Z">
 <meta property="article:author" content="honor">
 <meta property="article:tag" content="python 卷积神经网络">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200407200955527.png">
 
-<link rel="canonical" href="https://www.rongyao-blog.top/posts/d902.html">
+
+<link rel="canonical" href="https://honor-ry.github.io/posts/d902.html">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -57,130 +65,257 @@
     lang   : 'zh-CN'
   };
 </script>
-
-  <title>DNN|CNN|百度paddle学习 | honor</title>
+<title>DNN|CNN|百度paddle学习 | Honor's Blog</title>
   
-
-
-
 
 
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
-<link rel="alternate" href="/atom.xml" title="honor" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="Honor's Blog" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">honor</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
+      <h1 class="site-title">Honor's Blog</h1>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">爱笑的小土豆~</p>
   </div>
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">29</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">58</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
+        <li class="menu-item menu-item-box">
+
+    <a href="/box/" rel="section"><i class="fa fa-th fa-fw"></i>百宝盒</a>
+
+  </li>
+        <li class="menu-item menu-item-photo">
+
+    <a href="https://wangrongyao.lofter.com/" rel="noopener" target="_blank"><i class="fa fa-th fa-fw"></i>摄影</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
-    </header>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
 
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#深度学习三个步骤："><span class="nav-text">深度学习三个步骤：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积神经网络的一般结构"><span class="nav-text">卷积神经网络的一般结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#经典的CNN结构"><span class="nav-text">经典的CNN结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AlexNet"><span class="nav-text">AlexNet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VGG"><span class="nav-text">VGG</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day01-新冠疫情可视化"><span class="nav-text">Day01 新冠疫情可视化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day02手势识别"><span class="nav-text">Day02手势识别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day03-车牌识别"><span class="nav-text">Day03-车牌识别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day04-口罩分类"><span class="nav-text">Day04-口罩分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#人流密度检测问题"><span class="nav-text">人流密度检测问题</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="honor"
+      src="/images/logol1.png">
+  <p class="site-author-name" itemprop="name">honor</p>
+  <div class="site-description" itemprop="description">记录学习、科研、生活的点滴</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/honor-ry" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;honor-ry" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangrongyao2015@foxmail.com" title="E-Mail → mailto:wangrongyao2015@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
   </div>
 
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+        </section>
+      </div>
+        <div class="back-to-top animated">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
 
     
+
+  <a href="https://github.com/honor-ry" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.rongyao-blog.top/posts/d902.html">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/d902.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logol1.png">
@@ -189,47 +324,49 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="honor">
+      <meta itemprop="name" content="Honor's Blog">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           DNN|CNN|百度paddle学习
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-04-08 09:38:32" itemprop="dateCreated datePublished" datetime="2020-04-08T09:38:32+08:00">2020-04-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-30 21:32:19" itemprop="dateModified" datetime="2020-08-30T21:32:19+08:00">2020-08-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
-                </span>
-            </span>
+      <time title="创建时间：2020-04-08 09:38:32" itemprop="dateCreated datePublished" datetime="2020-04-08T09:38:32+08:00">2020-04-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-05 21:51:39" itemprop="dateModified" datetime="2020-12-05T21:51:39+08:00">2020-12-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+        </span>
+    </span>
 
-          
-            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span>
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -238,8 +375,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <a id="more"></a>
 
 <h3 id="深度学习三个步骤："><a href="#深度学习三个步骤：" class="headerlink" title="深度学习三个步骤："></a>深度学习三个步骤：</h3><ul>
@@ -259,6 +394,8 @@
 </li>
 </ul>
 <hr>
+<!--more-->
+
 <p>全连接神经网络DNN由于模型结构不够灵活，模型参数太多，通过模型改进，就出现了卷积神经网络CNN。<br>CNN在结构上有三大特性:</p>
 <ol>
 <li><p>局部连接，在我们进行图像识别的时候，不需要对整个图像进行处理，只需要关注图像中某些特殊的区域，一张640x480的图片，可能其中的16x16个像素</p>
@@ -274,42 +411,7 @@
 </ol>
 <p>这几天参加了百度飞桨举办的深度学习7日入门-CV疫情特辑课程，通过几个疫情AI实战案例，轻松入门深度学习。</p>
 <h3 id="Day01-新冠疫情可视化"><a href="#Day01-新冠疫情可视化" class="headerlink" title="Day01 新冠疫情可视化"></a>Day01 新冠疫情可视化</h3><p>利用python爬取丁香园公开的统计数据，根据累计确诊数，使用pyecharts绘制疫情分布图，通过查阅Pycharts api比较容易实现</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> json
-<span class="token keyword">import</span> datetime
-<span class="token keyword">from</span> pyecharts<span class="token punctuation">.</span>charts <span class="token keyword">import</span> Pie
-<span class="token keyword">from</span> pyecharts <span class="token keyword">import</span> options <span class="token keyword">as</span> opts
-
-<span class="token comment" spellcheck="true"># 读原始数据文件</span>
-today <span class="token operator">=</span> datetime<span class="token punctuation">.</span>date<span class="token punctuation">.</span>today<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">'%Y%m%d'</span><span class="token punctuation">)</span>   <span class="token comment" spellcheck="true">#20200315</span>
-datafile <span class="token operator">=</span> <span class="token string">'data/'</span><span class="token operator">+</span> today <span class="token operator">+</span> <span class="token string">'.json'</span>
-<span class="token keyword">with</span> open<span class="token punctuation">(</span>datafile<span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'UTF-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> file<span class="token punctuation">:</span>
-    json_array <span class="token operator">=</span> json<span class="token punctuation">.</span>loads<span class="token punctuation">(</span>file<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-<span class="token comment" spellcheck="true"># 分析全国实时确诊数据：'confirmedCount'字段</span>
-china_data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-<span class="token keyword">for</span> province <span class="token keyword">in</span> json_array<span class="token punctuation">:</span>
-    china_data<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>province<span class="token punctuation">[</span><span class="token string">'provinceShortName'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> province<span class="token punctuation">[</span><span class="token string">'confirmedCount'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-china_data <span class="token operator">=</span> sorted<span class="token punctuation">(</span>china_data<span class="token punctuation">,</span> key<span class="token operator">=</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> reverse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>                 <span class="token comment" spellcheck="true">#reverse=True,表示降序，反之升序</span>
-
-<span class="token keyword">print</span><span class="token punctuation">(</span>china_data<span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true"># 全国疫情地图</span>
-<span class="token comment" spellcheck="true"># 自定义的每一段的范围，以及每一段的特别的样式。</span>
-
-labels <span class="token operator">=</span> <span class="token punctuation">[</span>data<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token keyword">for</span> data <span class="token keyword">in</span> china_data<span class="token punctuation">]</span>
-counts <span class="token operator">=</span> <span class="token punctuation">[</span>data<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token keyword">for</span> data <span class="token keyword">in</span> china_data<span class="token punctuation">]</span>
-
-m <span class="token operator">=</span> Pie<span class="token punctuation">(</span><span class="token punctuation">)</span>
-m<span class="token punctuation">.</span>add<span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>list<span class="token punctuation">(</span>z<span class="token punctuation">)</span> <span class="token keyword">for</span> z <span class="token keyword">in</span> zip<span class="token punctuation">(</span>labels<span class="token punctuation">,</span> counts<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-
-<span class="token comment" spellcheck="true">#系列配置项,可配置图元样式、文字样式、标签样式、点线样式等</span>
-m<span class="token punctuation">.</span>set_series_opts<span class="token punctuation">(</span>label_opts<span class="token operator">=</span>opts<span class="token punctuation">.</span>LabelOpts<span class="token punctuation">(</span>formatter<span class="token operator">=</span><span class="token string">"{b}: {c}"</span><span class="token punctuation">)</span>
-            <span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">#全局配置项,可配置标题、动画、坐标轴、图例等</span>
-m<span class="token punctuation">.</span>set_global_opts<span class="token punctuation">(</span>title_opts<span class="token operator">=</span>opts<span class="token punctuation">.</span>TitleOpts<span class="token punctuation">(</span>title<span class="token operator">=</span><span class="token string">'全国实时确诊数据'</span><span class="token punctuation">,</span>
-                                            subtitle<span class="token operator">=</span><span class="token string">'数据来源：丁香园'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-                  legend_opts<span class="token operator">=</span>opts<span class="token punctuation">.</span>LegendOpts<span class="token punctuation">(</span>is_show<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">#render（）会生成本地 HTML 文件，默认会在当前目录生成 render.html 文件，也可以传入路径参数，如 m.render("mycharts.html")</span>
-m<span class="token punctuation">.</span>render<span class="token punctuation">(</span>path<span class="token operator">=</span><span class="token string">'/home/aistudio/data/饼状图.html'</span><span class="token punctuation">)</span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> pyecharts.charts <span class="keyword">import</span> Pie</span><br><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> options <span class="keyword">as</span> opts</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读原始数据文件</span></span><br><span class="line">today = datetime.date.today().strftime(<span class="string">'%Y%m%d'</span>)   <span class="comment">#20200315</span></span><br><span class="line">datafile = <span class="string">'data/'</span>+ today + <span class="string">'.json'</span></span><br><span class="line"><span class="keyword">with</span> open(datafile, <span class="string">'r'</span>, encoding=<span class="string">'UTF-8'</span>) <span class="keyword">as</span> file:</span><br><span class="line">    json_array = json.loads(file.read())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分析全国实时确诊数据：'confirmedCount'字段</span></span><br><span class="line">china_data = []</span><br><span class="line"><span class="keyword">for</span> province <span class="keyword">in</span> json_array:</span><br><span class="line">    china_data.append((province[<span class="string">'provinceShortName'</span>], province[<span class="string">'confirmedCount'</span>]))</span><br><span class="line">china_data = sorted(china_data, key=<span class="keyword">lambda</span> x: x[<span class="number">1</span>], reverse=<span class="literal">True</span>)                 <span class="comment">#reverse=True,表示降序，反之升序</span></span><br><span class="line"></span><br><span class="line">print(china_data)</span><br><span class="line"><span class="comment"># 全国疫情地图</span></span><br><span class="line"><span class="comment"># 自定义的每一段的范围，以及每一段的特别的样式。</span></span><br><span class="line"></span><br><span class="line">labels = [data[<span class="number">0</span>] <span class="keyword">for</span> data <span class="keyword">in</span> china_data]</span><br><span class="line">counts = [data[<span class="number">1</span>] <span class="keyword">for</span> data <span class="keyword">in</span> china_data]</span><br><span class="line"></span><br><span class="line">m = Pie()</span><br><span class="line">m.add(<span class="string">""</span>, [list(z) <span class="keyword">for</span> z <span class="keyword">in</span> zip(labels, counts)])</span><br><span class="line"></span><br><span class="line"><span class="comment">#系列配置项,可配置图元样式、文字样式、标签样式、点线样式等</span></span><br><span class="line">m.set_series_opts(label_opts=opts.LabelOpts(formatter=<span class="string">"{b}: {c}"</span>)</span><br><span class="line">            )</span><br><span class="line"><span class="comment">#全局配置项,可配置标题、动画、坐标轴、图例等</span></span><br><span class="line">m.set_global_opts(title_opts=opts.TitleOpts(title=<span class="string">'全国实时确诊数据'</span>,</span><br><span class="line">                                            subtitle=<span class="string">'数据来源：丁香园'</span>),</span><br><span class="line">                  legend_opts=opts.LegendOpts(is_show=<span class="literal">False</span>))</span><br><span class="line"><span class="comment">#render（）会生成本地 HTML 文件，默认会在当前目录生成 render.html 文件，也可以传入路径参数，如 m.render("mycharts.html")</span></span><br><span class="line">m.render(path=<span class="string">'/home/aistudio/data/饼状图.html'</span>)</span><br></pre></td></tr></tbody></table></figure>
 <p><strong>结果图：</strong><br><img src="https://img-blog.csdnimg.cn/2020040808513127.png" alt="在这里插入图片描述"></p>
 <h3 id="Day02手势识别"><a href="#Day02手势识别" class="headerlink" title="Day02手势识别"></a>Day02手势识别</h3><p>属于图像分类任务，根据图像的语义信息将不同类别图像区分开，是计算机视觉中重要的基本问题。手势识别属于图像分类中的一个细分类问题。<br>主要步骤：</p>
 <ol>
@@ -319,139 +421,19 @@ m<span class="token punctuation">.</span>render<span class="token punctuation">(
 <li>模型评估</li>
 <li>模型预测<br>定义的DNN全连接神经网络：</li>
 </ol>
-<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#定义DNN网络</span>
-<span class="token keyword">class</span> <span class="token class-name">MyDNN</span><span class="token punctuation">(</span>fluid<span class="token punctuation">.</span>dygraph<span class="token punctuation">.</span>Layer<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        super<span class="token punctuation">(</span>MyDNN<span class="token punctuation">,</span>self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>hidden1 <span class="token operator">=</span> Linear<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token number">300</span><span class="token punctuation">,</span>act<span class="token operator">=</span><span class="token string">"relu"</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>hidden2 <span class="token operator">=</span> Linear<span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span><span class="token number">500</span><span class="token punctuation">,</span>act<span class="token operator">=</span><span class="token string">"relu"</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>hidden3 <span class="token operator">=</span> Linear<span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span>act<span class="token operator">=</span><span class="token string">"relu"</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>hidden4 <span class="token operator">=</span> Linear<span class="token punctuation">(</span><span class="token number">3</span><span class="token operator">*</span><span class="token number">100</span><span class="token operator">*</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> act<span class="token operator">=</span><span class="token string">"softmax"</span><span class="token punctuation">)</span>
-    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>input<span class="token punctuation">)</span><span class="token punctuation">:</span>   
-       x<span class="token operator">=</span>self<span class="token punctuation">.</span>hidden1<span class="token punctuation">(</span>input<span class="token punctuation">)</span> 
-      <span class="token comment" spellcheck="true">#print(input.shape)</span>
-       x<span class="token operator">=</span>self<span class="token punctuation">.</span>hidden2<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-       x<span class="token operator">=</span>self<span class="token punctuation">.</span>hidden3<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-       x<span class="token operator">=</span>fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>x<span class="token punctuation">,</span>shape<span class="token operator">=</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token operator">*</span><span class="token number">100</span><span class="token operator">*</span><span class="token number">100</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-       <span class="token comment" spellcheck="true">#print(x.shape)</span>
-       y<span class="token operator">=</span>self<span class="token punctuation">.</span>hidden4<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-       <span class="token keyword">return</span> y<span class="token punctuation">;</span></code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#定义DNN网络</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyDNN</span><span class="params">(fluid.dygraph.Layer)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(MyDNN,self).__init__()</span><br><span class="line">        self.hidden1 = Linear(<span class="number">100</span>,<span class="number">300</span>,act=<span class="string">"relu"</span>)</span><br><span class="line">        self.hidden2 = Linear(<span class="number">300</span>,<span class="number">500</span>,act=<span class="string">"relu"</span>)</span><br><span class="line">        self.hidden3 = Linear(<span class="number">500</span>,<span class="number">100</span>,act=<span class="string">"relu"</span>)</span><br><span class="line">        self.hidden4 = Linear(<span class="number">3</span>*<span class="number">100</span>*<span class="number">100</span>, <span class="number">10</span>, act=<span class="string">"softmax"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self,input)</span>:</span>   </span><br><span class="line">       x=self.hidden1(input) </span><br><span class="line">      <span class="comment">#print(input.shape)</span></span><br><span class="line">       x=self.hidden2(x)</span><br><span class="line">       x=self.hidden3(x)</span><br><span class="line">       x=fluid.layers.reshape(x,shape=[<span class="number">-1</span>,<span class="number">3</span>*<span class="number">100</span>*<span class="number">100</span>])</span><br><span class="line">       <span class="comment">#print(x.shape)</span></span><br><span class="line">       y=self.hidden4(x)</span><br><span class="line">       <span class="keyword">return</span> y;</span><br></pre></td></tr></tbody></table></figure>
 <p>其中通过查看Paddle API，更改了几种不同的优化器和模型参数，最终accuracy还是达不到90%，还是不太会该如何选取参数。<br>识别结果：<img src="https://img-blog.csdnimg.cn/20200408090753891.png" alt="在这里插入图片描述"></p>
 <h3 id="Day03-车牌识别"><a href="#Day03-车牌识别" class="headerlink" title="Day03-车牌识别"></a>Day03-车牌识别</h3><p>通过对经典的卷积网络模型比如LeNet的解析， 分为多个卷积层，激活层，池化层，然后是全连接层，最后通过Softmax函数将各分类标签通过概率表达出来。学会每一层的维度计算。<br>车牌识别中，需要事先将车牌中每个字符例如’沪’，’C’等切分出来，共形成65个分类，通过深度学习实际上最后预测的是车牌上的每个字符最大概率的预测字符，然后再拼接出来形成最终的识别结果。</p>
-<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#定义网络</span>
-<span class="token keyword">class</span> <span class="token class-name">MyLeNet</span><span class="token punctuation">(</span>fluid<span class="token punctuation">.</span>dygraph<span class="token punctuation">.</span>Layer<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        super<span class="token punctuation">(</span>MyLeNet<span class="token punctuation">,</span>self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>hidden1_1 <span class="token operator">=</span> Conv2D<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">28</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>hidden1_2 <span class="token operator">=</span> Pool2D<span class="token punctuation">(</span>pool_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span>pool_type<span class="token operator">=</span><span class="token string">'max'</span><span class="token punctuation">,</span>pool_stride<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>hidden2_1 <span class="token operator">=</span> Conv2D<span class="token punctuation">(</span><span class="token number">28</span><span class="token punctuation">,</span><span class="token number">32</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>hidden2_2 <span class="token operator">=</span> Pool2D<span class="token punctuation">(</span>pool_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span>pool_type<span class="token operator">=</span><span class="token string">'max'</span><span class="token punctuation">,</span>pool_stride<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>hidden3 <span class="token operator">=</span> Conv2D<span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">,</span><span class="token number">32</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>hidden4 <span class="token operator">=</span> Linear<span class="token punctuation">(</span><span class="token number">32</span><span class="token operator">*</span><span class="token number">10</span><span class="token operator">*</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">65</span><span class="token punctuation">,</span>act<span class="token operator">=</span><span class="token string">'softmax'</span><span class="token punctuation">)</span>
-    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>input<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        x<span class="token operator">=</span>self<span class="token punctuation">.</span>hidden1_1<span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        x<span class="token operator">=</span>self<span class="token punctuation">.</span>hidden1_2<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        x<span class="token operator">=</span>self<span class="token punctuation">.</span>hidden2_1<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        x<span class="token operator">=</span>self<span class="token punctuation">.</span>hidden2_2<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        x<span class="token operator">=</span>self<span class="token punctuation">.</span>hidden3<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        x<span class="token operator">=</span>fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>x<span class="token punctuation">,</span>shape<span class="token operator">=</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">32</span><span class="token operator">*</span><span class="token number">10</span><span class="token operator">*</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-        y<span class="token operator">=</span>self<span class="token punctuation">.</span>hidden4<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token keyword">return</span> y</code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#定义网络</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyLeNet</span><span class="params">(fluid.dygraph.Layer)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(MyLeNet,self).__init__()</span><br><span class="line">        self.hidden1_1 = Conv2D(<span class="number">1</span>,<span class="number">28</span>,<span class="number">5</span>,<span class="number">1</span>)</span><br><span class="line">        self.hidden1_2 = Pool2D(pool_size=<span class="number">2</span>,pool_type=<span class="string">'max'</span>,pool_stride=<span class="number">1</span>)</span><br><span class="line">        self.hidden2_1 = Conv2D(<span class="number">28</span>,<span class="number">32</span>,<span class="number">3</span>,<span class="number">1</span>)</span><br><span class="line">        self.hidden2_2 = Pool2D(pool_size=<span class="number">2</span>,pool_type=<span class="string">'max'</span>,pool_stride=<span class="number">1</span>)</span><br><span class="line">        self.hidden3 = Conv2D(<span class="number">32</span>,<span class="number">32</span>,<span class="number">3</span>,<span class="number">1</span>)</span><br><span class="line">        self.hidden4 = Linear(<span class="number">32</span>*<span class="number">10</span>*<span class="number">10</span>,<span class="number">65</span>,act=<span class="string">'softmax'</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self,input)</span>:</span></span><br><span class="line">        x=self.hidden1_1(input);</span><br><span class="line">        x=self.hidden1_2(x);</span><br><span class="line">        x=self.hidden2_1(x);</span><br><span class="line">        x=self.hidden2_2(x);</span><br><span class="line">        x=self.hidden3(x);</span><br><span class="line">        x=fluid.layers.reshape(x,shape=[<span class="number">-1</span>,<span class="number">32</span>*<span class="number">10</span>*<span class="number">10</span>])</span><br><span class="line">        y=self.hidden4(x);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> y</span><br></pre></td></tr></tbody></table></figure>
 <h3 id="Day04-口罩分类"><a href="#Day04-口罩分类" class="headerlink" title="Day04-口罩分类"></a>Day04-口罩分类</h3><p>检测在密集人流区域中戴口罩和未戴口罩的所有人脸，同时判断该人是否佩戴口罩。<br>vgg模型配置<br><img src="https://img-blog.csdnimg.cn/2020040809293612.png" alt="在这里插入图片描述"><br>vgg网络定义:</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">VGGNet</span><span class="token punctuation">(</span>fluid<span class="token punctuation">.</span>dygraph<span class="token punctuation">.</span>Layer<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">'''
-    VGG网络
-    '''</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        super<span class="token punctuation">(</span>VGGNet<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>convpool01<span class="token operator">=</span>ConvPool<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">64</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span>act<span class="token operator">=</span><span class="token string">"relu"</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>convpool02<span class="token operator">=</span>ConvPool<span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">,</span><span class="token number">128</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span>act<span class="token operator">=</span><span class="token string">"relu"</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>convpool03<span class="token operator">=</span>ConvPool<span class="token punctuation">(</span><span class="token number">128</span><span class="token punctuation">,</span><span class="token number">256</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span>act<span class="token operator">=</span><span class="token string">"relu"</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>convpool04<span class="token operator">=</span>ConvPool<span class="token punctuation">(</span><span class="token number">256</span><span class="token punctuation">,</span><span class="token number">512</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span>act<span class="token operator">=</span><span class="token string">"relu"</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>convpool05<span class="token operator">=</span>ConvPool<span class="token punctuation">(</span><span class="token number">512</span><span class="token punctuation">,</span><span class="token number">512</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span>act<span class="token operator">=</span><span class="token string">"relu"</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>pool_5_shape<span class="token operator">=</span><span class="token number">512</span><span class="token operator">*</span><span class="token number">7</span><span class="token operator">*</span><span class="token number">7</span>
-        self<span class="token punctuation">.</span>fc01<span class="token operator">=</span>fluid<span class="token punctuation">.</span>dygraph<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>self<span class="token punctuation">.</span>pool_5_shape<span class="token punctuation">,</span><span class="token number">256</span><span class="token punctuation">,</span>act<span class="token operator">=</span><span class="token string">"relu"</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>fc02<span class="token operator">=</span>fluid<span class="token punctuation">.</span>dygraph<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">256</span><span class="token punctuation">,</span><span class="token number">256</span><span class="token punctuation">,</span>act<span class="token operator">=</span><span class="token string">"relu"</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>fc03<span class="token operator">=</span>fluid<span class="token punctuation">.</span>dygraph<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">256</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span>act<span class="token operator">=</span><span class="token string">"softmax"</span><span class="token punctuation">)</span>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VGGNet</span><span class="params">(fluid.dygraph.Layer)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    VGG网络</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(VGGNet, self).__init__()</span><br><span class="line">        self.convpool01=ConvPool(<span class="number">3</span>,<span class="number">64</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,act=<span class="string">"relu"</span>)</span><br><span class="line">        self.convpool02=ConvPool(<span class="number">64</span>,<span class="number">128</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,act=<span class="string">"relu"</span>)</span><br><span class="line">        self.convpool03=ConvPool(<span class="number">128</span>,<span class="number">256</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,act=<span class="string">"relu"</span>)</span><br><span class="line">        self.convpool04=ConvPool(<span class="number">256</span>,<span class="number">512</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,act=<span class="string">"relu"</span>)</span><br><span class="line">        self.convpool05=ConvPool(<span class="number">512</span>,<span class="number">512</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,act=<span class="string">"relu"</span>)</span><br><span class="line">        self.pool_5_shape=<span class="number">512</span>*<span class="number">7</span>*<span class="number">7</span></span><br><span class="line">        self.fc01=fluid.dygraph.Linear(self.pool_5_shape,<span class="number">256</span>,act=<span class="string">"relu"</span>)</span><br><span class="line">        self.fc02=fluid.dygraph.Linear(<span class="number">256</span>,<span class="number">256</span>,act=<span class="string">"relu"</span>)</span><br><span class="line">        self.fc03=fluid.dygraph.Linear(<span class="number">256</span>,<span class="number">2</span>,act=<span class="string">"softmax"</span>)</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, inputs, label=None)</span>:</span></span><br><span class="line">        <span class="string">"""前向计算"""</span></span><br><span class="line">        <span class="comment">#print(inputs.shape)</span></span><br><span class="line">        x=self.convpool01(inputs)</span><br><span class="line">        <span class="comment">#print(x.shape)</span></span><br><span class="line">        x=self.convpool02(x)</span><br><span class="line">        <span class="comment">#print(x.shape)</span></span><br><span class="line">        x=self.convpool03(x)</span><br><span class="line">        x=self.convpool04(x)</span><br><span class="line">        x=self.convpool05(x)</span><br><span class="line">        x=fluid.layers.reshape(x,shape=[<span class="number">-1</span>,<span class="number">512</span>*<span class="number">7</span>*<span class="number">7</span>])</span><br><span class="line">        x=self.fc01(x)</span><br><span class="line">        x=self.fc02(x)</span><br><span class="line">        x=self.fc03(x)</span><br><span class="line">        <span class="keyword">if</span> label <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            acc=fluid.layers.accuracy(input=x,label=label)</span><br><span class="line">            <span class="keyword">return</span> x, acc</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> x</span><br></pre></td></tr></tbody></table></figure>
 
-    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> inputs<span class="token punctuation">,</span> label<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""前向计算"""</span>
-        <span class="token comment" spellcheck="true">#print(inputs.shape)</span>
-        x<span class="token operator">=</span>self<span class="token punctuation">.</span>convpool01<span class="token punctuation">(</span>inputs<span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true">#print(x.shape)</span>
-        x<span class="token operator">=</span>self<span class="token punctuation">.</span>convpool02<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true">#print(x.shape)</span>
-        x<span class="token operator">=</span>self<span class="token punctuation">.</span>convpool03<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-        x<span class="token operator">=</span>self<span class="token punctuation">.</span>convpool04<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-        x<span class="token operator">=</span>self<span class="token punctuation">.</span>convpool05<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-        x<span class="token operator">=</span>fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>x<span class="token punctuation">,</span>shape<span class="token operator">=</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">512</span><span class="token operator">*</span><span class="token number">7</span><span class="token operator">*</span><span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-        x<span class="token operator">=</span>self<span class="token punctuation">.</span>fc01<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-        x<span class="token operator">=</span>self<span class="token punctuation">.</span>fc02<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-        x<span class="token operator">=</span>self<span class="token punctuation">.</span>fc03<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-        <span class="token keyword">if</span> label <span class="token keyword">is</span> <span class="token operator">not</span> None<span class="token punctuation">:</span>
-            acc<span class="token operator">=</span>fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>accuracy<span class="token punctuation">(</span>input<span class="token operator">=</span>x<span class="token punctuation">,</span>label<span class="token operator">=</span>label<span class="token punctuation">)</span>
-            <span class="token keyword">return</span> x<span class="token punctuation">,</span> acc
-        <span class="token keyword">else</span><span class="token punctuation">:</span>
-            <span class="token keyword">return</span> x</code></pre>
 <h3 id="人流密度检测问题"><a href="#人流密度检测问题" class="headerlink" title="人流密度检测问题"></a>人流密度检测问题</h3><p>本竞赛所用训练和测试图片均来自一般监控场景，但包括多种视角（如低空、高空、鱼眼等），图中行人的相对尺寸也会有较大差异。部分训练数据参考了公开数据集（如ShanghaiTech [1], UCF-CC-50 [2], WorldExpo’10 [3]，Mall [4] 等）。</p>
 <p>本竞赛的数据标注均在对应json文件中，每张训练图片的标注为以下两种方式之一：</p>
 <p>（1）部分数据对图中行人提供了方框标注（boundingbox），格式为[x, y, w, h][x,y,w,h]；</p>
 <p>（2）部分图对图中行人提供了头部的打点标注，坐标格式为[x, y][x,y]。</p>
 <p>此外部分图片还提供了忽略区（ignore_region）标注，格式为[x_0, y_0, x_1, y_1, …, x_n, y_n]组成的多边形（注意一张图片可能有多个多边形忽略区），图片在忽略区内的部分不参与训练/测试。<br>人流密度检测网络训练使用的CNN模型网络配置如下：</p>
-<pre class=" language-python"><code class="language-python">
-<span class="token keyword">class</span> <span class="token class-name">CNN</span><span class="token punctuation">(</span>fluid<span class="token punctuation">.</span>dygraph<span class="token punctuation">.</span>Layer<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">'''
-    网络
-    '''</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        super<span class="token punctuation">(</span>CNN<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-
-        self<span class="token punctuation">.</span>conv01_1 <span class="token operator">=</span> fluid<span class="token punctuation">.</span>dygraph<span class="token punctuation">.</span>Conv2D<span class="token punctuation">(</span>num_channels<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> num_filters<span class="token operator">=</span><span class="token number">64</span><span class="token punctuation">,</span>filter_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span>padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>act<span class="token operator">=</span><span class="token string">"relu"</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>pool01<span class="token operator">=</span>fluid<span class="token punctuation">.</span>dygraph<span class="token punctuation">.</span>Pool2D<span class="token punctuation">(</span>pool_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span>pool_type<span class="token operator">=</span><span class="token string">'max'</span><span class="token punctuation">,</span>pool_stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
-
-        self<span class="token punctuation">.</span>conv02_1 <span class="token operator">=</span> fluid<span class="token punctuation">.</span>dygraph<span class="token punctuation">.</span>Conv2D<span class="token punctuation">(</span>num_channels<span class="token operator">=</span><span class="token number">64</span><span class="token punctuation">,</span> num_filters<span class="token operator">=</span><span class="token number">128</span><span class="token punctuation">,</span>filter_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>act<span class="token operator">=</span><span class="token string">"relu"</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>pool02<span class="token operator">=</span>fluid<span class="token punctuation">.</span>dygraph<span class="token punctuation">.</span>Pool2D<span class="token punctuation">(</span>pool_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span>pool_type<span class="token operator">=</span><span class="token string">'max'</span><span class="token punctuation">,</span>pool_stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
-
-        self<span class="token punctuation">.</span>conv03_1 <span class="token operator">=</span> fluid<span class="token punctuation">.</span>dygraph<span class="token punctuation">.</span>Conv2D<span class="token punctuation">(</span>num_channels<span class="token operator">=</span><span class="token number">128</span><span class="token punctuation">,</span> num_filters<span class="token operator">=</span><span class="token number">256</span><span class="token punctuation">,</span>filter_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>act<span class="token operator">=</span><span class="token string">"relu"</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>pool03<span class="token operator">=</span>fluid<span class="token punctuation">.</span>dygraph<span class="token punctuation">.</span>Pool2D<span class="token punctuation">(</span>pool_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span>pool_type<span class="token operator">=</span><span class="token string">'max'</span><span class="token punctuation">,</span>pool_stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
-
-        self<span class="token punctuation">.</span>conv04_1 <span class="token operator">=</span> fluid<span class="token punctuation">.</span>dygraph<span class="token punctuation">.</span>Conv2D<span class="token punctuation">(</span>num_channels<span class="token operator">=</span><span class="token number">256</span><span class="token punctuation">,</span> num_filters<span class="token operator">=</span><span class="token number">512</span><span class="token punctuation">,</span>filter_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>act<span class="token operator">=</span><span class="token string">"relu"</span><span class="token punctuation">)</span>
-
-        self<span class="token punctuation">.</span>conv05_1 <span class="token operator">=</span> fluid<span class="token punctuation">.</span>dygraph<span class="token punctuation">.</span>Conv2D<span class="token punctuation">(</span>num_channels<span class="token operator">=</span><span class="token number">512</span><span class="token punctuation">,</span> num_filters<span class="token operator">=</span><span class="token number">512</span><span class="token punctuation">,</span>filter_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span>padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> act<span class="token operator">=</span><span class="token string">"relu"</span><span class="token punctuation">)</span>
-
-
-        self<span class="token punctuation">.</span>conv06 <span class="token operator">=</span> fluid<span class="token punctuation">.</span>dygraph<span class="token punctuation">.</span>Conv2D<span class="token punctuation">(</span>num_channels<span class="token operator">=</span><span class="token number">512</span><span class="token punctuation">,</span>num_filters<span class="token operator">=</span><span class="token number">256</span><span class="token punctuation">,</span>filter_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span>padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>act<span class="token operator">=</span><span class="token string">'relu'</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>conv07 <span class="token operator">=</span> fluid<span class="token punctuation">.</span>dygraph<span class="token punctuation">.</span>Conv2D<span class="token punctuation">(</span>num_channels<span class="token operator">=</span><span class="token number">256</span><span class="token punctuation">,</span>num_filters<span class="token operator">=</span><span class="token number">128</span><span class="token punctuation">,</span>filter_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span>padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>act<span class="token operator">=</span><span class="token string">'relu'</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>conv08 <span class="token operator">=</span> fluid<span class="token punctuation">.</span>dygraph<span class="token punctuation">.</span>Conv2D<span class="token punctuation">(</span>num_channels<span class="token operator">=</span><span class="token number">128</span><span class="token punctuation">,</span>num_filters<span class="token operator">=</span><span class="token number">64</span><span class="token punctuation">,</span>filter_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span>padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>act<span class="token operator">=</span><span class="token string">'relu'</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>conv09 <span class="token operator">=</span> fluid<span class="token punctuation">.</span>dygraph<span class="token punctuation">.</span>Conv2D<span class="token punctuation">(</span>num_channels<span class="token operator">=</span><span class="token number">64</span><span class="token punctuation">,</span>num_filters<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>filter_size<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>padding<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>act<span class="token operator">=</span>None<span class="token punctuation">)</span>
-
-
-    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> inputs<span class="token punctuation">,</span> label<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""前向计算"""</span>
-        out <span class="token operator">=</span> self<span class="token punctuation">.</span>conv01_1<span class="token punctuation">(</span>inputs<span class="token punctuation">)</span>
-
-        out <span class="token operator">=</span> self<span class="token punctuation">.</span>pool01<span class="token punctuation">(</span>out<span class="token punctuation">)</span>
-
-        out <span class="token operator">=</span> self<span class="token punctuation">.</span>conv02_1<span class="token punctuation">(</span>out<span class="token punctuation">)</span>
-
-        out <span class="token operator">=</span> self<span class="token punctuation">.</span>pool02<span class="token punctuation">(</span>out<span class="token punctuation">)</span>
-        out <span class="token operator">=</span> fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>dropout<span class="token punctuation">(</span>x<span class="token operator">=</span>out<span class="token punctuation">,</span>dropout_prob<span class="token operator">=</span><span class="token number">0.25</span><span class="token punctuation">)</span>
-        out <span class="token operator">=</span> self<span class="token punctuation">.</span>conv03_1<span class="token punctuation">(</span>out<span class="token punctuation">)</span>
-
-        out <span class="token operator">=</span> self<span class="token punctuation">.</span>pool03<span class="token punctuation">(</span>out<span class="token punctuation">)</span>
-        out <span class="token operator">=</span> fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>dropout<span class="token punctuation">(</span>x<span class="token operator">=</span>out<span class="token punctuation">,</span>dropout_prob<span class="token operator">=</span><span class="token number">0.25</span><span class="token punctuation">)</span>
-        out <span class="token operator">=</span> self<span class="token punctuation">.</span>conv04_1<span class="token punctuation">(</span>out<span class="token punctuation">)</span>    
-        out <span class="token operator">=</span> fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>dropout<span class="token punctuation">(</span>x<span class="token operator">=</span>out<span class="token punctuation">,</span>dropout_prob<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">)</span>
-        out <span class="token operator">=</span> self<span class="token punctuation">.</span>conv05_1<span class="token punctuation">(</span>out<span class="token punctuation">)</span>
-        out <span class="token operator">=</span> fluid<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>dropout<span class="token punctuation">(</span>x<span class="token operator">=</span>out<span class="token punctuation">,</span>dropout_prob<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">)</span>
-        out <span class="token operator">=</span> self<span class="token punctuation">.</span>conv06<span class="token punctuation">(</span>out<span class="token punctuation">)</span>
-        out <span class="token operator">=</span> self<span class="token punctuation">.</span>conv07<span class="token punctuation">(</span>out<span class="token punctuation">)</span>
-        out <span class="token operator">=</span> self<span class="token punctuation">.</span>conv08<span class="token punctuation">(</span>out<span class="token punctuation">)</span>
-        out <span class="token operator">=</span> self<span class="token punctuation">.</span>conv09<span class="token punctuation">(</span>out<span class="token punctuation">)</span>
-
-        <span class="token keyword">return</span> out</code></pre>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CNN</span><span class="params">(fluid.dygraph.Layer)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    网络</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(CNN, self).__init__()</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        self.conv01_1 = fluid.dygraph.Conv2D(num_channels=<span class="number">3</span>, num_filters=<span class="number">64</span>,filter_size=<span class="number">3</span>,padding=<span class="number">1</span>,act=<span class="string">"relu"</span>)</span><br><span class="line">        self.pool01=fluid.dygraph.Pool2D(pool_size=<span class="number">2</span>,pool_type=<span class="string">'max'</span>,pool_stride=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        self.conv02_1 = fluid.dygraph.Conv2D(num_channels=<span class="number">64</span>, num_filters=<span class="number">128</span>,filter_size=<span class="number">3</span>, padding=<span class="number">1</span>,act=<span class="string">"relu"</span>)</span><br><span class="line">        self.pool02=fluid.dygraph.Pool2D(pool_size=<span class="number">2</span>,pool_type=<span class="string">'max'</span>,pool_stride=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        self.conv03_1 = fluid.dygraph.Conv2D(num_channels=<span class="number">128</span>, num_filters=<span class="number">256</span>,filter_size=<span class="number">3</span>, padding=<span class="number">1</span>,act=<span class="string">"relu"</span>)</span><br><span class="line">        self.pool03=fluid.dygraph.Pool2D(pool_size=<span class="number">2</span>,pool_type=<span class="string">'max'</span>,pool_stride=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        self.conv04_1 = fluid.dygraph.Conv2D(num_channels=<span class="number">256</span>, num_filters=<span class="number">512</span>,filter_size=<span class="number">3</span>, padding=<span class="number">1</span>,act=<span class="string">"relu"</span>)</span><br><span class="line"></span><br><span class="line">        self.conv05_1 = fluid.dygraph.Conv2D(num_channels=<span class="number">512</span>, num_filters=<span class="number">512</span>,filter_size=<span class="number">3</span>,padding=<span class="number">1</span>, act=<span class="string">"relu"</span>)</span><br><span class="line">      </span><br><span class="line"></span><br><span class="line">        self.conv06 = fluid.dygraph.Conv2D(num_channels=<span class="number">512</span>,num_filters=<span class="number">256</span>,filter_size=<span class="number">3</span>,padding=<span class="number">1</span>,act=<span class="string">'relu'</span>)</span><br><span class="line">        self.conv07 = fluid.dygraph.Conv2D(num_channels=<span class="number">256</span>,num_filters=<span class="number">128</span>,filter_size=<span class="number">3</span>,padding=<span class="number">1</span>,act=<span class="string">'relu'</span>)</span><br><span class="line">        self.conv08 = fluid.dygraph.Conv2D(num_channels=<span class="number">128</span>,num_filters=<span class="number">64</span>,filter_size=<span class="number">3</span>,padding=<span class="number">1</span>,act=<span class="string">'relu'</span>)</span><br><span class="line">        self.conv09 = fluid.dygraph.Conv2D(num_channels=<span class="number">64</span>,num_filters=<span class="number">1</span>,filter_size=<span class="number">1</span>,padding=<span class="number">0</span>,act=<span class="literal">None</span>)</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, inputs, label=None)</span>:</span></span><br><span class="line">        <span class="string">"""前向计算"""</span></span><br><span class="line">        out = self.conv01_1(inputs)</span><br><span class="line">        </span><br><span class="line">        out = self.pool01(out)</span><br><span class="line"></span><br><span class="line">        out = self.conv02_1(out)</span><br><span class="line">       </span><br><span class="line">        out = self.pool02(out)</span><br><span class="line">        out = fluid.layers.dropout(x=out,dropout_prob=<span class="number">0.25</span>)</span><br><span class="line">        out = self.conv03_1(out)</span><br><span class="line">        </span><br><span class="line">        out = self.pool03(out)</span><br><span class="line">        out = fluid.layers.dropout(x=out,dropout_prob=<span class="number">0.25</span>)</span><br><span class="line">        out = self.conv04_1(out)    </span><br><span class="line">        out = fluid.layers.dropout(x=out,dropout_prob=<span class="number">0.5</span>)</span><br><span class="line">        out = self.conv05_1(out)</span><br><span class="line">        out = fluid.layers.dropout(x=out,dropout_prob=<span class="number">0.5</span>)</span><br><span class="line">        out = self.conv06(out)</span><br><span class="line">        out = self.conv07(out)</span><br><span class="line">        out = self.conv08(out)</span><br><span class="line">        out = self.conv09(out)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> out</span><br></pre></td></tr></tbody></table></figure>
 <p>通过几天的实践学习，掌握了训练的一般步骤，按照数据处理，配置网络，训练网络，模型评估和模型预测这样的步骤，再就是本地没GPU加速，运用百度paddle提供免费的算力，进行参数调优，但是对如何调整参数获得更好的效果，还是不太会。</p>
 <script>
         document.querySelectorAll('.github-emoji')
@@ -477,57 +459,71 @@ m<span class="token punctuation">.</span>render<span class="token punctuation">(
     
     
     
-        <div class="reward-container">
-  <div>Donate comment here.</div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
+	
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/images/wechat.jpg" alt="honor 微信支付">
-        <p>微信支付</p>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechat.jpg" alt="honor 微信">
+        <span>微信</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="/images/alipay.jpg" alt="honor 支付宝">
-        <p>支付宝</p>
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/python-%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="tag"># python 卷积神经网络</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/posts/d098.html" rel="prev" title="Pycharm汉化之后无法打开setting设置">
-      <i class="fa fa-chevron-left"></i> Pycharm汉化之后无法打开setting设置
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/988f.html" rel="next" title="C++ |标准模板库STL">
-      C++ |标准模板库STL <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
           
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>honor
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://honor-ry.github.io/posts/d902.html" title="DNN|CNN|百度paddle学习">https://honor-ry.github.io/posts/d902.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/python-%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="tag"><i class="fa fa-tag"></i> python 卷积神经网络</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/d098.html" rel="prev" title="Pycharm汉化之后无法打开setting设置">
+                  <i class="fa fa-chevron-left"></i> Pycharm汉化之后无法打开setting设置
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/988f.html" rel="next" title="C++ |标准模板库STL">
+                  C++ |标准模板库STL <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -536,7 +532,7 @@ m<span class="token punctuation">.</span>render<span class="token punctuation">(
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -545,120 +541,27 @@ m<span class="token punctuation">.</span>render<span class="token punctuation">(
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#深度学习三个步骤："><span class="nav-number">1.</span> <span class="nav-text">深度学习三个步骤：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积神经网络的一般结构"><span class="nav-number">2.</span> <span class="nav-text">卷积神经网络的一般结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#经典的CNN结构"><span class="nav-number">2.1.</span> <span class="nav-text">经典的CNN结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AlexNet"><span class="nav-number">2.2.</span> <span class="nav-text">AlexNet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VGG"><span class="nav-number">2.3.</span> <span class="nav-text">VGG</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day01-新冠疫情可视化"><span class="nav-number">3.</span> <span class="nav-text">Day01 新冠疫情可视化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day02手势识别"><span class="nav-number">4.</span> <span class="nav-text">Day02手势识别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day03-车牌识别"><span class="nav-number">5.</span> <span class="nav-text">Day03-车牌识别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day04-口罩分类"><span class="nav-number">6.</span> <span class="nav-text">Day04-口罩分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#人流密度检测问题"><span class="nav-number">7.</span> <span class="nav-text">人流密度检测问题</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="honor"
-      src="/images/logol1.png">
-  <p class="site-author-name" itemprop="name">honor</p>
-  <div class="site-description" itemprop="description">记录学习、科研、生活的点滴</div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">36</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">9</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">23</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/honor-ry" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;honor-ry" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:yourname@gmail.com" title="E-Mail → mailto:yourname@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-      </span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">honor</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
-  </div>
-<div class="powered-by">
-<i class="fa fa-user-md"></i>
-<span id="busuanzi_container_site_uv">
-  本站总访客数:<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;| 
-</span>
-<span id="busuanzi_container_site_pv">
-    &nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
-</span>
-</div>
-</div>
-        
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
@@ -667,7 +570,6 @@ m<span class="token punctuation">.</span>render<span class="token punctuation">(
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-divider">|</span>
     <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="fa fa-eye"></i>
@@ -677,46 +579,30 @@ m<span class="token punctuation">.</span>render<span class="token punctuation">(
       </span>
     </span>
 </div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
 
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
+    </div>
+  </footer>
 
   
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
 
-
-
-
-
-
-
-
+<script src="/js/local-search.js"></script>
 
 
 
@@ -724,8 +610,12 @@ m<span class="token punctuation">.</span>render<span class="token punctuation">(
 
 
   
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-  
+
+
+
+
 
 </body>
 </html>

@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="CAYCJxXU2WjV_qTNztIDX4VM2VyX7pj_5y5w2jYtris" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"honor-ry.github.io","root":"/","images":"/images","scheme":"Mist","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="leveldb中memtable的实现是采用skiplist跳表的，了解skiplist这种数据结构，便于我们分析理解memtable。 1.skiplist跳表的数据结构SkipList是一种用来代替平衡树的数据结构。    虽然在最坏的情况下SkipList的效率要低于平衡树，但是大多数情况下效率仍然非常高，其插入、删除、查找的时间复杂度都是O(log(N))。除了高效外，其实现和维护非常简单">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leveldb学习记录-skiplist">
+<meta property="og:url" content="https://honor-ry.github.io/posts/7ad579e7.html">
+<meta property="og:site_name" content="Honor&#39;s Blog">
+<meta property="og:description" content="leveldb中memtable的实现是采用skiplist跳表的，了解skiplist这种数据结构，便于我们分析理解memtable。 1.skiplist跳表的数据结构SkipList是一种用来代替平衡树的数据结构。    虽然在最坏的情况下SkipList的效率要低于平衡树，但是大多数情况下效率仍然非常高，其插入、删除、查找的时间复杂度都是O(log(N))。除了高效外，其实现和维护非常简单">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201221194025728.png">
+<meta property="og:image" content="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201221194105759.png">
+<meta property="article:published_time" content="2021-09-29T12:00:25.496Z">
+<meta property="article:modified_time" content="2020-12-26T08:58:06.973Z">
+<meta property="article:author" content="honor">
+<meta property="article:tag" content="leveldb">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201221194025728.png">
+
+
+<link rel="canonical" href="https://honor-ry.github.io/posts/7ad579e7.html">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>leveldb学习记录-skiplist | Honor's Blog</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Honor's Blog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Honor's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">爱笑的小土豆~</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">58</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-box">
+
+    <a href="/box/" rel="section"><i class="fa fa-th fa-fw"></i>百宝盒</a>
+
+  </li>
+        <li class="menu-item menu-item-photo">
+
+    <a href="https://wangrongyao.lofter.com/" rel="noopener" target="_blank"><i class="fa fa-th fa-fw"></i>摄影</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-skiplist跳表的数据结构"><span class="nav-text">1.skiplist跳表的数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查找"><span class="nav-text">查找</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入"><span class="nav-text">插入</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-skiplist类介绍"><span class="nav-text">2.skiplist类介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#skiplist的完整定义"><span class="nav-text">skiplist的完整定义</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-insert操作"><span class="nav-text">3.insert操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#FindGreaterOrEqual函数"><span class="nav-text">FindGreaterOrEqual函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Contains函数"><span class="nav-text">Contains函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FindLessThan和FindLast"><span class="nav-text">FindLessThan和FindLast</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-iterator"><span class="nav-text">4.iterator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-总结"><span class="nav-text">5.总结</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="honor"
+      src="/images/logol1.png">
+  <p class="site-author-name" itemprop="name">honor</p>
+  <div class="site-description" itemprop="description">记录学习、科研、生活的点滴</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/honor-ry" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;honor-ry" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangrongyao2015@foxmail.com" title="E-Mail → mailto:wangrongyao2015@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </section>
+      </div>
+        <div class="back-to-top animated">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+  <a href="https://github.com/honor-ry" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/7ad579e7.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logol1.png">
+      <meta itemprop="name" content="honor">
+      <meta itemprop="description" content="记录学习、科研、生活的点滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honor's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          leveldb学习记录-skiplist
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-09-29 20:00:25" itemprop="dateCreated datePublished" datetime="2021-09-29T20:00:25+08:00">2021-09-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-26 16:58:06" itemprop="dateModified" datetime="2020-12-26T16:58:06+08:00">2020-12-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/leveldb/" itemprop="url" rel="index"><span itemprop="name">leveldb</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>leveldb中memtable的实现是采用skiplist跳表的，了解skiplist这种数据结构，便于我们分析理解memtable。</p>
+<h2 id="1-skiplist跳表的数据结构"><a href="#1-skiplist跳表的数据结构" class="headerlink" title="1.skiplist跳表的数据结构"></a>1.skiplist跳表的数据结构</h2><p>SkipList是一种用来代替平衡树的数据结构。<br>    虽然在最坏的情况下SkipList的效率要低于平衡树，但是大多数情况下效率仍然非常高，其插入、删除、查找的时间复杂度都是O(log(N))。<br>除了高效外，其实现和维护非常简单也是一大优势。SkipList的使用还是比较广泛的，比如在LevelDB中的MemTable就是使用SkipList实现的。</p>
+<a id="more"></a>
+
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skiplist是多层的有序链表</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h4><p>以查找19为例</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201221194025728.png" alt="image-20201221194025728"></p>
+<p>先从最上层的跳跃区间大的层开始查找。从头结点开始，首先和23进行比较，小于23，（此时查找指针在图中“1”位置处），查找指针到下一层继续查找。</p>
+<p>然后和9进行判断，大于9，查找指针再往前走一步和23比较，小于23，（此时查找指针在图中“2”位置处） 此时这个值肯定在9结点和23结点之间。查找指针到下一层继续查找。</p>
+<p>然后和13进行判断，大于13，查找指针再往前走一步和23比较，小于23，（此时查找指针在图中“3”位置处）此时这个值肯定在13结点和23结点之间。查找指针到下一层继续查找。此时，我们和19进行判断，找到了。</p>
+<h4 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h4><p>包含以下几个操作：</p>
+<p>1、查找到需要插入的位置</p>
+<p>2、申请新的节点</p>
+<p>3、调整指针</p>
+<p>因为在找到插入点之后，新生成节点，新节点按概率出现在每层上，故需要保存所有层的后续指针，这里用一个临时数组保存所有层的插入点处的后续指针。</p>
+<p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/image-20201221194105759.png" alt="image-20201221194105759"></p>
+<p>以上图为例，现在要插入15这个节点。<br>其过程和查找类似，唯一的问题是，前面的节点的指针是如何保留下来的？</p>
+<p>我们可以看到插入结束后，13的level=0的指针指向了15，13的level=1的指针指向了15。<br>这就意味着，在插入的时候我们就需要保留13的level=0的指针和13的level=1的指针。</p>
+<p>在SkipList中是这样做的，有一个update数组，这个数组的大小为maxLevel。<br>还是以上图为例，在15插入之前，update这个数组中就已经存储了当前每个level的指针。</p>
+<ul>
+<li>update[0]：13 level=0</li>
+<li>update[1]：13 level=1</li>
+<li>update[2]：9   level=2</li>
+<li>update[3]：null level=3</li>
+</ul>
+<p>skiplist的删除</p>
+<p>删除的逻辑和插入类似</p>
+<p>1、查找到相应的节点</p>
+<p>2、通过update数组来实现该节点的逻辑删除</p>
+<p>3、回收该节点资源 </p>
+<h2 id="2-skiplist类介绍"><a href="#2-skiplist类介绍" class="headerlink" title="2.skiplist类介绍"></a>2.skiplist类介绍</h2><p>skiplist是一个模板类</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Key, <span class="class"><span class="keyword">class</span> <span class="title">Comparator</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">SkipList</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>其中key为要存储的数据类型，Comparator实现key之间的比较。</p>
+<h4 id="skiplist的完整定义"><a href="#skiplist的完整定义" class="headerlink" title="skiplist的完整定义"></a>skiplist的完整定义</h4><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Key, <span class="class"><span class="keyword">class</span> <span class="title">Comparator</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">SkipList</span> {</span></span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>;</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="comment">// Create a new SkipList object that will use "cmp" for comparing keys,</span></span><br><span class="line">  <span class="comment">// and will allocate memory using "*arena".  Objects allocated in the arena</span></span><br><span class="line">  <span class="comment">// must remain allocated for the lifetime of the skiplist object.</span></span><br><span class="line">  <span class="function"><span class="keyword">explicit</span> <span class="title">SkipList</span><span class="params">(Comparator cmp, Arena* arena)</span></span>;</span><br><span class="line"></span><br><span class="line">  SkipList(<span class="keyword">const</span> SkipList&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">  SkipList&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> SkipList&amp;) = <span class="keyword">delete</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Insert key into the list.</span></span><br><span class="line">  <span class="comment">// REQUIRES: nothing that compares equal to key is currently in the list.</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">(<span class="keyword">const</span> Key&amp; key)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Returns true iff an entry that compares equal to key is in the list.</span></span><br><span class="line">  <span class="function"><span class="keyword">bool</span> <span class="title">Contains</span><span class="params">(<span class="keyword">const</span> Key&amp; key)</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Iteration over the contents of a skip list</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Iterator</span> {</span></span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// Initialize an iterator over the specified list.</span></span><br><span class="line">    <span class="comment">// The returned iterator is not valid.</span></span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Iterator</span><span class="params">(<span class="keyword">const</span> SkipList* <span class="built_in">list</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Returns true iff the iterator is positioned at a valid node.</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">Valid</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Returns the key at the current position.</span></span><br><span class="line">    <span class="comment">// REQUIRES: Valid()</span></span><br><span class="line">    <span class="function"><span class="keyword">const</span> Key&amp; <span class="title">key</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Advances to the next position.</span></span><br><span class="line">    <span class="comment">// REQUIRES: Valid()</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Next</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Advances to the previous position.</span></span><br><span class="line">    <span class="comment">// REQUIRES: Valid()</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Prev</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Advance to the first entry with a key &gt;= target</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">const</span> Key&amp; target)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Position at the first entry in list.</span></span><br><span class="line">    <span class="comment">// Final state of iterator is Valid() iff list is not empty.</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">SeekToFirst</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Position at the last entry in list.</span></span><br><span class="line">    <span class="comment">// Final state of iterator is Valid() iff list is not empty.</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">SeekToLast</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">const</span> SkipList* list_;</span><br><span class="line">    Node* node_;</span><br><span class="line">    <span class="comment">// Intentionally copyable</span></span><br><span class="line">  };</span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">  <span class="keyword">enum</span> { kMaxHeight = <span class="number">12</span> };</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">GetMaxHeight</span><span class="params">()</span> <span class="keyword">const</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> max_height_.load(<span class="built_in">std</span>::memory_order_relaxed);</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="function">Node* <span class="title">NewNode</span><span class="params">(<span class="keyword">const</span> Key&amp; key, <span class="keyword">int</span> <span class="built_in">height</span>)</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">RandomHeight</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">bool</span> <span class="title">Equal</span><span class="params">(<span class="keyword">const</span> Key&amp; a, <span class="keyword">const</span> Key&amp; b)</span> <span class="keyword">const</span> </span>{ <span class="keyword">return</span> (compare_(a, b) == <span class="number">0</span>); }</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Return true if key is greater than the data stored in "n"</span></span><br><span class="line">  <span class="function"><span class="keyword">bool</span> <span class="title">KeyIsAfterNode</span><span class="params">(<span class="keyword">const</span> Key&amp; key, Node* n)</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Return the earliest node that comes at or after key.</span></span><br><span class="line">  <span class="comment">// Return nullptr if there is no such node.</span></span><br><span class="line">  <span class="comment">//</span></span><br><span class="line">  <span class="comment">// If prev is non-null, fills prev[level] with pointer to previous</span></span><br><span class="line">  <span class="comment">// node at "level" for every level in [0..max_height_-1].</span></span><br><span class="line">  <span class="function">Node* <span class="title">FindGreaterOrEqual</span><span class="params">(<span class="keyword">const</span> Key&amp; key, Node** prev)</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Return the latest node with a key &lt; key.</span></span><br><span class="line">  <span class="comment">// Return head_ if there is no such node.</span></span><br><span class="line">  <span class="function">Node* <span class="title">FindLessThan</span><span class="params">(<span class="keyword">const</span> Key&amp; key)</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Return the last node in the list.</span></span><br><span class="line">  <span class="comment">// Return head_ if list is empty.</span></span><br><span class="line">  <span class="function">Node* <span class="title">FindLast</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Immutable after construction</span></span><br><span class="line">  Comparator <span class="keyword">const</span> compare_;</span><br><span class="line">  Arena* <span class="keyword">const</span> arena_;  <span class="comment">// Arena used for allocations of nodes</span></span><br><span class="line"></span><br><span class="line">  Node* <span class="keyword">const</span> head_;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Modified only by Insert().  Read racily by readers, but stale</span></span><br><span class="line">  <span class="comment">// values are ok.</span></span><br><span class="line">  <span class="built_in">std</span>::atomic&lt;<span class="keyword">int</span>&gt; max_height_;  <span class="comment">// Height of the entire list</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Read/written only by Insert().</span></span><br><span class="line">  Random rnd_;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+
+<p>由skiplist定义，发现其只提供了<code>Insert</code>和<code>Contains</code>两个接口。</p>
+<p>即插入和查找。Contains用于判断是否在list中存在与key值相等的entry（即一条key-value记录）。没有提供<code>Delete</code>接口，因为在leveldb中删除操作就是插入一个标记某个kv对为删除的节点。</p>
+<h2 id="3-insert操作"><a href="#3-insert操作" class="headerlink" title="3.insert操作"></a>3.insert操作</h2><p>insert和contains是skiplist比较核心的部分。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Key, <span class="class"><span class="keyword">class</span> <span class="title">Comparator</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">SkipList</span>&lt;Key, Comparator&gt;:</span>:Insert(<span class="keyword">const</span> Key&amp; key) {</span><br><span class="line">  <span class="comment">// TODO(opt): We can use a barrier-free variant of FindGreaterOrEqual()</span></span><br><span class="line">  <span class="comment">// here since Insert() is externally synchronized.</span></span><br><span class="line">  Node* prev[kMaxHeight];</span><br><span class="line">  Node* x = FindGreaterOrEqual(key, prev);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Our data structure does not allow duplicate insertion</span></span><br><span class="line">  <span class="comment">//leveldb跳表要求不能插入重复数据</span></span><br><span class="line">  assert(x == <span class="literal">nullptr</span> || !Equal(key, x-&gt;key));</span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> <span class="built_in">height</span> = RandomHeight();  <span class="comment">//随机获取一个level值</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">height</span> &gt; GetMaxHeight()) {   <span class="comment">//GetMaxHeight为获取跳表当前高度</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = GetMaxHeight(); i &lt; <span class="built_in">height</span>; i++) {</span><br><span class="line">      prev[i] = head_;</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// It is ok to mutate max_height_ without any synchronization</span></span><br><span class="line">    <span class="comment">// with concurrent readers.  A concurrent reader that observes</span></span><br><span class="line">    <span class="comment">// the new value of max_height_ will see either the old value of</span></span><br><span class="line">    <span class="comment">// new level pointers from head_ (nullptr), or a new value set in</span></span><br><span class="line">    <span class="comment">// the loop below.  In the former case the reader will</span></span><br><span class="line">    <span class="comment">// immediately drop to the next level since nullptr sorts after all</span></span><br><span class="line">    <span class="comment">// keys.  In the latter case the reader will use the new node.</span></span><br><span class="line">    <span class="comment">// 此处不用为并发读加锁。因为并发读在（在另外线程中通过 FindGreaterOrEqual 中的 GetMaxHeight）</span></span><br><span class="line">    <span class="comment">// 读取到更新后跳表层数，但该节点尚未插入时也无妨。因为这意味着它会读到 nullptr，而在 LevelDB</span></span><br><span class="line">    <span class="comment">// 的 Comparator 设定中，nullptr 比所有 key 都大。因此，FindGreaterOrEqual 会继续往下找，</span></span><br><span class="line">    <span class="comment">// 符合预期。</span></span><br><span class="line">    max_height_.store(<span class="built_in">height</span>, <span class="built_in">std</span>::memory_order_relaxed);</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  x = NewNode(key, <span class="built_in">height</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">height</span>; i++) {</span><br><span class="line">    <span class="comment">// NoBarrier_SetNext() suffices since we will add a barrier when</span></span><br><span class="line">    <span class="comment">// we publish a pointer to "x" in prev[i].</span></span><br><span class="line">    <span class="comment">// 此句 NoBarrier_SetNext() 版本就够用了，因为后续 prev[i]-&gt;SetNext(i, x) 语句会进行强制同步。</span></span><br><span class="line">    <span class="comment">// 并且为了保证并发读的正确性，一定要先设置本节点指针，再设置原条表中节点（prev）指针</span></span><br><span class="line">    x-&gt;NoBarrier_SetNext(i, prev[i]-&gt;NoBarrier_Next(i));</span><br><span class="line">    prev[i]-&gt;SetNext(i, x);</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>采用<code>FindGreaterOrEqual</code>函数确定待插入的位置，采用prev记录每一层最大一个&lt; key的节点，也就是待插入节点的前驱节点。</p>
+<p>通过<code>RandomHeight</code>随机生成此次插入节点的高度，</p>
+<p>插入新节点。</p>
+<h4 id="FindGreaterOrEqual函数"><a href="#FindGreaterOrEqual函数" class="headerlink" title="FindGreaterOrEqual函数"></a>FindGreaterOrEqual函数</h4><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Key, <span class="class"><span class="keyword">class</span> <span class="title">Comparator</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">typename</span> <span class="title">SkipList</span>&lt;Key,Comparator&gt;:</span>:Node* SkipList&lt;Key,Comparator&gt;::FindGreaterOrEqual(<span class="keyword">const</span> Key&amp; key, Node** prev)</span><br><span class="line">    <span class="keyword">const</span> {</span><br><span class="line">  Node* x = head_;</span><br><span class="line">  <span class="keyword">int</span> level = GetMaxHeight() - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) {</span><br><span class="line">    Node* next = x-&gt;Next(level);</span><br><span class="line">    <span class="keyword">if</span> (KeyIsAfterNode(key, next)) {<span class="comment">//如果next-&gt;key &lt; key</span></span><br><span class="line">      <span class="comment">// Keep searching in this list</span></span><br><span class="line">      x = next;</span><br><span class="line">    } <span class="keyword">else</span> {<span class="comment">//如果next-&gt;key &gt;= key，如果单纯为了判断是否相等，这里可以加一个判断直接返回了，没必要level--到0再返回</span></span><br><span class="line">      <span class="keyword">if</span> (prev != <span class="literal">nullptr</span>) prev[level] = x;<span class="comment">//prev记录该level最后一个&lt;key的节点</span></span><br><span class="line">      <span class="keyword">if</span> (level == <span class="number">0</span>) {<span class="comment">//到达最底层则返回next (next是第一个&gt;=key的节点)</span></span><br><span class="line">        <span class="keyword">return</span> next;</span><br><span class="line">      } <span class="keyword">else</span> {</span><br><span class="line">        <span class="comment">// Switch to next list</span></span><br><span class="line">        level--;</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><a href="https://link.zhihu.com/?target=https%3A//github.com/google/leveldb/blob/1.22/db/skiplist.h%23L262">FindGreaterOrEqual</a></strong> 查找并返回第一个大于等于 key 的节点。如果是查找后需要进行插入，需要记录下这个节点的 prev 指针。</p>
+<p>插入的高度值是怎么确定的呢？</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">RandomHeight</span><span class="params">()</span></span>;<span class="comment">//通过抛硬币的方法(1/4概率)决定高度值，范围[1, kMaxHeight]</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="Contains函数"><a href="#Contains函数" class="headerlink" title="Contains函数"></a>Contains函数</h4><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Key, <span class="class"><span class="keyword">class</span> <span class="title">Comparator</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">bool</span> <span class="title">SkipList</span>&lt;Key,Comparator&gt;:</span>:Contains(<span class="keyword">const</span> Key&amp; key) <span class="keyword">const</span> {</span><br><span class="line">  <span class="comment">//x记录第一个&gt;= key的Node</span></span><br><span class="line">  <span class="comment">//注意FindGreaterOrEqual是查找&gt;=key的Node，因此会迭代直到level = 0才返回</span></span><br><span class="line">  <span class="comment">//实际上可以实现一个接口直接查找==key的Node，这样会在level &gt;=0 时就能返回，查找的时间复杂度不变，不过可以预见减少比较次数。</span></span><br><span class="line">  Node* x = FindGreaterOrEqual(key, <span class="literal">nullptr</span>);</span><br><span class="line">  <span class="comment">//判断x-&gt;key == key</span></span><br><span class="line">  <span class="keyword">if</span> (x != <span class="literal">nullptr</span> &amp;&amp; Equal(key, x-&gt;key)) {</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  } <span class="keyword">else</span> {</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>这个函数是通过FindGreaterOrEqual找到节点，如果存在该节点，且key值相同，就return true.<strong>Contains</strong> 查找 SkipList 是否包含某个 key.</p>
+<h4 id="FindLessThan和FindLast"><a href="#FindLessThan和FindLast" class="headerlink" title="FindLessThan和FindLast"></a>FindLessThan和FindLast</h4><p><code>Contains</code> <code>Insert</code>都用到了<code>FindGreaterOrEqual</code>，leveldb 还提供了：</p>
+<ol>
+<li><code>FindLessThan</code>：查找最大的一个<code>&lt; key</code>的节点，如果不存在返回head_</li>
+<li><code>FindLast</code>：查找最后一个节点</li>
+</ol>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Key, <span class="class"><span class="keyword">class</span> <span class="title">Comparator</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">typename</span> <span class="title">SkipList</span>&lt;Key,Comparator&gt;:</span>:Node*</span><br><span class="line">SkipList&lt;Key,Comparator&gt;::FindLessThan(<span class="keyword">const</span> Key&amp; key) <span class="keyword">const</span> {</span><br><span class="line">  Node* x = head_;</span><br><span class="line">  <span class="keyword">int</span> level = GetMaxHeight() - <span class="number">1</span>;<span class="comment">//获取当前最大height</span></span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) {</span><br><span class="line">    assert(x == head_ || compare_(x-&gt;key, key) &lt; <span class="number">0</span>);</span><br><span class="line">    Node* next = x-&gt;Next(level);</span><br><span class="line">    <span class="keyword">if</span> (next == <span class="literal">nullptr</span> || compare_(next-&gt;key, key) &gt;= <span class="number">0</span>) {<span class="comment">//如果key &gt;= next-&gt;key</span></span><br><span class="line">      <span class="keyword">if</span> (level == <span class="number">0</span>) {</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">      } <span class="keyword">else</span> {</span><br><span class="line">        <span class="comment">// Switch to next list</span></span><br><span class="line">        level--;</span><br><span class="line">      }</span><br><span class="line">    } <span class="keyword">else</span> {</span><br><span class="line">      x = next;</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Key, <span class="class"><span class="keyword">class</span> <span class="title">Comparator</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">typename</span> <span class="title">SkipList</span>&lt;Key,Comparator&gt;:</span>:Node* SkipList&lt;Key,Comparator&gt;::FindLast()</span><br><span class="line">    <span class="keyword">const</span> {</span><br><span class="line">  Node* x = head_;</span><br><span class="line">  <span class="keyword">int</span> level = GetMaxHeight() - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) {</span><br><span class="line">    Node* next = x-&gt;Next(level);</span><br><span class="line">    <span class="keyword">if</span> (next == <span class="literal">nullptr</span>) {<span class="comment">//到达最后一个节点</span></span><br><span class="line">      <span class="keyword">if</span> (level == <span class="number">0</span>) {<span class="comment">//level=0，则返回</span></span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">      } <span class="keyword">else</span> {</span><br><span class="line">        <span class="comment">// Switch to next list</span></span><br><span class="line">        <span class="comment">// level&gt;0则到下一层</span></span><br><span class="line">        level--;</span><br><span class="line">      }</span><br><span class="line">    } <span class="keyword">else</span> {</span><br><span class="line">        <span class="comment">//不是最后一个节点则继续递增</span></span><br><span class="line">      x = next;</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="4-iterator"><a href="#4-iterator" class="headerlink" title="4.iterator"></a>4.iterator</h2><p>memtable在读取时采用的是<code>SkipList::Iterator</code></p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Iteration over the contents of a skip list</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Iterator</span> {</span></span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// Initialize an iterator over the specified list.</span></span><br><span class="line">    <span class="comment">// The returned iterator is not valid.</span></span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Iterator</span><span class="params">(<span class="keyword">const</span> SkipList* <span class="built_in">list</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Returns true iff the iterator is positioned at a valid node.</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">Valid</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Returns the key at the current position.</span></span><br><span class="line">    <span class="comment">// REQUIRES: Valid()</span></span><br><span class="line">    <span class="function"><span class="keyword">const</span> Key&amp; <span class="title">key</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Advances to the next position.</span></span><br><span class="line">    <span class="comment">// REQUIRES: Valid()</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Next</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Advances to the previous position.</span></span><br><span class="line">    <span class="comment">// REQUIRES: Valid()</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Prev</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Advance to the first entry with a key &gt;= target</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Seek</span><span class="params">(<span class="keyword">const</span> Key&amp; target)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Position at the first entry in list.</span></span><br><span class="line">    <span class="comment">// Final state of iterator is Valid() iff list is not empty.</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">SeekToFirst</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Position at the last entry in list.</span></span><br><span class="line">    <span class="comment">// Final state of iterator is Valid() iff list is not empty.</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">SeekToLast</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">const</span> SkipList* list_;</span><br><span class="line">    Node* node_;</span><br><span class="line">    <span class="comment">// Intentionally copyable</span></span><br><span class="line">  };</span><br></pre></td></tr></tbody></table></figure>
+
+<p>分析源码，发现此迭代器接口跟普通迭代器基本一样，内部私有成员包含一个Skiplist和一个node。接口实现都较为简单，有的是直接调用上面提到的<code>FindGreaterOrEqual</code>、<code>FindLessThan</code>、<code>FindLast</code></p>
+<h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5.总结"></a>5.总结</h2><p>randomHeight，之前介绍抛硬币的方法概率为1/2，这里使用的是1/4，结合<code>kBranching = 4</code>和<code>kMaxHeight = 12</code>，不影响复杂度的情况下，可以最多支持<code>4^11 = 4194304</code>个节点，因此在百万节点左右，这么设置参数效果最优。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    </div>
+
+    
+    
+    
+	
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechat.jpg" alt="honor 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="honor 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>honor
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://honor-ry.github.io/posts/7ad579e7.html" title="leveldb学习记录-skiplist">https://honor-ry.github.io/posts/7ad579e7.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/leveldb/" rel="tag"><i class="fa fa-tag"></i> leveldb</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/741fdc25.html" rel="prev" title="leveldb学习记录-memtable">
+                  <i class="fa fa-chevron-left"></i> leveldb学习记录-memtable
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/21d4485b.html" rel="next" title="leveldb学习记录-Version">
+                  leveldb学习记录-Version <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">honor</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</body>
+</html>
