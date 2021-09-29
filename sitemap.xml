@@ -254,13 +254,6 @@
   </url>
   
   <url>
-    <loc>https://honor-ry.github.io/posts/36fc.html</loc>
-    
-    <lastmod>2020-12-07</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://honor-ry.github.io/posts/3826.html</loc>
     
     <lastmod>2020-12-07</lastmod>
@@ -466,14 +459,7 @@
 
   
   <url>
-    <loc>https://honor-ry.github.io/tags/anaconda-python/</loc>
-    <lastmod>2021-09-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://honor-ry.github.io/tags/C/</loc>
+    <loc>https://honor-ry.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</loc>
     <lastmod>2021-09-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -487,35 +473,7 @@
   </url>
   
   <url>
-    <loc>https://honor-ry.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</loc>
-    <lastmod>2021-09-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://honor-ry.github.io/tags/python-%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2021-09-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://honor-ry.github.io/tags/csdn-markdown/</loc>
-    <lastmod>2021-09-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://honor-ry.github.io/tags/python-kaggle-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2021-09-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://honor-ry.github.io/tags/%E6%B5%8B%E8%AF%95/</loc>
+    <loc>https://honor-ry.github.io/tags/anaconda-python/</loc>
     <lastmod>2021-09-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -529,7 +487,14 @@
   </url>
   
   <url>
-    <loc>https://honor-ry.github.io/tags/python-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-paddle/</loc>
+    <loc>https://honor-ry.github.io/tags/C/</loc>
+    <lastmod>2021-09-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://honor-ry.github.io/tags/python-%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</loc>
     <lastmod>2021-09-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -537,6 +502,27 @@
   
   <url>
     <loc>https://honor-ry.github.io/tags/python-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2021-09-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://honor-ry.github.io/tags/python-kaggle-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2021-09-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://honor-ry.github.io/tags/python-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-paddle/</loc>
+    <lastmod>2021-09-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://honor-ry.github.io/tags/%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2021-09-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -578,6 +564,13 @@
   </url>
   
   <url>
+    <loc>https://honor-ry.github.io/tags/opencv-%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB-python/</loc>
+    <lastmod>2021-09-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://honor-ry.github.io/tags/python-opencv/</loc>
     <lastmod>2021-09-29</lastmod>
     <changefreq>daily</changefreq>
@@ -599,14 +592,7 @@
   </url>
   
   <url>
-    <loc>https://honor-ry.github.io/tags/opencv-%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB-python/</loc>
-    <lastmod>2021-09-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://honor-ry.github.io/tags/%E8%8C%83%E6%95%B0-%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E8%8C%83%E6%95%B0-%E7%9F%A9%E9%98%B5%E8%8C%83%E6%95%B0/</loc>
+    <loc>https://honor-ry.github.io/tags/ubuntu/</loc>
     <lastmod>2021-09-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -627,7 +613,7 @@
   </url>
   
   <url>
-    <loc>https://honor-ry.github.io/tags/ubuntu/</loc>
+    <loc>https://honor-ry.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</loc>
     <lastmod>2021-09-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -641,14 +627,7 @@
   </url>
   
   <url>
-    <loc>https://honor-ry.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2021-09-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://honor-ry.github.io/tags/anaconda/</loc>
+    <loc>https://honor-ry.github.io/tags/%E8%8C%83%E6%95%B0-%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E8%8C%83%E6%95%B0-%E7%9F%A9%E9%98%B5%E8%8C%83%E6%95%B0/</loc>
     <lastmod>2021-09-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -668,17 +647,17 @@
     <priority>0.6</priority>
   </url>
   
-
-  
   <url>
-    <loc>https://honor-ry.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://honor-ry.github.io/tags/anaconda/</loc>
     <lastmod>2021-09-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
+
+  
   <url>
-    <loc>https://honor-ry.github.io/categories/%E7%BC%96%E7%A8%8B/</loc>
+    <loc>https://honor-ry.github.io/categories/leveldb/</loc>
     <lastmod>2021-09-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -692,21 +671,7 @@
   </url>
   
   <url>
-    <loc>https://honor-ry.github.io/categories/leveldb/</loc>
-    <lastmod>2021-09-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://honor-ry.github.io/categories/markdown/</loc>
-    <lastmod>2021-09-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://honor-ry.github.io/categories/%E6%B5%8B%E8%AF%95/</loc>
+    <loc>https://honor-ry.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2021-09-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -714,6 +679,20 @@
   
   <url>
     <loc>https://honor-ry.github.io/categories/NLP-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2021-09-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://honor-ry.github.io/categories/%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2021-09-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://honor-ry.github.io/categories/%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2021-09-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -734,14 +713,14 @@
   </url>
   
   <url>
-    <loc>https://honor-ry.github.io/categories/%E7%BC%96%E7%A8%8B%E7%BB%83%E4%B9%A0/</loc>
+    <loc>https://honor-ry.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
     <lastmod>2021-09-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://honor-ry.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
+    <loc>https://honor-ry.github.io/categories/%E7%BC%96%E7%A8%8B%E7%BB%83%E4%B9%A0/</loc>
     <lastmod>2021-09-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
