@@ -141,12 +141,12 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">13</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">54</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">53</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -235,14 +235,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -363,278 +363,6 @@
 <p>输出结果图：<br><img src="https://img-blog.csdnimg.cn/20200312150150723.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="  "><br>横坐标是b，纵坐标是w，标记×位最优解，显然，在图中我们并没有运行得到最优解，最优解十分的遥远。那么我们就调大learning rate，lr = 0.000001（调大10倍），得到结果如下图。<br><img src="https://img-blog.csdnimg.cn/20200312150917344.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="  "><br>我们再调大learning rate，lr = 0.00001（调大10倍），得到结果如下图。<br><img src="https://img-blog.csdnimg.cn/20200312153648587.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="  "><br>结果发现learning rate太大了，结果很不好。<br>所以我们给b和w特制化两种learning rate<br>修改后代码如下：</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">%matplotlib inline</span><br><span class="line">plt.rcParams[<span class="string">'font.sans-serif'</span>] = [<span class="string">'Simhei'</span>]  <span class="comment"># 显示中文</span></span><br><span class="line">mpl.rcParams[<span class="string">'axes.unicode_minus'</span>] = <span class="literal">False</span>  <span class="comment"># 解决保存图像是负号'-'显示为方块的问题</span></span><br><span class="line"></span><br><span class="line">x_data= [ <span class="number">338.</span>,  <span class="number">333.</span>, <span class="number">328.</span>, <span class="number">207.</span>, <span class="number">226.</span>, <span class="number">25.</span>, <span class="number">179.</span>, <span class="number">60.</span>, <span class="number">208.</span>, <span class="number">606.</span>]</span><br><span class="line">y_data= [ <span class="number">640.</span>,  <span class="number">633.</span>, <span class="number">619.</span>, <span class="number">393.</span>, <span class="number">428.</span>, <span class="number">27.</span>, <span class="number">193.</span>, <span class="number">66.</span>, <span class="number">226.</span>, <span class="number">1591.</span>] </span><br><span class="line"><span class="comment"># ydata =b + w * xdata</span></span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">-200</span>, <span class="number">-100</span>, <span class="number">1</span>) <span class="comment">#bias</span></span><br><span class="line">y = np.arange(<span class="number">-5</span>,<span class="number">5</span>,<span class="number">0.1</span>) <span class="comment">#weight</span></span><br><span class="line">Z = np.zeros((len(x), len(y)))</span><br><span class="line">X, Y = np.meshgrid(x, y)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(x)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(y)):</span><br><span class="line">        b = x[i]</span><br><span class="line">        w = y[j]</span><br><span class="line">        Z[j][i] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> n <span class="keyword">in</span> range(len(x_data)):</span><br><span class="line">            Z[j][i] = Z[j][i]  + (y_data[n] - b - w*x_data[n]) **<span class="number">2</span></span><br><span class="line">        Z[j][i] =   Z[j][i] /len(x_data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ydata = b + w * xdata</span></span><br><span class="line">b = <span class="number">-120</span> <span class="comment"># initial b</span></span><br><span class="line">w = <span class="number">-4</span> <span class="comment">#intial w</span></span><br><span class="line">lr =<span class="number">1</span> <span class="comment">#learning rate设为1</span></span><br><span class="line">iteration = <span class="number">100000</span> </span><br><span class="line"><span class="comment"># Store initial values for plotting.</span></span><br><span class="line">b_history = [b]</span><br><span class="line">w_history = [w]</span><br><span class="line"></span><br><span class="line">lr_b = <span class="number">0</span> <span class="comment">#客制化b的learning rate 的初始值</span></span><br><span class="line">lr_w = <span class="number">0</span> <span class="comment">#客制化w的learning rate 的初始值</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Iterations</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(iteration):</span><br><span class="line">    </span><br><span class="line">    b_grad = <span class="number">0.0</span></span><br><span class="line">    w_grad = <span class="number">0.0</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> range(len(x_data)):</span><br><span class="line">        b_grad = b_grad - <span class="number">2.0</span>*(y_data[n] - b - w*x_data[n]) *<span class="number">1.0</span></span><br><span class="line">        w_grad = w_grad - <span class="number">2.0</span>*(y_data[n] - b - w*x_data[n])*x_data[n]</span><br><span class="line">        </span><br><span class="line">    lr_b = lr_b + b_grad ** <span class="number">2</span> <span class="comment">#客制化b的learning rate</span></span><br><span class="line">    lr_w = lr_w + w_grad ** <span class="number">2</span> <span class="comment">#客制化w的learning rate</span></span><br><span class="line">        </span><br><span class="line">    <span class="comment"># Update parameters.</span></span><br><span class="line">    b = b - lr/np.sqrt(lr_b ) * b_grad</span><br><span class="line">    w = w - lr/np.sqrt(lr_w ) * w_grad</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Store parameters for plotting</span></span><br><span class="line">    b_history.append(b)</span><br><span class="line">    w_history.append(w)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot the figure</span></span><br><span class="line">plt.contourf(x, y, Z, <span class="number">50</span>, alpha = <span class="number">0.5</span>, cmap=plt.get_cmap(<span class="string">'jet'</span>))</span><br><span class="line">plt.plot([<span class="number">-188.4</span>], [<span class="number">2.67</span>], <span class="string">'x'</span>, ms = <span class="number">12</span>, markeredgewidth = <span class="number">3</span>, color=<span class="string">'orange'</span>)</span><br><span class="line">plt.plot(b_history, w_history, <span class="string">'o-'</span>, ms=<span class="number">3</span>, lw=<span class="number">1.5</span>, color=<span class="string">'black'</span>)</span><br><span class="line">plt.xlim(<span class="number">-200</span>, <span class="number">-100</span>)</span><br><span class="line">plt.ylim(<span class="number">-5</span>,<span class="number">5</span>)</span><br><span class="line">plt.xlabel(<span class="string">r'$b$'</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">plt.ylabel(<span class="string">r'$w$'</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">plt.title(<span class="string">"线性回归"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></tbody></table></figure>
 <p>这样有了新的特制化两种learning rate就可以在10w次迭代之内到达最优点了。<br><img src="https://img-blog.csdnimg.cn/20200312154047356.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="  "></p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-	
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://honor-ry.github.io/posts/87b0.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logol1.png">
-      <meta itemprop="name" content="honor">
-      <meta itemprop="description" content="记录学习、科研、生活的点滴">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Honor's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/87b0.html" class="post-title-link" itemprop="url">基本的bash shell命令（一）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-02-26 10:00:02" itemprop="dateCreated datePublished" datetime="2020-02-26T10:00:02+08:00">2020-02-26</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-05 21:47:55" itemprop="dateModified" datetime="2020-12-05T21:47:55+08:00">2020-12-05</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <a id="more"></a>
-
-<h2 id="linux文件系统"><a href="#linux文件系统" class="headerlink" title="linux文件系统"></a>linux文件系统</h2><p>不同于windows使用驱动器盘符，linux将文件存储在单个目录结构中，该目录被称为虚拟目录。Linux虚拟目录结构只包含一个称为根（ root）目录的基础目录。根目录下的目录和文件会按照访问它们的目录路径一一列出。</p>
-<!--more-->
-
-<p>通常系统文件存储在根驱动器中，而用户文件则存储在另一驱动器中。</p>
-<p><img src="https://img-blog.csdnimg.cn/20200226095654707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="  "><br> 　　　　　　　　　　　　==<strong>常见的linux目录</strong>==</p>
-<table>
-<thead>
-<tr>
-<th align="center">/</th>
-<th>虚拟目录的根目录</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">/bin</td>
-<td>二进制目录，存放许多用户级的GNU工具</td>
-</tr>
-<tr>
-<td align="center">/boot</td>
-<td>启动目录，存放启动文件</td>
-</tr>
-<tr>
-<td align="center">/dev</td>
-<td>设备目录， Linux在这里创建设备节点</td>
-</tr>
-<tr>
-<td align="center"><strong>/etc</strong></td>
-<td>系统配置文件目录</td>
-</tr>
-<tr>
-<td align="center"><strong>/home</strong></td>
-<td>主目录， Linux在这里创建用户目录</td>
-</tr>
-<tr>
-<td align="center">/lib</td>
-<td>库目录，存放系统和应用程序的库文件</td>
-</tr>
-<tr>
-<td align="center">/media</td>
-<td>媒体目录，可移动媒体设备的常用挂载点</td>
-</tr>
-<tr>
-<td align="center"><strong>/mnt</strong></td>
-<td>挂载目录，另一个可移动媒体设备的常用挂载点</td>
-</tr>
-<tr>
-<td align="center">/opt</td>
-<td>可选目录，常用于存放第三方软件包和数据文件</td>
-</tr>
-<tr>
-<td align="center">/proc</td>
-<td>进程目录，存放现有硬件及当前进程的相关信息</td>
-</tr>
-<tr>
-<td align="center"><strong>/root</strong></td>
-<td>root用户的主目录</td>
-</tr>
-<tr>
-<td align="center">/sbin</td>
-<td>系统二进制目录，存放许多GNU管理员级工具</td>
-</tr>
-<tr>
-<td align="center">/run</td>
-<td>运行目录，存放系统运作时的运行时数据</td>
-</tr>
-<tr>
-<td align="center">/srv</td>
-<td>服务目录，存放本地服务的相关文件</td>
-</tr>
-<tr>
-<td align="center">/sys</td>
-<td>系统目录，存放系统硬件信息的相关文件</td>
-</tr>
-<tr>
-<td align="center">/tmp</td>
-<td>临时目录，可以在该目录中创建和删除临时工作文件</td>
-</tr>
-<tr>
-<td align="center">/usr</td>
-<td>用户二进制目录，大量用户级的GNU工具和数据文件都存储在这里</td>
-</tr>
-<tr>
-<td align="center">/var</td>
-<td>可变目录，用以存放经常变化的文件，比如日志文件</td>
-</tr>
-</tbody></table>
-<h2 id="查看文件内容命令"><a href="#查看文件内容命令" class="headerlink" title="查看文件内容命令"></a>查看文件内容命令</h2><h3 id="查看文件类型"><a href="#查看文件类型" class="headerlink" title="查看文件类型"></a>查看文件类型</h3><p>file命令：file 文件名<br>　　查看二进制可执行程序。 file命令能够确定该程序编译时所面向的平台以及需要何种类型的库。<img src="https://img-blog.csdnimg.cn/20200222203129530.png" alt="  "></p>
-<h3 id="查看整个文件"><a href="#查看整个文件" class="headerlink" title="查看整个文件"></a>查看整个文件</h3><p>cat命令<br>|cat -n|给所有的行加上行号  |<br>|–  |–|<br>| cat -b | 给有文本的行加上行号 |<br>|cat -T  |不让制表符出现，用^I字符组合去替换文中的所有制表符。 |</p>
-<ol>
-<li>tail命令：默认显示文件末尾10行的内容<br>可以向tail命令中加入-n参数来修改所显示的行数。  tail -n 2 log-file 显示文件的最后两行<blockquote>
-<p>tail -f 允许在其他进程使用该文件时查看文件的内容。tail命令会保持活动状态，并不断显示添加到文件中的内容。可以实时监测系统日志。</p>
-</blockquote>
-</li>
-</ol>
-<p>2.head命令：默认显示文件前10行的文本<br>类似于tail命令，head -n 显示文件的前n行。同样也支持-f参数。</p>
-<p>当程序运行在系统上时，称之为进程，要监测这些进程，需要用ps命令。ps命令提供进程的一次性查看，即列出的是当前正在运行的进程的快照。<br>  ps命令标识进程的五种状态码</p>
-<ul>
-<li>D不可中断：uninterruptible sleep (usually IO）</li>
-<li>R运行：runnable</li>
-<li>S中断：sleeping<ul>
-<li>T停止：traced or stopped</li>
-<li>Z僵死：a defunct (”zombie”) process <h2 id="监测程序"><a href="#监测程序" class="headerlink" title="监测程序"></a>监测程序</h2><h4 id="ps命令常用参数："><a href="#ps命令常用参数：" class="headerlink" title="ps命令常用参数："></a>ps命令常用参数：</h4><table>
-<thead>
-<tr>
-<th align="center">参数</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">a</td>
-<td>显示所有进程</td>
-</tr>
-<tr>
-<td align="center">-a</td>
-<td>显示同一终端下的所行程序</td>
-</tr>
-<tr>
-<td align="center">-A或-e</td>
-<td>显示所有进程</td>
-</tr>
-<tr>
-<td align="center">c</td>
-<td>显示进程的其实名称</td>
-</tr>
-<tr>
-<td align="center">e</td>
-<td>显示环境变量</td>
-</tr>
-<tr>
-<td align="center">f</td>
-<td>显示程序间的关系</td>
-</tr>
-<tr>
-<td align="center">-H</td>
-<td>显示树状结构</td>
-</tr>
-<tr>
-<td align="center">r</td>
-<td>显示当前终端的进程</td>
-</tr>
-<tr>
-<td align="center">u</td>
-<td>指定用户的所有进程</td>
-</tr>
-<tr>
-<td align="center">-au</td>
-<td>显示较详细的咨询</td>
-</tr>
-<tr>
-<td align="center">-aux</td>
-<td>显示所有包含其他使用者的行程</td>
-</tr>
-<tr>
-<td align="center">T</td>
-<td>显示当前终端的所有程序</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-</li>
-</ul>
-<p>命令：ps -ef 显示所有进程信息，连通命令行。扩展参数组合-e参数指定显示所有运行在系统上的进程； -f参数则扩展了输出<br>命令：ps -ef|grep  ps与grep常用组合用法，查找特定进程</p>
-<blockquote>
-<p>命令：ps -l<img src="https://img-blog.csdnimg.cn/20200223105138912.png" alt="  "></p>
-</blockquote>
-<p>1) F：代表这个程序的旗标（ flag), 4 代表使用者为 super user。<br>2) S：代表这个程序的状态（ STAT），关于各 STAT 的意义将在下文中介绍 。<br>3) UID：程序被该 UID 所拥有 。<br>4) PID：这个程序的进程 id。<br>5) PPID ：其父进程的进程 id。<br>6) C：使用的 CPU 资源百分比 。<br>7) PRI：Priority （优先执行序）的缩写 。<br>8) NI：Nice 值。<br>9) ADDR：kernel function，指出该程序在内存的那个部分。 如果是个 running 的程序，一般就是”-“ 。<br>10) sz： 使用掉的内存大小 。<br>11) WCHAN： 目前这个程序是否正在运作当中，若为-表示正在运作 。<br>12) TTY： 登入者的终端机位置。<br>13) TIME：使用掉的 CPU 时间 。<br>14) CMD： 所下达的指令内容 。</p>
-<p><strong>==top命令：实时显示系统重各个进程的资源占用状况==</strong><br><img src="https://img-blog.csdnimg.cn/20200223110145166.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhaWR1XzM2NDE1MzYy,size_16,color_FFFFFF,t_70" alt="  "></p>
-<p>第 1 行分别显示：系统当前时间、系统运行时间、当前用户登录数和系统负载 。 系统负载（ load average ），这里有 3 个数值，分别是系统最近 lmin 、 5min 、 15min 的平均负载。 一般对于单个处理器来说，负载在0-1之间是正常的。<br>第 2 行分别显示： total （进程总数）、running （正在运行的进程数）、 sleeping （睡眠的进程数）、stopped （停止的进程数）和 zombie （僵尸进程数） 。<br>第 3 行分别显示： %us（用户空间占用 CPU 百分比）、%sy（内核空间占用 CPU 百分比）、%ni（用户进程空间内改变过优先级的进程占用 CPU 百分比）、 %id （空闲 CPU 百分比）、%wa （等待输入输出（I/O）的 CPU 时间百分比）、 %hi ( cpu 处理硬件中断的时间）、%si ( cpu 处理软中断的时间）、%st （用于有虚拟 cpu 的情况） 。通常 id% 值可以反映一个系统 cpu 的闲忙程度 。<br>第 4 行则显示内存 MEM 的数据： total （物理内存总量）、 used （使用的物理内存总量 ）、free （空闲内存总量）、 buffers （用作内核缓存的内存量） 。<br>第 5 行则显示交换器 SWAP 的数据： total（交换区总量）、used（使用的交换区总量）、 free （空闲交换区总量） 、 cached （缓冲的交换区总量） 。<br>第 6 行则显示 PID （进程号）、USER （运行用户）、PR （优先级）、NI （任务 nice 值）、VIRT （虚拟内存用量）VIRT=SWAP+RES,RES（物理内存用量）、 SHR（共享内存用量）、 S（进程状态）、 %CPU(CPU 占用比）、 %MEM （物理内存占用比）、 TIME+ （累计 CPU 占用时间）、 COMMAND 命令名／命令行。</p>
-<p><strong>df -h</strong> 查看所有已挂载磁盘的使用情况<br><img src="https://img-blog.csdnimg.cn/20200223161455522.png" alt="zxc"></p>
-<blockquote>
-<p>du命令：显示当前目录下所有的文件、目录和子目录的磁盘使用情况。<br>du -c：显示所有已列出文件总的大小。<br>du -h：按用户易读的格式输出大小，即用K替代千字节，用M替代兆字节，用G替代吉字节<br>du -s：显示每个输出参数的总计</p>
-</blockquote>
-<h3 id="排序数据"><a href="#排序数据" class="headerlink" title="排序数据"></a>排序数据</h3><p>sort -n 将数字当做数字而不是字符，按值排序</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
