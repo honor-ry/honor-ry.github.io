@@ -1139,25 +1139,6 @@
     
     
     <entry>
-      <title>linux中chmod与chown两个命令详解</title>
-      <link href="/posts/e464.html"/>
-      <url>/posts/e464.html</url>
-      
-        <content type="html"><![CDATA[<a id="more"></a><p>如果创建了一个目录或文件，需要改变它的安全性设置，在linux系统中有chmod和chown命令来完成这项任务。但两个命令的用途是不同的，chmod命令用来改变文件和目录的权限，而chown命令用来改变文件的属主和属组。</p><!--more--><h2 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h2><p>命令格式：chmod options mode file<br>options：<br>-v：显示权限变更的详细资料<br>-R：将权限的改变递归作用到文件和子目录。</p><p>文件和目录的权限分为3组，文件属主的权限，属组成员的权限，其他用户的权限。</p><p>[ ugoa …]  [[+ - =]   [rwxXstugo]…]<br>第一组字符定义了权限作用的对象：</p><ul><li>u代表用户</li><li>g代表组</li><li>o代表其他</li><li>a代表以上所有</li></ul><p>第二个符号：</p><ul><li>表示增加权限 　　  - 表示取消权限　　= 表示唯一设定权限。</li></ul><p>第三个符号代表作用到设置上的权限：</p><ul><li>r 表示可读取</li><li>w 表示可写入</li><li>x 表示可执行</li><li>X 表示只有当该文件是个子目录或者该文件已经被设定过为可执行，赋予执行权限。 </li><li>s：运行时重新设置UID或GID。</li><li>t：保留文件或目录。</li><li>u：将权限设置为跟属主一样。</li><li>g：将权限设置为跟属组一样。</li><li>o：将权限设置为跟其他用户一样。<br>最常用的比如：chmod -R 777 Downloads/*<br>设置文件夹下所有文件可读可写。</li></ul><h2 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h2><p>命令格式：chown options owner[.group] file<br>只有root有使用权限，改变文件的所属关系。<br>注意：只有root用户能够改变文件的属主。任何属主都可以改变文件的属组，但前提是属主必须是原属组和目标属组的成员。<br>options：<br>-v：显示指令执行过程<br>-R：将权限的改变递归作用到文件和子目录。<br>-h：改变该文件的所有符号链接的所属关系。<br>-f：不显示错误信息</p><p>owner：新的文件拥有者的属主ID<br>group：新的文件的属组</p><p>比如：chown -R wry:web /tmp/wry命令是将/tmp/wry这个目录的属主改为wry，属组为web。</p><p>权限：r- -　可读，八进制值4<br>　　：-w-　可写，八进制值2<br>　　：- -x　可执行，八进制值1</p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
-      
-      
-      <categories>
-          
-          <category> linux </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>基本的bash shell命令（一）</title>
       <link href="/posts/87b0.html"/>
       <url>/posts/87b0.html</url>
