@@ -2,9 +2,10 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
+<meta name="referrer" content="no-referrer" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.2.0">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -238,7 +239,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-开篇"><span class="nav-text">0.开篇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-整体架构"><span class="nav-text">1.整体架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-mainfest文件"><span class="nav-text">2.mainfest文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-current文件"><span class="nav-text">3.current文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-log文件"><span class="nav-text">4.log文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-sstable文件"><span class="nav-text">5.sstable文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-memtable"><span class="nav-text">6.memtable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-读操作"><span class="nav-text">7.读操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-Compaction"><span class="nav-text">8.Compaction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-cache"><span class="nav-text">9.cache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Version"><span class="nav-text">10.Version</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%BC%80%E7%AF%87"><span class="nav-text">0.开篇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="nav-text">1.整体架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-mainfest%E6%96%87%E4%BB%B6"><span class="nav-text">2.mainfest文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-current%E6%96%87%E4%BB%B6"><span class="nav-text">3.current文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-log%E6%96%87%E4%BB%B6"><span class="nav-text">4.log文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-sstable%E6%96%87%E4%BB%B6"><span class="nav-text">5.sstable文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-memtable"><span class="nav-text">6.memtable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E8%AF%BB%E6%93%8D%E4%BD%9C"><span class="nav-text">7.读操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-Compaction"><span class="nav-text">8.Compaction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-cache"><span class="nav-text">9.cache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Version"><span class="nav-text">10.Version</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -384,7 +385,7 @@
 <p>本系列文章是自己阅读leveldb源码过程中记录的一些笔记，方便日后查看。</p>
 <a id="more"></a>
 
-<p>这篇文章转载自：<a href="https://www.cnblogs.com/haippy/archive/2011/12/04/2276064.html" target="_blank" rel="noopener">https://www.cnblogs.com/haippy/archive/2011/12/04/2276064.html</a></p>
+<p>这篇文章转载自：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/haippy/archive/2011/12/04/2276064.html">https://www.cnblogs.com/haippy/archive/2011/12/04/2276064.html</a></p>
 <h2 id="1-整体架构"><a href="#1-整体架构" class="headerlink" title="1.整体架构"></a>1.整体架构</h2><p> LevelDb作为存储系统，数据记录的存储介质包括内存以及磁盘文件，如果像上面说的，当LevelDb运行了一段时间，此时我们给LevelDb进行透视拍照，那么您会看到如下一番景象：</p>
 <p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/2011121116344075.png" alt="leveldb结构"></p>
 <p>从图中可以看出，构成 LevelDB 静态结构的包括六个主要部分：内存中的 <strong>MemTable</strong> 和 <strong>Immutable MemTable</strong> 以及磁盘上的几种主要文件：<strong>Current文件</strong>，<strong>Manifest文件</strong>，<strong>log文件</strong>以及 <strong>SSTable 文件</strong>。当然，LevelDB 除了这六个主要部分还有一些辅助的文件，但是以上六个文件和数据结构是 LevelDB 的主体构成元素。</p>
@@ -438,7 +439,7 @@
 <h2 id="6-memtable"><a href="#6-memtable" class="headerlink" title="6.memtable"></a>6.memtable</h2><p>所有 KV 数据都是存储在 Memtable，Immutable Memtable 和 SSTable 中的，Immutable Memtable从结构上讲和 Memtable 是完全一样的，区别仅仅在于其是只读的，不允许写入操作，而 Memtable 则是允许写入和读取的。当 Memtable 写入的数据占用内存到达指定数量，则自动转换为 Immutable Memtable，等待 Dump 到磁盘中，系统会自动生成新的 Memtable 供写操作写入新数据，理解了 Memtable，那么 Immutable Memtable 自然不在话下。</p>
 <p>LevelDB 的 MemTable 提供了将 KV 数据写入，删除以及读取 KV 记录的操作接口，但是事实上 Memtable 并不存在真正的删除操作,删除某个Key的Value在 Memtable 内是作为插入一条记录实施的，但是会打上一个 Key 的删除标记，真正的删除操作是Lazy的，会在以后的 Compaction 过程中去掉这个KV。</p>
 <p>需要注意的是，LevelDB 的 Memtable 中KV对是根据key大小有序存储的，在系统插入新的KV时，LevelDB 要把这个KV插到合适的位置上以保持这种 Key 有序性。其实，LevelDB 的 Memtable 类只是一个接口类，真正的操作是通过背后的 SkipList 来做的，包括插入操作和读取操作等，所以 Memtable 的核心数据结构是一个 SkipList。</p>
-<p>SkipList是由 William Pugh 发明。他在 Communications of the ACM June 1990, 33(6) 668-676 发表了 Skip lists: a probabilistic alternative to balanced trees，在该论文中详细解释了SkipList的数据结构和插入删除操作。关于SkipList的详细介绍可以参考这篇文章：<a href="http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html。" target="_blank" rel="noopener">http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html。</a></p>
+<p>SkipList是由 William Pugh 发明。他在 Communications of the ACM June 1990, 33(6) 668-676 发表了 Skip lists: a probabilistic alternative to balanced trees，在该论文中详细解释了SkipList的数据结构和插入删除操作。关于SkipList的详细介绍可以参考这篇文章：<a target="_blank" rel="noopener" href="http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html。">http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html。</a></p>
 <h2 id="7-读操作"><a href="#7-读操作" class="headerlink" title="7.读操作"></a>7.读操作</h2><p>LevelDB 的读取流程如下所示：</p>
 <p><img src="https://gitee.com/honor-ry/my_pic_bed/raw/master/leveldb-02-11.png" alt="LevelDB读取记录流程"></p>
 <p>LevelDB 首先会去查看内存中的 Memtable，如果 Memtable 中包含 key 及其对应的value，则返回 value 值即可；</p>
@@ -597,7 +598,7 @@
 
 <div class="copyright">
   &copy; 2020 – 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -212,7 +212,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;ycsb英文全称为Yahoo! Cloud Serving Benchmark (YCSB) 。是Yahoo公司的一个用来对云服务进行基础测试的工具,leveldb的论文中实验测试评估这一章节，主要是采用提供的db_bench作为microbenchmark微基准测试工具，和YCSB作为macrobenchmarks宏基准测试工具，模仿实际的工作load。在运行YCSB的时候，可以配置不同的workload和DB，也可以指定线程数&amp;amp;并发数等其他参数。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;主要参考博客：&lt;a href=&quot;https://blog.csdn.net/NikoKVCS/article/details/88422307&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;YCSB 测试 LevelDB 数据库&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;主要参考博客：&lt;a href=&quot;https://blog.csdn.net/NikoKVCS/article/details/88422307&quot;&gt;YCSB 测试 LevelDB 数据库&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     
@@ -341,7 +341,7 @@
     
     <summary type="html">
     
-      &lt;figure class=&quot;highlight vim&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git clone --recurse-submodules http&lt;span class=&quot;variable&quot;&gt;s:&lt;/span&gt;//github.&lt;span class=&quot;keyword&quot;&gt;com&lt;/span&gt;/google/leveldb.git&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo apt-&lt;span class=&quot;built_in&quot;&gt;get&lt;/span&gt; install cmake&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;cd&lt;/span&gt; leveldb&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cmake CMakeLists.txt&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;make&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+      &lt;figure class=&quot;highlight vim&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git clone --recurse-submodules http&lt;span class=&quot;variable&quot;&gt;s:&lt;/span&gt;//github.&lt;span class=&quot;keyword&quot;&gt;com&lt;/span&gt;/google/leveldb.git&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo apt-&lt;span class=&quot;built_in&quot;&gt;get&lt;/span&gt; install cmake&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;cd&lt;/span&gt; leveldb&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cmake CMakeLists.txt&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;make&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
@@ -460,7 +460,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;教程链接：&lt;a href=&quot;https://www.tensorflow.org/install/pip&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.tensorflow.org/install/pip&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;教程链接：&lt;a href=&quot;https://www.tensorflow.org/install/pip&quot;&gt;https://www.tensorflow.org/install/pip&lt;/a&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;在系统上安装python开发环境&lt;/li&gt;
 &lt;li&gt;安装python、pip软件包管理器和Virtualenv&lt;br&gt;sudo apt update&lt;br&gt;sudo apt install python3-dev python3-pip&lt;br&gt;sudo pip3 install -U virtualenv  # system-wide install&lt;/li&gt;

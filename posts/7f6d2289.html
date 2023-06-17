@@ -2,9 +2,10 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
+<meta name="referrer" content="no-referrer" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.2.0">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -224,7 +225,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#leveldb的文件命名"><span class="nav-text">leveldb的文件命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-文件命名"><span class="nav-text">1.文件命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-生成文件编号"><span class="nav-text">2.生成文件编号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件编号1留给Mainifest使用"><span class="nav-text">文件编号1留给Mainifest使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#leveldb%E7%9A%84%E6%96%87%E4%BB%B6%E5%91%BD%E5%90%8D"><span class="nav-text">leveldb的文件命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%96%87%E4%BB%B6%E5%91%BD%E5%90%8D"><span class="nav-text">1.文件命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%94%9F%E6%88%90%E6%96%87%E4%BB%B6%E7%BC%96%E5%8F%B7"><span class="nav-text">2.生成文件编号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%BC%96%E5%8F%B71%E7%95%99%E7%BB%99Mainifest%E4%BD%BF%E7%94%A8"><span class="nav-text">文件编号1留给Mainifest使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -384,7 +385,7 @@
 <p>filename ：leveldb/db/filename.cc</p>
 <p>leveldb/db/filename.h</p>
 <p>database中的文件用文件名区分类型，有以下几种类型</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> FileType {</span><br><span class="line">  kLogFile,</span><br><span class="line">  kDBLockFile,</span><br><span class="line">  kTableFile,</span><br><span class="line">  kDescriptorFile,</span><br><span class="line">  kCurrentFile,</span><br><span class="line">  kTempFile,</span><br><span class="line">  kInfoLogFile  <span class="comment">// Either the current one, or an old one</span></span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">FileType</span> {</span></span><br><span class="line">  kLogFile,</span><br><span class="line">  kDBLockFile,</span><br><span class="line">  kTableFile,</span><br><span class="line">  kDescriptorFile,</span><br><span class="line">  kCurrentFile,</span><br><span class="line">  kTempFile,</span><br><span class="line">  kInfoLogFile  <span class="comment">// Either the current one, or an old one</span></span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 
 <p>1） kLogFile 日志文件： [0-9]+.log</p>
 <p> leveldb 的写流程是先记 binlog，然后写 sstable，该日志文件即是 binlog。前缀数字为FileNumber。<br>2） kDBLockFile， lock 文件： LOCK<br>​ 一个 db 同时只能有一个 db 实例操作，通过对 LOCK 文件加文件锁（flock） 实现主动保护。<br>3） kTableFile， sstable 文件： [0-9]+.sst<br>​ 保存数据的 sstable 文件。前缀为 FileNumber。<br>4） kDescriptorFile， db 元信息文件： MANIFEST-[0-9]+<br>​ 每当 db 中的状态改变（VersionSet），会将这次改变（VersionEdit） 追加到 descriptor 文件中。后缀数字为 FileNumber。<br>5） kCurrentFile，： CURRENT<br>​ CURRENT 文件中保存当前使用的 descriptor 文件的文件名。<br>6） kTempFile，临时文件： [0-9]+.dbtmp<br>​ 对 db 做修复（Repairer）时，会产生临时文件。 前缀为 FileNumber。<br>7） kInfoLogFile， db 运行时打印日志的文件： LOG<br>​ db 运行时，打印的 info 日志保存在 LOG 中。 每次重新运行，如果已经存在 LOG 文件，会先将 LOG文件重名成 LOG.old</p>
@@ -398,7 +399,7 @@
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">DescriptorFileName</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; dbname, <span class="keyword">uint64_t</span> number)</span> </span>{</span><br><span class="line">  assert(number &gt; <span class="number">0</span>);</span><br><span class="line">  <span class="keyword">char</span> buf[<span class="number">100</span>];</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">snprintf</span>(buf, <span class="keyword">sizeof</span>(buf), <span class="string">"/MANIFEST-%06llu"</span>,</span><br><span class="line">                <span class="keyword">static_cast</span>&lt;<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span>&gt;(number));</span><br><span class="line">  <span class="keyword">return</span> dbname + buf;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h3 id="2-生成文件编号"><a href="#2-生成文件编号" class="headerlink" title="2.生成文件编号"></a>2.生成文件编号</h3><p>db/version_set.h中保存了多个编号：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">uint64_t</span> next_file_number_;<span class="comment">//用于生成系统下一个文件的编号</span></span><br><span class="line"><span class="keyword">uint64_t</span> manifest_file_number_;<span class="comment">//Manifest文件的编号，主要在Recover()时用到</span></span><br><span class="line"><span class="keyword">uint64_t</span> last_sequence_;</span><br><span class="line"><span class="keyword">uint64_t</span> log_number_;<span class="comment">//log文件编号</span></span><br><span class="line"><span class="keyword">uint64_t</span> prev_log_number_;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">uint64_t</span> next_file_number_;<span class="comment">//用于生成系统下一个文件的编号</span></span><br><span class="line"><span class="keyword">uint64_t</span> manifest_file_number_;<span class="comment">//Manifest文件的编号，主要在Recover()时用到</span></span><br><span class="line"><span class="keyword">uint64_t</span> last_sequence_;</span><br><span class="line"><span class="keyword">uint64_t</span> log_number_;<span class="comment">//log文件编号</span></span><br><span class="line"><span class="keyword">uint64_t</span> prev_log_number_; </span><br></pre></td></tr></tbody></table></figure>
 
 <hr>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> file_number = versions_-&gt;NewFileNumber();<span class="comment">//sstable文件的number</span></span><br><span class="line"> </span><br><span class="line"> <span class="keyword">uint64_t</span> new_log_number = versions_-&gt;NewFileNumber(); <span class="comment">//log文件的number</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Allocate and return a new file number</span></span><br><span class="line">  <span class="function"><span class="keyword">uint64_t</span> <span class="title">NewFileNumber</span><span class="params">()</span> </span>{ <span class="keyword">return</span> next_file_number_++; }<span class="comment">//两者都调用的NewFileNumber函数</span></span><br></pre></td></tr></tbody></table></figure>
@@ -531,7 +532,7 @@
 
 <div class="copyright">
   &copy; 2020 – 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
